@@ -28,16 +28,16 @@ import LoadingScreen from '../../src/screens/LoadingScreen';
 import VerificationDoneScreen from '../../src/screens/VerificationDoneScreen';
 
 export const name = [
-  {id: 1, placeHolder: 'First Name'},
-  {id: 2, placeHolder: 'Middle Name'},
-  {id: 3, placeHolder: 'Last Name'},
+  {id: 1, name: 'firstname', placeHolder: 'First Name'},
+  {id: 2, name: 'middlename', placeHolder: 'Middle Name'},
+  {id: 3, name: 'lastname', placeHolder: 'Last Name'},
 ];
 
 export const options = [
-  {id: 1, title: 'National ID ', subTitle: 'Issued on or After 10/2016 '},
-  {id: 1, title: 'Driving Licence '},
-  {id: 1, title: 'Passport'},
-  {id: 1, title: 'Birth Certificate'},
+  {id: 'nid', title: 'National ID ', subTitle: 'Issued on or After 10/2016 '},
+  {id: 'dl', title: 'Driving Licence '},
+  {id: 'pass', title: 'Passport'},
+  {id: 'bc', title: 'Birth Certificate'},
 ];
 
 export const warnings = [

@@ -22,10 +22,13 @@ import {
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
 import {screens} from './assets/data/data';
+import { useForm, FormProvider } from 'react-hook-form';
 
 function App() {
   const Stack = createNativeStackNavigator();
+  const methods = useForm();
   return (
+    <FormProvider {...methods}>
     <NavigationContainer style={styles.container}>
       <Provider store={store}>
         <Stack.Navigator
@@ -43,6 +46,7 @@ function App() {
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>
+    </FormProvider>
   );
 }
 

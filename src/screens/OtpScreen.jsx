@@ -4,13 +4,13 @@ import {useSelector} from 'react-redux';
 // import {nextPage, prevPage} from '../redux/PageSlice';
 import OtpBox from '../components/OtpBox';
 import Button from '../components/Button';
-import {useState} from 'react';
+// import {useState} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import SubTextOtp from '../components/SubTextOtp';
 import MainText from '../components/MainText';
 
 const OtpScreen = ({navigation}) => {
-  const [value, onChangeText] = useState('');
+  // const [value, onChangeText] = useState('');
   const currentPage = useSelector(state => state.page.currentPage);
   return (
     <View style={styles.container}>
@@ -26,16 +26,17 @@ const OtpScreen = ({navigation}) => {
           />
         </View>
         <View style={styles.otpContainer}>
-          <OtpBox value={value} onChangeText={onChangeText} />
-          <SubTextOtp />
+        <OtpBox name="emailOtp" />
+        <SubTextOtp />
         </View>
       </View>
 
       <Button
-        value={value}
+        value={1}
         navigation={navigation}
         title="Verify Code"
         path="Phone"
+        id="emailOtp"
       />
     </View>
   );

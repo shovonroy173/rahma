@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import React from 'react';
+import {StyleSheet,  View} from 'react-native';
 import {useSelector} from 'react-redux';
 import ProgressContainer from '../components/ProgressContainer';
 import Button from '../components/Button';
 import SubText from '../components/SubText';
 import MainText from '../components/MainText';
+import BottomInput from '../components/BottomInput';
 
 const LoginScreen = ({navigation}) => {
-  const [value, onChangeText] = useState('');
+  // const [value, onChangeText] = useState('');
   const currentPage = useSelector(state => state.page.currentPage);
   return (
     <View style={styles.container}>
@@ -23,20 +24,17 @@ const LoginScreen = ({navigation}) => {
           />
         </View>
         <View>
-          <TextInput
-            onChangeText={text => onChangeText(text)}
-            value={value}
-            style={styles.inputBox}
-            placeholder={'name@example.com'}
-          />
+          <BottomInput name="email" />
+
           <SubText navigation={navigation} />
         </View>
       </View>
       <Button
         title="Continue"
-        value={value}
+        value={1}
         navigation={navigation}
         path="Otp"
+        id="email"
       />
     </View>
   );

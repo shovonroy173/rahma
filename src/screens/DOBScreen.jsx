@@ -1,13 +1,12 @@
-import {View,  Image, StyleSheet} from 'react-native';
-import React, {useState} from 'react';
+import {View, Image, StyleSheet} from 'react-native';
+import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
-import DatePicker from 'react-native-date-picker';
 import Button from '../components/Button';
 import MainText from '../components/MainText';
+import Calender from '../components/Calender';
 
 const DOBScreen = ({navigation}) => {
-  const [date, setDate] = useState(new Date());
   const currentPage = useSelector(state => state.page.currentPage);
 
   return (
@@ -19,8 +18,11 @@ const DOBScreen = ({navigation}) => {
             text1="When were you Born?"
             text2="To continue please enter Date of Birth"
           />
-          <Image source={require('../../assets/images/dob.png')} style={styles.image} />
-          <DatePicker date={date} onDateChange={setDate} dividerColor={'#43A041'} mode={'date'} />
+          <Image
+            source={require('../../assets/images/dob.png')}
+            style={styles.image}
+          />
+          <Calender name="calender" />
         </View>
       </View>
       <Button
@@ -33,27 +35,27 @@ const DOBScreen = ({navigation}) => {
   );
 };
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        backgroundColor: '#ffffff',
-        padding: 30,
-      },
-      mainContainer: {
-        display: 'flex',
-        gap: 40,
-        alignItems: 'center',
-      },
-      contentContainer: {
-        display: 'flex',
-        gap: 30,
-        alignItems: 'center',
-      },
-      image: {
-        width: 180,
-        height: 180,
-        borderRadius: 20,
-      },
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    padding: 30,
+  },
+  mainContainer: {
+    display: 'flex',
+    gap: 40,
+    alignItems: 'center',
+  },
+  contentContainer: {
+    display: 'flex',
+    gap: 30,
+    alignItems: 'center',
+  },
+  image: {
+    width: 180,
+    height: 180,
+    borderRadius: 20,
+  },
 });
 export default DOBScreen;

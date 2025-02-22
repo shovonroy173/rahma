@@ -1,17 +1,18 @@
 import {View, StyleSheet, Text} from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import Button from '../components/Button';
 import ProgressContainer from '../components/ProgressContainer';
 import SubText from '../components/SubText';
 import PhoneInput from 'react-native-phone-number-input';
 import MainText from '../components/MainText';
 import {useSelector} from 'react-redux';
+import {Controller, useFormContext} from 'react-hook-form';
 
 const PhoneScreen = ({navigation}) => {
   const phoneInput = useRef(null);
-  const [phoneNumber, setPhoneNumber] = useState('');
   const currentPage = useSelector(state => state.page.currentPage);
 
+  const {control} = useFormContext();
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
@@ -28,23 +29,30 @@ const PhoneScreen = ({navigation}) => {
 
         <View style={styles.subContainer}>
           <Text style={styles.label}>Enter Your Phone Number:</Text>
-          <PhoneInput
-            ref={phoneInput}
-            defaultValue={phoneNumber}
-            defaultCode="BD"
-            layout="first"
-            onChangeText={text => setPhoneNumber(text)}
-            containerStyle={styles.phoneContainer}
-            textContainerStyle={styles.textContainer}
-            codeTextStyle={styles.codeText}
-            flagButtonStyle={styles.flagButton}
-            // renderDropdownImage={() => null}
+          <Controller
+            name="phone"
+            control={control}
+            render={({field: {onChange, onBlur, value}}) => (
+              <PhoneInput
+                ref={phoneInput}
+                defaultCode="BD"
+                // layout="first"
+                onChangeText={text => onChange(text)}
+                value={value}
+                containerStyle={styles.phoneContainer}
+                textContainerStyle={styles.textContainer}
+                codeTextStyle={styles.codeText}
+                flagButtonStyle={styles.flagButton}
+                // renderDropdownImage={() => null}
+              />
+            )}
           />
+
           <SubText />
         </View>
       </View>
       <Button
-        value={phoneNumber}
+        value={1}
         navigation={navigation}
         path="Begin"
         title="Send a Verification Code"

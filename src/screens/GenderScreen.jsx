@@ -3,13 +3,14 @@ import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
+import {Controller, useFormContext} from 'react-hook-form';
 
 const GenderScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
 
   const [selectedGender, setSelectedGender] = useState(null);
   console.log(selectedGender);
-
+  const {control, setValue} = useFormContext();
   return (
     <View style={styles.container}>
       <View style={styles.progressContainer}>
@@ -18,25 +19,44 @@ const GenderScreen = ({navigation}) => {
       </View>
 
       <View style={styles.imageContainer}>
-        <TouchableOpacity
-          onPress={() => setSelectedGender('male')}
-          style={styles.singleImageContainer}>
-          {selectedGender !== 'male' && <View style={styles.imageShield} />}
-          <Image
-            source={require('../../assets/images/male.png')}
-            style={styles.image}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => setSelectedGender('female')}
-          style={styles.singleImageContainer}>
-          {selectedGender !== 'female' && <View style={styles.imageShield} />}
-          <Image
-            source={require('../../assets/images/female.png')}
-            style={styles.image}
-          />
-        </TouchableOpacity>
+        <Controller
+          name="gender"
+          control={control}
+          render={({field: {onChange, onBlur, value}}) => (
+            <TouchableOpacity
+              onPress={male => {
+                setSelectedGender('male');
+                setValue('gender', 'male');
+              }}
+              style={styles.singleImageContainer}>
+              {selectedGender !== 'male' && <View style={styles.imageShield} />}
+              <Image
+                source={require('../../assets/images/male.png')}
+                style={styles.image}
+              />
+            </TouchableOpacity>
+          )}
+        />
+        <Controller
+          name="gender"
+          control={control}
+          render={({field: {onChange, onBlur, value}}) => (
+            <TouchableOpacity
+              onPress={female => {
+                setSelectedGender('female');
+                setValue('gender', 'female');
+              }}
+              style={styles.singleImageContainer}>
+              {selectedGender !== 'female' && (
+                <View style={styles.imageShield} />
+              )}
+              <Image
+                source={require('../../assets/images/female.png')}
+                style={styles.image}
+              />
+            </TouchableOpacity>
+          )}
+        />
       </View>
 
       <Button

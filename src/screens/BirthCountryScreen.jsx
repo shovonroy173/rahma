@@ -3,13 +3,11 @@ import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
-import {CountrySelection} from 'react-native-country-list';
+import Country from '../components/Country';
 
 const BirthCountryScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
-  const onCountrySelection = item => {
-    console.log(item?.name);
-  };
+
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
@@ -20,7 +18,8 @@ const BirthCountryScreen = ({navigation}) => {
             <Text style={styles.titleText}>Do you Born?</Text>
           </View>
           <View style={styles.countryContainer}>
-            <CountrySelection action={item => onCountrySelection(item)} />
+            <Country name="birthCountry" />
+            {/* <CountrySelection action={item => onCountrySelection(item)} /> */}
           </View>
         </View>
       </View>

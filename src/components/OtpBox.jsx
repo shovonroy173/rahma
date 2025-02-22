@@ -1,58 +1,65 @@
-import {View, TextInput, StyleSheet} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-
-const OtpBox = ({value, onChangeText}) => {
- return (
-    <View style={styles.input}>
-      <TextInput
-        onChangeText={text => onChangeText(text)}
-        value={value}
-        style={styles.inputBox}
+import {OtpInput} from 'react-native-otp-entry';
+import {Controller, useFormContext} from 'react-hook-form';
+import {validationRules} from '../utils/validation';
+const OtpBox = (
+  // {Controller, control, setValue, name}
+  {name},
+) => {
+  const {
+    control,
+    formState: {errors},
+  } = useFormContext();
+  console.log('otpbox', errors[name]);
+  return (
+    <View>
+      <Controller
+        name={name}
+        control={control}
+        rules={validationRules[name]}
+        render={({field: {onChange, onBlur, value}}) => (
+          <OtpInput
+            onBlur={onBlur}
+            numberOfDigits={6}
+            onTextChange={text => {
+              // setValue(name, text);
+              onChange(text);
+            }}
+            value={value}
+            theme={{
+              pinCodeContainerStyle: styles.container,
+            }}
+          />
+        )}
       />
-      <TextInput
-        onChangeText={text => onChangeText(text)}
-        value={value}
-        style={styles.inputBox}
-      />
-      <TextInput
-        onChangeText={text => onChangeText(text)}
-        value={value}
-        style={styles.inputBox}
-      />
-      <TextInput
-        onChangeText={text => onChangeText(text)}
-        value={value}
-        style={styles.inputBox}
-      />
-      <TextInput
-        onChangeText={text => onChangeText(text)}
-        value={value}
-        style={styles.inputBox}
-      />
-      <TextInput
-        onChangeText={text => onChangeText(text)}
-        value={value}
-        style={styles.inputBox}
-      />
+      {errors[name] && (
+        <Text style={styles.errorText}>{errors[name]?.message}</Text>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  inputBox: {
-    width: 40,
-    borderBottomWidth: 1,
-    borderBottomColor: '#A19B9B',
-    // paddingHorizontal: 30,
-    fontSize: 16,
-    fontFamily: 'Poppins-Medium',
-    textAlign: 'center',
+  container: {
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderColor: '#A19B9B',
+    borderRadius: 0,
   },
   input: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 15,
+  },
+
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+    fontFamily: 'Poppins-Medium',
+    paddingVertical: 5,
   },
 });
 

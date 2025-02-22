@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     gap: 15,
+    paddingVertical: 20,
+
   },
   privacyText: {
     color: '#379A35',

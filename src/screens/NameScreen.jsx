@@ -26,13 +26,13 @@ const NameScreen = ({navigation}) => {
           <Text style={styles.title2Text}>What is your Name?</Text>
           <View style={styles.inputBoxContainer}>
             {name.map(item => (
-              <Input key={item.id} placeholder={item.placeHolder} />
+              <Input key={item.id} name={`user.${item.name}`} placeholder={item.placeHolder} />
             ))}
           </View>
         </View>
       </View>
 
-      <Button value={1} navigation={navigation} path="DOB" title="Continue" />
+      <Button value={1} navigation={navigation} path="DOB" title="Continue" id="user" />
     </View>
   );
 };
