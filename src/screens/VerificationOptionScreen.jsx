@@ -45,6 +45,7 @@ const VerificationOptionScreen = ({navigation}) => {
         value={1}
         navigation={navigation}
         path="TakePhoto"
+        id="idType"
       />
     </View>
   );

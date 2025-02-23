@@ -28,9 +28,9 @@ import LoadingScreen from '../../src/screens/LoadingScreen';
 import VerificationDoneScreen from '../../src/screens/VerificationDoneScreen';
 
 export const name = [
-  {id: 1, name: 'firstname', placeHolder: 'First Name'},
-  {id: 2, name: 'middlename', placeHolder: 'Middle Name'},
-  {id: 3, name: 'lastname', placeHolder: 'Last Name'},
+  {id: 1, name: 'firstName', placeHolder: 'First Name'},
+  {id: 2, name: 'middleName', placeHolder: 'Middle Name'},
+  {id: 3, name: 'lastName', placeHolder: 'Last Name'},
 ];
 
 export const options = [
@@ -39,6 +39,8 @@ export const options = [
   {id: 'pass', title: 'Passport'},
   {id: 'bc', title: 'Birth Certificate'},
 ];
+
+export const gender = [{id: 'male'}, {id: 'female'}];
 
 export const warnings = [
   {

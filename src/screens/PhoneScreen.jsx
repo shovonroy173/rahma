@@ -3,16 +3,15 @@ import React, {useRef} from 'react';
 import Button from '../components/Button';
 import ProgressContainer from '../components/ProgressContainer';
 import SubText from '../components/SubText';
-import PhoneInput from 'react-native-phone-number-input';
 import MainText from '../components/MainText';
 import {useSelector} from 'react-redux';
-import {Controller, useFormContext} from 'react-hook-form';
+import Phone from '../components/Phone';
 
 const PhoneScreen = ({navigation}) => {
-  const phoneInput = useRef(null);
   const currentPage = useSelector(state => state.page.currentPage);
+  const phoneInput = useRef(null);
 
-  const {control} = useFormContext();
+  // const {control} = useFormContext();
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
@@ -29,33 +28,17 @@ const PhoneScreen = ({navigation}) => {
 
         <View style={styles.subContainer}>
           <Text style={styles.label}>Enter Your Phone Number:</Text>
-          <Controller
-            name="phone"
-            control={control}
-            render={({field: {onChange, onBlur, value}}) => (
-              <PhoneInput
-                ref={phoneInput}
-                defaultCode="BD"
-                // layout="first"
-                onChangeText={text => onChange(text)}
-                value={value}
-                containerStyle={styles.phoneContainer}
-                textContainerStyle={styles.textContainer}
-                codeTextStyle={styles.codeText}
-                flagButtonStyle={styles.flagButton}
-                // renderDropdownImage={() => null}
-              />
-            )}
-          />
+          <Phone name="phone" phoneInput={phoneInput} />
 
           <SubText />
         </View>
       </View>
       <Button
-        value={1}
         navigation={navigation}
         path="Begin"
         title="Send a Verification Code"
+        id="phone"
+        phoneInput={phoneInput}
       />
     </View>
   );
@@ -79,38 +62,6 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-  },
-  phoneContainer: {
-    width: '100%',
-    height: 50,
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    gap: 10,
-  },
-  textContainer: {
-    paddingVertical: 0,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 10,
-    backgroundColor: 'transparent',
-  },
-  codeText: {
-    fontSize: 16,
-    color: 'gray',
-    fontWeight: 'bold',
-  },
-  flagContainer: {
-    backgroundColor: 'gray',
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    marginLeft: 5,
-  },
-  flagButton: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 8,
-    padding: 5,
   },
 });
 

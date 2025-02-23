@@ -27,9 +27,9 @@ const DOBScreen = ({navigation}) => {
       </View>
       <Button
         title="Continue"
-        value={1}
         navigation={navigation}
         path="BirthCountry"
+        id="calender"
       />
     </View>
   );

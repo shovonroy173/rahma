@@ -12,12 +12,31 @@ export const validationRules = {
       value: /^[0-9]+$/,
       message: 'Enter numbers only',
     },
-  },
-  password: {
-    required: 'Password is required',
     minLength: {
       value: 6,
-      message: 'Password must be at least 6 characters',
+      message: 'OTP must be 6 digits long',
+    },
+  },
+  phone: {
+    required: 'Phone number is required',
+    pattern: {
+      value: /^[0-9]+$/,
+      message: 'Enter numbers only',
+    },
+  },
+
+  'user.firstName': {
+    required: 'First name is required',
+    pattern: {
+      value: /^[A-Za-z]+$/,
+      message: 'Enter alphabet  only',
+    },
+  },
+  'user.lastName': {
+    required: 'Last name is required',
+    pattern: {
+      value: /^[A-Za-z]+$/,
+      message: 'Enter alphabet  only',
     },
   },
 };

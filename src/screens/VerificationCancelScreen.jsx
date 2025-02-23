@@ -15,7 +15,7 @@ import Button from '../components/Button';
 const DrawerContent = ({closeDrawer, navigation}) => (
   <View style={[styles.drawerContainer, styles.shadowProp]}>
     <View style={styles.drawerTextContainer}>
-      <Text style={styles.drawerText1}>Sorrydfsd!</Text>
+      <Text style={styles.drawerText1}>Sorry!</Text>
       <Text style={styles.drawerText2}>
         We are Unable to Continue your Private Information has been Deleted.
       </Text>

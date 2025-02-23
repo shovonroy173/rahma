@@ -1,16 +1,13 @@
-import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
-import {Controller, useFormContext} from 'react-hook-form';
+import {gender} from '../../assets/data/data';
+import Gender from '../components/Gender';
 
 const GenderScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
-
-  const [selectedGender, setSelectedGender] = useState(null);
-  console.log(selectedGender);
-  const {control, setValue} = useFormContext();
   return (
     <View style={styles.container}>
       <View style={styles.progressContainer}>
@@ -19,51 +16,16 @@ const GenderScreen = ({navigation}) => {
       </View>
 
       <View style={styles.imageContainer}>
-        <Controller
-          name="gender"
-          control={control}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TouchableOpacity
-              onPress={male => {
-                setSelectedGender('male');
-                setValue('gender', 'male');
-              }}
-              style={styles.singleImageContainer}>
-              {selectedGender !== 'male' && <View style={styles.imageShield} />}
-              <Image
-                source={require('../../assets/images/male.png')}
-                style={styles.image}
-              />
-            </TouchableOpacity>
-          )}
-        />
-        <Controller
-          name="gender"
-          control={control}
-          render={({field: {onChange, onBlur, value}}) => (
-            <TouchableOpacity
-              onPress={female => {
-                setSelectedGender('female');
-                setValue('gender', 'female');
-              }}
-              style={styles.singleImageContainer}>
-              {selectedGender !== 'female' && (
-                <View style={styles.imageShield} />
-              )}
-              <Image
-                source={require('../../assets/images/female.png')}
-                style={styles.image}
-              />
-            </TouchableOpacity>
-          )}
-        />
+        {gender.map(item => (
+          <Gender key={item.id} item={item} />
+        ))}
       </View>
 
       <Button
-        value={selectedGender === 'male' || selectedGender === 'female'}
         navigation={navigation}
         path="Name"
         title="Continue"
+        id="gender"
       />
     </View>
   );
@@ -89,25 +51,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
   },
   imageContainer: {
+    display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
     gap: 15,
-  },
-  singleImageContainer: {
-    position: 'relative', // Ensures overlay can be positioned inside this container
-  },
-  image: {
-    width: 180,
-    height: 180,
-    borderRadius: 100,
-  },
-  imageShield: {
-    position: 'absolute',
-    width: 180,
-    height: 180,
-    backgroundColor: 'rgba(120,120,120, 0.7)',
-    borderRadius: 100,
-    zIndex: 10,
   },
 });
 

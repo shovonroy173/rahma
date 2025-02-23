@@ -3,10 +3,16 @@ import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
-import Country from '../components/Country';
+// import Country from '../components/Country';
+import {CountrySelection} from 'react-native-country-list';
+import {Controller, useFormContext} from 'react-hook-form';
 
 const BirthCountryScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+  // const onCountrySelection = data => {
+  //   console.log(data);
+  // };
+  const {control, getValues} = useFormContext();
 
   return (
     <View style={styles.container}>
@@ -18,8 +24,20 @@ const BirthCountryScreen = ({navigation}) => {
             <Text style={styles.titleText}>Do you Born?</Text>
           </View>
           <View style={styles.countryContainer}>
-            <Country name="birthCountry" />
+            {/* <Country name="birthCountry" /> */}
             {/* <CountrySelection action={item => onCountrySelection(item)} /> */}
+            <Controller
+              name="birthCountry"
+              control={control}
+              render={({field: {onChange, value}}) => (
+                <CountrySelection action={item => onChange(item?.name)} />
+              )}
+            />
+            {getValues('birthCountry') && (
+              <Text style={styles.date}>
+                Place of Birth: {getValues('birthCountry')}
+              </Text>
+            )}
           </View>
         </View>
       </View>
@@ -28,6 +46,7 @@ const BirthCountryScreen = ({navigation}) => {
         value={1}
         navigation={navigation}
         path="PresentCountry"
+        id="birthCountry"
       />
     </View>
   );
@@ -62,6 +81,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 600,
     textAlign: 'center',
+  },
+  date: {
+    fontSize: 20,
+    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
   },
 });
 export default BirthCountryScreen;

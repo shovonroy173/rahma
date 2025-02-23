@@ -26,7 +26,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 
 function App() {
   const Stack = createNativeStackNavigator();
-  const methods = useForm();
+  const methods = useForm({ mode: 'onChange'});
   return (
     <FormProvider {...methods}>
     <NavigationContainer style={styles.container}>

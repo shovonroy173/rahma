@@ -13,7 +13,7 @@ const BottomInput = (
     control,
     formState: {errors},
   } = useFormContext();
-console.log(validationRules.name);
+// console.log(validationRules.name);
 
   return (
     <View>

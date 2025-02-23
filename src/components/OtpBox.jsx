@@ -11,7 +11,7 @@ const OtpBox = (
     control,
     formState: {errors},
   } = useFormContext();
-  console.log('otpbox', errors[name]);
+  // console.log('otpbox', errors[name]);
   return (
     <View>
       <Controller

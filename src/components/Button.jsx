@@ -1,47 +1,58 @@
 import {Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch} from 'react-redux';
 import {nextPage} from '../redux/PageSlice';
 import {useFormContext} from 'react-hook-form';
 
-const Button = ({navigation, title, path, id}) => {
+const Button = ({navigation, title, path, id, phoneInput}) => {
   const dispatch = useDispatch();
   const {
     handleSubmit,
     formState: {errors},
+    watch,
+    getValues,
   } = useFormContext();
   const onSubmit = data => {
-    // setCredentials((prev)=> ({prev, ...data}));
-    // console.log('Form Submitted:', getValues());
     console.log('Form Submitted:', data);
     console.log('Date', data.calender.toLocaleDateString());
   };
-  //   const [value, setValue] = useState(watch(id));
-  //  console.log(value , value[id]);
-  //  console.log('watch' , watch(id));
-  console.log('errors', id, errors[id]);
-
+  // console.log('watch', id, watch(id));
+  // console.log('Button Errors', id, !!errors[id]);
+  // console.log('Phone BUtton', getValues(id) );
+  // console.log(
+  //   'Phone Valid BUtton',
+  //   phoneInput?.current?.isValidNumber(getValues(id)),
+  // );
   return (
-    // <View style={styles.container}>
     <TouchableOpacity
       onPress={() => {
         console.log('Pressed');
         // if (id === 'submit') {
-        handleSubmit(onSubmit)();
         // }
-        if (!errors[id] || errors[id] === undefined) {
+
+        if (
+          !!errors[id] ||
+          !watch(id) ||
+          phoneInput?.current?.isValidNumber(getValues('phone')) === false ||
+          (id === 'user' && (!watch(id).firstName || !watch(id).lastName))
+        ) {
+          console.log('handle submit Error', errors[id]);
+        } else {
+          handleSubmit(onSubmit)();
           dispatch(nextPage());
           navigation.navigate(path);
         }
       }}
       style={[
-        !errors[id] || errors[id] === undefined
-          ?   styles.loginButton
-          : styles.disabledButton,
+        !!errors[id] ||
+        !watch(id) ||
+        phoneInput?.current?.isValidNumber(getValues('phone')) === false ||
+        (id === 'user' && (!watch(id).firstName || !watch(id).lastName))
+          ? styles.disabledButton
+          : styles.loginButton,
       ]}>
       <Text style={styles.loginButtonText}>{title}</Text>
     </TouchableOpacity>
-    // </View>
   );
 };
 

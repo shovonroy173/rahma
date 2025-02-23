@@ -32,7 +32,7 @@ const NameScreen = ({navigation}) => {
         </View>
       </View>
 
-      <Button value={1} navigation={navigation} path="DOB" title="Continue" id="user" />
+      <Button navigation={navigation} path="DOB" title="Continue" id="user" />
     </View>
   );
 };

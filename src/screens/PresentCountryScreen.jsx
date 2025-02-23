@@ -4,9 +4,12 @@ import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
 import Country from '../components/Country';
+import {Controller, useFormContext} from 'react-hook-form';
+import {CountrySelection} from 'react-native-country-list';
 
 const PresentCountryScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+  const {control, getValues} = useFormContext();
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
@@ -19,10 +22,22 @@ const PresentCountryScreen = ({navigation}) => {
           <View style={styles.countryContainer}>
             <Country name="presentCountry" />
             {/* <CountrySelection action={item => onCountrySelection(item)} /> */}
+            <Controller
+              name="presentCountry"
+              control={control}
+              render={({field: {onChange, value}}) => (
+                <CountrySelection action={item => onChange(item?.name)} />
+              )}
+            />
+            {getValues('presentCountry') && (
+              <Text style={styles.date}>
+                Place of Living: {getValues('presentCountry')}
+              </Text>
+            )}
           </View>
         </View>
       </View>
-      <Button title="Continue" value={1} navigation={navigation} path="Rules" />
+      <Button title="Continue" navigation={navigation} path="Rules" id="presentCountry" />
     </View>
   );
 };
@@ -56,6 +71,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 600,
     textAlign: 'center',
+  },
+  date: {
+    fontSize: 20,
+    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
   },
 });
 export default PresentCountryScreen;
