@@ -30,6 +30,7 @@
     "react-native-safe-area-context": "^5.1.0",
     "react-native-screens": "^4.5.0",
     "react-native-vector-icons": "^10.2.0",
+    "react-native-virtualized-view": "^1.0.0",
     "react-native-vision-camera": "^4.6.4",
     "react-redux": "^9.2.0"
   },

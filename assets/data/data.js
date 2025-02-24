@@ -26,6 +26,8 @@ import FrontErrorScreen from '../../src/screens/FrontErrorScreen';
 import BackErrorScreen from '../../src/screens/BackErrorScreen';
 import LoadingScreen from '../../src/screens/LoadingScreen';
 import VerificationDoneScreen from '../../src/screens/VerificationDoneScreen';
+import ProfileReadyScreen from '../../src/screens/ProfileReadyScreen';
+import UserSectScreen from '../../src/screens/UserSectScreen';
 
 export const name = [
   {id: 1, name: 'firstName', placeHolder: 'First Name'},
@@ -60,6 +62,22 @@ export const warnings = [
   },
 ];
 
+export const sects = [
+  {id: 1, title: 'Sunni'},
+  {id: 2, title: 'Shia'},
+  {id: 3, title: 'Ahmadi'},
+  {id: 4, title: 'Ibadi'},
+  {id: 5, title: 'Ismaili'},
+  {id: 6, title: 'Non Muslim'},
+  {id: 7, title: 'Others..'},
+  {id: 8, title: 'Prefer not to Say'},
+  {id: 9, title: 'Prefer '},
+  {id: 10, title: ' not to Say'},
+  {id: 11, title: 'fer not to Say'},
+  {id: 12, title: 'Prfer n Say'},
+  {id: 13, title: 'Prenot to y'},
+];
+
 export const screens = [
   {id: 1, name: 'Start', component: StartScreen},
   {id: 2, name: 'Login', component: LoginScreen},
@@ -84,5 +102,7 @@ export const screens = [
   {id: 20, name: 'FrontError', component: FrontErrorScreen},
   {id: 21, name: 'BackError', component: BackErrorScreen},
   {id: 22, name: 'Loading', component: LoadingScreen},
-  {id: 22, name: 'VerificationDone', component: VerificationDoneScreen},
+  {id: 23, name: 'VerificationDone', component: VerificationDoneScreen},
+  {id: 24, name: 'ProfileReady', component: ProfileReadyScreen},
+  {id: 24, name: 'UserSect', component: UserSectScreen},
 ];

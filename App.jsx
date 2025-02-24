@@ -8,8 +8,10 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
+// import SplashScreen from 'react-native-splash-screen';
 
 import {
+  // Platform,
   StyleSheet,
   // SafeAreaView,
   // ScrollView,
@@ -22,30 +24,35 @@ import {
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
 import {screens} from './assets/data/data';
-import { useForm, FormProvider } from 'react-hook-form';
+import {useForm, FormProvider} from 'react-hook-form';
 
 function App() {
   const Stack = createNativeStackNavigator();
-  const methods = useForm({ mode: 'onChange'});
+  const methods = useForm({mode: 'onChange'});
+  // useEffect(() => {
+  //   if (Platform.OS === 'android') {
+  //     SplashScreen.hide();
+  //   }
+  // }, []);
   return (
     <FormProvider {...methods}>
-    <NavigationContainer style={styles.container}>
-      <Provider store={store}>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-            gestureEnabled: false,
-          }}>
-          {screens.map(item => (
-            <Stack.Screen
-              key={item.id}
-              name={item.name}
-              component={item.component}
-            />
-          ))}
-        </Stack.Navigator>
-      </Provider>
-    </NavigationContainer>
+      <NavigationContainer style={styles.container}>
+        <Provider store={store}>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+              gestureEnabled: false,
+            }}>
+            {screens.map(item => (
+              <Stack.Screen
+                key={item.id}
+                name={item.name}
+                component={item.component}
+              />
+            ))}
+          </Stack.Navigator>
+        </Provider>
+      </NavigationContainer>
     </FormProvider>
   );
 }

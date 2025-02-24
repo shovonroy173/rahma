@@ -36,8 +36,10 @@ const Input = ({placeholder, name}) => {
   );
 };
 
+// const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   input: {
+    // width: width,
     borderWidth: 1,
     borderRadius: 10,
     borderColor: '#A19B9B',

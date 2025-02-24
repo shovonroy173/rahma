@@ -1,4 +1,4 @@
-import {View, StyleSheet, Text, Dimensions} from 'react-native';
+import {View, StyleSheet, Text, Dimensions, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, Keyboard} from 'react-native';
 import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
@@ -11,6 +11,10 @@ const PresentCountryScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
   const {control, getValues} = useFormContext();
   return (
+      <KeyboardAvoidingView
+          style={{flex: 1}}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <View style={styles.mainContainer}>
         <ProgressContainer currentPage={currentPage} navigation={navigation} />
@@ -39,6 +43,8 @@ const PresentCountryScreen = ({navigation}) => {
       </View>
       <Button title="Continue" navigation={navigation} path="Rules" id="presentCountry" />
     </View>
+    </TouchableWithoutFeedback>
+   </KeyboardAvoidingView>
   );
 };
 

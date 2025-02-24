@@ -15,6 +15,7 @@ const Calender = ({name}) => {
           <DatePicker
             date={value || new Date()}
             mode="date"
+            theme="auto"
             onDateChange={date => {
               onChange(date);
               console.log('date', date.toLocaleDateString());
@@ -24,7 +25,7 @@ const Calender = ({name}) => {
       />
       {getValues(name) && (
         <Text style={styles.date}>
-          Place of Birth: {getValues(name)?.toLocaleDateString()}
+          Date of Birth: {getValues(name)?.toLocaleDateString()}
         </Text>
       )}
     </View>

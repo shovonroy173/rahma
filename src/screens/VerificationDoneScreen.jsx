@@ -23,7 +23,7 @@ const VerificationDoneScreen = ({navigation}) => {
         title="Ok, Got It"
         value={1}
         navigation={navigation}
-        path="VerificationDone"
+        path="ProfileReady"
       />
     </View>
   );
