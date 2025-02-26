@@ -61,6 +61,7 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    // paddingVertical: 30,
   },
   backgroundImage: {
     flex: 1,

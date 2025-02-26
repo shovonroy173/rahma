@@ -28,6 +28,15 @@ import LoadingScreen from '../../src/screens/LoadingScreen';
 import VerificationDoneScreen from '../../src/screens/VerificationDoneScreen';
 import ProfileReadyScreen from '../../src/screens/ProfileReadyScreen';
 import UserSectScreen from '../../src/screens/UserSectScreen';
+import ProfessionScreen from '../../src/screens/ProfessionScreen';
+import SalaryScreen from '../../src/screens/SalaryScreen';
+import EthinicScreen from '../../src/screens/EthinicScreen';
+import EducationScreen from '../../src/screens/EducationScreen';
+import NotificationScreen from '../../src/screens/NotificationScreen';
+import UploadPhotosScreen from '../../src/screens/UploadPhotosScreen';
+import SelfieVerifyScreen from '../../src/screens/SelfieVerifyScreen';
+import FaceVerificationScreen from '../../src/screens/FaceVerificationScreen';
+import VerificationCompleteScreen from '../../src/screens/VerificationCompleteScreen';
 
 export const name = [
   {id: 1, name: 'firstName', placeHolder: 'First Name'},
@@ -71,12 +80,57 @@ export const sects = [
   {id: 6, title: 'Non Muslim'},
   {id: 7, title: 'Others..'},
   {id: 8, title: 'Prefer not to Say'},
-  {id: 9, title: 'Prefer '},
-  {id: 10, title: ' not to Say'},
-  {id: 11, title: 'fer not to Say'},
-  {id: 12, title: 'Prfer n Say'},
-  {id: 13, title: 'Prenot to y'},
 ];
+
+export const education = [
+  {id: 1, title: 'High School'},
+  {id: 2, title: 'Undergraduate Degree'},
+  {id: 3, title: 'Postgraduate Degree'},
+  {id: 4, title: 'Doctorate'},
+  {id: 5, title: 'Non-degree Qualification'},
+  {id: 6, title: 'Other Educational Level'},
+  {id: 7, title: 'No Degree & No Education'},
+];
+
+export const professions = [
+  {key: 1, value: 'Accountant'},
+  {key: 2, value: 'Actor'},
+  {key: 3, value: 'Acting Professional'},
+  {key: 4, value: 'Administrator Employee'},
+  {key: 5, value: 'Air Hostess'},
+  {key: 6, value: 'Advertising Professional'},
+  {key: 7, value: 'Alim'},
+  {key: 8, value: 'Doctor'},
+  {key: 9, value: 'Engineer'},
+];
+
+export const images = [
+  {id: 1, title: 'img1'},
+  {id: 2, title: 'img2'},
+  {id: 3, title: 'img3'},
+  {id: 4, title: 'img4'},
+  {id: 5, title: 'img5'},
+  {id: 6, title: 'img6'},
+  {id: 7, title: 'img7'},
+  {id: 8, title: 'img8'},
+];
+
+export const rightImages = [
+  {id: 1, desc: 'Only Show Yourself' , img: '../../assets/images/rightImage1.png'},
+  {id: 2, desc: 'Clear Face' , img: '../../assets/images/rightImage2.png'},
+
+];
+
+export const wrongImages = [
+  {id: 1, desc: 'Not a Person' , img: '../../assets/images/notaperson.png'},
+  {id: 2, desc: 'Face Covered' , img: '../../assets/images/facecovered.png'},
+  {id: 3, desc: 'Far Away' , img: '../../assets/images/faraway.png'},
+  {id: 4, desc: 'Ai Image & filter' , img: '../../assets/images/ai.png'},
+
+];
+
+
+
 
 export const screens = [
   {id: 1, name: 'Start', component: StartScreen},
@@ -104,5 +158,14 @@ export const screens = [
   {id: 22, name: 'Loading', component: LoadingScreen},
   {id: 23, name: 'VerificationDone', component: VerificationDoneScreen},
   {id: 24, name: 'ProfileReady', component: ProfileReadyScreen},
-  {id: 24, name: 'UserSect', component: UserSectScreen},
+  {id: 25, name: 'UserSect', component: UserSectScreen},
+  {id: 26, name: 'Profession', component: ProfessionScreen},
+  {id: 27, name: 'Salary', component: SalaryScreen},
+  {id: 28, name: 'Ethinic', component: EthinicScreen},
+  {id: 29, name: 'Education', component: EducationScreen},
+  {id: 30, name: 'Notification', component: NotificationScreen},
+  {id: 31, name: 'UploadPhotos', component: UploadPhotosScreen},
+  {id: 31, name: 'SelfieVerify', component: SelfieVerifyScreen},
+  {id: 31, name: 'FaceVerification', component: FaceVerificationScreen},
+  {id: 31, name: 'VerificationComplete', component: VerificationCompleteScreen},
 ];

@@ -15,7 +15,6 @@ import Button from '../components/Button';
 // import Country from '../components/Country';
 import {CountrySelection} from 'react-native-country-list';
 import {Controller, useFormContext} from 'react-hook-form';
-import {ScrollView} from 'react-native-virtualized-view';
 
 const BirthCountryScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);

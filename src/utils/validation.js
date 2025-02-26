@@ -38,5 +38,8 @@ export const validationRules = {
       value: /^[A-Za-z]+$/,
       message: 'Enter alphabet  only',
     },
+    'images.img1': {
+      required: 'Main images is required',
+    },
   },
 };

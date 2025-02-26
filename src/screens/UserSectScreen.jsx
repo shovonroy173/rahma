@@ -4,6 +4,7 @@ import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
 import {sects} from '../../assets/data/data';
+import Option2 from '../components/Option2';
 
 const UserSectScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -19,17 +20,17 @@ const UserSectScreen = ({navigation}) => {
           contentContainerStyle={styles.optionContainer}
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}>
-          {sects.map(sect => (
-            <Text key={sect.id} style={styles.option}>
-              {sect.title}
-            </Text>
+          {sects.map(item => (
+            <Option2 key={item.id} item={item} />
+            // <Text  style={styles.option}>
+            //   {sect.title}
+            // </Text>
           ))}
         </ScrollView>
       </View>
 
-      {/* ✅ Fix: Ensure Button Stays Visible */}
       <View style={styles.buttonContainer}>
-        <Button title="Continue" navigation={navigation} path="UserSect" />
+        <Button title="Continue" navigation={navigation} path="Profession" id="sect" />
       </View>
     </View>
   );

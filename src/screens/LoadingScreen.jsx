@@ -14,13 +14,13 @@ const LoadingScreen = ({navigation}) => {
         <ProgressContainer currentPage={currentPage} navigation={navigation} />
         <Skeleton
           animation="wave"
-          width={'100%'}
+          width="100%"
           height={40}
           skeletonStyle={styles.skeleton}
         />{' '}
-        <Skeleton animation="wave" width={'100%'} height={20} />
-        <Skeleton animation="wave" width={'100%'} height={60} />
-        <Skeleton animation="wave" width={'100%'} height={20} />
+        <Skeleton animation="wave" width="100%" height={20} />
+        <Skeleton animation="wave" width="100%" height={60} />
+        <Skeleton animation="wave" width="100%" height={20} />
       </View>
       <Button
         title="Ok, Got It"
