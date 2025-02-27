@@ -37,6 +37,7 @@ import UploadPhotosScreen from '../../src/screens/UploadPhotosScreen';
 import SelfieVerifyScreen from '../../src/screens/SelfieVerifyScreen';
 import FaceVerificationScreen from '../../src/screens/FaceVerificationScreen';
 import VerificationCompleteScreen from '../../src/screens/VerificationCompleteScreen';
+import BottomNavigatorScreen from '../../src/screens/BottomNavigatorScreen';
 
 export const name = [
   {id: 1, name: 'firstName', placeHolder: 'First Name'},
@@ -116,16 +117,16 @@ export const images = [
 ];
 
 export const rightImages = [
-  {id: 1, desc: 'Only Show Yourself' , img: '../../assets/images/rightImage1.png'},
-  {id: 2, desc: 'Clear Face' , img: '../../assets/images/rightImage2.png'},
+  {id: 1, desc: 'Only Show Yourself' , img: require('../../assets/images/rightImage1.png')},
+  {id: 2, desc: 'Clear Face' , img: require('../../assets/images/rightImage2.png')},
 
 ];
 
 export const wrongImages = [
-  {id: 1, desc: 'Not a Person' , img: '../../assets/images/notaperson.png'},
-  {id: 2, desc: 'Face Covered' , img: '../../assets/images/facecovered.png'},
-  {id: 3, desc: 'Far Away' , img: '../../assets/images/faraway.png'},
-  {id: 4, desc: 'Ai Image & filter' , img: '../../assets/images/ai.png'},
+  {id: 1, desc: 'Not a Person' , img: require('../../assets/images/notaperson.png')},
+  {id: 2, desc: 'Face Covered' , img: require('../../assets/images/facecovered.png')},
+  {id: 3, desc: 'Far Away' , img: require('../../assets/images/faraway.png')},
+  {id: 4, desc: 'Ai Image & filter' , img: require('../../assets/images/ai.png')},
 
 ];
 
@@ -165,7 +166,9 @@ export const screens = [
   {id: 29, name: 'Education', component: EducationScreen},
   {id: 30, name: 'Notification', component: NotificationScreen},
   {id: 31, name: 'UploadPhotos', component: UploadPhotosScreen},
-  {id: 31, name: 'SelfieVerify', component: SelfieVerifyScreen},
-  {id: 31, name: 'FaceVerification', component: FaceVerificationScreen},
-  {id: 31, name: 'VerificationComplete', component: VerificationCompleteScreen},
+  {id: 32, name: 'SelfieVerify', component: SelfieVerifyScreen},
+  {id: 33, name: 'FaceVerification', component: FaceVerificationScreen},
+  {id: 34, name: 'VerificationComplete', component: VerificationCompleteScreen},
+  {id: 35, name: 'BottomNavigator', component: BottomNavigatorScreen},
+
 ];
