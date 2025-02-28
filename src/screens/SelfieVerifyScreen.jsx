@@ -26,15 +26,11 @@ const SelfieVerifyScreen = ({navigation}) => {
         <Text style={styles.titleText}>
           Let’s Make Sure you are the Person in this Photo.
         </Text>
-        {/* <Text style={styles.titleText2}>Muslim Dating Apps</Text> */}
       </View>
       <View>
         <Text style={styles.subText}>
           This Ensure that uou Only Meet Genuine People on Rahma.
         </Text>
-        {/* <Text style={styles.subText}>
-          You must Verify your ID With Our Apps.{' '}
-        </Text> */}
       </View>
       <View style={styles.ruleBox}>
         <View style={styles.ruleContainer}>
@@ -74,7 +70,7 @@ const SelfieVerifyScreen = ({navigation}) => {
       <Button
         title="Verify Photos"
         navigation={navigation}
-        path="BottomNavigator"
+        path="EthinicOrigin"
       />
 
       <TouchableOpacity style={styles.loginButton}>

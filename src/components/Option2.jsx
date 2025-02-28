@@ -2,19 +2,19 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
 
-const Option2 = ({item}) => {
+const Option2 = ({item , name} ) => {
   const {control, watch} = useFormContext();
   console.log(watch('sect'));
 
   return (
     <Controller
-      name="sect"
+      name={name}
       control={control}
       render={({field: {onChange, value}}) => (
         <TouchableOpacity
           style={[
             styles.optionContainer,
-            watch('sect')?.id === item?.id && styles.selectedOption,
+            watch(name)?.id === item?.id && styles.selectedOption,
           ]}
           onPress={() => {
             onChange(item);
@@ -24,7 +24,7 @@ const Option2 = ({item}) => {
               style={[
                 styles.optionText,
 
-                watch('sect')?.id === item?.id && styles.optionTextSelected,
+                watch(name)?.id === item?.id && styles.optionTextSelected,
               ]}>
               {item.title}
             </Text>

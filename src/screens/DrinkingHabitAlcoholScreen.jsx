@@ -1,21 +1,21 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {education} from '../../assets/data/data';
 import OptionComponent from '../components/OptionComponent';
+import {drinkingHabit} from '../../assets/data/data';
 
-const EducationScreen = ({navigation}) => {
+const DrinkingHabitAlcoholScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
 
   return (
     <OptionComponent
       currentPage={currentPage}
       navigation={navigation}
-      title="What’s your Education Level?"
-      options={education}
-      id="education"
-      path="Notification"
+      title="Do you Drink Alcohol?"
+      options={drinkingHabit}
+      id="drinkinghhabitalcohol"
+      path="DrinkingHabitBeer"
     />
   );
 };
 
-export default EducationScreen;
+export default DrinkingHabitAlcoholScreen;

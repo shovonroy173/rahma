@@ -1,14 +1,14 @@
 import React from 'react';
 import ExploreComponent from '../components/ExploreComponent';
 
-const PassedScreen = () => {
+const LikedScreen = () => {
   return (
     <ExploreComponent
-      title="Favourited"
+      title="Liked"
       subtitle="People Who you Passed will Appear Here."
-      img={require('../../assets/images/passed.png')}
+      img={require('../../assets/images/liked.png')}
     />
   );
 };
 
-export default PassedScreen;
+export default LikedScreen;

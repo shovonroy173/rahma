@@ -1,21 +1,22 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {education} from '../../assets/data/data';
 import OptionComponent from '../components/OptionComponent';
+import {convert} from '../../assets/data/data';
 
-const EducationScreen = ({navigation}) => {
+const ConvertScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
 
   return (
     <OptionComponent
       currentPage={currentPage}
       navigation={navigation}
-      title="What’s your Education Level?"
-      options={education}
-      id="education"
-      path="Notification"
+      title="Are You a
+Convert/Revert?"
+      options={convert}
+      id="convert"
+      path="Interest"
     />
   );
 };
 
-export default EducationScreen;
+export default ConvertScreen;

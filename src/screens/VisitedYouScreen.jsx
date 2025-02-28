@@ -1,12 +1,15 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import ExploreComponent from '../components/ExploreComponent';
 
 const VisitedYouScreen = () => {
   return (
-    <View>
-      <Text>VisitedYouScreen</Text>
-    </View>
-  )
-}
+    <ExploreComponent
+      title="Visted you"
+      subtitle="People Who have Liked you will Appear Here."
+      name="likedyou"
+      img={require('../../assets/images/visitedyou.png')}
+    />
+  );
+};
 
-export default VisitedYouScreen
+export default VisitedYouScreen;

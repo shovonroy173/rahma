@@ -1,12 +1,14 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import ExploreComponent from '../components/ExploreComponent';
 
 const FavouritedScreen = () => {
   return (
-    <View>
-      <Text>FavouritedScreen</Text>
-    </View>
-  )
-}
+    <ExploreComponent
+      title="Favourited"
+      subtitle="People you Favourited  will Appear Here.Don’t Worry they won’t Know your Favourited them."
+      img={require('../../assets/images/favourited.png')}
+    />
+  );
+};
 
-export default FavouritedScreen
+export default FavouritedScreen;
