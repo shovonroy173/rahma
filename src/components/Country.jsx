@@ -4,12 +4,7 @@ import {Controller, useFormContext} from 'react-hook-form';
 import {StyleSheet, Text, View} from 'react-native';
 
 const Country = ({name}) => {
-  const {control, getValues} = useFormContext();
-  const onCountrySelection = (data) =>{
-    console.log(data);
-  };
-  console.log(name);
-  
+  const {control} = useFormContext();
   return (
     <View>
       {/* {getValues(name) && (

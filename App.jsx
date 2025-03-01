@@ -28,7 +28,13 @@ import {useForm, FormProvider} from 'react-hook-form';
 
 function App() {
   const Stack = createNativeStackNavigator();
-  const methods = useForm({mode: 'onChange'});
+  const methods = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      selectedOptions: {},
+      selectedPersonalies: {},
+    },
+  });
   // useEffect(() => {
   //   if (Platform.OS === 'android') {
   //     SplashScreen.hide();

@@ -1,23 +1,17 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 
 const SubText = ({navigation}) => {
   return (
-    <View>
-      <Text style={styles.privacyContainer}>
-        By Continuing you agree to our{' '}
-        <Text
-          onPress={() => navigation.navigate('Terms')}
-          style={styles.termsText}>
-          Terms
-        </Text>{' '}
-        and{' '}
-        <Text
-          onPress={() => navigation.navigate('PrivacyPolicy')}
-          style={styles.termsText}>
-          Privacy Policy
-        </Text>{' '}
-      </Text>
+    <View style={styles.privacyContainer}>
+      <Text>By Continuing you agree to our</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Terms')}>
+        <Text style={styles.termsText}>Terms</Text>
+      </TouchableOpacity>{' '}
+      <Text>and </Text>
+      <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy')}>
+        <Text style={styles.termsText}>Privacy Policy</Text>
+      </TouchableOpacity>{' '}
     </View>
   );
 };
@@ -30,6 +24,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     paddingVertical: 20,
     fontWeight: 400,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    gap: 10,
+    flexWrap: 'wrap',
   },
   termsText: {
     color: '#379A35',

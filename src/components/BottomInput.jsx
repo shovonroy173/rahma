@@ -7,7 +7,7 @@ import { validationRules } from '../utils/validation';
 
 const BottomInput = (
   // {Controller, control, errors, watch, name, setValue}
-  {name},
+  {name, placeholder},
 ) => {
   const {
     control,
@@ -32,7 +32,7 @@ const BottomInput = (
           // }
             value={value}
             style={styles.inputBox}
-            placeholder={'name@example.com'}
+            placeholder={placeholder}
           />
         )}
       />

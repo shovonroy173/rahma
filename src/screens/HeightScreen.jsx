@@ -18,10 +18,10 @@ const HeightScreen = ({navigation}) => {
 
       <ScrollView
         style={styles.scrollContainer}
-        contentContainerStyle={{flexGrow: 1, paddingBottom: 20}}
+        contentContainerStyle={{flexGrow: 1, paddingBottom: 20, gap: 10}}
         showsVerticalScrollIndicator={false}>
         {heights.map(item => (
-          <Height key={item.id} item={item} />
+          <Height key={item.id} item={item} name="height" />
         ))}
       </ScrollView>
 

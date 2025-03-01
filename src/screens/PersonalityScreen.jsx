@@ -1,21 +1,21 @@
 import React from 'react';
-import {interests} from '../../assets/data/data';
 import {useSelector} from 'react-redux';
 import MultiSelect from '../components/MultiSelect';
+import {personalities} from '../../assets/data/data';
 
-const InterestScreen = ({navigation}) => {
+const PersonalityScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
 
   return (
     <MultiSelect
       currentPage={currentPage}
       navigation={navigation}
-      title="What are You Interests?"
-      options={interests}
-      id="selectedOptions"
-      path="Personality"
+      title="What would you Describe your Personality?"
+      options={personalities}
+      id="selectedPersonalies"
+      path="Bio"
     />
   );
 };
 
-export default InterestScreen;
+export default PersonalityScreen;

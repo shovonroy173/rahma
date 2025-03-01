@@ -23,7 +23,7 @@ const SalaryScreen = ({navigation}) => {
           </View>
         </View>
         <View>
-          <BottomInput name="salary"  />
+          <BottomInput name="salary" placeholder="ex. 20000"  />
           <SubText navigation={navigation} />
         </View>
       </View>

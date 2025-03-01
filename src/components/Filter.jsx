@@ -1,10 +1,13 @@
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-const Filter = () => {
+const Filter = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/images/filter.png')} />
+      <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
+        <Image source={require('../../assets/images/filter.png')} />
+      </TouchableOpacity>
+
       <Text style={styles.title}>Explore</Text>
     </View>
   );

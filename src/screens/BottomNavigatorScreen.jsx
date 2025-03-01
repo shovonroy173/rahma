@@ -24,8 +24,7 @@ const BottomNavigatorScreen = () => {
           justifyContent: 'center',
         },
         tabBarShowLabel: false,
-      }}
-      >
+      }}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}

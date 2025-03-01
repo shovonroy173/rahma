@@ -4,7 +4,7 @@ import { createContext, useState } from 'react';
 
 // Create a context
 export const ProgressContext = createContext();
-const TOTAL_PAGES = 42;
+const TOTAL_PAGES = 53;
 // Provider component
 export const ProgressProvider = ({ children }) => {
   const [progressValue, setProgressValue] = useState(10);

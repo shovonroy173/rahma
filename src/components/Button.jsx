@@ -16,25 +16,27 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
     console.log('Form Submitted:', data);
     console.log('Date', data.calender.toLocaleDateString());
   };
-  // console.log('watch', id, watch(id));
-  // console.log('Button Errors', id, !!errors[id]);
-  // console.log('Phone BUtton', getValues(id) );
-  // console.log(
-  //   'Phone Valid BUtton',
-  //   phoneInput?.current?.isValidNumber(getValues(id)),
-  // );
+  // console.log(!watch('height'));
+
+  const totalInterests =
+    watch('selectedOptions') || watch('selectedPersonalities')
+      ? Object.values(watch(id) || {}).reduce(
+          (sum, category) => sum + category?.length,
+          0,
+        )
+      : 0;
+  // console.log(watch(id), totalInterests);
+
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log('Pressed');
-        // if (id === 'submit') {
-        // }
-
         if (
           !!errors[id] ||
           !watch(id) ||
           phoneInput?.current?.isValidNumber(getValues('phone')) === false ||
-          (id === 'user' && (!watch(id).firstName || !watch(id).lastName))
+          (id === 'user' && (!watch(id).firstName || !watch(id).lastName)) ||
+          (id === 'selectedOptions' && Object.keys(watch(id)).length === 0) ||
+          (id === 'selectedPersonalies' && Object.keys(watch(id)).length === 0)
         ) {
           console.log('handle submit Error', errors[id]);
         } else {
@@ -47,22 +49,27 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
         !!errors[id] ||
         !watch(id) ||
         phoneInput?.current?.isValidNumber(getValues('phone')) === false ||
-        (id === 'user' && (!watch(id).firstName || !watch(id).lastName))
+        (id === 'user' && (!watch(id).firstName || !watch(id).lastName)) ||
+        (id === 'selectedOptions' && Object.keys(watch(id)).length === 0) ||
+        totalInterests === 0 ||
+        (id === 'selectedPersonalies' && Object.keys(watch(id)).length === 0) ||
+        totalInterests === 0
           ? styles.disabledButton
           : styles.loginButton,
       ]}>
-      <Text style={styles.loginButtonText}>{title}</Text>
+      <Text style={styles.loginButtonText}>
+        {(id === 'selectedOptions' && totalInterests !== 0) ||
+        (id === 'selectedPersonalies' && totalInterests !== 0)
+          ? `Select(${totalInterests})`
+          : title}
+      </Text>
     </TouchableOpacity>
   );
 };
 
 const {width} = Dimensions.get('window');
-// const {height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  // container: {
-  //   height: height,
-  // },
   loginButton: {
     width: width - 50,
     backgroundColor: '#379A35',

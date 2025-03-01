@@ -54,6 +54,12 @@ import FutureChildrenScreen from '../../src/screens/FutureChildrenScreen';
 import ConvertScreen from '../../src/screens/ConvertScreen';
 import MoveAbroadScreen from '../../src/screens/MoveAboadScreen';
 import InterestScreen from '../../src/screens/InterestScreen';
+import PersonalityScreen from '../../src/screens/PersonalityScreen';
+import BioScreen from '../../src/screens/BioScreen';
+import LookingForScreen from '../../src/screens/LookingForScreen';
+import FinishScreen from '../../src/screens/FinishScreen';
+import FilterScreen from '../../src/screens/FilterScreen';
+import EditPreviewScreen from '../../src/screens/EditPreviewScreen';
 
 export const name = [
   {id: 1, name: 'firstName', placeHolder: 'First Name'},
@@ -278,6 +284,111 @@ export const convert = [
   {id: 4, title: 'Want to Revert'},
 ];
 
+export const interests = {
+  arts: [
+    {id: 1, title: 'Painting', icon: '🎨'},
+    {id: 2, title: 'Sculpture', icon: '🗿'},
+    {id: 3, title: 'Photography', icon: '📸'},
+    {id: 4, title: 'Acting', icon: '🎭'},
+    {id: 5, title: 'Design', icon: '🖼️'},
+    {id: 6, title: 'Creative Writing', icon: '✍️'},
+    {id: 7, title: 'Film Making', icon: '🎬'},
+    {id: 8, title: 'Singing', icon: '🎤'},
+    {id: 9, title: 'Dancing', icon: '💃'},
+    {id: 10, title: 'Calligraphy', icon: '✒️'},
+  ],
+  technology: [
+    {id: 11, title: 'Coding', icon: '💻'},
+    {id: 12, title: 'Cybersecurity', icon: '🛡️'},
+    {id: 13, title: 'Artificial Intelligence', icon: '🤖'},
+    {id: 14, title: 'Game Development', icon: '🎮'},
+    {id: 15, title: 'Web Design', icon: '🌐'},
+    {id: 16, title: 'App Development', icon: '📱'},
+    {id: 17, title: 'Blockchain', icon: '⛓️'},
+    {id: 18, title: 'Data Science', icon: '📊'},
+  ],
+  sports: [
+    {id: 19, title: 'Football', icon: '⚽'},
+    {id: 20, title: 'Basketball', icon: '🏀'},
+    {id: 21, title: 'Tennis', icon: '🎾'},
+    {id: 22, title: 'Swimming', icon: '🏊'},
+    {id: 23, title: 'Running', icon: '🏃'},
+    {id: 24, title: 'Chess', icon: '♟️'},
+    {id: 25, title: 'Gymnastics', icon: '🤸'},
+    {id: 26, title: 'Martial Arts', icon: '🥋'},
+  ],
+  music: [
+    {id: 27, title: 'Guitar', icon: '🎸'},
+    {id: 28, title: 'Piano', icon: '🎹'},
+    {id: 29, title: 'Drums', icon: '🥁'},
+    {id: 30, title: 'Violin', icon: '🎻'},
+    {id: 31, title: 'DJing', icon: '🎧'},
+    {id: 32, title: 'Music Production', icon: '🎼'},
+  ],
+  science: [
+    {id: 33, title: 'Astronomy', icon: '🔭'},
+    {id: 34, title: 'Biology', icon: '🦠'},
+    {id: 35, title: 'Chemistry', icon: '⚗️'},
+    {id: 36, title: 'Physics', icon: '🌌'},
+    {id: 37, title: 'Engineering', icon: '🛠️'},
+    {id: 38, title: 'Mathematics', icon: '➗'},
+  ],
+  travel: [
+    {id: 39, title: 'Hiking', icon: '🥾'},
+    {id: 40, title: 'Camping', icon: '🏕️'},
+    {id: 41, title: 'Backpacking', icon: '🎒'},
+    {id: 42, title: 'Road Trips', icon: '🚗'},
+    {id: 43, title: 'Beach Adventures', icon: '🏖️'},
+    {id: 44, title: 'Exploring Cities', icon: '🌆'},
+  ],
+  community: [
+    {id: 45, title: 'Volunteering', icon: '🤝'},
+    {id: 46, title: 'Environmental Activism', icon: '🌿'},
+    {id: 47, title: 'Animal Welfare', icon: '🐾'},
+    {id: 48, title: 'Social Work', icon: '🏡'},
+    {id: 49, title: 'Fundraising', icon: '💰'},
+  ],
+};
+
+export const personalities = {
+  extrovert: [
+    {id: 1, title: 'Energetic', icon: '⚡'},
+    {id: 2, title: 'Social', icon: '🎉'},
+    {id: 3, title: 'Adventurous', icon: '🌍'},
+    {id: 4, title: 'Charismatic', icon: '😃'},
+    {id: 5, title: 'Spontaneous', icon: '🔥'},
+    {id: 6, title: 'Persuasive', icon: '🗣️'},
+  ],
+  introvert: [
+    {id: 7, title: 'Thoughtful', icon: '🤔'},
+    {id: 8, title: 'Quiet', icon: '🤫'},
+    {id: 9, title: 'Creative', icon: '🎨'},
+    {id: 10, title: 'Empathetic', icon: '💙'},
+    {id: 11, title: 'Deep Thinker', icon: '📚'},
+    {id: 12, title: 'Observant', icon: '👀'},
+  ],
+};
+
+export const lookingFor = [
+  {id: '1', title: 'Limit Location by', subTitle: 'No Limit'},
+  {id: '2', title: 'Sect', subTitle: 'No Preference'},
+  {id: '3', title: 'Ethnicity', subTitle: 'No Preference'},
+  {id: '4', title: 'Travel Mode', subTitle: 'No Preference'},
+];
+export const info = [
+  {id: '1', title: 'First Name', subTitle: 'Example'},
+  {id: '2', title: 'Last Name', subTitle: 'Example'},
+  {id: '3', title: 'Date of Birth', subTitle: '1 May, 1998'},
+  {id: '4', title: 'Gender', subTitle: 'Male'},
+  {id: '5', title: 'Email Address', subTitle: 'example@gmail.com'},
+  {id: '6', title: 'Phone Number', subTitle: '+8801********9'},
+];
+
+export const preferences = [
+  {id: '1', title: 'Height', subTitle: 'No Limit'},
+  {id: '2', title: 'Marital Status', subTitle: 'No Preference'},
+];
+
 export const screens = [
   // {id: 1, name: 'Start', component: StartScreen},
   // {id: 2, name: 'Login', component: LoginScreen},
@@ -317,18 +428,24 @@ export const screens = [
   // {id: 34, name: 'SelfieVerify', component: SelfieVerifyScreen},
   // {id: 35, name: 'FaceVerification', component: FaceVerificationScreen},
   // {id: 36, name: 'VerificationComplete', component: VerificationCompleteScreen},
-  // {id: 37, name: 'BottomNavigator', component: BottomNavigatorScreen},
+  {id: 37, name: 'BottomNavigator', component: BottomNavigatorScreen},
   // {id: 38, name: 'MaritalStatus', component: MaritalStatusScreen},
-  {id: 38, name: 'MaritalIntension', component: MaritalIntensionScreen},
-  {id: 38, name: 'ReligiousType', component: ReligiousTypeScreen},
-  // {id: 38, name: 'PrayingHabit', component: PrayingHabitScreen},
-  // {id: 38, name: 'EatingHabit', component: EatingHabitScreen},
-  // {id: 38, name: 'SmokingHabit', component: SmokingHabitScreen},
-  // {id: 38, name: 'DrinkingHabitAlcohol', component: DrinkingHabitAlcoholScreen},
-  // {id: 38, name: 'DrinkingHabitBeer', component: DrinkingHabitBeerScreen},
-  // {id: 38, name: 'PresentChildren', component: PresentChildrenScreen},
-  // {id: 38, name: 'FutureChildren', component: FutureChildrenScreen},
-  // {id: 38, name: 'MoveAbroad', component: MoveAbroadScreen},
-  // {id: 38, name: 'Convert', component: ConvertScreen},
-  {id: 38, name: 'Interest', component: InterestScreen},
+  // {id: 39, name: 'MaritalIntension', component: MaritalIntensionScreen},
+  // {id: 40, name: 'ReligiousType', component: ReligiousTypeScreen},
+  // {id: 41, name: 'PrayingHabit', component: PrayingHabitScreen},
+  // {id: 42, name: 'EatingHabit', component: EatingHabitScreen},
+  // {id: 43, name: 'SmokingHabit', component: SmokingHabitScreen},
+  // {id: 44, name: 'DrinkingHabitAlcohol', component: DrinkingHabitAlcoholScreen},
+  // {id: 45, name: 'DrinkingHabitBeer', component: DrinkingHabitBeerScreen},
+  // {id: 46, name: 'PresentChildren', component: PresentChildrenScreen},
+  // {id: 47, name: 'FutureChildren', component: FutureChildrenScreen},
+  // {id: 48, name: 'MoveAbroad', component: MoveAbroadScreen},
+  // {id: 49, name: 'Convert', component: ConvertScreen},
+  // {id: 50, name: 'Interest', component: InterestScreen},
+  // {id: 51, name: 'Personality', component: PersonalityScreen},
+  // {id: 52, name: 'Bio', component: BioScreen},
+  // {id: 53, name: 'LookingFor', component: LookingForScreen},
+  // {id: 54, name: 'Finish', component: FinishScreen},
+  {id: 55, name: 'Filter', component: FilterScreen},
+  {id: 56, name: 'EditPreview', component: EditPreviewScreen},
 ];

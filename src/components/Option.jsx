@@ -3,29 +3,28 @@ import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import {Controller, useFormContext} from 'react-hook-form';
 
-const Option = ({item, index, handleSelect, selectedOptions}) => {
-  const {control , watch} = useFormContext();
-console.log(watch('idType'));
+const Option = ({item, index, id}) => {
+  const {control, watch} = useFormContext();
+  // console.log(watch(id));
 
   return (
     <Controller
-      name="idType"
+      name={id}
       control={control}
       render={({field: {onChange, value}}) => (
         <TouchableOpacity
           key={index}
           style={[
             styles.optionContainer,
-            selectedOptions === index && styles.selectedOption,
+            watch(id)?.id === item.id && styles.selectedOption,
           ]}
           onPress={() => {
-            handleSelect(index);
-            onChange(item.id);
+            onChange(item);
           }}>
           <View>
             <Text
               style={[
-                selectedOptions === index
+                watch(id)?.id === item.id
                   ? styles.optionTextSelected
                   : styles.optionText,
               ]}>
@@ -34,7 +33,7 @@ console.log(watch('idType'));
             {item?.subTitle && (
               <Text
                 style={[
-                  selectedOptions === index
+                  watch(id)?.id === item.id
                     ? styles.optionTextSelected2
                     : styles.optionText2,
                 ]}>
@@ -45,7 +44,7 @@ console.log(watch('idType'));
           <Feather
             name="chevron-right"
             size={24}
-            color={selectedOptions === index ? '#ffffff' : '#000000'}
+            color={watch(id)?.id === item.id ? '#ffffff' : '#000000'}
           />
         </TouchableOpacity>
       )}
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#DCD8D8',
     borderRadius: 20,
     paddingHorizontal: 30,
-    paddingVertical: 5,
+    paddingVertical: 4,
     color: '#000000',
     height: 70,
   },

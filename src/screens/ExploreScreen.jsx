@@ -10,11 +10,11 @@ import LikedScreen from './LikedScreen';
 import SentComplementsScreen from './SentComplementsScreen';
 import BlockedScreen from './BlockedScreen';
 
-const ExploreScreen = () => {
+const ExploreScreen = ({navigation}) => {
   const Tab = createMaterialTopTabNavigator();
   return (
     <SafeAreaView style={styles.container}>
-      <Filter />
+      <Filter navigation={navigation}/>
       <Tab.Navigator
         screenOptions={{
           tabBarLabelStyle: {fontSize: 16, fontWeight: 600},

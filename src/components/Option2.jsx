@@ -4,7 +4,7 @@ import {Controller, useFormContext} from 'react-hook-form';
 
 const Option2 = ({item , name} ) => {
   const {control, watch} = useFormContext();
-  console.log(watch('sect'));
+  // console.log(watch('sect'));
 
   return (
     <Controller

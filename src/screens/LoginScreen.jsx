@@ -24,7 +24,7 @@ const LoginScreen = ({navigation}) => {
           />
         </View>
         <View>
-          <BottomInput name="email" />
+          <BottomInput name="email" placeholder="name@example.com" />
 
           <SubText navigation={navigation} />
         </View>

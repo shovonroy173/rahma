@@ -29,13 +29,7 @@ const VerificationOptionScreen = ({navigation}) => {
           <View style={styles.divider} />
           <Text style={styles.text}>Accepted Documents:</Text>
           {options.map((item, index) => (
-            <Option
-              key={index}
-              item={item}
-              index={index}
-              handleSelect={handleSelect}
-              selectedOptions={selectedOptions}
-            />
+            <Option key={index} item={item} index={index} id="idType" />
           ))}
           <Text style={styles.footerText}>More about Verification</Text>
         </View>

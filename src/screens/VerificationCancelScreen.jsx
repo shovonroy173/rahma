@@ -69,7 +69,7 @@ const VerficationCancelScreen = ({navigation}) => {
         </View>
 
         <TouchableOpacity onPress={openDrawer} style={styles.loginButton}>
-          <Text style={styles.loginButtonText}>Drawer</Text>
+          <Text style={styles.loginButtonText}>Not Verified</Text>
         </TouchableOpacity>
       </View>
     </Drawer>

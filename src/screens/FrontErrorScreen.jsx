@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
@@ -19,8 +19,8 @@ const FrontErrorScreen = ({navigation}) => {
         <Text style={styles.nation}>Bangladesh</Text>
       </View>
       <View style={styles.screenNameContainer}>
-        <Text>Front</Text>
-        <Text>Back</Text>
+        <Text style={styles.idType2}>Front</Text>
+        <Text style={styles.idType3}>Back</Text>
       </View>
       <Text>Before you Try Again, Please be Sure to:</Text>
       <View style={styles.ruleBox}>
@@ -31,8 +31,7 @@ const FrontErrorScreen = ({navigation}) => {
             size={24}
           />
           <Text style={styles.rule}>
-            We Continuously Verify all Accounts on Our Apps.Your Account Cold be
-            Deactivated Any Time, If Suspicious Activity is Detected.
+            Check yor ID Photo and Details aren’t Covered.
           </Text>
         </View>
         <View style={styles.ruleContainer}>
@@ -42,8 +41,7 @@ const FrontErrorScreen = ({navigation}) => {
             size={24}
           />
           <Text style={styles.rule}>
-            We Continuously Verify all Accounts on Our Apps.Your Account Cold be
-            Deactivated Any Time, If Suspicious Activity is Detected.
+            Check yor ID Photo and Details aren’t Covered.
           </Text>
         </View>
       </View>
@@ -56,6 +54,8 @@ const FrontErrorScreen = ({navigation}) => {
     </View>
   );
 };
+
+const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -71,6 +71,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   idType: {
+    fontSize: 18,
+    fontWeight: 600,
+    color: '#313030',
+  },
+  idType2: {
+    fontSize: 18,
+    fontWeight: 600,
+    color: '#379A35',
+  },
+  idType3: {
     fontSize: 18,
     fontWeight: 600,
     color: '#313030',
@@ -100,9 +110,12 @@ const styles = StyleSheet.create({
   ruleContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
     gap: 10,
+    backgroundColor: '#E8E5E5',
+    borderRadius: 10,
+    width: width - 40,
+    padding: 10,
   },
 });
 
