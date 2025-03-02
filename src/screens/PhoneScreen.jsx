@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     display: 'flex',
     alignItems: 'center',
-    gap: responsiveHeight(3),
+    // gap: responsiveHeight(3),
   },
   subContainer: {
     display: 'flex',

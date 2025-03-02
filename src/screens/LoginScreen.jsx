@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   // },
   inputContainer: {
     alignItems: 'center',
-    gap: responsiveHeight(3),
+    // gap: responsiveHeight(3),
   },
   textContainer: {
     gap: responsiveHeight(2),

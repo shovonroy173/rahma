@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     padding: responsiveHeight(4),
   },
   inputContainer: {
-    gap: responsiveHeight(4),
+    // gap: responsiveHeight(4),
   },
   textContainer: {
     gap: responsiveHeight(2),

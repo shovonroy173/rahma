@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   View,
   Text,
@@ -5,25 +6,30 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, {useRef} from 'react';
+import React from 'react';
 import ImageUpload from '../components/ImageUpload';
 import {images, info, lookingFor} from '../../assets/data/data';
-import Drawer from 'react-native-drawer';
-import Icon from 'react-native-vector-icons/AntDesign';
-import PhotoGuidelines from '../components/PhotoGuidelines';
-import Button from '../components/Button';
+// import Drawer from 'react-native-drawer';
+// import Icon from 'react-native-vector-icons/AntDesign';
+// import PhotoGuidelines from '../components/PhotoGuidelines';
+// import Button from '../components/Button';
 import Option from '../components/Option';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const EditScreen = () => {
-  const drawerRef = useRef(null);
+  // const drawerRef = useRef(null);
 
-  const openDrawer = () => {
-    drawerRef.current.open();
-  };
+  // const openDrawer = () => {
+  //   drawerRef.current.open();
+  // };
 
-  const closeDrawer = () => {
-    drawerRef.current.close();
-  };
+  // const closeDrawer = () => {
+  //   drawerRef.current.close();
+  // };
   return (
     // <Drawer
     //   ref={drawerRef}
@@ -148,39 +154,40 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingVertical: responsiveHeight(1.5),
+    paddingHorizontal: responsiveWidth(4),
     backgroundColor: '#98C097',
     // opacity: 0.7,
     borderRadius: 10,
   },
   memberTextContainer: {
-    width: '65%',
+    width: responsiveWidth(50),
   },
   memberText: {
-    fontSize: 24,
+    fontSize: responsiveFontSize(2.4),
     color: 'white',
     opacity: 0.7,
     fontWeight: 600,
   },
   memberText2: {
-    fontSize: 14,
+    fontSize: responsiveFontSize(1.4),
     color: 'white',
     opacity: 0.7,
   },
+
   learnMore: {
     color: 'white',
     backgroundColor: '#379A35',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingVertical: responsiveHeight(1),
+    paddingHorizontal: responsiveWidth(3),
     borderRadius: 20,
-    fontSize: 16,
+    fontSize: responsiveFontSize(1.6),
     fontWeight: 600,
     opacity: 1,
   },
 });
-const drawerStyles = {
-  drawer: {shadowColor: '#000', shadowOpacity: 0.5, shadowRadius: 3},
-};
+// const drawerStyles = {
+//   drawer: {shadowColor: '#000', shadowOpacity: 0.5, shadowRadius: 3},
+// };
 
 export default EditScreen;

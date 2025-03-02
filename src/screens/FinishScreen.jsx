@@ -20,7 +20,7 @@ const FinishScreen = ({navigation}) => {
         </Text>
         <Text style={styles.text3}>
           Inappropiate Behavior will result in your Account being Permanently
-          Blacked.
+          Blocked.
         </Text>
       </View>
       <Button

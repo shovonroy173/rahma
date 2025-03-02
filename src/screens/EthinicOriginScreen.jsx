@@ -108,6 +108,8 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2),
     fontWeight: 600,
     fontFamily: 'Poppins-SemiBold',
+    textAlign: 'center',
+    paddingVertical: responsiveHeight(1),
   },
   buttonContainer: {
     paddingBottom: responsiveWidth(2),

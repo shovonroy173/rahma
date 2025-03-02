@@ -3,7 +3,7 @@ import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
-import {responsiveHeight} from 'react-native-responsive-dimensions';
+import {responsiveFontSize, responsiveHeight, responsiveWidth} from 'react-native-responsive-dimensions';
 
 const NotificationScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -41,11 +41,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff',
     justifyContent: 'space-between',
-    padding: 30,
+    padding: responsiveHeight(4),
   },
 
   title: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(3),
     textAlign: 'center',
     fontWeight: '600',
   },
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    paddingVertical: 20,
+    paddingVertical: responsiveHeight(2),
     width: '100%',
   },
 
@@ -62,23 +62,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingVertical: responsiveHeight(1.5),
+    paddingHorizontal: responsiveWidth(4),
     backgroundColor: '#98C097',
     // opacity: 0.7,
     borderRadius: 10,
   },
   memberTextContainer: {
-    width: '65%',
+    width: responsiveWidth(50),
   },
   memberText: {
-    fontSize: 24,
+    fontSize: responsiveFontSize(2.4),
     color: 'white',
     opacity: 0.7,
     fontWeight: 600,
   },
   memberText2: {
-    fontSize: 14,
+    fontSize: responsiveFontSize(1.4),
     color: 'white',
     opacity: 0.7,
   },
@@ -86,10 +86,10 @@ const styles = StyleSheet.create({
   learnMore: {
     color: 'white',
     backgroundColor: '#379A35',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingVertical: responsiveHeight(1),
+    paddingHorizontal: responsiveWidth(3),
     borderRadius: 20,
-    fontSize: 16,
+    fontSize: responsiveFontSize(1.6),
     fontWeight: 600,
     opacity: 1,
   },
