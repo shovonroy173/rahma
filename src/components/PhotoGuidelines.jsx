@@ -1,7 +1,7 @@
 import {
   View,
   Text,
-  Dimensions,
+  // Dimensions,
   StyleSheet,
   TouchableOpacity,
   Image,
@@ -9,6 +9,11 @@ import {
 import React from 'react';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {rightImages, wrongImages} from '../../assets/data/data';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const PhotoGuidelines = ({closeDrawer}) => {
   return (
@@ -61,7 +66,7 @@ const PhotoGuidelines = ({closeDrawer}) => {
   );
 };
 
-const {width} = Dimensions.get('window');
+// const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   drawerContentContainer: {
@@ -70,16 +75,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    gap: 10,
+    gap: responsiveWidth(2),
   },
   drawerText: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: responsiveFontSize(2),
     fontWeight: 600,
-    marginBottom: 10,
+    // marginBottom: 10,
   },
   loginButton: {
-    width: width - 50,
+    width: responsiveWidth(80),
     backgroundColor: '#379A35',
     padding: 10,
     borderRadius: 100,
@@ -87,19 +92,20 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: '#FFFFFF',
     textAlign: 'center',
-    fontSize: 20,
+    // fontSize: 20,
     fontWeight: 600,
     fontFamily: 'Poppins-SemiBold',
   },
 
   drawerContainer: {
     flex: 1,
+    height: responsiveHeight(100),
     backgroundColor: '#fff',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    // paddingVertical: 10,
+    // paddingHorizontal: responsiveHeight(0.5),
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 20,
+    gap: responsiveWidth(3),
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
   },
@@ -111,16 +117,21 @@ const styles = StyleSheet.create({
     elevation: 20, // Required for Android
   },
 
-  drawerTextContainer: {display: 'flex', gap: 30, borderBottomStartRadius: 20},
+  drawerTextContainer: {
+    display: 'flex',
+    gap: responsiveHeight(1),
+    borderBottomStartRadius: 20,
+  },
+
   drawerText1: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(2),
     color: '#111111',
     fontWeight: 600,
     textAlign: 'center',
   },
 
   drawerText2: {
-    fontSize: 20,
+    fontSize: responsiveFontSize(2),
     color: '#313030',
     fontWeight: 600,
   },
@@ -128,14 +139,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     backgroundColor: '#57A655',
-    padding: 6,
+    padding: responsiveWidth(1),
     borderRadius: 10,
     gap: 10,
     position: 'relative',
   },
   image: {
-    width: 110,
-    height: 60,
+    width: responsiveWidth(20),
+    height: responsiveHeight(10),
     objectFit: 'cover',
     borderRadius: 10,
   },

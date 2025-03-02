@@ -2,6 +2,7 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import {Controller, useFormContext} from 'react-hook-form';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const Option = ({item, index, id}) => {
   const {control, watch} = useFormContext();
@@ -60,19 +61,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#DCD8D8',
     borderRadius: 20,
-    paddingHorizontal: 30,
-    paddingVertical: 4,
+    paddingHorizontal: responsiveWidth(5),
+    paddingVertical: responsiveHeight(1),
     color: '#000000',
-    height: 70,
+    height: responsiveHeight(8),
   },
   selectedOption: {
     backgroundColor: '#379A35',
   },
   optionText: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.8),
   },
   optionTextSelected: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.8),
     color: '#ffffff',
   },
   optionText2: {

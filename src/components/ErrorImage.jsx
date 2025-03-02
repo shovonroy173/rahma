@@ -1,5 +1,6 @@
-import {View, StyleSheet, Dimensions, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import React from 'react';
+import {responsiveWidth} from 'react-native-responsive-dimensions';
 
 const ErrorImage = () => {
   return (
@@ -9,14 +10,12 @@ const ErrorImage = () => {
   );
 };
 
-const {width} = Dimensions.get('window');
-
 const styles = StyleSheet.create({
   imgContainer: {
     borderWidth: 5,
     borderColor: 'gray',
     borderRadius: 20,
-    width: width - 140,
+    width: responsiveWidth(65),
   },
 });
 

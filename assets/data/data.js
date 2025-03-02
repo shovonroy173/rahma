@@ -125,6 +125,10 @@ export const professions = [
   {key: 7, value: 'Alim'},
   {key: 8, value: 'Doctor'},
   {key: 9, value: 'Engineer'},
+  {key: 10, value: 'Govt. Job'},
+  {key: 11, value: 'Chef'},
+  {key: 12, value: 'Army'},
+  {key: 13, value: 'Police'},
 ];
 
 export const images = [

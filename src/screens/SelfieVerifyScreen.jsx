@@ -4,13 +4,18 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  Dimensions,
+  // Dimensions,
 } from 'react-native';
 import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Button from '../components/Button';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const SelfieVerifyScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -80,7 +85,7 @@ const SelfieVerifyScreen = ({navigation}) => {
   );
 };
 
-const {width} = Dimensions.get('window');
+// const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -91,52 +96,52 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   image: {
-    width: 120,
-    height: 140,
+    width: responsiveWidth(30),
+    height: responsiveHeight(20),
     borderRadius: 20,
   },
   titleText: {
-    fontSize: 32,
+    fontSize: responsiveFontSize(3),
     fontWeight: 600,
   },
   titleText2: {
-    fontSize: 20,
+    fontSize: responsiveFontSize(1.8),
     fontWeight: 600,
     textAlign: 'center',
   },
   subText: {
-    fontSize: 14,
+    fontSize: responsiveFontSize(1.4),
     fontWeight: 400,
     // textAlign: 'center',
     color: '#313030',
   },
   rule: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(2),
     fontWeight: 600,
     // textAlign: 'center',
     color: '#313030',
   },
   rule2: {
-    fontSize: 14,
+    fontSize: responsiveFontSize(1.4),
   },
   ruleBox: {
     display: 'flex',
-    gap: 10,
-    paddingHorizontal: 20,
+    gap: responsiveHeight(2),
+    paddingHorizontal: responsiveWidth(2),
   },
   ruleContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     alignItems: 'center',
-    gap: 10,
+    gap: responsiveWidth(10),
     borderRadius: 20,
-    padding: 20,
+    padding: responsiveWidth(2),
     backgroundColor: '#F3F2F2',
   },
   loginButton: {
-    width: width - 50,
-    padding: 10,
+    width: responsiveWidth(85),
+    padding: responsiveWidth(2),
     borderRadius: 100,
     borderWidth: 2,
     borderColor: '#379A35',
@@ -144,7 +149,7 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: '#379A35',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: responsiveFontSize(2.4),
     fontWeight: 600,
     fontFamily: 'Poppins-SemiBold',
   },

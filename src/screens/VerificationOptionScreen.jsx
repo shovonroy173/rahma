@@ -1,18 +1,15 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
 import {options} from '../../assets/data/data';
 import Option from '../components/Option';
+import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
 
 const VerificationOptionScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
-  const [selectedOptions, setSelectedOptions] = useState(null);
 
-  const handleSelect = index => {
-    setSelectedOptions(index);
-  };
   return (
     <View style={styles.container}>
       <View>
@@ -51,27 +48,27 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    padding: 30,
+    padding: responsiveHeight(4),
   },
   mainContainer: {
     display: 'flex',
-    gap: 20,
+    gap: responsiveHeight(2),
   },
   divider: {
     height: 1,
     backgroundColor: 'black',
   },
   title: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(3),
     fontWeight: 600,
     textAlign: 'center',
   },
   text: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.8),
     fontWeight: 600,
   },
   text2: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.8),
   },
   textContainer: {
     display: 'flex',
@@ -80,7 +77,7 @@ const styles = StyleSheet.create({
   },
 
   footerText: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.8),
     fontWeight: 600,
     color: '#379A35',
   },

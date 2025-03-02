@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {View, StyleSheet, Text, Dimensions, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, Keyboard} from 'react-native';
 import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
@@ -6,6 +7,7 @@ import Button from '../components/Button';
 import Country from '../components/Country';
 import {Controller, useFormContext} from 'react-hook-form';
 import {CountrySelection} from 'react-native-country-list';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const PresentCountryScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -56,32 +58,35 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    padding: 30,
+    padding: responsiveHeight(4),
   },
   mainContainer: {
     display: 'flex',
-    gap: 40,
+    gap: responsiveWidth(2),
     alignItems: 'center',
   },
   contentContainer: {
     display: 'flex',
-    gap: 30,
+    gap: responsiveWidth(2),
     alignItems: 'center',
   },
   countryContainer: {
     width: width,
-    height: 480,
+    height: responsiveHeight(55),
     paddingHorizontal: 20,
   },
   titleText: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(3),
     fontWeight: 600,
     textAlign: 'center',
   },
   date: {
-    fontSize: 20,
+    fontSize: responsiveFontSize(2),
     fontWeight: 600,
     fontFamily: 'Poppins-SemiBold',
+  },
+  buttonContainer: {
+    paddingBottom: responsiveWidth(2),
   },
 });
 export default PresentCountryScreen;

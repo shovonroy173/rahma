@@ -2,7 +2,7 @@ import {
   View,
   Text,
   StyleSheet,
-  Dimensions,
+  // Dimensions,
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
@@ -11,6 +11,7 @@ import {useSelector} from 'react-redux';
 import CommonWarning from '../components/CommonWarning';
 import Button from '../components/Button';
 import ErrorImage from '../components/ErrorImage';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const ConfirmFrontPhotoScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -48,7 +49,6 @@ const ConfirmFrontPhotoScreen = ({navigation}) => {
   );
 };
 
-const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -56,33 +56,34 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    padding: 30,
+    padding: responsiveHeight(4),
+
   },
   mainContainer: {
     display: 'flex',
-    gap: 20,
-    paddingHorizontal: 10,
+    gap: responsiveHeight(2),
+    paddingHorizontal: responsiveHeight(1),
     alignItems: 'center',
   },
   title: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(3),
     fontWeight: 600,
-    paddingHorizontal: 25,
+    paddingHorizontal: responsiveWidth(2),
   },
   info: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.8),
     textAlign: 'center',
     fontWeight: 600,
     color: '#7B7777',
-    paddingHorizontal: 30,
+    paddingHorizontal: responsiveHeight(3),
   },
   btnContainer: {
     display: 'flex',
-    gap: 20,
+    gap: responsiveHeight(2),
   },
   loginButton: {
-    width: width - 50,
-    padding: 10,
+    width: responsiveWidth(84),
+    padding: responsiveHeight(1),
     borderRadius: 100,
     borderWidth: 2,
     borderColor: '#379A35',
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: '#379A35',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: responsiveFontSize(2.5),
     fontWeight: 600,
     fontFamily: 'Poppins-SemiBold',
   },

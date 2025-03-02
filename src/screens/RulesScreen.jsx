@@ -4,13 +4,18 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  Dimensions,
+  // Dimensions,
 } from 'react-native';
 import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Button from '../components/Button';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const RulesScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -66,7 +71,12 @@ const RulesScreen = ({navigation}) => {
           </Text>
         </View>
       </View>
-      <Button title="Get ID Verified" value={1} navigation={navigation} path="VerificationCancel" />
+      <Button
+        title="Get ID Verified"
+        value={1}
+        navigation={navigation}
+        path="VerificationCancel"
+      />
 
       <TouchableOpacity style={styles.loginButton}>
         <Text style={styles.loginButtonText}>Cancel</Text>
@@ -75,58 +85,58 @@ const RulesScreen = ({navigation}) => {
   );
 };
 
-const {width} = Dimensions.get('window');
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    padding: 30,
+    padding: responsiveHeight(4),
+    gap: responsiveHeight(2),
   },
   image: {
-    width: 180,
-    height: 180,
+    width: responsiveWidth(35),
+    height: responsiveWidth(35),
     borderRadius: 20,
-    },
-    titleText: {
-      fontSize: 24,
-      fontWeight: 600,
-      textAlign: 'center',
-    },
+  },
+  titleText: {
+    fontSize: responsiveFontSize(3),
+    fontWeight: 600,
+    textAlign: 'center',
+  },
   titleText2: {
-    fontSize: 20,
+    fontSize: responsiveFontSize(2),
     fontWeight: 600,
     textAlign: 'center',
   },
   subText: {
-    fontSize: 14,
+    fontSize: responsiveFontSize(1.4),
     fontWeight: 400,
     textAlign: 'center',
     color: '#313030',
   },
   rule: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.6),
     fontWeight: 600,
-    // textAlign: 'center',
+    textAlign: 'left',
     color: '#313030',
   },
   ruleBox: {
     display: 'flex',
-    gap: 25,
-    paddingHorizontal: 20,
+    gap: responsiveHeight(1.5),
+    paddingHorizontal: responsiveWidth(2),
   },
   ruleContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
-    gap: 10,
+    paddingHorizontal: responsiveWidth(2),
+    gap: responsiveWidth(1.5),
   },
   loginButton: {
-    width: width - 50,
-    padding: 10,
+    width: responsiveWidth(85),
+    padding: responsiveWidth(1.5),
     borderRadius: 100,
     borderWidth: 2,
     borderColor: '#379A35',
@@ -134,7 +144,7 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: '#379A35',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: responsiveFontSize(2.5),
     fontWeight: 600,
     fontFamily: 'Poppins-SemiBold',
   },

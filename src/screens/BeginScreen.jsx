@@ -15,6 +15,11 @@ import {useDispatch} from 'react-redux';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import Button from '../components/Button';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const {width} = Dimensions.get('window');
 
@@ -102,16 +107,24 @@ const FlatListCarousel = ({navigation}) => {
         />
       </View>
       <View style={styles.infoContainer}>
-        <Text style={styles.titleText}>Your halal love story start here...</Text>
-        <Text style={styles.subText}><Text style={styles.colorText}>10 Million</Text>  members on Rahma</Text>
-        <Text style={styles.subText}><Text style={styles.colorText}>500,000</Text> Success stories 🎉</Text>
+        <Text style={styles.titleText}>
+          Your halal love story start here...
+        </Text>
+        <Text style={styles.subText}>
+          <Text style={styles.colorText}>10 Million</Text> members on Rahma
+        </Text>
+        <Text style={styles.subText}>
+          <Text style={styles.colorText}>500,000</Text> Success stories 🎉
+        </Text>
         <Text style={styles.subText}>Your is just one match away ❤️</Text>
-        <Button
-        value={1}
-        navigation={navigation}
-        path="Gender"
-        title="Begin my Journey"
-      />
+        <View style={styles.buttonContainer}>
+          <Button
+            value={1}
+            navigation={navigation}
+            path="Gender"
+            title="Begin my Journey"
+          />
+        </View>
       </View>
     </View>
   );
@@ -128,25 +141,30 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 400,
+    height: responsiveHeight(55),
   },
   content: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 30,
+    padding: responsiveHeight(4),
   },
   iconContainer: {
     width: width,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    gap: 10,
-    paddingHorizontal: 30,
+    gap: responsiveHeight(1),
+    paddingHorizontal: responsiveWidth(3),
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   slide: {
     width: width,
-    height: 400,
+    height: responsiveHeight(55),
   },
   backgroundImage: {
     flex: 1,
@@ -156,35 +174,34 @@ const styles = StyleSheet.create({
     objectFit: 'cover',
   },
   infoContainer: {
-    flex:1,
+    flex: 1,
     justifyContent: 'space-between',
     // alignItems: 'center',
-    paddingVertical: 40,
-    paddingHorizontal: 30,
+    paddingVertical: responsiveHeight(2),
+    paddingHorizontal: responsiveWidth(4),
   },
   titleText: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(3.5),
     fontWeight: 600,
   },
   subText: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(2),
     fontWeight: 600,
   },
   colorText: {
-color: '#47A146',
+    color: '#47A146',
   },
   slideContent: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    gap: responsiveHeight(1),
+    padding: responsiveHeight(1),
     borderRadius: 40,
     backgroundColor: '#9CCC9C99',
   },
   slideText: {
-    fontSize: 16,
+    fontSize: responsiveFontSize(1.5),
     fontWeight: 'bold',
     color: 'white',
   },

@@ -1,34 +1,73 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import {useSelector} from 'react-redux';
 import ProgressContainer from '../components/ProgressContainer';
 import Button from '../components/Button';
-import BottomInput from '../components/BottomInput';
-import {Text} from '@rneui/base';
 import SubText from '../components/SubText';
+import BottomInput from '../components/BottomInput';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+} from 'react-native-responsive-dimensions';
+import {Text} from 'react-native';
 
 const SalaryScreen = ({navigation}) => {
+  // const [value, onChangeText] = useState('');
   const currentPage = useSelector(state => state.page.currentPage);
   return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <View style={styles.textContainer}>
-          <ProgressContainer
-            currentPage={currentPage}
-            navigation={navigation}
-          />
-          <View>
-            <Text style={styles.titleText}>Select Your</Text>
-            <Text style={styles.titleText}>Salary Range</Text>
+    <KeyboardAvoidingView
+      style={{flex: 1}}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <View style={styles.inputContainer}>
+            <View style={styles.textContainer}>
+              <ProgressContainer
+                currentPage={currentPage}
+                navigation={navigation}
+              />
+              <View>
+                <Text style={styles.titleText}>Select Your</Text>
+                <Text style={styles.titleText}>Salary Range</Text>
+              </View>
+            </View>
+            <ScrollView
+              style={styles.scrollContainer}
+              contentContainerStyle={{
+                flexGrow: 1,
+                paddingBottom: 20,
+                gap: 10,
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+              showsVerticalScrollIndicator={false}>
+              <View>
+                <BottomInput name="salary" placeholder="ex. 20000" />
+                <SubText navigation={navigation} />
+              </View>
+            </ScrollView>
+
+            <View style={styles.buttonContainer}>
+              <Button
+                title="Continue"
+                navigation={navigation}
+                path="Ethinic"
+                id="salary"
+              />
+            </View>
           </View>
         </View>
-        <View>
-          <BottomInput name="salary" placeholder="ex. 20000"  />
-          <SubText navigation={navigation} />
-        </View>
-      </View>
-      <Button title="Continue" navigation={navigation} path="UploadPhotos" id="salary" />
-    </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -40,18 +79,30 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    padding: 30,
+    padding: responsiveHeight(4),
   },
+  // inputBox: {
+  //   borderBottomWidth: 1,
+  //   borderBottomColor: '#A19B9B',
+  //   paddingHorizontal: responsiveWidth(3),
+  //   fontSize: 16,
+  //   fontFamily: 'Poppins-Medium',
+  // },
   inputContainer: {
-    gap: 40,
+    alignItems: 'center',
+    gap: responsiveHeight(3),
   },
   textContainer: {
-    gap: 20,
+    gap: responsiveHeight(2),
+    alignItems: 'center',
   },
   titleText: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(3),
     fontWeight: 600,
-    textAlign: 'center',
+  },
+  buttonContainer: {
+    paddingBottom: responsiveHeight(2),
+    backgroundColor: 'white',
   },
 });
 

@@ -4,6 +4,7 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {Controller, useFormContext} from 'react-hook-form';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {validationRules} from '../utils/validation';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const ImageUpload = ({name}) => {
   const [image, setImage] = useState();
@@ -56,8 +57,8 @@ const ImageUpload = ({name}) => {
 
 const styles = StyleSheet.create({
   image: {
-    width: 110,
-    height: 150,
+    width: responsiveWidth(25),
+    height: responsiveHeight(18),
     objectFit: 'cover',
   },
   //   buttonText: {
@@ -65,8 +66,8 @@ const styles = StyleSheet.create({
   //     fontSize: 16,
   //   },
   uploadButton: {
-    width: 110,
-    height: 150,
+    width: responsiveWidth(25),
+    height: responsiveHeight(18),
     borderStyle: 'dashed',
     borderWidth: 2,
     borderColor: '#43A041',

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   View,
   Text,
@@ -16,6 +17,7 @@ import {useSelector} from 'react-redux';
 import Button from '../components/Button';
 import {name} from '../../assets/data/data';
 import Input from '../components/Input';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const NameScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -76,49 +78,49 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    paddingVertical: 30,
+    paddingVertical: responsiveHeight(3.5),
   },
   mainContainer: {
     display: 'flex',
-    gap: 40,
+    gap: responsiveWidth(2),
   },
   imageContainer: {
     display: 'flex',
     alignItems: 'center',
-    gap: 15,
-    paddingHorizontal: 30,
+    gap: responsiveWidth(2),
+    paddingHorizontal: responsiveWidth(4),
   },
   titleText: {
-    fontSize: 24,
+    fontSize: responsiveFontSize(3.5),
     fontWeight: '600',
     textAlign: 'center',
   },
   inputScrollContainer: {
     flexGrow: 1,
-    paddingBottom: 20,
+    paddingBottom: responsiveWidth(2),
   },
   inputContainer: {
     display: 'flex',
     width: width,
-    gap: 40,
-    paddingHorizontal: 30,
+    gap: responsiveWidth(5),
+    paddingHorizontal: responsiveWidth(6),
   },
   inputBoxContainer: {
     display: 'flex',
-    gap: 30,
+    gap: responsiveWidth(6),
   },
   title2Text: {
-    fontSize: 30,
-    fontWeight: '600',
+    fontSize: responsiveFontSize(3.5),
+    fontWeight: 600,
     textAlign: 'center',
   },
   image: {
-    width: 180,
-    height: 180,
+    width: responsiveWidth(35),
+    height: responsiveWidth(35),
     borderRadius: 100,
   },
   buttonContainer: {
-    paddingBottom: 20,
+    paddingBottom: responsiveWidth(2),
   },
 });
 

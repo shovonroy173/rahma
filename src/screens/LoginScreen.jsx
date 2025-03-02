@@ -1,41 +1,71 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {StyleSheet,  View} from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import {useSelector} from 'react-redux';
 import ProgressContainer from '../components/ProgressContainer';
 import Button from '../components/Button';
 import SubText from '../components/SubText';
 import MainText from '../components/MainText';
 import BottomInput from '../components/BottomInput';
+import {responsiveHeight} from 'react-native-responsive-dimensions';
 
 const LoginScreen = ({navigation}) => {
   // const [value, onChangeText] = useState('');
   const currentPage = useSelector(state => state.page.currentPage);
   return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <View style={styles.textContainer}>
-          <ProgressContainer
-            currentPage={currentPage}
-            navigation={navigation}
-          />
-          <MainText
-            text1="Enter your Email Address"
-            text2="We will Send you a Verification Code to Verify your Identity."
-          />
-        </View>
-        <View>
-          <BottomInput name="email" placeholder="name@example.com" />
+    <KeyboardAvoidingView
+      style={{flex: 1}}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <View style={styles.inputContainer}>
+            <View style={styles.textContainer}>
+              <ProgressContainer
+                currentPage={currentPage}
+                navigation={navigation}
+              />
+              <MainText
+                text1="Enter your Email Address"
+                text2="We will Send you a Verification Code to Verify your Identity."
+              />
+            </View>
+            <ScrollView
+              style={styles.scrollContainer}
+              contentContainerStyle={{
+                flexGrow: 1,
+                paddingBottom: 20,
+                gap: 10,
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+              showsVerticalScrollIndicator={false}>
+              <View>
+                <BottomInput name="email" placeholder="name@example.com" />
 
-          <SubText navigation={navigation} />
+                <SubText navigation={navigation} />
+              </View>
+            </ScrollView>
+
+            <View style={styles.buttonContainer}>
+              <Button
+                title="Continue"
+                navigation={navigation}
+                path="Otp"
+                id="email"
+              />
+            </View>
+          </View>
         </View>
-      </View>
-      <Button
-        title="Continue"
-        navigation={navigation}
-        path="Otp"
-        id="email"
-      />
-    </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -47,20 +77,27 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    padding: 30,
+    padding: responsiveHeight(4),
   },
-  inputBox: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#A19B9B',
-    paddingHorizontal: 30,
-    fontSize: 16,
-    fontFamily: 'Poppins-Medium',
-  },
+  // inputBox: {
+  //   borderBottomWidth: 1,
+  //   borderBottomColor: '#A19B9B',
+  //   paddingHorizontal: responsiveWidth(3),
+  //   fontSize: 16,
+  //   fontFamily: 'Poppins-Medium',
+  // },
   inputContainer: {
-    gap: 40,
+    alignItems: 'center',
+    gap: responsiveHeight(3),
   },
   textContainer: {
-    gap: 20,
+    gap: responsiveHeight(2),
+    alignItems: 'center',
+  },
+
+  buttonContainer: {
+    paddingBottom: responsiveHeight(2),
+    backgroundColor: 'white',
   },
 });
 

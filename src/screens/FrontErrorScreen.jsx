@@ -1,10 +1,15 @@
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import ErrorImage from '../components/ErrorImage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Button from '../components/Button';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const FrontErrorScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -55,7 +60,7 @@ const FrontErrorScreen = ({navigation}) => {
   );
 };
 
-const {width} = Dimensions.get('window');
+// const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -63,30 +68,30 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    padding: 30,
+    padding: responsiveHeight(4),
   },
   title: {
-    fontSize: 26,
+    fontSize: responsiveFontSize(2.5),
     fontWeight: 600,
     textAlign: 'center',
   },
   idType: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.8),
     fontWeight: 600,
     color: '#313030',
   },
   idType2: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.8),
     fontWeight: 600,
     color: '#379A35',
   },
   idType3: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.8),
     fontWeight: 600,
     color: '#313030',
   },
   nation: {
-    fontSize: 14,
+    fontSize: responsiveFontSize(1.4),
     color: '#575454',
     textAlign: 'center',
   },
@@ -95,26 +100,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: 40,
+    gap: responsiveWidth(10),
   },
   rule: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.8),
     fontWeight: 600,
     color: '#313030',
   },
   ruleBox: {
     display: 'flex',
-    gap: 25,
-    paddingHorizontal: 20,
+    gap: responsiveHeight(2),
   },
   ruleContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: responsiveWidth(2),
     backgroundColor: '#E8E5E5',
     borderRadius: 10,
-    width: width - 40,
+    // width: responsiveWidth(84),
     padding: 10,
   },
 });

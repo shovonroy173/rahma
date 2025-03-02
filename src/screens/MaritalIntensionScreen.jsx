@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import {knowStatus, marriedStatus} from '../../assets/data/data';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const MaritalIntensionScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -56,25 +57,25 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 10,
+    gap: responsiveWidth(2),
   },
   container: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    padding: 30,
+    padding: responsiveHeight(4),
   },
   contentContainer: {
-    gap: 30,
+    gap: responsiveWidth(3),
   },
   title: {
-    fontSize: 26,
+    fontSize: responsiveFontSize(3),
     textAlign: 'center',
     fontWeight: 600,
   },
   text: {
-    fontSize: 23,
+    fontSize: responsiveFontSize(2.3),
     // textAlign: 'center',
     fontWeight: 800,
   },

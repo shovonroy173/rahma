@@ -3,8 +3,20 @@ import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import Button from '../components/Button';
 import Option2 from '../components/Option2';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
-const OptionComponent = ({navigation, currentPage, options, path, id, title}) => {
+const OptionComponent = ({
+  navigation,
+  currentPage,
+  options,
+  path,
+  id,
+  title,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
@@ -34,32 +46,32 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff',
     justifyContent: 'space-between',
-    padding: 30,
+    padding: responsiveHeight(4),
   },
   mainContainer: {
     alignItems: 'center',
   },
   title: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(3),
     textAlign: 'center',
-    fontWeight: '600',
+    fontWeight: 600,
   },
   scrollWrapper: {
     flex: 1,
     width: '100%',
   },
   optionContainer: {
-    paddingVertical: 20,
-    gap: 20,
+    paddingVertical: responsiveHeight(2),
+    gap: responsiveHeight(2),
   },
   option: {
     backgroundColor: '#E8E5E5',
     borderRadius: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 20,
+    paddingHorizontal: responsiveWidth(4),
+    paddingVertical: responsiveHeight(2),
   },
   buttonContainer: {
-    paddingVertical: 20,
+    paddingVertical: responsiveHeight(2),
     width: '100%',
   },
 });

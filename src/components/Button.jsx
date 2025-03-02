@@ -1,8 +1,13 @@
-import {Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
+import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import {nextPage} from '../redux/PageSlice';
 import {useFormContext} from 'react-hook-form';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize,
+} from 'react-native-responsive-dimensions';
 
 const Button = ({navigation, title, path, id, phoneInput}) => {
   const dispatch = useDispatch();
@@ -16,7 +21,7 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
     console.log('Form Submitted:', data);
     console.log('Date', data.calender.toLocaleDateString());
   };
-  // console.log(!watch('height'));
+  console.log(!watch('calender'));
 
   const totalInterests =
     watch('selectedOptions') || watch('selectedPersonalities')
@@ -66,26 +71,24 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
   );
 };
 
-const {width} = Dimensions.get('window');
-
 const styles = StyleSheet.create({
   loginButton: {
-    width: width - 50,
+    width: responsiveWidth(84),
     backgroundColor: '#379A35',
-    padding: 10,
+    padding: responsiveHeight(1),
     borderRadius: 100,
   },
   loginButtonText: {
     color: '#FFFFFF',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: responsiveFontSize(2.5),
     fontWeight: 600,
     fontFamily: 'Poppins-SemiBold',
   },
   disabledButton: {
-    width: width - 50,
+    width: responsiveWidth(84),
     backgroundColor: '#379A35',
-    padding: 10,
+    padding: responsiveHeight(1),
     borderRadius: 100,
     opacity: 0.7,
     cursor: 'auto',

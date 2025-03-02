@@ -8,6 +8,11 @@ import {useSelector} from 'react-redux';
 import Drawer from 'react-native-drawer';
 import Icon from 'react-native-vector-icons/AntDesign';
 import PhotoGuidelines from '../components/PhotoGuidelines';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const UploadPhotosScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -70,24 +75,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 20,
+    padding: responsiveHeight(4),
     backgroundColor: '#ffffff',
   },
   title: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(3),
     fontWeight: 'bold',
     textAlign: 'center',
   },
   subTitle: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.8),
     textAlign: 'center',
     color: 'gray',
   },
   allImages: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'center',
     flexWrap: 'wrap',
-    gap: 20,
+    gap: responsiveWidth(3),
     alignItems: 'center',
   },
   button: {

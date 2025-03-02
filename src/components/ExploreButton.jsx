@@ -1,5 +1,6 @@
 import {Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native';
 import React from 'react';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const ExploreButton = ({title, type, id}) => {
   return (
@@ -21,31 +22,31 @@ const styles = StyleSheet.create({
   //   height: height,
   // },
   loginButton: {
-    width: width - 50,
+    width: responsiveWidth(85),
     backgroundColor: '#379A35',
-    padding: 10,
+    padding: responsiveHeight(1.5),
     borderRadius: 100,
   },
   loginButtonText: {
     color: '#FFFFFF',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: responsiveFontSize(2),
     fontWeight: 600,
     fontFamily: 'Poppins-SemiBold',
   },
   nonBgButtonText: {
     color: '#379A35',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: responsiveFontSize(2),
     fontWeight: 600,
     fontFamily: 'Poppins-SemiBold',
   },
   nonBgButton: {
-    width: width - 50,
+    width: responsiveWidth(85),
     borderWidth: 4,
     borderColor: '#379A35',
     backgroundColor: 'white',
-    padding: 8,
+    padding: responsiveHeight(1),
     borderRadius: 100,
     opacity: 0.7,
     cursor: 'auto',

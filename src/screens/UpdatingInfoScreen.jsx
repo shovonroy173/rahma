@@ -13,6 +13,11 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import ProgressBar from '../components/ProgressBar';
 import {useFocusEffect} from '@react-navigation/native';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const UpdatingInfoScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -41,7 +46,10 @@ const UpdatingInfoScreen = ({navigation}) => {
         <FAIcon name="question-circle-o" size={24} />
       </View>
       <Text style={styles.title}>Please Wait a while!</Text>
-      <Image source={require('../../assets/images/updating.png')} />
+      <Image
+        source={require('../../assets/images/updating.png')}
+        style={styles.image}
+      />
       <Text style={styles.subTitle}>
         Please don’t Close the App Until We’ve Uploaded your National ID. This
         Usually Takes Less than a Minutes.
@@ -59,8 +67,8 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    padding: 30,
-    gap: 30,
+    padding: responsiveHeight(4),
+    gap: responsiveHeight(4),
   },
   iconContainer: {
     display: 'flex',
@@ -69,17 +77,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // gap: 15,
     width: width,
-    paddingHorizontal: 30,
+    paddingHorizontal: responsiveHeight(4),
   },
   title: {
     fontWeight: 600,
-    fontSize: 26,
+    fontSize: responsiveFontSize(3),
   },
   subTitle: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(2),
     color: '#7B7777',
     fontWeight: 600,
     textAlign: 'center',
+  },
+  image: {
+    width: responsiveWidth(60),
+    height: responsiveWidth(60),
   },
 });
 

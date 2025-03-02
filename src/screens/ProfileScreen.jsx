@@ -2,6 +2,7 @@ import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const ProfileScreen = ({navigation}) => {
   return (
@@ -89,16 +90,16 @@ const styles = StyleSheet.create({
   notificationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: responsiveWidth(2),
   },
   beseen: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#379A35',
     borderRadius: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    gap: 10,
+    paddingVertical: responsiveWidth(2),
+    paddingHorizontal: responsiveWidth(6),
+    gap: 20,
   },
   text: {
     color: 'white',
@@ -109,9 +110,10 @@ const styles = StyleSheet.create({
   profileContainer: {
     width: '100%',
     flex: 1,
+    justifyContent: 'space-between',
     backgroundColor: '#e8ffe8',
-    padding: 20,
-    gap: 20,
+    padding: responsiveHeight(3),
+    gap: responsiveHeight(2),
   },
   imgContainer: {
     padding: 5,
@@ -121,15 +123,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   image: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: responsiveWidth(25),
+    height: responsiveWidth(25),
+    borderRadius: 100,
     objectFit: 'cover',
     borderWidth: 2,
     borderColor: '#379A35',
   },
   profileName: {
-    fontSize: 18,
+    // fontSize: 18,
     fontWeight: 'bold',
   },
 
@@ -137,27 +139,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingVertical: responsiveHeight(1),
+    paddingHorizontal: responsiveWidth(4),
     backgroundColor: '#98C097',
     // opacity: 0.7,
     borderRadius: 10,
   },
   memberText: {
-    fontSize: 20,
+    fontSize: responsiveFontSize(2),
     color: 'white',
     opacity: 0.7,
   },
   memberText2: {
-    fontSize: 14,
+    fontSize: responsiveFontSize(1.5),
     color: 'white',
     opacity: 0.7,
   },
   learnMore: {
     color: 'white',
     backgroundColor: '#379A35',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingVertical: responsiveHeight(1),
+    paddingHorizontal: responsiveWidth(4),
     borderRadius: 20,
     fontSize: 16,
     fontWeight: 600,
@@ -170,28 +172,28 @@ const styles = StyleSheet.create({
   likesCard: {
     width: '48%',
     backgroundColor: '#DCD8D8',
-    padding: 15,
+    padding: responsiveHeight(1.5),
     borderRadius: 20,
     alignItems: 'center',
-    gap: 20,
+    gap: responsiveHeight(1.5),
     // justifyContent: 'space-between',
   },
   likesNumber: {
-    fontSize: 25,
+    fontSize: responsiveFontSize(2.5),
     fontWeight: 600,
     textAlign: 'center',
   },
   likesText: {
-    fontSize: 20,
+    fontSize: responsiveFontSize(2),
     fontWeight: 600,
     textAlign: 'center',
   },
   goGoldText: {
-    fontSize: 12,
+    fontSize: responsiveFontSize(1.4),
     color: 'gray',
   },
   upgradeBtn: {
-    marginTop: 10,
+    // marginTop: 10,
     backgroundColor: '#379A35',
     paddingVertical: 8,
     paddingHorizontal: 24,
@@ -199,7 +201,7 @@ const styles = StyleSheet.create({
   },
 
   upgradeBtn2: {
-    marginTop: 10,
+    // marginTop: 10,
     backgroundColor: '#28AED8',
     paddingVertical: 8,
     paddingHorizontal: 24,
@@ -207,19 +209,19 @@ const styles = StyleSheet.create({
   },
   upgradeText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: responsiveFontSize(2),
     fontWeight: 'bold',
   },
   editProfile: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 20,
+    padding: responsiveHeight(1.5),
     borderRadius: 10,
     backgroundColor: '#DCD8D8',
   },
   editProfileText: {
-    fontSize: 20,
+    fontSize: responsiveFontSize(2),
   },
 });
 

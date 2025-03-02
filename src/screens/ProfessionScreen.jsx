@@ -5,7 +5,7 @@ import {
   TextInput,
   FlatList,
   TouchableOpacity,
-  Dimensions,
+  // Dimensions,
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
@@ -16,6 +16,11 @@ import Button from '../components/Button';
 import {Controller, useFormContext} from 'react-hook-form';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {professions} from '../../assets/data/data';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const ProfessionScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -94,7 +99,7 @@ const ProfessionScreen = ({navigation}) => {
   );
 };
 
-const {width} = Dimensions.get('window');
+// const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -102,12 +107,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    padding: 30,
+    padding: responsiveHeight(4),
   },
   title: {
-    fontSize: 30,
-    fontWeight: '600',
-    paddingHorizontal: 10,
+    fontSize: responsiveFontSize(3.5),
+    fontWeight: 600,
+    paddingHorizontal: responsiveWidth(4),
     textAlign: 'center',
     fontFamily: 'Poppins-SemiBold',
   },
@@ -117,24 +122,24 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#68AE67',
     paddingHorizontal: 10,
-    width: width - 70,
-    marginBottom: 10,
+    width: responsiveWidth(80),
+    marginBottom: responsiveHeight(2),
   },
   icon: {
-    marginRight: 10,
+    marginRight: responsiveWidth(2),
   },
   searchInput: {
     flex: 1,
-    height: 40,
-    fontSize: 16,
+    height: responsiveHeight(10),
+    fontSize: responsiveFontSize(2),
     color: '#68AE67',
   },
   listItem: {
-    padding: 15,
-    width: width - 70,
+    padding: responsiveHeight(1.6),
+    width: responsiveWidth(80),
   },
   listItemText: {
-    fontSize: 16,
+    fontSize: responsiveFontSize(1.8),
   },
   selectedItem: {
     borderBottomWidth: 1,
