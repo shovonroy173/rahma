@@ -6,8 +6,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 const Selection = ({ name, item, type }) => {
   const { control, watch } = useFormContext();
-  const selectedValue = watch(name); // Get current selected value
-
+  const selectedValue = watch(name);
   return (
     <Controller
       name={name}

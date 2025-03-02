@@ -22,7 +22,7 @@ const UpdatingInfoScreen = ({navigation}) => {
     useCallback(() => {
       const timer = setTimeout(() => {
         navigation.navigate('FrontError');
-        console.log('Navigating to FrontError');
+        // console.log('Navigating to FrontError');
       }, 2000);
 
       return () => clearTimeout(timer);

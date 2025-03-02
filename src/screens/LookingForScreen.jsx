@@ -30,7 +30,7 @@ const LookingForScreen = ({navigation}) => {
         </View>
         <View style={styles.mainContainer}>
           {lookingFor.map(item => (
-            <Option key={item.id} item={item} id="lookingfor" />
+            <Option key={item.id} item={item} id="looking" />
           ))}
         </View>
       </View>
@@ -38,7 +38,7 @@ const LookingForScreen = ({navigation}) => {
         title="Submit"
         navigation={navigation}
         path="Finish"
-        id="lookingfor"
+        id="looking"
       />
     </View>
   );

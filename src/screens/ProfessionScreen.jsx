@@ -68,7 +68,7 @@ const ProfessionScreen = ({navigation}) => {
                   ]}
                   onPress={() => {
                     onChange(item.value);
-                    console.log('Selected:', item.value);
+                    // console.log('Selected:', item.value);
                   }}>
                   <Text
                     style={[

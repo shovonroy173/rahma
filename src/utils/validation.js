@@ -42,4 +42,7 @@ export const validationRules = {
   'images.img1': {
     required: 'Main images is required',
   },
+  bio: {
+    required: 'Bio is required',
+  },
 };

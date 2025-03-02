@@ -52,8 +52,7 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
         (id === 'user' && (!watch(id).firstName || !watch(id).lastName)) ||
         (id === 'selectedOptions' && Object.keys(watch(id)).length === 0) ||
         totalInterests === 0 ||
-        (id === 'selectedPersonalies' && Object.keys(watch(id)).length === 0) ||
-        totalInterests === 0
+        (id === 'selectedPersonalies' && Object.keys(watch(id)).length === 0)
           ? styles.disabledButton
           : styles.loginButton,
       ]}>

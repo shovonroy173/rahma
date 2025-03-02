@@ -15,6 +15,7 @@ import {useSelector} from 'react-redux';
 import Button from '../components/Button';
 import {Controller, useFormContext} from 'react-hook-form';
 import {Keyboard} from 'react-native';
+import { validationRules } from '../utils/validation';
 
 const BioScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -37,6 +38,7 @@ const BioScreen = ({navigation}) => {
             <Controller
               control={control}
               name="bio"
+              rules={validationRules.id}
               render={({field:{onChange, onBlur, value}}) => (
                 <TextInput
                   editable

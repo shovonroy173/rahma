@@ -8,7 +8,7 @@ import {validationRules} from '../utils/validation';
 const ImageUpload = ({name}) => {
   const [image, setImage] = useState();
   const {control, watch} = useFormContext();
-  console.log('watch at 9', name, watch(name), validationRules[name]);
+  // console.log('watch at/ 9', name, watch(name), validationRules[name]);
 
   return (
     <Controller
