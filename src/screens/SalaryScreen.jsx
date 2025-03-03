@@ -13,15 +13,17 @@ import {useSelector} from 'react-redux';
 import ProgressContainer from '../components/ProgressContainer';
 import Button from '../components/Button';
 import SubText from '../components/SubText';
-import BottomInput from '../components/BottomInput';
+
 import {
   responsiveFontSize,
   responsiveHeight,
+  responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {Text} from 'react-native';
+import {salary} from '../../assets/data/data';
+import SalaryInput from '../components/SalaryInput';
 
 const SalaryScreen = ({navigation}) => {
-  // const [value, onChangeText] = useState('');
   const currentPage = useSelector(state => state.page.currentPage);
   return (
     <KeyboardAvoidingView
@@ -51,7 +53,17 @@ const SalaryScreen = ({navigation}) => {
               }}
               showsVerticalScrollIndicator={false}>
               <View>
-                <BottomInput name="salary" placeholder="ex. 20000" />
+                {/* <BottomInput name="salary" placeholder="ex. 20000" /> */}
+                <View style={styles.salaryContainer}>
+                  {salary.map(item => (
+                    <SalaryInput
+                      key={item.id}
+                      placeholder={item.placeholder}
+                      name={`salary.${item.name}`}
+                    />
+                  ))}
+                </View>
+                {/* <Input placeholder="Max"/> */}
                 <SubText navigation={navigation} />
               </View>
             </ScrollView>
@@ -92,6 +104,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: responsiveHeight(3),
   },
+  input: {
+    width: responsiveWidth(35),
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: '#A19B9B',
+    paddingHorizontal: 15,
+    height: responsiveHeight(6),
+  },
+
   textContainer: {
     gap: responsiveHeight(2),
     alignItems: 'center',
@@ -103,6 +124,13 @@ const styles = StyleSheet.create({
   buttonContainer: {
     paddingBottom: responsiveHeight(2),
     backgroundColor: 'white',
+  },
+  salaryContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    // backgroundColor: 'red',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });
 

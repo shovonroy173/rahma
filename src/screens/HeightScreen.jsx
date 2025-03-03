@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
@@ -5,6 +6,7 @@ import {useSelector} from 'react-redux';
 import {heights} from '../../assets/data/data';
 import Height from '../components/Height';
 import Button from '../components/Button';
+import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
 
 const HeightScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -41,20 +43,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-    padding: 30,
+    padding: responsiveHeight(4),
   },
   title: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(3),
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 10,
+    marginBottom: responsiveHeight(2),
   },
   scrollContainer: {
     flex: 1,
     width: '100%',
   },
   buttonContainer: {
-    paddingVertical: 10,
+    paddingVertical: responsiveHeight(2),
     backgroundColor: 'white',
   },
 });

@@ -1,6 +1,7 @@
 import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 const Gender = ({item}) => {
   const {control, getValues} = useFormContext();
@@ -43,14 +44,14 @@ const styles = StyleSheet.create({
     position: 'relative', // Ensures overlay can be positioned inside this container
   },
   image: {
-    width: 180,
-    height: 180,
+    width: responsiveWidth(40),
+    height: responsiveWidth(40),
     borderRadius: 100,
   },
   imageShield: {
     position: 'absolute',
-    width: 180,
-    height: 180,
+    width: responsiveWidth(40),
+    height: responsiveWidth(40),
     backgroundColor: 'rgba(120,120,120, 0.7)',
     borderRadius: 100,
     zIndex: 10,

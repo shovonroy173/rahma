@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 import Button from '../components/Button';
 import {gender} from '../../assets/data/data';
 import Gender from '../components/Gender';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const GenderScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    paddingVertical: 30,
+    padding: responsiveHeight(4),
   },
   progressContainer: {
     flexDirection: 'column',
@@ -53,7 +54,9 @@ const styles = StyleSheet.create({
   imageContainer: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 15,
+    alignItems: 'center',
+    gap: responsiveWidth(3),
+    paddingHorizontal: responsiveWidth(3),
   },
 });
 

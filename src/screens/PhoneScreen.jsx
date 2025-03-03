@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     gap: responsiveHeight(2),
   },
   label: {
-    fontSize: responsiveFontSize(3),
+    fontSize: responsiveFontSize(2.5),
   },
 
   buttonContainer: {

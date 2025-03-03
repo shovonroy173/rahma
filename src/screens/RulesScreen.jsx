@@ -71,16 +71,18 @@ const RulesScreen = ({navigation}) => {
           </Text>
         </View>
       </View>
-      <Button
-        title="Get ID Verified"
-        value={1}
-        navigation={navigation}
-        path="VerificationCancel"
-      />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Get ID Verified"
+          value={1}
+          navigation={navigation}
+          path="VerificationCancel"
+        />
 
-      <TouchableOpacity style={styles.loginButton}>
-        <Text style={styles.loginButtonText}>Cancel</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.loginButton}>
+          <Text style={styles.loginButtonText}>Cancel</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -147,6 +149,9 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2.5),
     fontWeight: 600,
     fontFamily: 'Poppins-SemiBold',
+  },
+  buttonContainer: {
+    gap: responsiveHeight(2),
   },
 });
 

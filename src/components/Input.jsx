@@ -1,7 +1,8 @@
-import {TextInput, StyleSheet, View, Text} from 'react-native';
+import {TextInput, StyleSheet, View, Text, Dimensions} from 'react-native';
 import React from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
 import {validationRules} from '../utils/validation';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 const Input = ({placeholder, name}) => {
   // const [value, onChangeText] = useState('');
@@ -19,7 +20,7 @@ const Input = ({placeholder, name}) => {
       <Controller
         name={name}
         control={control}
-        rules={validationRules[name]}
+        // rules={validationRules[name]}
         render={({field: {onChange, value}}) => (
           <TextInput
             onChangeText={text => onChange(text)}
@@ -44,6 +45,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: '#A19B9B',
     paddingHorizontal: 15,
+    height: responsiveHeight(6),
   },
   errorText: {
     color: 'red',

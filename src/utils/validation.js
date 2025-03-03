@@ -39,6 +39,22 @@ export const validationRules = {
       message: 'Enter alphabet  only',
     },
   },
+
+  'salary.min': {
+    required: 'Min is required',
+    pattern: {
+      value: /^[0-9]+$/,
+      message: 'Enter nunmber  only',
+    },
+  },
+  'salary.max': {
+    required: 'Max is required',
+    pattern: {
+      value: /^[0-9]+$/,
+      message: 'Enter number  only',
+    },
+  },
+
   'images.img1': {
     required: 'Main images is required',
   },
