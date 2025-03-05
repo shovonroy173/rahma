@@ -21,21 +21,28 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
     getValues,
     reset,
   } = useFormContext();
-  const onSubmit = async data => {
-    try {
-      console.log('Form Submitted:', data);
-      console.log(
-        'Date:',
-        data.calender ? data.calender.toLocaleDateString() : 'No date selected',
-      );
+  // const onSubmit = async data => {
+  //   try {
+  //     console.log('Form Submitted:', data);
+  //     console.log(
+  //       'Date:',
+  //       data.calender ? data.calender.toLocaleDateString() : 'No date selected',
+  //     );
 
-      const response = await addUser(data).unwrap();
-      console.log('User added:', response);
-      reset(); // Clears react-hook-form state
-      dispatch(resetFormData());
-    } catch (error) {
-      console.error('Error adding user:', error);
-    }
+  //     const response = await addUser(data).unwrap();
+  //     console.log('User added:', response);
+  //     reset(); // Clears react-hook-form state
+  //     dispatch(resetFormData());
+  //   } catch (error) {
+  //     console.error('Error adding user:', error);
+  //   }
+  // };
+  const onSubmit = data => {
+    console.log('Form Submitted:', data);
+    console.log(
+      'Date:',
+      data.calender ? data.calender.toLocaleDateString() : 'No date selected',
+    );
   };
   // console.log(!watch('calender'));
 

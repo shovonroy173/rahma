@@ -6,8 +6,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Dimensions,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {Image} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -18,33 +19,56 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import About from '../components/About';
+import {users, wrongImages} from '../../assets/data/data';
 
 const HomeScreen = ({navigation}) => {
-  const {data, loading, error} = useGetUserQuery('email@valid.com');
-  console.log(data, loading, error);
+  // const {data, loading, error} = useGetUserQuery('email@valid.com');
+  // console.log(data, loading, error);
+  // function calculateAge(dateString) {
+  //   const birthDate = new Date(dateString);
+  //   const today = new Date();
 
-  function calculateAge(dateString) {
-    const birthDate = new Date(dateString);
-    const today = new Date();
+  //   let age = today.getFullYear() - birthDate.getFullYear();
+  //   const monthDiff = today.getMonth() - birthDate.getMonth();
+  //   const dayDiff = today.getDate() - birthDate.getDate();
 
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    const dayDiff = today.getDate() - birthDate.getDate();
+  //   if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+  //     age--;
+  //   }
 
-    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+  //   return age;
+  // }
+
+  function calculateAge(timestamp) {
+    const birthDate = new Date(timestamp); // Create a Date object from the timestamp
+    const currentDate = new Date(); // Get the current date
+
+    let age = currentDate.getFullYear() - birthDate.getFullYear(); // Calculate the initial age
+
+    // Check if the birthday has occurred this year, if not subtract 1 from age
+    const monthDifference = currentDate.getMonth() - birthDate.getMonth();
+    const dayDifference = currentDate.getDate() - birthDate.getDate();
+
+    if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
       age--;
     }
 
     return age;
   }
 
-  // const calender = "2016-03-05T02:34:00.000Z";
-  // console.log(calculateAge(calender)); // Output: Age in years
+  function getRandomObject(arr) {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+  }
+  const [data, setData] = useState(getRandomObject(users));
+  // const data = getRandomObject(users);
+
+  // console.log('image', data);
 
   return (
     <ScrollView style={{flex: 1}}>
       <ImageBackground
-        source={require('../../assets/images/home.png')}
+        source={data?.img}
         style={styles.backgroundImage}
         resizeMode="cover">
         <View style={styles.container}>
@@ -66,9 +90,12 @@ const HomeScreen = ({navigation}) => {
           </View>
           <View style={styles.bottomContainer}>
             <View style={styles.nameContainer}>
-              <Text style={styles.name}>{`${data && data[0]?.user?.firstName} ${
-                data && data[0]?.user?.lastName
-              } ${data && calculateAge(data[0]?.calender)}`}</Text>
+              <Text style={styles.name}>
+                {`${data && data?.user?.firstName} ${
+                  data && data?.user?.lastName
+                } ${data && calculateAge(data?.calendar)}
+               `}
+              </Text>
               <View style={styles.iconContainer}>
                 <Ionicons
                   name="checkmark-circle-outline"
@@ -77,7 +104,9 @@ const HomeScreen = ({navigation}) => {
                 />
               </View>
             </View>
-            <Text style={styles.address}>{`🇧🇩 12KM Away, ${data && data[0]?.presentCountry}`}</Text>
+            <Text style={styles.address}>{`🇧🇩 12KM Away, ${
+              data && data?.presentCountry
+            }`}</Text>
             <View style={styles.descContainer}>
               <View style={styles.info}>
                 <Entypo name="dot-single" size={24} color={'#379A35'} />
@@ -85,20 +114,18 @@ const HomeScreen = ({navigation}) => {
               </View>
               <View style={styles.info}>
                 <Ionicons name="briefcase-outline" size={30} color={'white'} />
-                <Text style={styles.infotext}>
-                  {data && data[0]?.profession}
-                </Text>
+                <Text style={styles.infotext}>{data && data?.profession}</Text>
               </View>
               <View style={styles.info}>
                 <Ionicons name="moon-outline" size={30} color={'white'} />
                 <Text style={styles.infotext}>
-                  {data && data[0]?.religioustype?.title}
+                  {data && data?.religioustype?.title}
                 </Text>
               </View>
               <View style={styles.info}>
                 <Text>🇧🇩</Text>
                 <Text style={styles.infotext}>
-                  {data && data[0]?.birthCountry}
+                  {data && data?.birthCountry}
                 </Text>
               </View>
             </View>
@@ -122,17 +149,19 @@ const HomeScreen = ({navigation}) => {
           </View>
         </View>
       </ImageBackground>
-      <About about={data && data[0]} />
+      <About about={data} />
     </ScrollView>
   );
 };
+
+const {height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     justifyContent: 'center',
     width: '100%',
-    height: responsiveHeight(85),
+    height: height * 0.9,
     objectFit: 'cover',
   },
   container: {
@@ -140,6 +169,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 30,
+    height: height * 0.9,
   },
   topContainer: {
     width: '100%',

@@ -13,7 +13,7 @@ import {
 } from 'react-native-responsive-dimensions';
 
 const About = ({about}) => {
-  console.log(about);
+  // console.log(about);
 
   return (
     <View style={styles.container}>
@@ -27,15 +27,15 @@ const About = ({about}) => {
           </View>
           <View style={styles.featureContainer}>
             <MaterialCommunityIcons name="ring" size={24} />
-            <Text>{about?.maritalstatus.title}</Text>
+            <Text>{about?.maritalStatus.title}</Text>
           </View>
           <View style={styles.featureContainer}>
             <MaterialCommunityIcons name="baby-face-outline" size={24} />
             <Text>{`${
-              about?.maritalstatus?.title === 'Yes'
-                ? 'I have children'
-                : about?.maritalstatus?.title === 'No'
-                ? "Doesn't have children"
+              about?.presentCildren?.title === 'Yes'
+                ? 'I have Children'
+                : about?.presentCildren?.title === 'No'
+                ? "Doesn't have Children"
                 : 'I have adopted'
             }`}</Text>
           </View>
@@ -52,21 +52,21 @@ const About = ({about}) => {
           <View style={styles.featureContainer}>
             <Feather name="moon" size={24} />
 
-            <Text>{about?.religioustype?.title}</Text>
+            <Text>{about?.religiousType?.title}</Text>
           </View>
           <View style={styles.featureContainer}>
             <FontAwesome6 name="person-praying" size={24} />
-            <Text>{about?.prayinghabit?.title}</Text>
+            <Text>{about?.prayingHabit?.title}</Text>
           </View>
           <View style={styles.featureContainer}>
             <MaterialIcons name="silverware-fork-knife" size={24} />
 
             <Text>{`${
-              about?.eatinghabit?.id === 1
+              about?.eatingHabit?.id === 1
                 ? 'Only eats halal'
-                : about?.eatinghabit?.id === 2
+                : about?.eatingHabit?.id === 2
                 ? 'Never eats halal'
-                : about?.eatinghabit?.id === 3
+                : about?.eatingHabit?.id === 3
                 ? 'Mostly trys'
                 : "I don't know"
             }`}</Text>
@@ -75,11 +75,11 @@ const About = ({about}) => {
             <MaterialIcons name="smoking-rooms" size={24} />
 
             <Text>{`${
-              about?.smokinghabit?.id === 1
+              about?.smokingHabit?.id === 1
                 ? 'Smoker'
-                : about?.smokinghabit?.id === 2
+                : about?.smokingHabit?.id === 2
                 ? 'Non-Smoker'
-                : about?.smokinghabit?.id === 3
+                : about?.smokingHabit?.id === 3
                 ? 'I do Vape'
                 : 'I do Vape'
             }`}</Text>
@@ -88,7 +88,7 @@ const About = ({about}) => {
             <Entypo name="drink" size={24} />
 
             <Text>{`${
-              about?.drinkinhhabit?.id === 1 ? 'Does drink' : "Doesn't drink"
+              about?.drinkingHabit?.id === 1 ? 'Does drink' : "Doesn't drink"
             }`}</Text>
           </View>
         </View>
@@ -101,22 +101,22 @@ const About = ({about}) => {
             <MaterialCommunityIcons name="baby-face-outline" size={24} />
             <Text>
               {`${
-                about?.futurechildren?.id === 1
-                  ? 'Wants children'
-                  : about?.futurechildren?.id === 2
-                  ? 'Does not want children'
-                  : about?.futurechildren?.id === 3
+                about?.futureChildren?.id === 1
+                  ? 'Wants Children'
+                  : about?.futureChildren?.id === 2
+                  ? 'Does not want Children'
+                  : about?.futureChildren?.id === 3
                   ? 'Prefer not to say'
-                  : "I can't have children"
+                  : "I can't have Children"
               }`}
             </Text>
           </View>
           <View style={styles.featureContainer}>
             <MaterialCommunityIcons name="airplane" size={24} />
             <Text>{`${
-              about?.moveabroad.id === 1
+              about?.moveAbroad.id === 1
                 ? 'Will move abroad'
-                : about?.moveabroad.id === 2
+                : about?.moveAbroad.id === 2
                 ? 'Will not move abroad'
                 : "Let's see"
             }`}</Text>
@@ -141,7 +141,7 @@ const About = ({about}) => {
       <View style={styles.mainContainer}>
         <Text style={styles.title}>Personality</Text>
         <View style={styles.aboutContainer}>
-          {about && Object.values(about && about?.selectedPersonalies)
+          {about && Object.values(about && about?.selectedPersonalities)
             .flat()
             .map(item => (
               <View key={item?.id} style={styles.featureContainerNonBg}>
@@ -175,7 +175,7 @@ const About = ({about}) => {
           </View>
           <View style={styles.featureContainer}>
             <MaterialCommunityIcons name="briefcase-variant" size={24} />
-            <Text>{`Grew up in ${about?.grownup}`}</Text>
+            <Text>{`Grew up in ${about?.grownUp}`}</Text>
           </View>
         </View>
       </View>
