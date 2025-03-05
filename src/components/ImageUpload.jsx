@@ -1,55 +1,106 @@
-import {View, TouchableOpacity, Image, StyleSheet} from 'react-native';
-import React, {useState} from 'react';
-import {launchImageLibrary} from 'react-native-image-picker';
+import {View, TouchableOpacity, Image, StyleSheet, Alert, Platform} from 'react-native';
+import React from 'react';
+import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import {Controller, useFormContext} from 'react-hook-form';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {validationRules} from '../utils/validation';
-import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import {responsiveHeight, responsiveWidth} from 'react-native-responsive-dimensions';
+import {request, check, requestMultiple, PERMISSIONS, RESULTS} from 'react-native-permissions';
 
 const ImageUpload = ({name}) => {
-  const [image, setImage] = useState();
   const {control, watch} = useFormContext();
-  // console.log('watch at/ 9', name, watch(name), validationRules[name]);
+
+  const requestCameraPermission = async (onChange) => {
+    const cameraPermission =
+      Platform.OS === 'android' ? PERMISSIONS.ANDROID.CAMERA : PERMISSIONS.IOS.CAMERA;
+    const storagePermission = PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE;
+
+    try {
+      if (Platform.OS === 'android') {
+        const statuses = await requestMultiple([cameraPermission, storagePermission]);
+        if (statuses[cameraPermission] === RESULTS.GRANTED) {
+          openCamera(onChange);
+        } else {
+          Alert.alert('Permission Denied', 'Camera access is required to take photos.');
+        }
+      } else {
+        const status = await request(cameraPermission);
+        if (status === RESULTS.GRANTED) {
+          openCamera(onChange);
+        } else {
+          Alert.alert('Permission Denied', 'Camera access is required to take photos.');
+        }
+      }
+    } catch (error) {
+      console.log('Permission error:', error);
+    }
+  };
+
+  const openCamera = (onChange) => {
+    const options = {
+      mediaType: 'photo',
+      includeBase64: false,
+      maxHeight: 2000,
+      maxWidth: 2000,
+      saveToPhotos: true,
+    };
+
+    launchCamera(options, response => {
+      if (response.didCancel) {
+        console.log('User cancelled camera');
+      } else if (response.errorCode) {
+        console.log('Camera Error:', response.errorMessage);
+      } else {
+        let imageUri = response.assets?.[0]?.uri;
+        onChange(imageUri);
+      }
+    });
+  };
+
+  const openGallery = (onChange) => {
+    const options = {
+      mediaType: 'photo',
+    };
+
+    launchImageLibrary(options, response => {
+      if (response.didCancel) {
+        console.log('User cancelled gallery');
+      } else if (response.errorCode) {
+        console.log('Gallery Error:', response.errorMessage);
+      } else {
+        let imageUri = response.assets?.[0]?.uri;
+        onChange(imageUri);
+      }
+    });
+  };
 
   return (
     <Controller
       name={name}
       control={control}
       rules={validationRules[name]}
-      render={({field: {onChange, onBlur, value}}) => (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            console.log('select image');
-
-            const options = {
-              mediaType: 'photo',
-              includeBase64: false,
-              maxHeight: 2000,
-              maxWidth: 2000,
-            };
-
-            launchImageLibrary(options, response => {
-              if (response.didCancel) {
-                console.log('User cancelled image picker');
-              } else if (response.error) {
-                console.log('Image picker error: ', response.error);
-              } else {
-                console.log(response, response.uri, response.assets?.[0]?.uri);
-                let imageUri = response.uri || response.assets?.[0]?.uri;
-                onChange(imageUri);
-                setImage(imageUri);
-              }
-            });
+      render={({field: {onChange}}) => (
+        <View>
+          <TouchableOpacity style={styles.button} onPress={() => {
+            Alert.alert(
+              'Upload Photo',
+              'Choose an option',
+              [
+                {text: 'Take Photo', onPress: () => requestCameraPermission(onChange)},
+                {text: 'Choose from Gallery', onPress: () => openGallery(onChange)},
+                {text: 'Cancel', style: 'cancel'},
+              ]
+            );
           }}>
-          {watch(name) !== undefined ? (
-            <Image source={{uri: image}} style={styles.image} />
-          ) : (
-            <View style={styles.uploadButton}>
-              <Icon name="plus" size={24} color={'#43A041'} />
-            </View>
-          )}
-        </TouchableOpacity>
+            {watch(name) ? (
+              <Image source={{uri: watch(name)}} style={styles.image} />
+            ) : (
+              <View style={styles.uploadButton}>
+                <Icon name="plus" size={24} color={'#43A041'} />
+              </View>
+            )}
+          </TouchableOpacity>
+        </View>
       )}
     />
   );
@@ -61,10 +112,6 @@ const styles = StyleSheet.create({
     height: responsiveHeight(18),
     objectFit: 'cover',
   },
-  //   buttonText: {
-  //     color: '#fff',
-  //     fontSize: 16,
-  //   },
   uploadButton: {
     width: responsiveWidth(25),
     height: responsiveHeight(18),

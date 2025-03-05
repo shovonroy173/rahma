@@ -1,79 +1,129 @@
-import {View, Text, ImageBackground, StyleSheet, TouchableOpacity} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
 import {Image} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import {useGetUserQuery} from '../redux/slices/userSlice';
+import {
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import About from '../components/About';
 
 const HomeScreen = ({navigation}) => {
-  return (
-    <ImageBackground
-      source={require('../../assets/images/home.png')}
-      style={styles.backgroundImage}>
-      <View style={styles.container}>
-        <View style={styles.topContainer}>
-          <TouchableOpacity onPress={()=> navigation.navigate('Filter')}>
-          <Image source={require('../../assets/images/filter_white.png')} />
+  const {data, loading, error} = useGetUserQuery('email@valid.com');
+  console.log(data, loading, error);
 
-          </TouchableOpacity>
-          <View style={styles.notificationContainer}>
-            <View style={styles.beseen}>
-              <Ionicons name="rocket-sharp" size={24} color={'#379A35'} />
-              <Text>Be Seen First</Text>
-            </View>
-            <Ionicons name="notifications-outline" size={24} color={'white'} />
-          </View>
-        </View>
-        <View style={styles.bottomContainer}>
-          <View style={styles.nameContainer}>
-            <Text style={styles.name}>Sifat Jahan 29</Text>
-            <View style={styles.iconContainer}>
+  function calculateAge(dateString) {
+    const birthDate = new Date(dateString);
+    const today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    const dayDiff = today.getDate() - birthDate.getDate();
+
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+      age--;
+    }
+
+    return age;
+  }
+
+  // const calender = "2016-03-05T02:34:00.000Z";
+  // console.log(calculateAge(calender)); // Output: Age in years
+
+  return (
+    <ScrollView style={{flex: 1}}>
+      <ImageBackground
+        source={require('../../assets/images/home.png')}
+        style={styles.backgroundImage}
+        resizeMode="cover">
+        <View style={styles.container}>
+          <View style={styles.topContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
+              <Image source={require('../../assets/images/filter_white.png')} />
+            </TouchableOpacity>
+            <View style={styles.notificationContainer}>
+              <View style={styles.beseen}>
+                <Ionicons name="rocket-sharp" size={24} color={'#379A35'} />
+                <Text>Be Seen First</Text>
+              </View>
               <Ionicons
-                name="checkmark-circle-outline"
-                size={30}
-                color={'#379A35'}
+                name="notifications-outline"
+                size={24}
+                color={'white'}
               />
             </View>
           </View>
-          <Text style={styles.address}>🇧🇩 12KM Away, Tungi</Text>
-          <View style={styles.descContainer}>
-            <View style={styles.info}>
-              <Entypo name="dot-single" size={24} color={'#379A35'} />
-              <Text style={styles.infotext}>Active Today</Text>
-            </View>
-            <View style={styles.info}>
-              <Ionicons name="briefcase-outline" size={30} color={'white'} />
-              <Text style={styles.infotext}>Human Resource Professional</Text>
-            </View>
-            <View style={styles.info}>
-              <Ionicons name="moon-outline" size={30} color={'white'} />
-              <Text style={styles.infotext}>Practising</Text>
-            </View>
-            <View style={styles.info}>
-              <Text>🇧🇩</Text>
-              <Text style={styles.infotext}>Bangladeshi</Text>
-            </View>
-          </View>
-          <View style={styles.topContainer}>
-            <View style={styles.iconContainer}>
-              <Ionicons name="close-circle-outline" size={40} color={'red'} />
-            </View>
+          <View style={styles.bottomContainer}>
             <View style={styles.nameContainer}>
-              <View style={styles.iconContainer}>
-                <SimpleLineIcons name="star" size={40} color={'#379A35'} />
-              </View>
+              <Text style={styles.name}>{`${data && data[0]?.user?.firstName} ${
+                data && data[0]?.user?.lastName
+              } ${data && calculateAge(data[0]?.calender)}`}</Text>
               <View style={styles.iconContainer}>
                 <Ionicons
                   name="checkmark-circle-outline"
-                  size={40}
-                  color={'#379A35s'}
+                  size={30}
+                  color={'#379A35'}
                 />
+              </View>
+            </View>
+            <Text style={styles.address}>{`🇧🇩 12KM Away, ${data && data[0]?.presentCountry}`}</Text>
+            <View style={styles.descContainer}>
+              <View style={styles.info}>
+                <Entypo name="dot-single" size={24} color={'#379A35'} />
+                <Text style={styles.infotext}>Active Today</Text>
+              </View>
+              <View style={styles.info}>
+                <Ionicons name="briefcase-outline" size={30} color={'white'} />
+                <Text style={styles.infotext}>
+                  {data && data[0]?.profession}
+                </Text>
+              </View>
+              <View style={styles.info}>
+                <Ionicons name="moon-outline" size={30} color={'white'} />
+                <Text style={styles.infotext}>
+                  {data && data[0]?.religioustype?.title}
+                </Text>
+              </View>
+              <View style={styles.info}>
+                <Text>🇧🇩</Text>
+                <Text style={styles.infotext}>
+                  {data && data[0]?.birthCountry}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.topContainer}>
+              <View style={styles.iconContainer}>
+                <Ionicons name="close-circle-outline" size={40} color={'red'} />
+              </View>
+              <View style={styles.nameContainer}>
+                <View style={styles.iconContainer}>
+                  <SimpleLineIcons name="star" size={40} color={'#379A35'} />
+                </View>
+                <View style={styles.iconContainer}>
+                  <Ionicons
+                    name="checkmark-circle-outline"
+                    size={40}
+                    color={'#379A35s'}
+                  />
+                </View>
               </View>
             </View>
           </View>
         </View>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+      <About about={data && data[0]} />
+    </ScrollView>
   );
 };
 
@@ -82,7 +132,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     width: '100%',
-    height: '100%',
+    height: responsiveHeight(85),
     objectFit: 'cover',
   },
   container: {
@@ -162,6 +212,21 @@ const styles = StyleSheet.create({
   address: {
     fontSize: 18,
     color: '#ffffff',
+  },
+  aboutContainer: {flex: 1, padding: 20, backgroundColor: 'white'},
+  aboutHeader: {fontSize: 22, fontWeight: 'bold', marginBottom: 10},
+  aboutText: {fontSize: 16, lineHeight: 22, marginBottom: 10},
+  featureContainer: {
+    backgroundColor: '#f3eded',
+    paddingVertical: responsiveWidth(1),
+    paddingHorizontal: responsiveWidth(4),
+    borderRadius: 20,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 5,
+    width: responsiveWidth(30),
   },
 });
 

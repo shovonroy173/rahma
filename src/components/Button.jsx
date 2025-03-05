@@ -8,20 +8,36 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
+import {useAddUserMutation} from '../redux/slices/userSlice';
+import {resetFormData} from '../redux/slices/formSlice';
 
 const Button = ({navigation, title, path, id, phoneInput}) => {
   const dispatch = useDispatch();
+  const [addUser] = useAddUserMutation();
   const {
     handleSubmit,
     formState: {errors},
     watch,
     getValues,
+    reset,
   } = useFormContext();
-  const onSubmit = data => {
-    console.log('Form Submitted:', data);
-    console.log('Date', data.calender.toLocaleDateString());
+  const onSubmit = async data => {
+    try {
+      console.log('Form Submitted:', data);
+      console.log(
+        'Date:',
+        data.calender ? data.calender.toLocaleDateString() : 'No date selected',
+      );
+
+      const response = await addUser(data).unwrap();
+      console.log('User added:', response);
+      reset(); // Clears react-hook-form state
+      dispatch(resetFormData());
+    } catch (error) {
+      console.error('Error adding user:', error);
+    }
   };
-  console.log(!watch('calender'));
+  // console.log(!watch('calender'));
 
   const totalInterests =
     watch('selectedOptions') || watch('selectedPersonalities')
@@ -45,7 +61,11 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
         ) {
           console.log('handle submit Error', errors[id]);
         } else {
-          handleSubmit(onSubmit)();
+          if (path === 'BottomNavigator') {
+            handleSubmit(onSubmit)();
+          }
+          // handleSubmit(onSubmit)();
+
           dispatch(nextPage());
           navigation.navigate(path);
         }

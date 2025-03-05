@@ -22,9 +22,16 @@ import {
 import {Text} from 'react-native';
 import {salary} from '../../assets/data/data';
 import SalaryInput from '../components/SalaryInput';
+// import { useGetTodosQuery } from '../redux/apiSlice';
+// import {useGetTodoQuery} from '../redux/endpoints/getTodos';
+// import { useSelector } from 'react-redux';
+// import {useGetTodoQuery} from '../redux/endpoints/getTodos';
 
 const SalaryScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+  // const {data, loading, error} = useGetTodoQuery();
+  // console.log(data, loading, error, currentPage);
+
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}

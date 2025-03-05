@@ -16,10 +16,14 @@ import SubText from '../components/SubText';
 import MainText from '../components/MainText';
 import BottomInput from '../components/BottomInput';
 import {responsiveHeight} from 'react-native-responsive-dimensions';
+// import { useGetTodoQuery } from '../redux/endpoints/getTodos';
 
 const LoginScreen = ({navigation}) => {
   // const [value, onChangeText] = useState('');
   const currentPage = useSelector(state => state.page.currentPage);
+  // const {data, loading, error} = useGetTodoQuery();
+  // console.log(data, loading, error, currentPage);
+
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}

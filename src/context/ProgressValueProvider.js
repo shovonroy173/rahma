@@ -2,10 +2,9 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { createContext, useState } from 'react';
 
-// Create a context
 export const ProgressContext = createContext();
 const TOTAL_PAGES = 65;
-// Provider component
+
 export const ProgressProvider = ({ children }) => {
   const [progressValue, setProgressValue] = useState(10);
   const [currentPage, setCurrentPage] = useState(10);

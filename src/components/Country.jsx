@@ -12,11 +12,11 @@ const Country = ({name}) => {
           Place of Birth: {getValues(name)}
         </Text>
       )} */}
- <Controller
+      <Controller
         name={name}
         control={control}
         render={({field: {onChange, value}}) => (
-          <CountrySelection action={item => onChange(item?.name)} />
+          <CountrySelection action={item => onChange(item)} />
         )}
       />
     </View>

@@ -1,17 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from '@reduxjs/toolkit';
 
-const TOTAL_PAGES = 42;
+const TOTAL_PAGES = 55;
 
 const pageSlice = createSlice({
-  name: "page",
-  initialState: { currentPage: 1, totalPages: TOTAL_PAGES },
+  name: 'page',
+  initialState: {currentPage: 1, totalPages: TOTAL_PAGES},
   reducers: {
-    nextPage: (state) => {
+    nextPage: state => {
       if (state.currentPage < state.totalPages) {
         state.currentPage += 1;
       }
     },
-    prevPage: (state) => {
+    prevPage: state => {
       if (state.currentPage > 1) {
         state.currentPage -= 1;
       }
@@ -22,5 +22,5 @@ const pageSlice = createSlice({
   },
 });
 
-export const { nextPage, prevPage } = pageSlice.actions;
+export const {nextPage, prevPage} = pageSlice.actions;
 export default pageSlice.reducer;

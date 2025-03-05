@@ -10,7 +10,7 @@ const InterestScreen = ({navigation}) => {
     <MultiSelect
       currentPage={currentPage}
       navigation={navigation}
-      title="What are You Interests?"
+      title="What are You Interest?"
       options={interests}
       id="selectedOptions"
       path="Personality"
