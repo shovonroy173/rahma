@@ -38,13 +38,11 @@ const BottomNavigatorScreen = () => {
               {focused ? (
                 <Image
                   source={require('../../assets/images/home_inactive.png')}
-                  style={{
-                    backgroundColor: '#000000',
-                  }}
                 />
               ) : (
                 <Image
-                  source={require('../../assets/images/home_inactive.png')}
+                  source={require('../../assets/images/home_active.png')}
+                  style={{width: 40, height: 40, objectFit: 'cover'}}
                 />
               )}
             </View>
@@ -68,8 +66,6 @@ const BottomNavigatorScreen = () => {
               )}
             </View>
           ),
-          tabBarBadge: 2,
-          tabBarBadgeStyle: {backgroundColor: '#FF9900', color: '#ffffff'},
         }}
       />
       <Tab.Screen
@@ -89,8 +85,6 @@ const BottomNavigatorScreen = () => {
               )}
             </View>
           ),
-          tabBarBadge: 5,
-          tabBarBadgeStyle: {backgroundColor: '#FF9900', color: '#ffffff'},
         }}
       />
       <Tab.Screen
@@ -110,8 +104,6 @@ const BottomNavigatorScreen = () => {
               )}
             </View>
           ),
-          tabBarBadge: 1,
-          tabBarBadgeStyle: {backgroundColor: '#FF9900', color: '#ffffff'},
         }}
       />
     </Tab.Navigator>

@@ -670,6 +670,28 @@ export const users = [
   },
 ];
 
+export const languages = [
+  {label: 'English', value: 'en'}, 
+  {label: 'Arabic - العربية', value: 'ar'},
+  {label: 'Bengali - বাংলা', value: 'bn'},
+  {label: 'Turkish - Türkçe', value: 'tr'},
+  {label: 'Urdu - اردو', value: 'ur'},
+  {label: 'Persian - فارسی', value: 'fa'},
+  {label: 'Malay - Melayu', value: 'ms'},
+  {label: 'Pashto - پښتو', value: 'ps'},
+];
+
+export const translations = {
+  en: 'Login', 
+  ar: 'تسجيل الدخول',
+  bn: 'লগইন',
+  tr: 'Giriş yap',
+  ur: 'لاگ ان کریں',
+  fa: 'ورود',
+  ms: 'Log masuk',
+  ps: 'ننوتل',
+};
+
 export const screens = [
   {id: 1, name: 'Start', component: StartScreen},
   {id: 2, name: 'Login', component: LoginScreen},

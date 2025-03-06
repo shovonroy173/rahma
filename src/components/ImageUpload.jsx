@@ -71,6 +71,8 @@ const ImageUpload = ({name}) => {
   //       console.log('Camera Error:', response.errorMessage);
   //     } else {
   //       let imageUri = response.assets?.[0]?.uri;
+  //       console.log(imageUri);
+        
   //       onChange(imageUri);
   //     }
   //   });
@@ -124,6 +126,8 @@ const ImageUpload = ({name}) => {
         console.log('Gallery Error:', response.errorMessage);
       } else {
         let imageUri = response.assets?.[0]?.uri;
+        // console.log(imageUri);
+        
         onChange(imageUri);
       }
     });

@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   ScrollView,
   Dimensions,
+  Platform,
+  PermissionsAndroid,
 } from 'react-native';
 import React, {useState} from 'react';
 import {Image} from 'react-native';
@@ -15,12 +17,13 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {useGetUserQuery} from '../redux/slices/userSlice';
 import {
+  responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import About from '../components/About';
-import {users, wrongImages} from '../../assets/data/data';
-
+import {users} from '../../assets/data/data';
+import Geolocation from 'react-native-geolocation-service';
 const HomeScreen = ({navigation}) => {
   // const {data, loading, error} = useGetUserQuery('email@valid.com');
   // console.log(data, loading, error);
@@ -61,96 +64,168 @@ const HomeScreen = ({navigation}) => {
     return arr[randomIndex];
   }
   const [data, setData] = useState(getRandomObject(users));
-  // const data = getRandomObject(users);
+  const [location, setLocation] = useState(null);
+  const requestLocationPermission = async () => {
+    if (Platform.OS === 'android') {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      );
+      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    }
+    return true; 
+  };
 
-  // console.log('image', data);
+  const getCurrentLocation = async () => {
+    const hasPermission = await requestLocationPermission();
+    if (!hasPermission) return;
+
+    Geolocation.getCurrentPosition(
+      position => {
+        setLocation(position.coords);
+      },
+      error => {
+        console.error(error);
+      },
+      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+    );
+  };
 
   return (
-    <ScrollView style={{flex: 1}}>
-      <ImageBackground
-        source={data?.img}
-        style={styles.backgroundImage}
-        resizeMode="cover">
-        <View style={styles.container}>
-          <View style={styles.topContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
-              <Image source={require('../../assets/images/filter_white.png')} />
-            </TouchableOpacity>
-            <View style={styles.notificationContainer}>
-              <View style={styles.beseen}>
-                <Ionicons name="rocket-sharp" size={24} color={'#379A35'} />
-                <Text>Be Seen First</Text>
-              </View>
-              <Ionicons
-                name="notifications-outline"
-                size={24}
-                color={'white'}
-              />
-            </View>
-          </View>
-          <View style={styles.bottomContainer}>
-            <View style={styles.nameContainer}>
-              <Text style={styles.name}>
-                {`${data && data?.user?.firstName} ${
-                  data && data?.user?.lastName
-                } ${data && calculateAge(data?.calendar)}
-               `}
-              </Text>
-              <View style={styles.iconContainer}>
-                <Ionicons
-                  name="checkmark-circle-outline"
-                  size={30}
-                  color={'#379A35'}
-                />
-              </View>
-            </View>
-            <Text style={styles.address}>{`🇧🇩 12KM Away, ${
-              data && data?.presentCountry
-            }`}</Text>
-            <View style={styles.descContainer}>
-              <View style={styles.info}>
-                <Entypo name="dot-single" size={24} color={'#379A35'} />
-                <Text style={styles.infotext}>Active Today</Text>
-              </View>
-              <View style={styles.info}>
-                <Ionicons name="briefcase-outline" size={30} color={'white'} />
-                <Text style={styles.infotext}>{data && data?.profession}</Text>
-              </View>
-              <View style={styles.info}>
-                <Ionicons name="moon-outline" size={30} color={'white'} />
-                <Text style={styles.infotext}>
-                  {data && data?.religioustype?.title}
-                </Text>
-              </View>
-              <View style={styles.info}>
-                <Text>🇧🇩</Text>
-                <Text style={styles.infotext}>
-                  {data && data?.birthCountry}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.topContainer}>
-              <View style={styles.iconContainer}>
-                <Ionicons name="close-circle-outline" size={40} color={'red'} />
-              </View>
-              <View style={styles.nameContainer}>
-                <View style={styles.iconContainer}>
-                  <SimpleLineIcons name="star" size={40} color={'#379A35'} />
-                </View>
-                <View style={styles.iconContainer}>
+    <View style={{flex: 1}}>
+      {location ? (
+        <ScrollView style={{flex: 1}}>
+          <ImageBackground
+            source={data?.img}
+            style={styles.backgroundImage}
+            resizeMode="cover">
+            <View style={styles.container}>
+              <View style={styles.topContainer}>
+                <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
+                  <Image
+                    source={require('../../assets/images/filter_white.png')}
+                  />
+                </TouchableOpacity>
+                <View style={styles.notificationContainer}>
+                  <View style={styles.beseen}>
+                    <Ionicons name="rocket-sharp" size={24} color={'#379A35'} />
+                    <Text>Be Seen First</Text>
+                  </View>
                   <Ionicons
-                    name="checkmark-circle-outline"
-                    size={40}
-                    color={'#379A35s'}
+                    name="notifications-outline"
+                    size={24}
+                    color={'white'}
                   />
                 </View>
               </View>
+              <View style={styles.bottomContainer}>
+                <View style={styles.nameContainer}>
+                  <Text style={styles.name}>
+                    {`${data && data?.user?.firstName} ${
+                      data && data?.user?.lastName
+                    } ${data && calculateAge(data?.calendar)}
+               `}
+                  </Text>
+                  <View style={styles.iconContainer}>
+                    <Ionicons
+                      name="checkmark-circle-outline"
+                      size={30}
+                      color={'#379A35'}
+                    />
+                  </View>
+                </View>
+                <Text style={styles.address}>{`🇧🇩 12KM Away, ${
+                  data && data?.presentCountry
+                }`}</Text>
+                <View style={styles.descContainer}>
+                  <View style={styles.info}>
+                    <Entypo name="dot-single" size={24} color={'#379A35'} />
+                    <Text style={styles.infotext}>Active Today</Text>
+                  </View>
+                  <View style={styles.info}>
+                    <Ionicons
+                      name="briefcase-outline"
+                      size={30}
+                      color={'white'}
+                    />
+                    <Text style={styles.infotext}>
+                      {data && data?.profession}
+                    </Text>
+                  </View>
+                  <View style={styles.info}>
+                    <Ionicons name="moon-outline" size={30} color={'white'} />
+                    <Text style={styles.infotext}>
+                      {data && data?.religioustype?.title}
+                    </Text>
+                  </View>
+                  <View style={styles.info}>
+                    <Text>🇧🇩</Text>
+                    <Text style={styles.infotext}>
+                      {data && data?.birthCountry}
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.topContainer}>
+                  <View style={styles.iconContainerBg}>
+                    <Ionicons name="close-outline" size={30} color={'red'} />
+                  </View>
+                  <View style={styles.nameContainer}>
+                    <View style={styles.iconContainerBgStar}>
+                      <SimpleLineIcons name="star" size={30} color={'white'} />
+                    </View>
+                    <View style={styles.iconContainerBgCheck}>
+                      <Ionicons name="checkmark" size={30} color={'white'} />
+                    </View>
+                  </View>
+                </View>
+              </View>
             </View>
+          </ImageBackground>
+          <About about={data} location={location && location} />
+        </ScrollView>
+      ) : (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            padding: responsiveHeight(4),
+            gap: responsiveHeight(4),
+          }}>
+          <Image
+            source={require('../../assets/images/gps.png')}
+            style={{width: 200, height: 200, objectFit: 'cover'}}
+          />
+          <View
+            style={{
+              gap: responsiveHeight(1),
+            }}>
+            <Text
+              style={{
+                fontSize: responsiveFontSize(4.5),
+                textAlign: 'center',
+                fontWeight: 600,
+              }}>
+              Ready to meet your future partner?
+            </Text>
+            <Text
+              style={{
+                fontSize: responsiveFontSize(2.5),
+                textAlign: 'center',
+              }}>
+              Enable GPS on your device to start seeing Muslims singles nearby.
+            </Text>
           </View>
+          <TouchableOpacity
+            onPress={() => {
+              console.log('Pressed');
+              getCurrentLocation();
+            }}
+            style={styles.loginButton}>
+            <Text style={styles.loginButtonText}>Enable GPS</Text>
+          </TouchableOpacity>
         </View>
-      </ImageBackground>
-      <About about={data} />
-    </ScrollView>
+      )}
+    </View>
   );
 };
 
@@ -163,6 +238,19 @@ const styles = StyleSheet.create({
     width: '100%',
     height: height * 0.9,
     objectFit: 'cover',
+  },
+  loginButton: {
+    width: responsiveWidth(85),
+    backgroundColor: '#379A35',
+    padding: responsiveHeight(1.5),
+    borderRadius: 100,
+  },
+  loginButtonText: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontSize: responsiveFontSize(2),
+    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
   },
   container: {
     flex: 1,
@@ -230,6 +318,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 100,
     padding: 2,
+  },
+  iconContainerBg: {
+    backgroundColor: '#1d1c1c',
+    borderRadius: 100,
+    padding: 10,
+  },
+  iconContainerBgCheck: {
+    backgroundColor: '#e70a3d',
+    borderRadius: 100,
+    padding: 10,
+  },
+  iconContainerBgStar: {
+    backgroundColor: '#e800d5',
+    borderRadius: 100,
+    padding: 10,
+  },
+  iconContainer2: {
+    backgroundColor: '#ffffff',
+    borderRadius: 100,
+    padding: 6,
+    // borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   descContainer: {
     display: 'flex',

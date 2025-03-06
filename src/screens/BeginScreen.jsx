@@ -29,7 +29,7 @@ const data = [
   {id: '3', text: 'Samia and Ishrak married in 2021'},
 ];
 
-const FlatListCarousel = ({navigation}) => {
+const BeginScreen = ({navigation}) => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const flatListRef = useRef(null);
   const dispatch = useDispatch();
@@ -217,4 +217,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FlatListCarousel;
+export default BeginScreen;

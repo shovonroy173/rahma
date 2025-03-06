@@ -12,7 +12,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
-const About = ({about}) => {
+const About = ({about, location}) => {
   // console.log(about);
 
   return (
@@ -127,28 +127,30 @@ const About = ({about}) => {
       <View style={styles.mainContainer}>
         <Text style={styles.title}>Interests</Text>
         <View style={styles.aboutContainer}>
-          {about && Object.values(about && about?.selectedOptions)
-            .flat()
-            .map(item => (
-              <View key={item?.id} style={styles.featureContainerNonBg}>
-                <Text>{item?.icon}</Text>
-                <Text>{item?.title}</Text>
-              </View>
-            ))}
+          {about &&
+            Object.values(about && about?.selectedOptions)
+              .flat()
+              .map(item => (
+                <View key={item?.id} style={styles.featureContainerNonBg}>
+                  <Text>{item?.icon}</Text>
+                  <Text>{item?.title}</Text>
+                </View>
+              ))}
         </View>
       </View>
       {/* Personities */}
       <View style={styles.mainContainer}>
         <Text style={styles.title}>Personality</Text>
         <View style={styles.aboutContainer}>
-          {about && Object.values(about && about?.selectedPersonalities)
-            .flat()
-            .map(item => (
-              <View key={item?.id} style={styles.featureContainerNonBg}>
-                <Text>{item?.icon}</Text>
-                <Text>{item?.title}</Text>
-              </View>
-            ))}
+          {about &&
+            Object.values(about && about?.selectedPersonalities)
+              .flat()
+              .map(item => (
+                <View key={item?.id} style={styles.featureContainerNonBg}>
+                  <Text>{item?.icon}</Text>
+                  <Text>{item?.title}</Text>
+                </View>
+              ))}
         </View>
       </View>
       {/* Education */}
@@ -223,6 +225,11 @@ const About = ({about}) => {
           <Text style={styles.icontext}>Report</Text>
         </View>
       </View>
+      <View style={styles.shareContainer}>
+        <Text style={styles.verifiedContainertext}>
+          Latitude: {location.latitude}, Longitude: {location.longitude}
+        </Text>
+      </View>
     </View>
   );
 };
@@ -293,6 +300,8 @@ const styles = StyleSheet.create({
   verifiedContainertext: {
     fontSize: responsiveFontSize(2),
     // fontWeight: 600,
+    paddingHorizontal: responsiveWidth(2),
+
   },
   shareContainer: {
     flexDirection: 'row',

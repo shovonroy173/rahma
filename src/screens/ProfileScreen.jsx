@@ -1,12 +1,115 @@
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Dimensions,
+  Animated,
+  FlatList,
+} from 'react-native';
+import React, {useEffect, useRef} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
-import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+const {width} = Dimensions.get('window');
+const data = [
+  {
+    id: '1',
+    title: 'Welcome to Our App',
+    desc: 'Discover new features and enjoy a seamless experience.',
+  },
+  {
+    id: '2',
+    title: 'Stay Connected',
+    desc: 'Keep in touch with your friends and never miss an update.',
+  },
+  {
+    id: '3',
+    title: 'Smart Notifications',
+    desc: 'Receive important alerts and updates in real time.',
+  },
+  {
+    id: '4',
+    title: 'Explore the World',
+    desc: 'Find new places, events, and experiences around you.',
+  },
+  {
+    id: '5',
+    title: 'Get Started Now',
+    desc: 'Join millions of users and start your journey today!',
+  },
+];
 
 const ProfileScreen = ({navigation}) => {
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const flatListRef = useRef(null);
+  const intervalRef = useRef(null);
+  const currentIndex = useRef(0);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      if (flatListRef.current) {
+        currentIndex.current =
+          currentIndex.current < data.length - 1 ? currentIndex.current + 1 : 0;
+        flatListRef.current.scrollToOffset({
+          offset: currentIndex.current * width,
+          animated: true,
+        });
+      }
+    }, 3000);
+
+    return () => clearInterval(intervalRef.current);
+  }, []);
+
+  const renderItem = ({item}) => (
+    <View style={styles.slide}>
+      {/* Fixed Dots Container */}
+      <View style={styles.fixedDotsContainer}>
+        {data.map((_, index) => {
+          const inputRange = [
+            (index - 1) * width,
+            index * width,
+            (index + 1) * width,
+          ];
+
+          const dotWidth = scrollX.interpolate({
+            inputRange,
+            outputRange: [8, 12, 8],
+            extrapolate: 'clamp',
+          });
+
+          const backgroundColor = scrollX.interpolate({
+            inputRange,
+            outputRange: ['#CCCCCC', '#ECA76E', '#CCCCCC'],
+            extrapolate: 'clamp',
+          });
+
+          return (
+            <Animated.View
+              key={index}
+              style={[styles.dot, {width: dotWidth, backgroundColor}]}
+            />
+          );
+        })}
+      </View>
+
+      {/* Content Section */}
+      <View style={styles.slideContent}>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.desc}>{item.desc}</Text>
+      </View>
+    </View>
+  );
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.topContainer}>
         <Image source={require('../../assets/images/filter.png')} />
         <View style={styles.notificationContainer}>
@@ -67,14 +170,75 @@ const ProfileScreen = ({navigation}) => {
           <Text style={styles.editProfileText}>Edit Profile</Text>
           <Feather name="edit" size={24} color={'black'} />
         </TouchableOpacity>
+        <View style={styles.editProfile}>
+          <Text style={styles.editProfileText}>Settings</Text>
+          <Ionicons name="settings-outline" size={24} color={'black'} />
+        </View>
+        <View style={styles.editProfile}>
+          <Text style={styles.editProfileText}>Help & Support Center</Text>
+          <Feather name="shield" size={24} color={'black'} />
+        </View>
+        <View style={styles.editProfile}>
+          <Text style={styles.editProfileText}>Invite friends</Text>
+          <Feather name="share-2" size={24} color={'black'} />
+        </View>
+        <View style={styles.verifyContainer}>
+          <View style={{flexDirection: 'row', gap: 5, alignItems: 'center'}}>
+            <Text style={styles.editProfileText}>ID Verification</Text>
+            <MaterialCommunityIcons
+              name="check-decagram"
+              size={18}
+              color={'blue'}
+            />
+          </View>
+
+          <Text>
+            Verify your age and identity to receive more likes and matches
+          </Text>
+          <TouchableOpacity>
+            <Text style={styles.learnMore}>Get ID Verified</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.carouselContainer}>
+
+          <View style={styles.carouselContent}>
+            <FlatList
+              ref={flatListRef}
+              data={data}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+              horizontal
+              pagingEnabled
+              snapToAlignment="center"
+              snapToInterval={width}
+              decelerationRate="fast"
+              showsHorizontalScrollIndicator={false}
+              onScroll={Animated.event(
+                [{nativeEvent: {contentOffset: {x: scrollX}}}],
+                {useNativeDriver: false},
+              )}
+            />
+            <TouchableOpacity style={styles.buttonContainer}>
+              <Text style={styles.learnMore}>Upgrade</Text>
+            </TouchableOpacity>
+          </View>
+
+
+          <View style={styles.imageContainer}>
+            <Image
+              source={require('../../assets/images/profile2.png')}
+              style={styles.profileImage}
+            />
+          </View>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     // padding: 20,
     backgroundColor: 'white',
   },
@@ -212,16 +376,83 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2),
     fontWeight: 'bold',
   },
+
   editProfile: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: responsiveHeight(1.5),
+    padding: responsiveHeight(2),
     borderRadius: 10,
     backgroundColor: '#DCD8D8',
   },
   editProfileText: {
     fontSize: responsiveFontSize(2),
+    fontWeight: 500,
+  },
+  verifyContainer: {
+    // flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    gap: responsiveHeight(1),
+    padding: responsiveWidth(4),
+    backgroundColor: '#DCD8D8',
+    // opacity: 0.7,
+    borderRadius: 10,
+  },
+  carouselContainer: {
+    flexDirection: 'row',
+    backgroundColor: '#DCD8D8',
+    borderRadius: 10,
+    width: '100%',
+  },
+  carouselContent: {
+    flex: 1,
+    padding: responsiveWidth(4),
+  },
+  buttonContainer: {
+    marginTop: 10,
+    alignSelf: 'flex-start',
+  },
+  imageContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    // padding: 10,
+  },
+  profileImage: {
+    width: responsiveWidth(25),
+    height: responsiveWidth(25),
+    borderRadius: 40,
+    objectFit: 'cover',
+  },
+  slide: {
+    width: width,
+  },
+  fixedDotsContainer: {
+    position: 'absolute',
+    top: 5,
+    // alignSelf: 'center',
+    flexDirection: 'row',
+    gap: 5,
+  },
+  dot: {
+    height: 8,
+    width:20,
+    borderRadius: 4,
+  },
+  slideContent: {
+    width: '50%',
+    marginTop: 20,
+gap:10
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  desc: {
+    fontSize: 16,
+    flexWrap: 'wrap',
+    flexShrink: 'shrink',
+    // backgroundColor: 'red'
   },
 });
 
