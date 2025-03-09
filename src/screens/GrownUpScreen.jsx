@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 /* eslint-disable react-native/no-inline-styles */
 import {
   View,
@@ -9,7 +10,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
@@ -27,7 +28,15 @@ const GrownUpScreen = ({navigation}) => {
   // const onCountrySelection = data => {
   //   console.log(data);
   // };
-  const {control, getValues} = useFormContext();
+  const {control, getValues, setValue} = useFormContext();
+  const savedValue = useSelector(state => state.form.formData['grownup'] || '');
+  useEffect(() => {
+    if (savedValue) {
+      setValue('grownup', savedValue);
+    } else {
+      console.log('no cache data');
+    }
+  }, [savedValue, setValue]);
 
   return (
     <KeyboardAvoidingView

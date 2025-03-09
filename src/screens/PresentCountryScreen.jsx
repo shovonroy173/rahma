@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 /* eslint-disable react-native/no-inline-styles */
 import {
   View,
@@ -9,7 +10,7 @@ import {
   Platform,
   Keyboard,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
@@ -24,7 +25,15 @@ import {
 
 const PresentCountryScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
-  const {control, getValues} = useFormContext();
+  const {control, getValues, setValue} = useFormContext();
+    const savedValue = useSelector(state => state.form.formData['presentCountry'] || '');
+    useEffect(() => {
+      if (savedValue) {
+        setValue('presentCountry', savedValue);
+      } else {
+        console.log('no cache data');
+      }
+    }, [savedValue, setValue]);
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}

@@ -1,12 +1,21 @@
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import { Controller, useFormContext } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 const Selection = ({ name, item, type }) => {
-  const { control, watch } = useFormContext();
+  const { control, watch,setValue } = useFormContext();
   const selectedValue = watch(name);
+  const savedValue = useSelector(state => state.form.formData[name] || '');
+  useEffect(() => {
+    if (savedValue) {
+      setValue(name, savedValue);
+    } else {
+      console.log('no cache data');
+    }
+  }, [savedValue, setValue, name]);
   return (
     <Controller
       name={name}

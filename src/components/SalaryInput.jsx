@@ -1,19 +1,29 @@
 import {View, Text, StyleSheet, TextInput} from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {Controller, useFormContext} from 'react-hook-form';
 import {validationRules} from '../utils/validation';
+import { useSelector } from 'react-redux';
 
 const SalaryInput = ({name, placeholder}) => {
   const {
     control,
     formState: {errors},
+    setValue,
   } = useFormContext();
   const user = name?.split('.')[0];
   const sec = name?.split('.')[1];
+  const savedValue = useSelector(state => state.form.formData[name] || '');
+  useEffect(() => {
+    if (savedValue) {
+      setValue(name, savedValue);
+    } else {
+      console.log('no cache data');
+    }
+  }, [savedValue, setValue, name]);
 
   return (
     <View>

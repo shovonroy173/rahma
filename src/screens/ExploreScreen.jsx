@@ -17,7 +17,7 @@ const ExploreScreen = ({navigation}) => {
       <Filter navigation={navigation}/>
       <Tab.Navigator
         screenOptions={{
-          tabBarLabelStyle: {fontSize: 16, fontWeight: 600},
+          tabBarLabelStyle: {fontSize: 16, fontWeight: 600, width: 230},
           tabBarScrollEnabled: true,
           tabBarIndicatorStyle: {backgroundColor: '#379A35'},
           tabBarActiveTintColor: '#379A35',

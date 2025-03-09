@@ -1,19 +1,34 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
 import PhoneInput from 'react-native-phone-number-input';
 import {validationRules} from '../utils/validation';
+import {useDispatch, useSelector} from 'react-redux';
+import {updateFormData} from '../redux/slices/formSlice';
 const Phone = ({name, phoneInput}) => {
   const {
     control,
     formState: {errors},
     getValues,
+    setValue,
   } = useFormContext();
   // console.log('Phone', getValues('phone'));
   // console.log(
   //   'Phone Valid',
   //   phoneInput.current?.isValidNumber(getValues('phone')),
   // );
+  const savedValue = useSelector(state => state.form.formData[name] || '');
+  const dispatch = useDispatch();
+console.log('phone otp', savedValue);
+
+  useEffect(() => {
+    if (savedValue) {
+      setValue(name, savedValue);
+    } else {
+      console.log('no cache data');
+    }
+  }, [savedValue, setValue, name]);
+
   return (
     <View>
       <Controller
@@ -23,11 +38,12 @@ const Phone = ({name, phoneInput}) => {
         render={({field: {onChange, onBlur, value}}) => (
           <PhoneInput
             ref={phoneInput}
-            defaultCode="BD"
+            defaultCode="US"
             onBlur={onBlur}
             onChangeText={text => {
               //   phoneInput.current?.isValidNumber(text) &&
               onChange(text);
+              dispatch(updateFormData({[name]: text}));
             }}
             onChangeCountry={country => {
               onChange(country.callingCode);

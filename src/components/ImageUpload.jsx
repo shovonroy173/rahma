@@ -4,30 +4,33 @@ import {
   Image,
   StyleSheet,
   Alert,
-  Platform,
+  // Platform,
 } from 'react-native';
 import React from 'react';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import {Controller, useFormContext} from 'react-hook-form';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {AppState} from 'react-native';
+// import {AppState} from 'react-native';
 import {validationRules} from '../utils/validation';
 import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import {
-  request,
-  check,
-  requestMultiple,
-  PERMISSIONS,
-  RESULTS,
-} from 'react-native-permissions';
+// import {
+//   request,
+//   check,
+//   requestMultiple,
+//   PERMISSIONS,
+//   RESULTS,
+// } from 'react-native-permissions';
 
 const ImageUpload = ({name}) => {
   const {control, watch} = useFormContext();
+  // const [formData, setFormData] = useState();
 
-  // const requestCameraPermission = async (onChange) => {
+  // console.log(formData);
+
+  // const requestCameraPermission = async () => {
   //   const cameraPermission =
   //     Platform.OS === 'android' ? PERMISSIONS.ANDROID.CAMERA : PERMISSIONS.IOS.CAMERA;
   //   const storagePermission = PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE;
@@ -36,14 +39,14 @@ const ImageUpload = ({name}) => {
   //     if (Platform.OS === 'android') {
   //       const statuses = await requestMultiple([cameraPermission, storagePermission]);
   //       if (statuses[cameraPermission] === RESULTS.GRANTED) {
-  //         openCamera(onChange);
+  //         openCamera();
   //       } else {
   //         Alert.alert('Permission Denied', 'Camera access is required to take photos.');
   //       }
   //     } else {
   //       const status = await request(cameraPermission);
   //       if (status === RESULTS.GRANTED) {
-  //         openCamera(onChange);
+  //         openCamera();
   //       } else {
   //         Alert.alert('Permission Denied', 'Camera access is required to take photos.');
   //       }
@@ -52,31 +55,47 @@ const ImageUpload = ({name}) => {
   //     console.log('Permission error:', error);
   //   }
   // };
-
-  // const openCamera = onChange => {
-  //   const options = {
-  //     mediaType: 'photo',
-  //     includeBase64: false,
-  //     maxHeight: 2000,
-  //     maxWidth: 2000,
-  //     saveToPhotos: true,
-  //   };
-
-  //   launchCamera(options, response => {
-  //     console.log(response);
-
-  //     if (response.didCancel) {
-  //       console.log('User cancelled camera', response);
-  //     } else if (response.errorCode) {
-  //       console.log('Camera Error:', response.errorMessage);
+  // const requestCameraPermission = async () => {
+  //   if (Platform.OS === 'android') {
+  //     const result = await request(PERMISSIONS.ANDROID.CAMERA);
+  //     if (result === RESULTS.GRANTED) {
+  //       openCamera();
   //     } else {
-  //       let imageUri = response.assets?.[0]?.uri;
-  //       console.log(imageUri);
-        
-  //       onChange(imageUri);
+  //       Alert.alert('Permission Denied', 'Camera access is required.');
   //     }
-  //   });
+  //   } else {
+  //     openCamera(); // iOS handles permissions internally
+  //   }
   // };
+  const openCamera = onChange => {
+    console.log('camera');
+
+    const options = {
+      mediaType: 'photo',
+      // cameraType: 'back',
+      // includeBase64: false,
+      // maxHeight: 2000,
+      // maxWidth: 2000,
+      // saveToPhotos: true,
+    };
+
+    launchCamera(options, response => {
+      console.log(response);
+
+      if (response.didCancel) {
+        console.log('User cancelled camera', response);
+      } else if (response.errorCode) {
+        console.log('Camera Error:', response, response.errorMessage);
+      } else {
+        const selectedImage = response.assets[0]?.uri;
+        // setFormData(prev => ({
+        //   ...prev,
+        //   image: selectedImage,
+        // }));
+        onChange(selectedImage);
+      }
+    });
+  };
 
   // const openCamera = onChange => {
   //   const options = {
@@ -125,10 +144,12 @@ const ImageUpload = ({name}) => {
       } else if (response.errorCode) {
         console.log('Gallery Error:', response.errorMessage);
       } else {
-        let imageUri = response.assets?.[0]?.uri;
-        // console.log(imageUri);
-        
-        onChange(imageUri);
+        const selectedImage = response.assets[0]?.uri;
+        // setFormData(prev => ({
+        //   ...prev,
+        //   image: selectedImage,
+        // }));
+        onChange(selectedImage);
       }
     });
   };
@@ -139,28 +160,28 @@ const ImageUpload = ({name}) => {
       control={control}
       rules={validationRules[name]}
       render={({field: {onChange}}) => (
-        <View>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              Alert.alert('Upload Photo', 'Choose an option', [
-                // {text: 'Take Photo', onPress: () => openCamera(onChange)},
-                {
-                  text: 'Choose from Gallery',
-                  onPress: () => openGallery(onChange),
-                },
-                {text: 'Cancel', style: 'cancel'},
-              ]);
-            }}>
-            {watch(name) ? (
-              <Image source={{uri: watch(name)}} style={styles.image} />
-            ) : (
-              <View style={styles.uploadButton}>
-                <Icon name="plus" size={24} color={'#43A041'} />
-              </View>
-            )}
-          </TouchableOpacity>
-        </View>
+        // <View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            Alert.alert('Upload Photo', 'Choose an option', [
+              {text: 'Take Photo', onPress: () => openCamera(onChange)},
+              {
+                text: 'Choose from Gallery',
+                onPress: () => openGallery(onChange),
+              },
+              {text: 'Cancel', style: 'cancel'},
+            ]);
+          }}>
+          {watch(name) ? (
+            <Image source={{uri: watch(name)}} style={styles.image} />
+          ) : (
+            <View style={styles.uploadButton}>
+              <Icon name="plus" size={24} color={'#43A041'} />
+            </View>
+          )}
+        </TouchableOpacity>
+        // </View>
       )}
     />
   );

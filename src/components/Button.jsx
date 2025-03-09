@@ -8,18 +8,18 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
-import {useAddUserMutation} from '../redux/slices/userSlice';
-import {resetFormData} from '../redux/slices/formSlice';
+// import {useAddUserMutation} from '../redux/slices/userSlice';
+// import {resetFormData} from '../redux/slices/formSlice';
 
 const Button = ({navigation, title, path, id, phoneInput}) => {
   const dispatch = useDispatch();
-  const [addUser] = useAddUserMutation();
+  // const [addUser] = useAddUserMutation();
   const {
     handleSubmit,
     formState: {errors},
     watch,
     getValues,
-    reset,
+    // reset,
   } = useFormContext();
   // const onSubmit = async data => {
   //   try {
@@ -63,8 +63,10 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
           !watch(id) ||
           phoneInput?.current?.isValidNumber(getValues('phone')) === false ||
           (id === 'user' && (!watch(id).firstName || !watch(id).lastName)) ||
-          (id === 'selectedOptions' && Object.keys(watch(id)).length === 0) ||
-          (id === 'selectedPersonalies' && Object.keys(watch(id)).length === 0)
+          (id === 'selectedOptions' &&
+            (Object.keys(watch(id)).length === 0 || totalInterests === 0)) ||
+          (id === 'selectedPersonalies' &&
+            (Object.keys(watch(id)).length === 0 || totalInterests === 0))
         ) {
           console.log('handle submit Error', errors[id]);
         } else {
@@ -82,10 +84,12 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
         !watch(id) ||
         phoneInput?.current?.isValidNumber(getValues('phone')) === false ||
         (id === 'user' && (!watch(id).firstName || !watch(id).lastName)) ||
-        (id === 'selectedOptions' && Object.keys(watch(id)).length === 0) ||
-        totalInterests === 0 ||
-        (id === 'selectedPersonalies' && Object.keys(watch(id)).length === 0)
-          ? styles.disabledButton
+        (id === 'selectedOptions' &&
+          (Object.keys(watch(id)).length === 0 || totalInterests === 0)) ||
+        (id === 'selectedPersonalies' &&
+          (Object.keys(watch(id)).length === 0 || totalInterests === 0))
+          ?
+            styles.disabledButton
           : styles.loginButton,
       ]}>
       <Text style={styles.loginButtonText}>

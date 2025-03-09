@@ -60,6 +60,7 @@ import LookingForScreen from '../../src/screens/LookingForScreen';
 import FinishScreen from '../../src/screens/FinishScreen';
 import FilterScreen from '../../src/screens/FilterScreen';
 import EditPreviewScreen from '../../src/screens/EditPreviewScreen';
+import OtpScreen2 from '../../src/screens/OtpScreen2';
 
 export const name = [
   {id: 1, name: 'firstName', placeHolder: 'First Name'},
@@ -175,26 +176,46 @@ export const wrongImages = [
 ];
 
 export const heights = [
-  {id: 1, cm: 104, ft: 3.5},
-  {id: 2, cm: 106, ft: 3.6},
-  {id: 3, cm: 109, ft: 3.7},
-  {id: 4, cm: 112, ft: 3.8},
-  {id: 5, cm: 114, ft: 3.9},
-  {id: 6, cm: 116, ft: 3.1},
-  {id: 7, cm: 119, ft: 3.11},
-  {id: 8, cm: 121, ft: 4.0},
-  {id: 9, cm: 124, ft: 4.1},
-  {id: 10, cm: 126, ft: 4.2},
-  {id: 11, cm: 129, ft: 4.3},
-  {id: 12, cm: 131, ft: 4.4},
-  {id: 13, cm: 134, ft: 4.5},
-  {id: 14, cm: 136, ft: 4.6},
-  {id: 15, cm: 139, ft: 4.7},
-  {id: 16, cm: 142, ft: 4.8},
-  {id: 17, cm: 149, ft: 4.9},
-  {id: 18, cm: 152, ft: 4.1},
-  {id: 19, cm: 157, ft: 4.11},
-  {id: 20, cm: 160, ft: 5.0},
+  {id: 1, cm: 104, ft:  3.5 },
+  {id: 2, cm: 106, ft:  3.6 },
+  {id: 3, cm: 109, ft:  3.7 },
+  {id: 4, cm: 112, ft:  3.8 },
+  {id: 5, cm: 114, ft:  3.9 },
+  {id: 6, cm: 116, ft:  3.10 },
+  {id: 7, cm: 119, ft:  3.11 },
+  {id: 8, cm: 121, ft:  4.0 },
+  {id: 9, cm: 124, ft:  4.1 },
+  {id: 10, cm: 126, ft:  4.2 },
+  {id: 11, cm: 129, ft:  4.3 },
+  {id: 12, cm: 131, ft:  4.4 },
+  {id: 13, cm: 134, ft:  4.5 },
+  {id: 14, cm: 136, ft:  4.6 },
+  {id: 15, cm: 139, ft:  4.7 },
+  {id: 16, cm: 142, ft:  4.8 },
+  {id: 17, cm: 145, ft:  4.9 },
+  {id: 18, cm: 147, ft:  4.10 },
+  {id: 19, cm: 150, ft:  4.11 },
+  {id: 20, cm: 152, ft:  5.0 },
+  {id: 21, cm: 155, ft:  5.1 },
+  {id: 22, cm: 157, ft:  5.2 },
+  {id: 23, cm: 160, ft:  5.3 },
+  {id: 24, cm: 163, ft:  5.4 },
+  {id: 25, cm: 165, ft:  5.5 },
+  {id: 26, cm: 168, ft:  5.6 },
+  {id: 27, cm: 170, ft:  5.7 },
+  {id: 28, cm: 173, ft:  5.8 },
+  {id: 29, cm: 175, ft:  5.9 },
+  {id: 30, cm: 178, ft:  5.10 },
+  {id: 31, cm: 180, ft:  5.11 },
+  {id: 32, cm: 183, ft:  6.0 },
+  {id: 33, cm: 185, ft:  6.1 },
+  {id: 34, cm: 188, ft:  6.2 },
+  {id: 35, cm: 191, ft:  6.3 },
+  {id: 36, cm: 193, ft:  6.4 },
+  {id: 37, cm: 196, ft:  6.5 },
+  {id: 38, cm: 198, ft:  6.6 },
+  {id: 39, cm: 201, ft:  6.7 },
+  {id: 40, cm: 203, ft: 6.8},
 ];
 
 export const maritalStatus = [
@@ -671,7 +692,7 @@ export const users = [
 ];
 
 export const languages = [
-  {label: 'English', value: 'en'}, 
+  {label: 'English', value: 'en'},
   {label: 'Arabic - العربية', value: 'ar'},
   {label: 'Bengali - বাংলা', value: 'bn'},
   {label: 'Turkish - Türkçe', value: 'tr'},
@@ -682,7 +703,7 @@ export const languages = [
 ];
 
 export const translations = {
-  en: 'Login', 
+  en: 'Login',
   ar: 'تسجيل الدخول',
   bn: 'লগইন',
   tr: 'Giriş yap',
@@ -699,6 +720,8 @@ export const screens = [
   {id: 3, name: 'Terms', component: TermsScreen},
   {id: 4, name: 'PrivacyPolicy', component: PrivacyPolicyScreen},
   {id: 5, name: 'Phone', component: PhoneScreen},
+  {id: 3, name: 'Otp2', component: OtpScreen2},
+
   {id: 6, name: 'Begin', component: BeginScreen},
   {id: 7, name: 'Gender', component: GenderScreen},
   {id: 8, name: 'Name', component: NameScreen},

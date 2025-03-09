@@ -14,7 +14,7 @@ const ProgressContainer = ({navigation , currentPage}) => {
             <TouchableOpacity
               onPress={() => {
                 dispatch(prevPage());
-                navigation.goBack();
+              navigation.goBack();
               }}>
               <Icon name="left" size={24} />
             </TouchableOpacity>

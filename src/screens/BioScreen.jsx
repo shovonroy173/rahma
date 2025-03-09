@@ -1,3 +1,5 @@
+/* eslint-disable dot-notation */
+/* eslint-disable react-native/no-inline-styles */
 import {
   View,
   Text,
@@ -11,15 +13,18 @@ import {
 } from 'react-native';
 import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Button from '../components/Button';
 import {Controller, useFormContext} from 'react-hook-form';
 import {Keyboard} from 'react-native';
-import { validationRules } from '../utils/validation';
+import {validationRules} from '../utils/validation';
+import {updateFormData} from '../redux/slices/formSlice';
 
 const BioScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
   const {control} = useFormContext();
+  const dispatch = useDispatch();
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -32,21 +37,25 @@ const BioScreen = ({navigation}) => {
           />
           <Text style={styles.title}>Write a Bio</Text>
           <Text style={styles.subtitle}>
-            Add a Bio in 300 to 500 Words to Make your Profile Stand Out!
+            Add a Bio in 300 to Words to Make your Profile Stand Out!
           </Text>
-          <ScrollView contentContainerStyle={styles.inputScrollContainer}>
+          <ScrollView
+            contentContainerStyle={styles.inputScrollContainer}
+            showsVerticalScrollIndicator={false}>
             <Controller
               control={control}
               name="bio"
-              rules={validationRules.id}
-              render={({field:{onChange, onBlur, value}}) => (
+              rules={validationRules['bio']}
+              render={({field: {onChange, onBlur, value}}) => (
                 <TextInput
                   editable
                   multiline
-                  numberOfLines={4}
-                  maxLength={40}
+                  maxLength={500}
                   onBlur={onBlur}
-                  onChangeText={onChange}
+                  onChangeText={text => {
+                    onChange(text);
+                    dispatch(updateFormData({['bio']: text}));
+                  }}
                   value={value}
                   placeholder="Describe yourself.."
                   style={styles.input}
@@ -56,7 +65,12 @@ const BioScreen = ({navigation}) => {
           </ScrollView>
 
           <View style={styles.buttonContainer}>
-            <Button title="Continue" navigation={navigation} id="bio" path="LookingFor" />
+            <Button
+              title="Continue"
+              navigation={navigation}
+              id="bio"
+              path="LookingFor"
+            />
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -87,13 +101,14 @@ const styles = StyleSheet.create({
   },
   input: {
     width: width - 60,
-    height: 400,
+    minHeight: 400,
     borderWidth: 2,
     borderStyle: 'dashed',
     borderRadius: 10,
     borderColor: '#78B377',
-    // textAlign: 'flex-start',
     backgroundColor: '#F3F2F2',
+    textAlignVertical: 'top', // Ensures text starts from the top
+    padding: 20, // Adds spacing for better readability
   },
   inputScrollContainer: {
     flexGrow: 1,

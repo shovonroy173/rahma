@@ -1,19 +1,31 @@
-import {TextInput, StyleSheet, View, Text, Dimensions} from 'react-native';
-import React from 'react';
+import {TextInput, StyleSheet, View, Text} from 'react-native';
+import React, {useEffect} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
-import {validationRules} from '../utils/validation';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import {responsiveHeight} from 'react-native-responsive-dimensions';
+import {useDispatch, useSelector} from 'react-redux';
+import {updateFormData} from '../redux/slices/formSlice';
 
 const Input = ({placeholder, name}) => {
   // const [value, onChangeText] = useState('');
   const {
     control,
     formState: {errors},
+    setValue,
   } = useFormContext();
   // console.log(name?.split('.')[0], name?.split('.')[1]);
   const user = name?.split('.')[0];
   const sec = name?.split('.')[1];
   // console.log('validation', name, errors);
+  const savedValue = useSelector(state => state.form.formData[name] || '');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (savedValue) {
+      setValue(name, savedValue);
+    } else {
+      console.log('no cache data');
+    }
+  }, [savedValue, setValue, name]);
 
   return (
     <View>
@@ -23,7 +35,10 @@ const Input = ({placeholder, name}) => {
         // rules={validationRules[name]}
         render={({field: {onChange, value}}) => (
           <TextInput
-            onChangeText={text => onChange(text)}
+            onChangeText={text => {
+              onChange(text);
+              dispatch(updateFormData({[name]: text}));
+            }}
             value={value}
             style={styles.input}
             placeholder={placeholder}

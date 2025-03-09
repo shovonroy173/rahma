@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import DatePicker from 'react-native-date-picker';
 import {Controller, useFormContext} from 'react-hook-form';
 import {StyleSheet, Text, View} from 'react-native';
+import {useSelector} from 'react-redux';
 
 const Calender = ({name}) => {
-  const {control, getValues} = useFormContext();
+  const {control, getValues, setValue} = useFormContext();
+  const savedValue = useSelector(state => state.form.formData[name] || '');
+  useEffect(() => {
+    if (savedValue) {
+      setValue(name, savedValue);
+    } else {
+      console.log('no cache data');
+    }
+  }, [savedValue, setValue, name]);
 
   return (
     <View style={styles.container}>

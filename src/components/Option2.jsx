@@ -1,10 +1,19 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 const Option2 = ({item , name} ) => {
-  const {control, watch} = useFormContext();
+  const {control, watch, setValue} = useFormContext();
   // console.log(watch('sect'));
+  const savedValue = useSelector(state => state.form.formData[name] || '');
+  useEffect(() => {
+    if (savedValue) {
+      setValue(name, savedValue);
+    } else {
+      console.log('no cache data');
+    }
+  }, [savedValue, setValue, name]);
 
   return (
     <Controller

@@ -3,10 +3,13 @@
 import {View, Image} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import HomeScreen from './HomeScreen';
 import ExploreScreen from './ExploreScreen';
 import MessagesScreen from './MessagesScreen';
 import ProfileScreen from './ProfileScreen';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 const BottomNavigatorScreen = () => {
   const Tab = createBottomTabNavigator();
@@ -18,7 +21,7 @@ const BottomNavigatorScreen = () => {
           backgroundColor: '#47A146',
           paddingTop: 15,
           paddingHorizontal: 20,
-          height: 80,
+          height: responsiveHeight(10),
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -36,13 +39,16 @@ const BottomNavigatorScreen = () => {
                 justifyContent: 'center',
               }}>
               {focused ? (
-                <Image
-                  source={require('../../assets/images/home_inactive.png')}
-                />
+                <MaterialCommunityIcons
+                name="ring"
+                size={30}
+              />
               ) : (
-                <Image
-                  source={require('../../assets/images/home_active.png')}
-                  style={{width: 40, height: 40, objectFit: 'cover'}}
+                <MaterialCommunityIcons
+                  name="ring"
+                  size={30}
+                  color={'#7B7777'}
+
                 />
               )}
             </View>
@@ -56,12 +62,16 @@ const BottomNavigatorScreen = () => {
           tabBarIcon: ({focused}) => (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
               {focused ? (
-                <Image
-                  source={require('../../assets/images/explore_active.png')}
+
+                <MaterialCommunityIcons
+                  name="heart-multiple-outline"
+                  size={30}
                 />
               ) : (
-                <Image
-                  source={require('../../assets/images/explore_inactive.png')}
+                <MaterialCommunityIcons
+                  name="heart-multiple-outline"
+                  size={30}
+                  color={'#7B7777'}
                 />
               )}
             </View>
@@ -69,7 +79,7 @@ const BottomNavigatorScreen = () => {
         }}
       />
       <Tab.Screen
-        name="Settings"
+        name="Message"
         component={MessagesScreen}
         options={{
           tabBarIcon: ({focused}) => (
@@ -77,10 +87,12 @@ const BottomNavigatorScreen = () => {
               {focused ? (
                 <Image
                   source={require('../../assets/images/message_active.png')}
+                  style={{width: 30, height: 30, objectFit: 'cover'}}
                 />
               ) : (
                 <Image
                   source={require('../../assets/images/message_inactive.png')}
+                  style={{width: 35, height: 35, objectFit: 'cover'}}
                 />
               )}
             </View>
@@ -96,10 +108,12 @@ const BottomNavigatorScreen = () => {
               {focused ? (
                 <Image
                   source={require('../../assets/images/profile_active.png')}
+                  style={{width: 35, height: 35, objectFit: 'cover'}}
                 />
               ) : (
                 <Image
                   source={require('../../assets/images/profile_inactive.png')}
+                  style={{width: 35, height: 35, objectFit: 'cover'}}
                 />
               )}
             </View>

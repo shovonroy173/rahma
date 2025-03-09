@@ -1,8 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {OtpInput} from 'react-native-otp-entry';
 import {Controller, useFormContext} from 'react-hook-form';
 import {validationRules} from '../utils/validation';
+import {useDispatch, useSelector} from 'react-redux';
+import { updateFormData } from '../redux/slices/formSlice';
 const OtpBox = (
   // {Controller, control, setValue, name}
   {name},
@@ -10,8 +12,22 @@ const OtpBox = (
   const {
     control,
     formState: {errors},
+    setValue,
+    getValues
   } = useFormContext();
   // console.log('otpbox', errors[name]);
+  const savedValue = useSelector(state => state.form.formData[name] || '');
+  const dispatch = useDispatch();
+
+  console.log('otp data', getValues(name));
+
+  useEffect(() => {
+    if (savedValue) {
+      setValue(name, savedValue);
+    } else {
+      console.log('no cache data');
+    }
+  }, [savedValue, setValue, name]);
   return (
     <View>
       <Controller
@@ -25,6 +41,8 @@ const OtpBox = (
             onTextChange={text => {
               // setValue(name, text);
               onChange(text);
+              console.log(text);
+              dispatch(updateFormData({[name]: text}));
             }}
             value={value}
             theme={{

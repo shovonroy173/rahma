@@ -25,7 +25,7 @@ const OtpScreen = ({navigation}) => {
           />
           <MainText
             text1="Enter the Verification Code Here"
-            text2="A Verification Code Already Sent in your ."
+            text2="A Verification Code Already Sent in your Email."
           />
         </View>
         <ScrollView

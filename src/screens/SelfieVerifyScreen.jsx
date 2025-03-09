@@ -75,7 +75,7 @@ const SelfieVerifyScreen = ({navigation}) => {
       <Button
         title="Verify Photos"
         navigation={navigation}
-        path="EthinicOrigin"
+        path="FaceVerification"
       />
 
       <TouchableOpacity style={styles.loginButton}>

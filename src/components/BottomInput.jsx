@@ -17,13 +17,9 @@ const BottomInput = (
     setValue,
   } = useFormContext();
   const savedValue = useSelector(state => state.form.formData[name] || '');
-  // const saved = useSelector(state => state.form.formData || '');
-  // console.log('slice value', savedValue, saved);
   const dispatch = useDispatch();
-  // console.log(validationRules.name);
   useEffect(() => {
     if (savedValue) {
-      // console.log(savedValue);
       setValue(name, savedValue);
     } else {
       console.log('no cache data');

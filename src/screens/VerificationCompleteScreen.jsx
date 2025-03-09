@@ -1,12 +1,59 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import {View, Text, Image, StyleSheet} from 'react-native';
+import React from 'react';
+import ProgressContainer from '../components/ProgressContainer';
+import {useSelector} from 'react-redux';
+import Button from '../components/Button';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+} from 'react-native-responsive-dimensions';
 
-const VerificationCompleteScreen = () => {
+const VerficationCompleteScreen = ({navigation}) => {
+  const currentPage = useSelector(state => state.page.currentPage);
+
   return (
-    <View>
-      <Text>VerificationComplete</Text>
-    </View>
-  )
-}
+    <View style={styles.container}>
+      <ProgressContainer navigation={navigation} currentPage={currentPage} />
+      <Text style={styles.title}>Check Complete</Text>
 
-export default VerificationCompleteScreen
+      <View style={styles.mainContainer}>
+        <Image source={require('../../assets/images/doneverification.png')} />
+        <Text style={styles.text}>Verifiaction Done</Text>
+      </View>
+
+      <Button
+        title="Start Verification"
+        path="EthinicOrigin"
+        navigation={navigation}
+
+        // id="faceVerification"
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    padding: responsiveHeight(4),
+  },
+  title: {
+    fontSize: responsiveFontSize(3),
+    fontWeight: 600,
+  },
+  mainContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 10,
+  },
+  text: {
+    fontSize: responsiveFontSize(2),
+    fontWeight: 500,
+    textAlign: 'center',
+  },
+});
+
+export default VerficationCompleteScreen;

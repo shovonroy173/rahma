@@ -15,7 +15,7 @@ import {Image} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import {useGetUserQuery} from '../redux/slices/userSlice';
+// import {useGetUserQuery} from '../redux/slices/userSlice';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -24,6 +24,7 @@ import {
 import About from '../components/About';
 import {users} from '../../assets/data/data';
 import Geolocation from 'react-native-geolocation-service';
+import GlossyButton from '../components/GlossyButton';
 const HomeScreen = ({navigation}) => {
   // const {data, loading, error} = useGetUserQuery('email@valid.com');
   // console.log(data, loading, error);
@@ -72,7 +73,7 @@ const HomeScreen = ({navigation}) => {
       );
       return granted === PermissionsAndroid.RESULTS.GRANTED;
     }
-    return true; 
+    return true;
   };
 
   const getCurrentLocation = async () => {
@@ -93,95 +94,112 @@ const HomeScreen = ({navigation}) => {
   return (
     <View style={{flex: 1}}>
       {location ? (
-        <ScrollView style={{flex: 1}}>
-          <ImageBackground
-            source={data?.img}
-            style={styles.backgroundImage}
-            resizeMode="cover">
-            <View style={styles.container}>
-              <View style={styles.topContainer}>
-                <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
-                  <Image
-                    source={require('../../assets/images/filter_white.png')}
-                  />
-                </TouchableOpacity>
-                <View style={styles.notificationContainer}>
-                  <View style={styles.beseen}>
-                    <Ionicons name="rocket-sharp" size={24} color={'#379A35'} />
-                    <Text>Be Seen First</Text>
-                  </View>
-                  <Ionicons
-                    name="notifications-outline"
-                    size={24}
-                    color={'white'}
-                  />
-                </View>
-              </View>
-              <View style={styles.bottomContainer}>
-                <View style={styles.nameContainer}>
-                  <Text style={styles.name}>
-                    {`${data && data?.user?.firstName} ${
-                      data && data?.user?.lastName
-                    } ${data && calculateAge(data?.calendar)}
-               `}
-                  </Text>
-                  <View style={styles.iconContainer}>
-                    <Ionicons
-                      name="checkmark-circle-outline"
-                      size={30}
-                      color={'#379A35'}
+        <View style={{flex: 1}}>
+          <View style={styles.mainIconContainer}>
+            <GlossyButton
+              onPress={() => setData(getRandomObject(users))}
+              primaryColor="#000000"
+              secondaryColor="#222222"
+              icon={<Ionicons name="close-outline" size={30} color={'red'} />}
+            />
+
+            <View style={styles.nameContainer}>
+              <GlossyButton
+                onPress={() => setData(getRandomObject(users))}
+                primaryColor="#e800d5"
+                secondaryColor="#c700b0"
+                icon={<SimpleLineIcons name="star" size={30} color={'white'} />}
+              />
+              <GlossyButton
+                onPress={() => setData(getRandomObject(users))}
+                primaryColor="#e70a3d"
+                secondaryColor="#c20434"
+                icon={<Ionicons name="checkmark" size={30} color={'white'} />}
+              />
+            </View>
+          </View>
+          <ScrollView style={{flex: 1}}>
+            <ImageBackground
+              source={data?.img}
+              style={styles.backgroundImage}
+              resizeMode="cover">
+              <View style={styles.container}>
+                <View style={styles.topContainer}>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('Filter')}>
+                    <Image
+                      source={require('../../assets/images/filter_white.png')}
                     />
-                  </View>
-                </View>
-                <Text style={styles.address}>{`🇧🇩 12KM Away, ${
-                  data && data?.presentCountry
-                }`}</Text>
-                <View style={styles.descContainer}>
-                  <View style={styles.info}>
-                    <Entypo name="dot-single" size={24} color={'#379A35'} />
-                    <Text style={styles.infotext}>Active Today</Text>
-                  </View>
-                  <View style={styles.info}>
+                  </TouchableOpacity>
+                  <View style={styles.notificationContainer}>
+                    <View style={styles.beseen}>
+                      <Ionicons
+                        name="rocket-sharp"
+                        size={24}
+                        color={'#379A35'}
+                      />
+                      <Text>Be Seen First</Text>
+                    </View>
                     <Ionicons
-                      name="briefcase-outline"
-                      size={30}
+                      name="notifications-outline"
+                      size={24}
                       color={'white'}
                     />
-                    <Text style={styles.infotext}>
-                      {data && data?.profession}
-                    </Text>
-                  </View>
-                  <View style={styles.info}>
-                    <Ionicons name="moon-outline" size={30} color={'white'} />
-                    <Text style={styles.infotext}>
-                      {data && data?.religioustype?.title}
-                    </Text>
-                  </View>
-                  <View style={styles.info}>
-                    <Text>🇧🇩</Text>
-                    <Text style={styles.infotext}>
-                      {data && data?.birthCountry}
-                    </Text>
                   </View>
                 </View>
-                <View style={styles.topContainer}>
-                  <View style={styles.iconContainerBg}>
-                    <Ionicons name="close-outline" size={30} color={'red'} />
-                  </View>
+                <View style={styles.bottomContainer}>
                   <View style={styles.nameContainer}>
-                    <View style={styles.iconContainerBgStar}>
-                      <SimpleLineIcons name="star" size={30} color={'white'} />
+                    <Text style={styles.name}>
+                      {`${data && data?.user?.firstName} ${
+                        data && data?.user?.lastName
+                      } ${data && calculateAge(data?.calendar)}
+               `}
+                    </Text>
+                    <View style={styles.iconContainer}>
+                      <Ionicons
+                        name="checkmark-circle-outline"
+                        size={30}
+                        color={'#379A35'}
+                      />
                     </View>
-                    <View style={styles.iconContainerBgCheck}>
-                      <Ionicons name="checkmark" size={30} color={'white'} />
+                  </View>
+                  <Text style={styles.address}>{`🇧🇩 12KM Away, ${
+                    data && data?.presentCountry
+                  }`}</Text>
+                  <View style={styles.descContainer}>
+                    <View style={styles.info}>
+                      <Entypo name="dot-single" size={24} color={'#379A35'} />
+                      <Text style={styles.infotext}>Active Today</Text>
+                    </View>
+                    <View style={styles.info}>
+                      <Ionicons
+                        name="briefcase-outline"
+                        size={30}
+                        color={'white'}
+                      />
+                      <Text style={styles.infotext}>
+                        {data && data?.profession}
+                      </Text>
+                    </View>
+                    <View style={styles.info}>
+                      <Ionicons name="moon-outline" size={30} color={'white'} />
+                      <Text style={styles.infotext}>
+                        {data && data?.religiousType?.title}
+                      </Text>
+                    </View>
+                    <View style={styles.info}>
+                      <Text>🇧🇩</Text>
+                      <Text style={styles.infotext}>
+                        {data && data?.birthCountry}
+                      </Text>
                     </View>
                   </View>
                 </View>
               </View>
-            </View>
-          </ImageBackground>
-          <About about={data} location={location && location} />
-        </ScrollView>
+            </ImageBackground>
+            <About about={data} location={location && location} />
+          </ScrollView>
+        </View>
       ) : (
         <View
           style={{
@@ -266,6 +284,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  mainIconContainer: {
+    position: 'absolute', // Keep it fixed
+    top: responsiveHeight(78), // Adjust as needed
+    left: 0,
+    right: 0,
+    zIndex: 10, // Ensure it stays above the ScrollView
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
   notificationContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -308,6 +338,7 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
     justifyContent: 'space-between',
     // alignItems: 'center',
+    paddingBottom: 70,
   },
   name: {
     color: '#ffffff',
@@ -319,16 +350,40 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     padding: 2,
   },
+
   iconContainerBg: {
     backgroundColor: '#1d1c1c',
     borderRadius: 100,
     padding: 10,
   },
+  // iconContainerBgCheck: {
+  //   backgroundColor: '#e70a3d',
+  //   borderRadius: 100,
+  //   padding: 10,
+  // },
   iconContainerBgCheck: {
-    backgroundColor: '#e70a3d',
+    backgroundColor: '#e70a3d', // Button color
     borderRadius: 100,
     padding: 10,
+    position: 'relative', // To allow overlay
+    overflow: 'hidden', // Ensures the overlay doesn't go beyond the border-radius
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5, // For Android shadow
   },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.3)', // Light gloss effect
+    borderRadius: 100, // Same as button to fit within the border
+    zIndex: -1, // Ensures the icon stays above the overlay
+  },
+
   iconContainerBgStar: {
     backgroundColor: '#e800d5',
     borderRadius: 100,

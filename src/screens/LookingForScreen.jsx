@@ -1,15 +1,28 @@
+/* eslint-disable dot-notation */
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import {lookingFor} from '../../assets/data/data';
 import Option from '../components/Option';
 import Button from '../components/Button';
 import Slider from '@react-native-community/slider';
+import {Controller, useFormContext} from 'react-hook-form';
+import {updateFormData} from '../redux/slices/formSlice';
 
 const LookingForScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
-
+  const {control, getValues, setValue} = useFormContext();
+  const savedValue = useSelector(
+    state => state.form.formData['lookingforage'] || '',
+  );
+  useEffect(() => {
+    if (savedValue) {
+      setValue('lookingforage', savedValue);
+    } else {
+      console.log('no cache data');
+    }
+  }, [savedValue, setValue]);
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
@@ -18,14 +31,31 @@ const LookingForScreen = ({navigation}) => {
         <View>
           <View style={styles.topContainer}>
             <Text style={styles.title}>Age</Text>
+            <Text>{`${
+              getValues('lookingforage')
+                ? Math.floor(getValues('lookingforage'))
+                : 'Not Selected'
+            }`}</Text>
             <Text>18-51 Years</Text>
           </View>
-          <Slider
-            style={styles.slider}
-            minimumValue={0}
-            maximumValue={100}
-            minimumTrackTintColor="#47A146"
-            maximumTrackTintColor="#A8C6A8"
+          <Controller
+            name="lookingforage"
+            control={control}
+            render={({field: {value, onChange}}) => (
+              <Slider
+                style={styles.slider}
+                minimumValue={18}
+                maximumValue={51}
+                minimumTrackTintColor="#47A146"
+                maximumTrackTintColor="#A8C6A8"
+                value={value}
+                onValueChange={text => {
+                  console.log(text);
+                  onChange(text);
+                  updateFormData({['lookingforage']: text});
+                }}
+              />
+            )}
           />
         </View>
         <View style={styles.mainContainer}>

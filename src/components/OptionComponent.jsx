@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import Button from '../components/Button';
 import Option2 from '../components/Option2';
@@ -8,6 +8,8 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import {useSelector} from 'react-redux';
+import {useFormContext} from 'react-hook-form';
 
 const OptionComponent = ({
   navigation,
@@ -17,6 +19,15 @@ const OptionComponent = ({
   id,
   title,
 }) => {
+  const {setValue} = useFormContext();
+  const savedValue = useSelector(state => state.form.formData[id] || '');
+  useEffect(() => {
+    if (savedValue) {
+      setValue(id, savedValue);
+    } else {
+      console.log('no cache data');
+    }
+  }, [savedValue, setValue, id]);
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>

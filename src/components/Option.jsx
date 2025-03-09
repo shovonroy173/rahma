@@ -1,12 +1,21 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import {Controller, useFormContext} from 'react-hook-form';
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import { useSelector } from 'react-redux';
 
 const Option = ({item, index, id}) => {
-  const {control, watch} = useFormContext();
+  const {control, watch, setValue} = useFormContext();
   // console.log(watch(id));
+  const savedValue = useSelector(state => state.form.formData[id] || '');
+  useEffect(() => {
+    if (savedValue) {
+      setValue(id, savedValue);
+    } else {
+      console.log('no cache data');
+    }
+  }, [savedValue, setValue, id]);
 
   return (
     <Controller

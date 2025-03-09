@@ -1,11 +1,23 @@
+/* eslint-disable dot-notation */
 import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import {responsiveWidth} from 'react-native-responsive-dimensions';
+import {useDispatch, useSelector} from 'react-redux';
+import {updateFormData} from '../redux/slices/formSlice';
 
 const Gender = ({item}) => {
-  const {control, getValues} = useFormContext();
-//   console.log('getValues', getValues('gender'));
+  const {control, getValues, setValue} = useFormContext();
+  //   console.log('getValues', getValues('gender'));
+  const savedValue = useSelector(state => state.form.formData['gender'] || '');
+  useEffect(() => {
+    if (savedValue) {
+      setValue('gender', savedValue);
+    } else {
+      console.log('no cache data');
+    }
+  }, [savedValue, setValue]);
+  const dispatch = useDispatch();
 
   return (
     <Controller
@@ -16,6 +28,7 @@ const Gender = ({item}) => {
           onBlur={onBlur}
           onPress={() => {
             onChange(item.id);
+            dispatch(updateFormData({['gender']: item?.id}));
           }}
           value={value}
           style={styles.singleImageContainer}>

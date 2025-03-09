@@ -63,7 +63,7 @@ const PhoneScreen = ({navigation}) => {
             <View style={styles.buttonContainer}>
               <Button
                 navigation={navigation}
-                path="Begin"
+                path="Otp2"
                 title="Send a Verification Code"
                 id="phone"
                 phoneInput={phoneInput}

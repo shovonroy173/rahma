@@ -213,15 +213,15 @@ const About = ({about, location}) => {
       {/* icons */}
       <View style={styles.iconContentContainer}>
         <View style={styles.iconContainer}>
-          <MaterialCommunityIcons name="star-outline" size={50} />
+          <MaterialCommunityIcons name="star-outline" size={40} />
           <Text style={styles.icontext}>Favourite</Text>
         </View>
         <View style={styles.iconContainer}>
-          <MaterialCommunityIcons name="block-helper" size={50} />
+          <MaterialCommunityIcons name="block-helper" size={40} />
           <Text style={styles.icontext}>Block</Text>
         </View>
         <View style={styles.iconContainer}>
-          <MaterialCommunityIcons name="flag-variant-outline" size={50} />
+          <MaterialCommunityIcons name="flag-variant-outline" size={40} />
           <Text style={styles.icontext}>Report</Text>
         </View>
       </View>
@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   icontext: {
-    fontSize: responsiveFontSize(2.5),
+    fontSize: responsiveFontSize(2),
     fontWeight: 500,
   },
 });

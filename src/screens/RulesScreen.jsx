@@ -74,7 +74,6 @@ const RulesScreen = ({navigation}) => {
       <View style={styles.buttonContainer}>
         <Button
           title="Get ID Verified"
-          value={1}
           navigation={navigation}
           path="VerificationCancel"
         />

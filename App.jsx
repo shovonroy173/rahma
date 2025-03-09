@@ -21,7 +21,7 @@ import {
   // View,
 } from 'react-native';
 
-import {Provider, useSelector} from 'react-redux';
+import {Provider} from 'react-redux';
 
 import {screens} from './assets/data/data';
 import {useForm, FormProvider} from 'react-hook-form';
@@ -31,50 +31,51 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function App() {
   const Stack = createNativeStackNavigator();
-  // const [initialRoute, setInitialRoute] = useState('Start');
+  const [isLoading, setIsLoading] = useState(true);
+  const [initialState, setInitialState] = useState(null);
 
-  // useEffect(() => {
-  //   const loadLastScreen = async () => {
-  //     const savedScreen = await AsyncStorage.getItem('lastScreen');
-  //     if (savedScreen) {
-  //       setInitialRoute(savedScreen);
-  //     }
-  //   };
-  //   loadLastScreen();
-  // }, []);
-
+  useEffect(() => {
+    const loadNavigationState = async () => {
+      try {
+        const savedState = await AsyncStorage.getItem('navigationState');
+        if (savedState) {
+          setInitialState(JSON.parse(savedState));
+        }
+      } catch (error) {
+        console.error('Failed to load navigation state:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadNavigationState();
+  }, []);
   const methods = useForm({
     mode: 'onChange',
     defaultValues: {
       selectedOptions: {},
       selectedPersonalies: {},
-      // ...savedFormData,
+      faceVerification: false,
     },
   });
-  // useEffect(() => {
-  //   if (Platform.OS === 'android') {
-  //     SplashScreen.hide();
-  //   }
-  // }, []);
+
+  // Wait for AsyncStorage to load before rendering navigation
+  if (isLoading) {
+    return null; // or a loading spinner if needed
+  }
+
   return (
     <FormProvider {...methods}>
       <NavigationContainer
-        // onStateChange={async state => {
-        //   if (state) {
-        //     const currentRoute = state.routes[state.index].name;
-        //     await AsyncStorage.setItem('lastScreen', currentRoute); // Save screen name
-        //   }
-        // }}
+      initialState={initialState}
+          onStateChange={async state => {
+            await AsyncStorage.setItem('navigationState', JSON.stringify(state));
+          }}
         style={styles.container}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <Stack.Navigator
-              screenOptions={{
-                headerShown: false,
-                // gestureEnabled: false,
-              }}
-              // initialRouteName={initialRoute}
-              >
+              screenOptions={{headerShown: false}}
+           >
               {screens.map(item => (
                 <Stack.Screen
                   key={item.id}
@@ -89,6 +90,7 @@ function App() {
     </FormProvider>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

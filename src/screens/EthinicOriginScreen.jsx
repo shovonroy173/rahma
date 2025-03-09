@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 /* eslint-disable react-native/no-inline-styles */
 import {
   View,
@@ -9,21 +10,35 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
 // import Country from '../components/Country';
 import {CountrySelection} from 'react-native-country-list';
 import {Controller, useFormContext} from 'react-hook-form';
-import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const EthinicOriginScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
   // const onCountrySelection = data => {
   //   console.log(data);
   // };
-  const {control, getValues} = useFormContext();
+  const {control, getValues, setValue} = useFormContext();
+  const savedValue = useSelector(
+    state => state.form.formData['ethinicorigin'] || '',
+  );
+  useEffect(() => {
+    if (savedValue) {
+      setValue('ethinicorigin', savedValue);
+    } else {
+      console.log('no cache data');
+    }
+  }, [savedValue, setValue]);
 
   return (
     <KeyboardAvoidingView
@@ -71,7 +86,7 @@ const EthinicOriginScreen = ({navigation}) => {
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
-);
+  );
 };
 
 const {width} = Dimensions.get('window');
