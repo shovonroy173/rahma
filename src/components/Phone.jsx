@@ -12,14 +12,8 @@ const Phone = ({name, phoneInput}) => {
     getValues,
     setValue,
   } = useFormContext();
-  // console.log('Phone', getValues('phone'));
-  // console.log(
-  //   'Phone Valid',
-  //   phoneInput.current?.isValidNumber(getValues('phone')),
-  // );
   const savedValue = useSelector(state => state.form.formData[name] || '');
   const dispatch = useDispatch();
-console.log('phone otp', savedValue);
 
   useEffect(() => {
     if (savedValue) {

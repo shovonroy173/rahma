@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
@@ -27,7 +28,12 @@ const BackErrorScreen = ({navigation}) => {
         <Text style={styles.idType3}>Front</Text>
         <Text style={styles.idType2}>Back</Text>
       </View>
-      <Text>Before you Try Again, Please be Sure to:</Text>
+      <Text
+        style={{
+          fontFamily: 'Poppins-Regular',
+        }}>
+        Before you Try Again, Please be Sure to:
+      </Text>
       <View style={styles.ruleBox}>
         <View style={styles.ruleContainer}>
           <Ionicons
@@ -72,28 +78,32 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: responsiveFontSize(2.5),
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
+
     textAlign: 'center',
   },
   idType: {
     fontSize: responsiveFontSize(1.8),
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
+
     color: '#313030',
   },
   idType2: {
     fontSize: responsiveFontSize(1.8),
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
+
     color: '#379A35',
   },
   idType3: {
     fontSize: responsiveFontSize(1.8),
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
     color: '#313030',
   },
   nation: {
     fontSize: responsiveFontSize(1.4),
     color: '#575454',
     textAlign: 'center',
+    fontFamily: 'Poppins-Regular',
   },
   screenNameContainer: {
     display: 'flex',
@@ -103,8 +113,9 @@ const styles = StyleSheet.create({
     gap: responsiveWidth(10),
   },
   rule: {
-    fontSize: responsiveFontSize(1.8),
-    fontWeight: 600,
+    fontSize: responsiveFontSize(1.5),
+    fontFamily: 'Poppins-SemiBold',
+
     color: '#313030',
   },
   ruleBox: {

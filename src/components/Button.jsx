@@ -1,5 +1,5 @@
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import {useDispatch} from 'react-redux';
 import {nextPage} from '../redux/PageSlice';
 import {useFormContext} from 'react-hook-form';
@@ -8,6 +8,7 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 // import {useAddUserMutation} from '../redux/slices/userSlice';
 // import {resetFormData} from '../redux/slices/formSlice';
 
@@ -54,44 +55,35 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
         )
       : 0;
   // console.log(watch(id), totalInterests);
+  const isDisabled =
+    !!errors[id] ||
+    !watch(id) ||
+    phoneInput?.current?.isValidNumber(getValues('phone')) === false ||
+    (id === 'user' && (!watch(id).firstName || !watch(id).lastName)) ||
+    (id === 'selectedOptions' &&
+      (Object.keys(watch(id)).length === 0 || totalInterests === 0)) ||
+    (id === 'selectedPersonalies' &&
+      (Object.keys(watch(id)).length === 0 || totalInterests === 0));
+
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <TouchableOpacity
       onPress={() => {
-        if (
-          !!errors[id] ||
-          !watch(id) ||
-          phoneInput?.current?.isValidNumber(getValues('phone')) === false ||
-          (id === 'user' && (!watch(id).firstName || !watch(id).lastName)) ||
-          (id === 'selectedOptions' &&
-            (Object.keys(watch(id)).length === 0 || totalInterests === 0)) ||
-          (id === 'selectedPersonalies' &&
-            (Object.keys(watch(id)).length === 0 || totalInterests === 0))
-        ) {
+        if (isDisabled) {
           console.log('handle submit Error', errors[id]);
         } else {
-          if (path === 'BottomNavigator') {
-            handleSubmit(onSubmit)();
-          }
-          // handleSubmit(onSubmit)();
+          // if (path === 'BottomNavigator') {
+          //   handleSubmit(onSubmit)();
+          // }
+          handleSubmit(onSubmit)();
 
           dispatch(nextPage());
           navigation.navigate(path);
         }
       }}
-      style={[
-        !!errors[id] ||
-        !watch(id) ||
-        phoneInput?.current?.isValidNumber(getValues('phone')) === false ||
-        (id === 'user' && (!watch(id).firstName || !watch(id).lastName)) ||
-        (id === 'selectedOptions' &&
-          (Object.keys(watch(id)).length === 0 || totalInterests === 0)) ||
-        (id === 'selectedPersonalies' &&
-          (Object.keys(watch(id)).length === 0 || totalInterests === 0))
-          ?
-            styles.disabledButton
-          : styles.loginButton,
-      ]}>
+      style={[isDisabled ? styles.disabledButton : styles.loginButton]}>
       <Text style={styles.loginButtonText}>
         {(id === 'selectedOptions' && totalInterests !== 0) ||
         (id === 'selectedPersonalies' && totalInterests !== 0)
@@ -101,29 +93,28 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  loginButton: {
-    width: responsiveWidth(84),
-    backgroundColor: '#379A35',
-    padding: responsiveHeight(1),
-    borderRadius: 100,
-  },
-  loginButtonText: {
-    color: '#FFFFFF',
-    textAlign: 'center',
-    fontSize: responsiveFontSize(2.5),
-    fontWeight: 600,
-    fontFamily: 'Poppins-SemiBold',
-  },
-  disabledButton: {
-    width: responsiveWidth(84),
-    backgroundColor: '#379A35',
-    padding: responsiveHeight(1),
-    borderRadius: 100,
-    opacity: 0.7,
-    cursor: 'auto',
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    loginButton: {
+      width: responsiveWidth(84),
+      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35', // Darker green for dark mode
+      padding: responsiveHeight(1),
+      borderRadius: 100,
+    },
+    loginButtonText: {
+      color: theme === 'dark' ? '#E5E5E5' : '#FFFFFF', // Light text for dark mode
+      textAlign: 'center',
+      fontSize: responsiveFontSize(2.5),
+      fontFamily: 'Poppins-SemiBold',
+    },
+    disabledButton: {
+      width: responsiveWidth(84),
+      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35', // Adjust disabled color
+      padding: responsiveHeight(1),
+      borderRadius: 100,
+      opacity: 0.7,
+      cursor: 'auto',
+    },
+  });
 
 export default Button;

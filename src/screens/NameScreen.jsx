@@ -3,7 +3,7 @@ import {
   View,
   Text,
   Image,
-  StyleSheet,
+  // StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
@@ -11,17 +11,24 @@ import {
   Keyboard,
   Dimensions,
 } from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
 import {name} from '../../assets/data/data';
 import Input from '../components/Input';
-import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const NameScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
-
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
+  console.log(theme);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -38,7 +45,7 @@ const NameScreen = ({navigation}) => {
                 source={require('../../assets/images/male.png')}
                 style={styles.image}
               />
-              <Text style={styles.titleText}>Sadit</Text>
+              {/* <Text style={styles.titleText}>Sadit</Text> */}
             </View>
           </View>
           <ScrollView contentContainerStyle={styles.inputScrollContainer}>
@@ -72,12 +79,12 @@ const NameScreen = ({navigation}) => {
 
 const {width} = Dimensions.get('window');
 
-const styles = StyleSheet.create({
+const getStyles = theme => ({
   container: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
     paddingVertical: responsiveHeight(3.5),
   },
   mainContainer: {
@@ -87,13 +94,14 @@ const styles = StyleSheet.create({
   imageContainer: {
     display: 'flex',
     alignItems: 'center',
-    gap: responsiveWidth(2),
+    gap: responsiveHeight(3),
     paddingHorizontal: responsiveWidth(4),
   },
   titleText: {
     fontSize: responsiveFontSize(3.5),
-    fontWeight: '600',
     textAlign: 'center',
+    fontFamily: 'Poppins-SemiBold',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
   },
   inputScrollContainer: {
     flexGrow: 1,
@@ -102,17 +110,18 @@ const styles = StyleSheet.create({
   inputContainer: {
     display: 'flex',
     width: width,
-    gap: responsiveWidth(5),
+    gap: responsiveWidth(3),
     paddingHorizontal: responsiveWidth(6),
   },
   inputBoxContainer: {
     display: 'flex',
-    gap: responsiveWidth(6),
+    gap: responsiveWidth(4),
   },
   title2Text: {
     fontSize: responsiveFontSize(3.5),
-    fontWeight: 600,
     textAlign: 'center',
+    fontFamily: 'Poppins-SemiBold',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
   },
   image: {
     width: responsiveWidth(35),
@@ -121,6 +130,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     paddingBottom: responsiveWidth(2),
+    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
   },
 });
 

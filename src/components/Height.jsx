@@ -1,7 +1,11 @@
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+} from 'react-native-responsive-dimensions';
 
 const Height = ({item, name}) => {
   const {control, watch, setValue} = useFormContext();
@@ -26,9 +30,17 @@ const Height = ({item, name}) => {
           onPress={() => onChange(item)}
           onBlur={onBlur}
           value={value}>
-          <Text style={[styles.text, watch(name)?.id === item?.id && styles.selectedText]}>{`${item?.cm} cm`}</Text>
+          <Text
+            style={[
+              styles.text,
+              watch(name)?.id === item?.id && styles.selectedText,
+            ]}>{`${item?.cm} cm`}</Text>
           <Text>-</Text>
-          <Text style={[styles.text, watch(name)?.id === item?.id && styles.selectedText]}>{`${item?.ft.toFixed(1).split('.')[0]}'${
+          <Text
+            style={[
+              styles.text,
+              watch(name)?.id === item?.id && styles.selectedText,
+            ]}>{`${item?.ft.toFixed(1).split('.')[0]}'${
             item?.ft.toFixed(1).split('.')[1]
           }'' ft`}</Text>
         </TouchableOpacity>
@@ -45,14 +57,15 @@ const styles = StyleSheet.create({
     gap: 40,
   },
   text: {
-    fontSize: 18,
-    fontWeight: 500,
+    fontSize: responsiveFontSize(2),
+    fontFamily: 'Poppins-SemiBold',
+    padding: responsiveHeight(2),
   },
   selectedText: {
-    borderRadius:10,
+    borderRadius: 10,
     color: 'white',
     backgroundColor: '#379A35',
-    padding: 10,
+    padding: responsiveHeight(2),
   },
 });
 

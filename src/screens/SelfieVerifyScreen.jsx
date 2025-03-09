@@ -34,7 +34,7 @@ const SelfieVerifyScreen = ({navigation}) => {
       </View>
       <View>
         <Text style={styles.subText}>
-          This Ensure that uou Only Meet Genuine People on Rahma.
+          This Ensure that you Only Meet Genuine People on Rahma.
         </Text>
       </View>
       <View style={styles.ruleBox}>
@@ -102,27 +102,28 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: responsiveFontSize(3),
-    fontWeight: 600,
+     fontFamily: 'Poppins-SemiBold',
   },
   titleText2: {
     fontSize: responsiveFontSize(1.8),
-    fontWeight: 600,
+     fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
   },
   subText: {
     fontSize: responsiveFontSize(1.4),
-    fontWeight: 400,
+     fontFamily: 'Poppins-Regular',
     // textAlign: 'center',
     color: '#313030',
   },
   rule: {
     fontSize: responsiveFontSize(2),
-    fontWeight: 600,
+     fontFamily: 'Poppins-SemiBold',
     // textAlign: 'center',
     color: '#313030',
   },
   rule2: {
     fontSize: responsiveFontSize(1.4),
+    fontFamily: 'Poppins-Regular',
   },
   ruleBox: {
     display: 'flex',
@@ -136,7 +137,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: responsiveWidth(10),
     borderRadius: 20,
-    padding: responsiveWidth(2),
+    paddingVertical: responsiveWidth(2),
+    paddingHorizontal: responsiveWidth(5),
     backgroundColor: '#F3F2F2',
   },
   loginButton: {
@@ -150,11 +152,12 @@ const styles = StyleSheet.create({
     color: '#379A35',
     textAlign: 'center',
     fontSize: responsiveFontSize(2.4),
-    fontWeight: 600,
-    fontFamily: 'Poppins-SemiBold',
+     fontFamily: 'Poppins-SemiBold',
+    // fontFamily: 'Poppins-SemiBold',
   },
   subRule: {
     fontSize: 10,
+    fontFamily: 'Poppins-Regular',
   },
 });
 

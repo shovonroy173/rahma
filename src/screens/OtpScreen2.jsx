@@ -11,10 +11,14 @@ import SubTextOtp from '../components/SubTextOtp';
 import MainText from '../components/MainText';
 import {ScrollView} from 'react-native';
 import {responsiveHeight} from 'react-native-responsive-dimensions';
+import {useContext} from 'react';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const OtpScreen2 = ({navigation}) => {
-  // const [value, onChangeText] = useState('');
   const currentPage = useSelector(state => state.page.currentPage);
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -38,7 +42,7 @@ const OtpScreen2 = ({navigation}) => {
             alignItems: 'center',
           }}
           showsVerticalScrollIndicator={false}>
-          <View style={styles.otpContainer}>
+          <View>
             <OtpBox name="phoneOtp" />
             <SubTextOtp />
           </View>
@@ -57,27 +61,25 @@ const OtpScreen2 = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: responsiveHeight(4),
-  },
-  inputContainer: {
-    // gap: responsiveHeight(4),
-  },
-  textContainer: {
-    gap: responsiveHeight(2),
-  },
-  otpContainer: {
-    gap: responsiveHeight(2),
-  },
-  buttonContainer: {
-    paddingBottom: responsiveHeight(2),
-    backgroundColor: 'white',
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      padding: responsiveHeight(4),
+    },
+    inputContainer: {
+      gap: responsiveHeight(3),
+    },
+    textContainer: {
+      gap: responsiveHeight(3),
+    },
+    buttonContainer: {
+      paddingBottom: responsiveHeight(2),
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+    },
+  });
 
 export default OtpScreen2;

@@ -80,13 +80,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: responsiveHeight(4),
   },
   title: {
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
     fontSize: responsiveFontSize(3),
   },
   subTitle: {
     fontSize: responsiveFontSize(2),
     color: '#7B7777',
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
   },
   image: {

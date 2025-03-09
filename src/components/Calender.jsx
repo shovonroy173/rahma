@@ -1,12 +1,25 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import DatePicker from 'react-native-date-picker';
 import {Controller, useFormContext} from 'react-hook-form';
 import {StyleSheet, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
+import { ThemeContext } from '../context/DarkThemeContext';
 
 const Calender = ({name}) => {
   const {control, getValues, setValue} = useFormContext();
   const savedValue = useSelector(state => state.form.formData[name] || '');
+  const today = new Date();
+  const minDate = new Date(
+    today.getFullYear() - 51,
+    today.getMonth(),
+    today.getDate(),
+  );
+  const maxDate = new Date(
+    today.getFullYear() - 18,
+    today.getMonth(),
+    today.getDate(),
+  );
+
   useEffect(() => {
     if (savedValue) {
       setValue(name, savedValue);
@@ -14,6 +27,8 @@ const Calender = ({name}) => {
       console.log('no cache data');
     }
   }, [savedValue, setValue, name]);
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
@@ -22,12 +37,14 @@ const Calender = ({name}) => {
         control={control}
         render={({field: {onChange, value}}) => (
           <DatePicker
-            date={value || new Date()}
+            date={value || maxDate}
             mode="date"
             theme="auto"
+            minimumDate={minDate}
+            maximumDate={maxDate}
             onDateChange={date => {
               onChange(date);
-              console.log('date', date.toLocaleDateString());
+              // console.log('date', date.toLocaleDateString());
             }}
           />
         )}
@@ -41,7 +58,7 @@ const Calender = ({name}) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (theme)=> StyleSheet.create({
   container: {
     display: 'flex',
     alignItems: 'center',
@@ -50,6 +67,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 600,
     fontFamily: 'Poppins-SemiBold',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
+
   },
 });
 

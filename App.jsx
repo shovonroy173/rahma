@@ -28,10 +28,11 @@ import {useForm, FormProvider} from 'react-hook-form';
 import {persistor, store} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {ThemeProvider} from './src/context/DarkThemeContext';
 
 function App() {
   const Stack = createNativeStackNavigator();
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [initialState, setInitialState] = useState(null);
 
   useEffect(() => {
@@ -44,7 +45,8 @@ function App() {
       } catch (error) {
         console.error('Failed to load navigation state:', error);
       } finally {
-        setIsLoading(false);
+        // setIsLoading(false);
+        console.log('out of loop');
       }
     };
     loadNavigationState();
@@ -59,42 +61,44 @@ function App() {
   });
 
   // Wait for AsyncStorage to load before rendering navigation
-  if (isLoading) {
-    return null; // or a loading spinner if needed
-  }
+  // if (isLoading) {
+  //   return null; // or a loading spinner if needed
+  // }
 
   return (
     <FormProvider {...methods}>
-      <NavigationContainer
-      initialState={initialState}
+      <ThemeProvider>
+        <NavigationContainer
+          initialState={initialState}
           onStateChange={async state => {
-            await AsyncStorage.setItem('navigationState', JSON.stringify(state));
+            await AsyncStorage.setItem(
+              'navigationState',
+              JSON.stringify(state),
+            );
           }}
-        style={styles.container}>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <Stack.Navigator
-              screenOptions={{headerShown: false}}
-           >
-              {screens.map(item => (
-                <Stack.Screen
-                  key={item.id}
-                  name={item.name}
-                  component={item.component}
-                />
-              ))}
-            </Stack.Navigator>
-          </PersistGate>
-        </Provider>
-      </NavigationContainer>
+          style={styles.container}>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <Stack.Navigator screenOptions={{headerShown: false}}>
+                {screens.map(item => (
+                  <Stack.Screen
+                    key={item.id}
+                    name={item.name}
+                    component={item.component}
+                  />
+                ))}
+              </Stack.Navigator>
+            </PersistGate>
+          </Provider>
+        </NavigationContainer>
+      </ThemeProvider>
     </FormProvider>
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
+    flex: 1,
   },
 });
 

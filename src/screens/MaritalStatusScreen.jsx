@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 import Button from '../components/Button';
 import{maritalStatus} from '../../assets/data/data';
 import Option2 from '../components/Option2';
+import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
 
 const MaritalStatusScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -47,11 +48,12 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     alignItems: 'center',
+    gap: responsiveHeight(2),
   },
   title: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(3.5),
     textAlign: 'center',
-    fontWeight: '600',
+     fontFamily: 'Poppins-SemiBold',
   },
   scrollWrapper: {
     flex: 1,

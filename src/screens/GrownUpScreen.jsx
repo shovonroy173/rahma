@@ -114,14 +114,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   titleText: {
-    fontSize: responsiveFontSize(3),
-    fontWeight: 600,
+    fontSize: responsiveFontSize(3.5),
+     fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
   },
   date: {
     fontSize: responsiveFontSize(2),
-    fontWeight: 600,
-    fontFamily: 'Poppins-SemiBold',
+     fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
     paddingVertical: responsiveHeight(1),
   },

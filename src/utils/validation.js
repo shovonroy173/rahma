@@ -17,6 +17,18 @@ export const validationRules = {
       message: 'OTP must be 6 digits long',
     },
   },
+  phoneOtp: {
+    required: 'Email otp is required',
+    pattern: {
+      value: /^[0-9]+$/,
+      message: 'Enter numbers only',
+    },
+    minLength: {
+      value: 6,
+      message: 'OTP must be 6 digits long',
+    },
+  },
+
   phone: {
     required: 'Phone number is required',
     pattern: {

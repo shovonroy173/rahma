@@ -111,10 +111,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: responsiveFontSize(3.5),
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
     paddingHorizontal: responsiveWidth(4),
     textAlign: 'center',
-    fontFamily: 'Poppins-SemiBold',
   },
   searchContainer: {
     flexDirection: 'row',
@@ -133,6 +132,7 @@ const styles = StyleSheet.create({
     height: responsiveHeight(10),
     fontSize: responsiveFontSize(2),
     color: '#68AE67',
+    fontFamily: 'Poppins-Medium',
   },
   listItem: {
     padding: responsiveHeight(1.6),
@@ -140,10 +140,10 @@ const styles = StyleSheet.create({
   },
   listItemText: {
     fontSize: responsiveFontSize(1.8),
+    fontFamily: 'Poppins-Medium',
   },
   selectedItem: {
     borderBottomWidth: 1,
-
     borderColor: '#68AE67',
   },
   selectedItemText: {

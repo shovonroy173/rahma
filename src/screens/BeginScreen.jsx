@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useContext, useRef} from 'react';
 import {
   View,
   Text,
@@ -20,6 +20,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const {width} = Dimensions.get('window');
 
@@ -65,13 +66,13 @@ const BeginScreen = ({navigation}) => {
 
                 const dotWidth = scrollX.interpolate({
                   inputRange,
-                  outputRange: [8, 12, 8],
+                  outputRange: [10, 20, 10],
                   extrapolate: 'clamp',
                 });
 
                 const backgroundColor = scrollX.interpolate({
                   inputRange,
-                  outputRange: ['#CCCCCC', '#ECA76E', '#CCCCCC'],
+                  outputRange: ['#CCCCCC', '#379A35', '#CCCCCC'],
                   extrapolate: 'clamp',
                 });
 
@@ -88,6 +89,9 @@ const BeginScreen = ({navigation}) => {
       </ImageBackground>
     </View>
   );
+
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
@@ -119,7 +123,6 @@ const BeginScreen = ({navigation}) => {
         <Text style={styles.subText}>Your is just one match away ❤️</Text>
         <View style={styles.buttonContainer}>
           <Button
-            value={1}
             navigation={navigation}
             path="Gender"
             title="Begin my Journey"
@@ -130,91 +133,95 @@ const BeginScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: 'red',
-  },
-  carouselContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: responsiveHeight(55),
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: responsiveHeight(4),
-  },
-  iconContainer: {
-    width: width,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: responsiveHeight(1),
-    paddingHorizontal: responsiveWidth(3),
-  },
-  buttonContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  slide: {
-    width: width,
-    height: responsiveHeight(55),
-  },
-  backgroundImage: {
-    flex: 1,
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  },
-  infoContainer: {
-    flex: 1,
-    justifyContent: 'space-between',
-    // alignItems: 'center',
-    paddingVertical: responsiveHeight(2),
-    paddingHorizontal: responsiveWidth(4),
-  },
-  titleText: {
-    fontSize: responsiveFontSize(3.5),
-    fontWeight: 600,
-  },
-  subText: {
-    fontSize: responsiveFontSize(2),
-    fontWeight: 600,
-  },
-  colorText: {
-    color: '#47A146',
-  },
-  slideContent: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: responsiveHeight(1),
-    padding: responsiveHeight(1),
-    borderRadius: 40,
-    backgroundColor: '#9CCC9C99',
-  },
-  slideText: {
-    fontSize: responsiveFontSize(1.5),
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  dotsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  dot: {
-    height: 8,
-    borderRadius: 4,
-    marginHorizontal: 5,
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+    },
+    carouselContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: responsiveHeight(55),
+    },
+    content: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: responsiveHeight(4),
+    },
+    iconContainer: {
+      width: width,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      gap: responsiveHeight(1),
+      paddingHorizontal: responsiveWidth(3),
+    },
+    buttonContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    slide: {
+      width: width,
+      height: responsiveHeight(55),
+    },
+    backgroundImage: {
+      flex: 1,
+      justifyContent: 'center',
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+    },
+    infoContainer: {
+      flex: 1,
+      justifyContent: 'space-between',
+      // alignItems: 'center',
+      paddingVertical: responsiveHeight(2),
+      paddingHorizontal: responsiveWidth(4),
+    },
+    titleText: {
+      fontSize: responsiveFontSize(3),
+      // fontWeight: 600,
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    subText: {
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-Medium',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    colorText: {
+      color: theme === 'dark' ? '#A1FF99' : '#47A146',
+    },
+    slideContent: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: responsiveHeight(1),
+      padding: responsiveHeight(1),
+      borderRadius: 40,
+      backgroundColor: '#9CCC9C99',
+    },
+    slideText: {
+      fontSize: responsiveFontSize(1.5),
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+      fontFamily: 'Poppins-Regular',
+    },
+    dotsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      marginTop: 20,
+    },
+    dot: {
+      height: 8,
+      borderRadius: 4,
+      marginHorizontal: 5,
+    },
+  });
 
 export default BeginScreen;

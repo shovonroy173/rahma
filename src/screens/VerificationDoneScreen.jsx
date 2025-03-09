@@ -46,13 +46,14 @@ const styles = StyleSheet.create({
     padding: responsiveHeight(4),
   },
   title: {
-    fontSize: responsiveFontSize(2.4),
-    fontWeight: 600,
-    paddingHorizontal: responsiveHeight(3),
+    fontSize: responsiveFontSize(2.5),
+    fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
   },
   text: {
     textAlign: 'center',
+    fontFamily: 'Poppins-Medium',
+    color: 'gray',
   },
   mainContainer: {
     display: 'flex',

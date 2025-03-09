@@ -5,7 +5,6 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  Dimensions,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Platform,
@@ -19,6 +18,7 @@ import {Controller, useFormContext} from 'react-hook-form';
 import {Keyboard} from 'react-native';
 import {validationRules} from '../utils/validation';
 import {updateFormData} from '../redux/slices/formSlice';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const BioScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -78,7 +78,6 @@ const BioScreen = ({navigation}) => {
   );
 };
 
-const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -86,29 +85,31 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    padding: 30,
+    padding: responsiveHeight(4),
   },
 
   title: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(3.5),
     marginBottom: 10,
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
   },
   subtitle: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.8),
+    fontFamily: 'Poppins-Regular',
     marginBottom: 10,
   },
   input: {
-    width: width - 60,
+    width: responsiveWidth(85),
     minHeight: 400,
     borderWidth: 2,
     borderStyle: 'dashed',
     borderRadius: 10,
     borderColor: '#78B377',
     backgroundColor: '#F3F2F2',
-    textAlignVertical: 'top', // Ensures text starts from the top
-    padding: 20, // Adds spacing for better readability
+    textAlignVertical: 'top',
+    padding: 20,
+    fontFamily: 'Poppins-Regular',
   },
   inputScrollContainer: {
     flexGrow: 1,

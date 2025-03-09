@@ -61,11 +61,12 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     alignItems: 'center',
+    gap: responsiveHeight(2),
   },
   title: {
-    fontSize: responsiveFontSize(3),
+    fontSize: responsiveFontSize(3.5),
     textAlign: 'center',
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
   },
   scrollWrapper: {
     flex: 1,

@@ -1,9 +1,10 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
+import {responsiveFontSize} from 'react-native-responsive-dimensions';
 
-const Option2 = ({item , name} ) => {
+const Option2 = ({item, name}) => {
   const {control, watch, setValue} = useFormContext();
   // console.log(watch('sect'));
   const savedValue = useSelector(state => state.form.formData[name] || '');
@@ -50,21 +51,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#E8E5E5',
+    backgroundColor: '#F3F2F2',
     borderRadius: 10,
     paddingHorizontal: 30,
     paddingVertical: 10,
     color: '#000000',
+
   },
   selectedOption: {
     backgroundColor: '#379A35',
+
   },
   optionText: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(2),
+    fontFamily: 'Poppins-Medium',
+    opacity: 0.6,
+
   },
   optionTextSelected: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(2),
     color: '#ffffff',
+    fontFamily: 'Poppins-SemiBold',
+    opacity: 1,
+
   },
 });
 

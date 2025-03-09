@@ -1,9 +1,13 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import {Controller, useFormContext} from 'react-hook-form';
-import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
-import { useSelector } from 'react-redux';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import {useSelector} from 'react-redux';
 
 const Option = ({item, index, id}) => {
   const {control, watch, setValue} = useFormContext();
@@ -80,16 +84,20 @@ const styles = StyleSheet.create({
   },
   optionText: {
     fontSize: responsiveFontSize(1.8),
+    fontFamily: 'Poppins-Medium',
   },
   optionTextSelected: {
     fontSize: responsiveFontSize(1.8),
     color: '#ffffff',
+    fontFamily: 'Poppins-Medium',
   },
   optionText2: {
     color: '#000000',
+    fontFamily: 'Poppins-Regular',
   },
   optionTextSelected2: {
     color: '#ffffff',
+    fontFamily: 'Poppins-Regular',
   },
 });
 

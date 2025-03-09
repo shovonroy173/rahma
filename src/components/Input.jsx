@@ -1,9 +1,10 @@
 import {TextInput, StyleSheet, View, Text} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
 import {responsiveHeight} from 'react-native-responsive-dimensions';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateFormData} from '../redux/slices/formSlice';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const Input = ({placeholder, name}) => {
   // const [value, onChangeText] = useState('');
@@ -18,6 +19,8 @@ const Input = ({placeholder, name}) => {
   // console.log('validation', name, errors);
   const savedValue = useSelector(state => state.form.formData[name] || '');
   const dispatch = useDispatch();
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   useEffect(() => {
     if (savedValue) {
@@ -42,6 +45,7 @@ const Input = ({placeholder, name}) => {
             value={value}
             style={styles.input}
             placeholder={placeholder}
+            placeholderTextColor={styles.placeholderColor}
           />
         )}
       />
@@ -52,22 +56,24 @@ const Input = ({placeholder, name}) => {
   );
 };
 
-// const {width} = Dimensions.get('window');
-const styles = StyleSheet.create({
-  input: {
-    // width: width,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: '#A19B9B',
-    paddingHorizontal: 15,
-    height: responsiveHeight(6),
-  },
-  errorText: {
-    color: 'red',
-    fontSize: 12,
-    fontFamily: 'Poppins-Medium',
-    paddingVertical: 5,
-  },
-});
-
+export const getStyles = theme =>
+  StyleSheet.create({
+    input: {
+      borderWidth: 1,
+      borderRadius: 10,
+      borderColor: theme === 'dark' ? '#555' : '#A19B9B',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+      paddingHorizontal: 15,
+      height: responsiveHeight(6),
+      fontFamily: 'Poppins-Regular',
+    },
+    errorText: {
+      color: 'red',
+      fontSize: 12,
+      fontFamily: 'Poppins-Medium',
+      paddingVertical: 5,
+    },
+    placeholderColor: theme === 'dark' ? '#888' : '#555',
+  });
 export default Input;

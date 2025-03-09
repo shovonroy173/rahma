@@ -11,10 +11,14 @@ import SubTextOtp from '../components/SubTextOtp';
 import MainText from '../components/MainText';
 import {ScrollView} from 'react-native';
 import {responsiveHeight} from 'react-native-responsive-dimensions';
+import { ThemeContext } from '../context/DarkThemeContext';
+import { useContext } from 'react';
 
 const OtpScreen = ({navigation}) => {
   // const [value, onChangeText] = useState('');
   const currentPage = useSelector(state => state.page.currentPage);
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -32,13 +36,13 @@ const OtpScreen = ({navigation}) => {
           style={styles.scrollContainer}
           contentContainerStyle={{
             flexGrow: 1,
-            paddingBottom: 20,
+            // paddingBottom: 20,
             gap: 10,
             justifyContent: 'space-between',
             alignItems: 'center',
           }}
           showsVerticalScrollIndicator={false}>
-          <View style={styles.otpContainer}>
+          <View>
             <OtpBox name="emailOtp" />
             <SubTextOtp />
           </View>
@@ -56,28 +60,28 @@ const OtpScreen = ({navigation}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: responsiveHeight(4),
-  },
-  inputContainer: {
-    // gap: responsiveHeight(4),
-  },
-  textContainer: {
-    gap: responsiveHeight(2),
-  },
-  otpContainer: {
-    gap: responsiveHeight(2),
-  },
-  buttonContainer: {
-    paddingBottom: responsiveHeight(2),
-    backgroundColor: 'white',
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#121212' : '#ffffff', // Dark mode background
+      padding: responsiveHeight(4),
+    },
+    inputContainer: {
+      gap: responsiveHeight(3),
+    },
+    textContainer: {
+      gap: responsiveHeight(3),
+    },
+    buttonContainer: {
+      paddingBottom: responsiveHeight(2),
+      backgroundColor: theme === 'dark' ? '#1e1e1e' : 'white', // Dark mode button container
+    },
+    text: {
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+  });
 
 export default OtpScreen;

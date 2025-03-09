@@ -100,7 +100,7 @@
 //   title: {
 //     fontSize: 30,
 //     marginBottom: 10,
-//     fontWeight: 600,
+//      fontFamily: 'Poppins-SemiBold',
 //     textAlign: 'center',
 //   },
 //   subtitle: {
@@ -115,7 +115,7 @@
 //   },
 //   categoryTitle: {
 //     fontSize: 16,
-//     fontWeight: 'bold',
+//      fontFamily: 'Poppins-SemiBold',
 //     marginBottom: 5,
 //     textTransform: 'capitalize',
 //   },
@@ -142,12 +142,12 @@
 //   optionText: {
 //     color: 'black',
 //     fontSize: 16,
-//     fontWeight: 500,
+//      fontFamily: 'Poppins-Medium',
 //   },
 //   selectedOptionText: {
 //     color: 'white',
 //     fontSize: 16,
-//     fontWeight: 500,
+//      fontFamily: 'Poppins-Medium',
 //   },
 //   buttonContainer: {
 //     paddingVertical: 20,
@@ -163,6 +163,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-nati
 import { Controller, useFormContext } from 'react-hook-form';
 import ProgressContainer from '../components/ProgressContainer';
 import Button from '../components/Button';
+import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
 
 const MultiSelect = ({ currentPage, navigation, title, options, id, path }) => {
   const { control, setValue, watch } = useFormContext();
@@ -250,13 +251,14 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   title: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(3.5),
     marginBottom: 10,
-    fontWeight: 600,
+     fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
   },
   subtitle: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(2),
+    fontFamily: 'Poppins-Medium',
     marginBottom: 10,
   },
   categoryContainer: {
@@ -266,8 +268,8 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   categoryTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: responsiveHeight(2.5),
+     fontFamily: 'Poppins-SemiBold',
     marginBottom: 5,
     textTransform: 'capitalize',
   },
@@ -293,13 +295,13 @@ const styles = StyleSheet.create({
   },
   optionText: {
     color: 'black',
-    fontSize: 16,
-    fontWeight: 500,
+    fontSize: responsiveFontSize(1.8),
+     fontFamily: 'Poppins-Medium',
   },
   selectedOptionText: {
     color: 'white',
-    fontSize: 16,
-    fontWeight: 500,
+    fontSize: responsiveFontSize(1.8),
+     fontFamily: 'Poppins-Medium',
   },
   buttonContainer: {
     paddingVertical: 20,

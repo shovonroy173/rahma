@@ -10,7 +10,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
@@ -22,6 +22,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { ThemeContext } from '../context/DarkThemeContext';
 
 const BirthCountryScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -37,6 +38,8 @@ const BirthCountryScreen = ({navigation}) => {
       console.log('no cache data');
     }
   }, [savedValue, setValue]);
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <KeyboardAvoidingView
@@ -90,12 +93,13 @@ const BirthCountryScreen = ({navigation}) => {
 
 const {width} = Dimensions.get('window');
 
-const styles = StyleSheet.create({
+const getStyles = (theme)=> StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+
     padding: responsiveHeight(4),
   },
   mainContainer: {
@@ -115,8 +119,10 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: responsiveFontSize(3),
-    fontWeight: 600,
     textAlign: 'center',
+    fontFamily: 'Poppins-SemiBold',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
+
   },
   date: {
     fontSize: responsiveFontSize(2),
@@ -124,9 +130,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
     paddingVertical: responsiveHeight(1),
+    color: theme === 'dark' ? '#ffffff' : '#000000',
+
   },
   buttonContainer: {
     paddingBottom: responsiveWidth(2),
+    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+
   },
 });
 export default BirthCountryScreen;

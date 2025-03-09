@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import React, {useRef} from 'react';
+import React, {useContext, useRef} from 'react';
 import Button from '../components/Button';
 import ProgressContainer from '../components/ProgressContainer';
 import SubText from '../components/SubText';
@@ -20,12 +20,14 @@ import {
   responsiveFontSize,
   responsiveHeight,
 } from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const PhoneScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
   const phoneInput = useRef(null);
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
-  // const {control} = useFormContext();
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}
@@ -53,7 +55,7 @@ const PhoneScreen = ({navigation}) => {
                 alignItems: 'center',
               }}
               showsVerticalScrollIndicator={false}>
-              <View style={styles.subContainer}>
+              <View>
                 <Text style={styles.label}>Enter Your Phone Number:</Text>
                 <Phone name="phone" phoneInput={phoneInput} />
 
@@ -76,31 +78,36 @@ const PhoneScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: responsiveHeight(4),
-  },
-  mainContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    // gap: responsiveHeight(3),
-  },
-  subContainer: {
-    display: 'flex',
-    gap: responsiveHeight(2),
-  },
-  label: {
-    fontSize: responsiveFontSize(2.5),
-  },
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      padding: responsiveHeight(4),
+    },
+    mainContainer: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: responsiveHeight(3),
+    },
+    subContainer: {
+      display: 'flex',
+      gap: responsiveHeight(2),
+    },
+    label: {
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-Regular',
+      paddingBottom: 5,
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
 
-  buttonContainer: {
-    paddingBottom: responsiveHeight(2),
-    width: '100%',
-  },
-});
+    buttonContainer: {
+      paddingBottom: responsiveHeight(2),
+      width: '100%',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+    },
+  });
 
 export default PhoneScreen;

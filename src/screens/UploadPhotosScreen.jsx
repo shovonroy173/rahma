@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useRef} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import ImageUpload from '../components/ImageUpload';
@@ -43,8 +44,16 @@ const UploadPhotosScreen = ({navigation}) => {
         <View>
           <Text style={styles.title}>Upload your Photos</Text>
           <Text style={styles.subTitle}>
-            You Need to Upload at Least 3 Photos to Continue Completing your
-            Profile. You can change them later.
+            You Need to Upload at Least
+            <Text
+              style={{
+                color: '#379A35',
+                fontSize: responsiveFontSize(2),
+                fontFamily: 'Poppins-SemiBold',
+              }}>
+              3 Photos
+            </Text>
+            to Continue Completing your Profile. You can change them later.
           </Text>
         </View>
         <View style={styles.allImages}>
@@ -79,14 +88,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   title: {
-    fontSize: responsiveFontSize(3),
-    fontWeight: 'bold',
+    fontSize: responsiveFontSize(3.5),
+    fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
   },
   subTitle: {
-    fontSize: responsiveFontSize(1.8),
+    fontSize: responsiveFontSize(1.5),
     textAlign: 'center',
     color: 'gray',
+    fontFamily: 'Poppins-Medium',
   },
   allImages: {
     display: 'flex',
@@ -114,7 +124,8 @@ const styles = StyleSheet.create({
   },
   guidelineText: {
     color: '#43A041',
-    fontSize: 20,
+    fontSize: responsiveFontSize(2.3),
+    fontFamily: 'Poppins-Medium',
   },
 });
 

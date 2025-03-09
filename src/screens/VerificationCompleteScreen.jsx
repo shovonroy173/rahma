@@ -13,8 +13,10 @@ const VerficationCompleteScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <ProgressContainer navigation={navigation} currentPage={currentPage} />
-      <Text style={styles.title}>Check Complete</Text>
+      <View style={styles.mainContainer}>
+        <ProgressContainer navigation={navigation} currentPage={currentPage} />
+        <Text style={styles.title}>Check Complete</Text>
+      </View>
 
       <View style={styles.mainContainer}>
         <Image source={require('../../assets/images/doneverification.png')} />
@@ -41,8 +43,8 @@ const styles = StyleSheet.create({
     padding: responsiveHeight(4),
   },
   title: {
-    fontSize: responsiveFontSize(3),
-    fontWeight: 600,
+    fontSize: responsiveFontSize(3.5),
+     fontFamily: 'Poppins-SemiBold',
   },
   mainContainer: {
     display: 'flex',
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: responsiveFontSize(2),
-    fontWeight: 500,
+    fontFamily: 'Poppins-Medium',
     textAlign: 'center',
   },
 });

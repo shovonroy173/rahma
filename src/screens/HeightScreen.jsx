@@ -6,14 +6,17 @@ import {useSelector} from 'react-redux';
 import {heights} from '../../assets/data/data';
 import Height from '../components/Height';
 import Button from '../components/Button';
-import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+} from 'react-native-responsive-dimensions';
 
 const HeightScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.mainContainer}>
         <ProgressContainer navigation={navigation} currentPage={currentPage} />
         <Text style={styles.title}>What's your Height?</Text>
       </View>
@@ -45,9 +48,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     padding: responsiveHeight(4),
   },
+  mainContainer: {
+    gap: responsiveHeight(2),
+  },
   title: {
-    fontSize: responsiveFontSize(3),
-    fontWeight: 'bold',
+    fontSize: responsiveFontSize(3.5),
+    fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
     marginBottom: responsiveHeight(2),
   },

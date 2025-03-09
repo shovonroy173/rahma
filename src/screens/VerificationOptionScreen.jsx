@@ -33,7 +33,6 @@ const VerificationOptionScreen = ({navigation}) => {
       </View>
       <Button
         title="Submit"
-        value={1}
         navigation={navigation}
         path="TakePhoto"
         id="idType"
@@ -60,15 +59,18 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: responsiveFontSize(3),
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
   },
   text: {
     fontSize: responsiveFontSize(1.8),
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
+
   },
   text2: {
     fontSize: responsiveFontSize(1.8),
+    fontFamily: 'Poppins-Regular',
+
   },
   textContainer: {
     display: 'flex',
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
 
   footerText: {
     fontSize: responsiveFontSize(1.8),
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
     color: '#379A35',
   },
 });

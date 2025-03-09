@@ -11,6 +11,7 @@ import Drawer from 'react-native-drawer';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
+import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
 
 const DrawerContent = ({closeDrawer, navigation}) => (
   <View style={[styles.drawerContainer, styles.shadowProp]}>
@@ -21,7 +22,7 @@ const DrawerContent = ({closeDrawer, navigation}) => (
       </Text>
     </View>
 
-    <Button title="Got It" value={1} navigation={navigation} path="Warnings" />
+    <Button title="Got It" navigation={navigation} path="Warnings" />
   </View>
 );
 
@@ -78,18 +79,18 @@ const VerficationCancelScreen = ({navigation}) => {
 
 const {width} = Dimensions.get('window');
 
-const styles = StyleSheet.create({
+const getStyles = (theme)=> StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: 30,
+    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+    padding: responsiveHeight(4),
   },
   mainContainer: {
     display: 'flex',
     alignItems: 'center',
-    gap: 30,
+    gap: responsiveHeight(2.5),
   },
   image: {
     width: 180,
@@ -98,8 +99,9 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 24,
-    fontWeight: 600,
     textAlign: 'center',
+    fontFamily: 'Poppins-SemiBold',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
   },
   loginButton: {
     width: width - 50,
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   loginButtonText: {
-    color: '#FFFFFF',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 600,
@@ -116,17 +118,17 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 15,
-    backgroundColor: '#007bff',
+    backgroundColor: theme === 'dark' ? '#0056b3' : '#007bff' ,
     borderRadius: 5,
   },
   buttonText: {
-    color: '#fff',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
     fontSize: 16,
   },
 
   drawerContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
     paddingVertical: 30,
     paddingHorizontal: 30,
     justifyContent: 'space-between',
@@ -136,24 +138,26 @@ const styles = StyleSheet.create({
   },
   shadowProp: {
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: -60}, // Negative height for top shadow
+    shadowOffset: {width: 0, height: -60},
     shadowOpacity: 0.6,
     shadowRadius: 15,
-    elevation: 20, // Required for Android
+    elevation: 20,
   },
 
   drawerTextContainer: {display: 'flex', gap: 30, borderBottomStartRadius: 20},
   drawerText1: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(3),
     color: '#111111',
-    fontWeight: 600,
     textAlign: 'center',
+    fontFamily: 'Poppins-SemiBold',
+
   },
 
   drawerText2: {
-    fontSize: 20,
+    fontSize: responsiveFontSize(2),
     color: '#313030',
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
+
   },
 });
 

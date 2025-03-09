@@ -16,17 +16,19 @@ const FaceVerificationScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <ProgressContainer navigation={navigation} currentPage={currentPage} />
-      <Text style={styles.title}>Private Photo Verification</Text>
+      <View style={styles.mainContainer}>
+        <ProgressContainer navigation={navigation} currentPage={currentPage} />
+        <Text style={styles.title}>Private Photo Verification</Text>
+      </View>
       <Controller
         control={control}
         name="faceVerification"
-        style={styles.mainContainer}
         render={({field: {onChange, onBlur, value}}) => (
           <TouchableOpacity
             onPress={() => {
               onChange(!watch('faceVerification'));
-            }}>
+            }}
+            style={styles.mainContainer}>
             <Image
               source={require('../../assets/images/faceverification.png')}
             />
@@ -39,7 +41,6 @@ const FaceVerificationScreen = ({navigation}) => {
         path="VerificationComplete"
         id="faceVerification"
         navigation={navigation}
-
       />
     </View>
   );
@@ -54,17 +55,19 @@ const styles = StyleSheet.create({
     padding: responsiveHeight(4),
   },
   title: {
-    fontSize: responsiveFontSize(3),
-    fontWeight: 600,
+    fontSize: responsiveFontSize(3.5),
+    fontFamily: 'Poppins-SemiBold',
+    textAlign: 'center',
   },
   mainContainer: {
     display: 'flex',
     alignItems: 'center',
-    gap: 10,
+    gap: 20,
   },
   text: {
     fontSize: responsiveFontSize(2),
-    fontWeight: 500,
+    fontFamily: 'Poppins-Medium',
+
     textAlign: 'center',
   },
 });

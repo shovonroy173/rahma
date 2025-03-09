@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   // Dimensions,
 } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -16,9 +16,12 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { ThemeContext } from '../context/DarkThemeContext';
 
 const RulesScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
@@ -86,12 +89,13 @@ const RulesScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (theme)=> StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+
     padding: responsiveHeight(4),
     gap: responsiveHeight(2),
   },
@@ -102,25 +106,31 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: responsiveFontSize(3),
-    fontWeight: 600,
     textAlign: 'center',
+    fontFamily: 'Poppins-SemiBold',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
+
   },
   titleText2: {
     fontSize: responsiveFontSize(2),
-    fontWeight: 600,
     textAlign: 'center',
+    fontFamily: 'Poppins-SemiBold',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
+
   },
   subText: {
     fontSize: responsiveFontSize(1.4),
-    fontWeight: 400,
     textAlign: 'center',
-    color: '#313030',
+    fontFamily: 'Poppins-Regular',
+    color: theme === 'dark' ? '#ffffff' : '#313030',
+
   },
   rule: {
     fontSize: responsiveFontSize(1.6),
-    fontWeight: 600,
     textAlign: 'left',
-    color: '#313030',
+    color: theme === 'dark' ? '#ffffff' : '#313030',
+    fontFamily: 'Poppins-SemiBold',
+
   },
   ruleBox: {
     display: 'flex',
@@ -130,7 +140,6 @@ const styles = StyleSheet.create({
   ruleContainer: {
     display: 'flex',
     flexDirection: 'row',
-    // justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: responsiveWidth(2),
     gap: responsiveWidth(1.5),
@@ -140,10 +149,10 @@ const styles = StyleSheet.create({
     padding: responsiveWidth(1.5),
     borderRadius: 100,
     borderWidth: 2,
-    borderColor: '#379A35',
+    borderColor: theme === 'dark' ? '#121212' : '#379A35',
   },
   loginButtonText: {
-    color: '#379A35',
+    color: theme === 'dark' ? '#121212' : '#379A35',
     textAlign: 'center',
     fontSize: responsiveFontSize(2.5),
     fontWeight: 600,

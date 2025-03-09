@@ -4,7 +4,7 @@ import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import {Image} from 'react-native';
 import Button from '../components/Button';
-import {responsiveWidth} from 'react-native-responsive-dimensions';
+import {responsiveFontSize, responsiveWidth} from 'react-native-responsive-dimensions';
 
 const ProfileReadyScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -51,14 +51,16 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   title1: {
-    fontSize: 30,
+    fontSize: responsiveFontSize(3.5),
     textAlign: 'center',
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
+
   },
   title2: {
     fontSize: 16,
     textAlign: 'center',
     color: '#313030',
+    fontFamily: 'Poppins-Medium',
   },
   image: {
     width: responsiveWidth(55),

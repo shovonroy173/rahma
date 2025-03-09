@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     borderColor: '#A19B9B',
     paddingHorizontal: 15,
     height: responsiveHeight(6),
+    fontFamily: 'Poppins-Regular',
   },
   errorText: {
     color: 'red',

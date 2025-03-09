@@ -62,16 +62,16 @@ const styles = StyleSheet.create({
   textNumber: {
     color: '#ffffff',
     backgroundColor: '#379A35',
-    padding: 5,
     borderRadius: 100,
     textAlign: 'center',
-    width: 40,
+    width: 55,
+    padding:10,
     fontSize: 20,
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
   },
   text: {
     fontSize: 18,
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
     color: '#313030',
   },
 });

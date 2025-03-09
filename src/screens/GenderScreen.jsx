@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
 import {gender} from '../../assets/data/data';
 import Gender from '../components/Gender';
-import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
-
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import { ThemeContext } from '../context/DarkThemeContext';
 const GenderScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
+
   return (
     <View style={styles.container}>
       <View style={styles.progressContainer}>
@@ -32,12 +39,13 @@ const GenderScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (theme)=> StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+
     padding: responsiveHeight(4),
   },
   progressContainer: {
@@ -46,10 +54,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   titleText: {
-    fontSize: 30,
-    fontWeight: '600',
+    fontSize: responsiveFontSize(4),
     textAlign: 'center',
-    paddingHorizontal: 40,
+    fontFamily: 'Poppins-SemiBold',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
   },
   imageContainer: {
     display: 'flex',

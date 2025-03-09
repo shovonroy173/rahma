@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -16,11 +16,14 @@ import SubText from '../components/SubText';
 import MainText from '../components/MainText';
 import BottomInput from '../components/BottomInput';
 import {responsiveHeight} from 'react-native-responsive-dimensions';
+import { ThemeContext } from '../context/DarkThemeContext';
 // import { useGetTodoQuery } from '../redux/endpoints/getTodos';
 
 const LoginScreen = ({navigation}) => {
   // const [value, onChangeText] = useState('');
   const currentPage = useSelector(state => state.page.currentPage);
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
   // const {data, loading, error} = useGetTodoQuery();
   // console.log(data, loading, error, currentPage);
 
@@ -75,34 +78,30 @@ const LoginScreen = ({navigation}) => {
 
 // const {width} = Dimensions.get('window');
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: responsiveHeight(4),
-  },
-  // inputBox: {
-  //   borderBottomWidth: 1,
-  //   borderBottomColor: '#A19B9B',
-  //   paddingHorizontal: responsiveWidth(3),
-  //   fontSize: 16,
-  //   fontFamily: 'Poppins-Medium',
-  // },
-  inputContainer: {
-    alignItems: 'center',
-    // gap: responsiveHeight(3),
-  },
-  textContainer: {
-    gap: responsiveHeight(2),
-    alignItems: 'center',
-  },
-
-  buttonContainer: {
-    paddingBottom: responsiveHeight(2),
-    backgroundColor: 'white',
-  },
-});
+const getStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff', // Dark mode background
+      padding: responsiveHeight(4),
+    },
+    inputContainer: {
+      alignItems: 'center',
+      gap: responsiveHeight(3),
+    },
+    textContainer: {
+      gap: responsiveHeight(3),
+      alignItems: 'center',
+    },
+    buttonContainer: {
+      paddingBottom: responsiveHeight(2),
+      backgroundColor: theme === 'dark' ? '#222222' : 'white',
+    },
+    text: {
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+  });
 
 export default LoginScreen;

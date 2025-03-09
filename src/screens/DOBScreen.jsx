@@ -9,7 +9,7 @@ import {
   Keyboard,
   // ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
@@ -19,9 +19,12 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { ThemeContext } from '../context/DarkThemeContext';
 
 const DOBScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <KeyboardAvoidingView
@@ -70,12 +73,13 @@ const DOBScreen = ({navigation}) => {
     </KeyboardAvoidingView>
   );
 };
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+
     padding: responsiveHeight(4),
   },
   mainContainer: {
@@ -96,7 +100,8 @@ const styles = StyleSheet.create({
 
   buttonContainer: {
     paddingBottom: responsiveHeight(2),
-    backgroundColor: 'white',
+    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+
   },
 });
 export default DOBScreen;

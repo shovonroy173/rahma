@@ -1,9 +1,14 @@
+/* eslint-disable react-native/no-inline-styles */
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
-import {responsiveFontSize, responsiveHeight, responsiveWidth} from 'react-native-responsive-dimensions';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const NotificationScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -13,7 +18,9 @@ const NotificationScreen = ({navigation}) => {
       <View style={styles.mainContainer}>
         <ProgressContainer navigation={navigation} currentPage={currentPage} />
         <Text style={styles.title}>Notification</Text>
-        <Text>Do you Want to Active Notifications on your Device.</Text>
+        <Text style={{fontFamily: 'Poppins-Regular'}}>
+          Do you Want to Active Notifications on your Device.
+        </Text>
         <View>
           <View style={styles.memberContainer}>
             <View style={styles.memberTextContainer}>
@@ -45,9 +52,9 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: responsiveFontSize(3),
+    fontSize: responsiveFontSize(3.5),
     textAlign: 'center',
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
   mainContainer: {
     gap: responsiveHeight(2),
@@ -75,12 +82,13 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2.4),
     color: 'white',
     opacity: 0.7,
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
   },
   memberText2: {
     fontSize: responsiveFontSize(1.4),
     color: 'white',
     opacity: 0.7,
+    fontFamily: 'Poppins-Regular',
   },
 
   learnMore: {
@@ -90,7 +98,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: responsiveWidth(3),
     borderRadius: 20,
     fontSize: responsiveFontSize(1.6),
-    fontWeight: 600,
+    fontFamily: 'Poppins-SemiBold',
     opacity: 1,
   },
 });

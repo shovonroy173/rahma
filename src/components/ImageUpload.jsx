@@ -1,189 +1,95 @@
+import React, { useState } from 'react';
 import {
   View,
   TouchableOpacity,
   Image,
   StyleSheet,
-  Alert,
-  // Platform,
+  Modal,
+  Text,
 } from 'react-native';
-import React from 'react';
-import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
-import {Controller, useFormContext} from 'react-hook-form';
+import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
+import { Controller, useFormContext } from 'react-hook-form';
 import Icon from 'react-native-vector-icons/AntDesign';
-// import {AppState} from 'react-native';
-import {validationRules} from '../utils/validation';
 import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-// import {
-//   request,
-//   check,
-//   requestMultiple,
-//   PERMISSIONS,
-//   RESULTS,
-// } from 'react-native-permissions';
 
-const ImageUpload = ({name}) => {
-  const {control, watch} = useFormContext();
-  // const [formData, setFormData] = useState();
-
-  // console.log(formData);
-
-  // const requestCameraPermission = async () => {
-  //   const cameraPermission =
-  //     Platform.OS === 'android' ? PERMISSIONS.ANDROID.CAMERA : PERMISSIONS.IOS.CAMERA;
-  //   const storagePermission = PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE;
-
-  //   try {
-  //     if (Platform.OS === 'android') {
-  //       const statuses = await requestMultiple([cameraPermission, storagePermission]);
-  //       if (statuses[cameraPermission] === RESULTS.GRANTED) {
-  //         openCamera();
-  //       } else {
-  //         Alert.alert('Permission Denied', 'Camera access is required to take photos.');
-  //       }
-  //     } else {
-  //       const status = await request(cameraPermission);
-  //       if (status === RESULTS.GRANTED) {
-  //         openCamera();
-  //       } else {
-  //         Alert.alert('Permission Denied', 'Camera access is required to take photos.');
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log('Permission error:', error);
-  //   }
-  // };
-  // const requestCameraPermission = async () => {
-  //   if (Platform.OS === 'android') {
-  //     const result = await request(PERMISSIONS.ANDROID.CAMERA);
-  //     if (result === RESULTS.GRANTED) {
-  //       openCamera();
-  //     } else {
-  //       Alert.alert('Permission Denied', 'Camera access is required.');
-  //     }
-  //   } else {
-  //     openCamera(); // iOS handles permissions internally
-  //   }
-  // };
-  const openCamera = onChange => {
-    console.log('camera');
-
-    const options = {
-      mediaType: 'photo',
-      // cameraType: 'back',
-      // includeBase64: false,
-      // maxHeight: 2000,
-      // maxWidth: 2000,
-      // saveToPhotos: true,
-    };
-
+const ImageUpload = ({ name }) => {
+  const { control, watch } = useFormContext();
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [currentOnChange, setCurrentOnChange] = useState(null);
+  const openCamera = () => {
+    const options = { mediaType: 'photo' };
     launchCamera(options, response => {
-      console.log(response);
-
-      if (response.didCancel) {
-        console.log('User cancelled camera', response);
-      } else if (response.errorCode) {
-        console.log('Camera Error:', response, response.errorMessage);
-      } else {
-        const selectedImage = response.assets[0]?.uri;
-        // setFormData(prev => ({
-        //   ...prev,
-        //   image: selectedImage,
-        // }));
-        onChange(selectedImage);
+      if (!response.didCancel && !response.errorCode) {
+        currentOnChange && currentOnChange(response.assets[0]?.uri);
       }
     });
+    setAlertVisible(false);
   };
 
-  // const openCamera = onChange => {
-  //   const options = {
-  //     mediaType: 'photo',
-  //     includeBase64: false,
-  //     maxHeight: 2000,
-  //     maxWidth: 2000,
-  //     saveToPhotos: true,
-  //   };
-
-  //   const handleAppStateChange = nextAppState => {
-  //     if (nextAppState === 'active') {
-  //       launchCamera(options, response => {
-  //         if (response.didCancel) {
-  //           console.log('User cancelled camera');
-  //         } else if (response.errorCode) {
-  //           console.log('Camera Error:', response.errorMessage);
-  //         } else {
-  //           let imageUri = response.assets?.[0]?.uri;
-  //           onChange(imageUri);
-  //         }
-  //       });
-  //     }
-  //   };
-
-  //   AppState.addEventListener('change', handleAppStateChange);
-  //   launchCamera(options);
-
-  //   // Cleanup when camera is opened
-  //   return () => {
-  //     AppState.removeEventListener('change', handleAppStateChange);
-  //   };
-  // };
-
-  const openGallery = onChange => {
-    const options = {
-      mediaType: 'photo',
-      includeBase64: false,
-      maxHeight: 2000,
-      maxWidth: 2000,
-    };
-
+  const openGallery = () => {
+    const options = { mediaType: 'photo' };
     launchImageLibrary(options, response => {
-      if (response.didCancel) {
-        console.log('User cancelled gallery');
-      } else if (response.errorCode) {
-        console.log('Gallery Error:', response.errorMessage);
-      } else {
-        const selectedImage = response.assets[0]?.uri;
-        // setFormData(prev => ({
-        //   ...prev,
-        //   image: selectedImage,
-        // }));
-        onChange(selectedImage);
+      if (!response.didCancel && !response.errorCode) {
+        currentOnChange && currentOnChange(response.assets[0]?.uri);
       }
     });
+    setAlertVisible(false);
   };
 
   return (
-    <Controller
-      name={name}
-      control={control}
-      rules={validationRules[name]}
-      render={({field: {onChange}}) => (
-        // <View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            Alert.alert('Upload Photo', 'Choose an option', [
-              {text: 'Take Photo', onPress: () => openCamera(onChange)},
-              {
-                text: 'Choose from Gallery',
-                onPress: () => openGallery(onChange),
-              },
-              {text: 'Cancel', style: 'cancel'},
-            ]);
-          }}>
-          {watch(name) ? (
-            <Image source={{uri: watch(name)}} style={styles.image} />
-          ) : (
-            <View style={styles.uploadButton}>
-              <Icon name="plus" size={24} color={'#43A041'} />
-            </View>
-          )}
-        </TouchableOpacity>
-        // </View>
-      )}
-    />
+    <>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field: { onChange } }) => (
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              setCurrentOnChange(() => onChange);
+              setAlertVisible(true);
+            }}
+          >
+            {watch(name) ? (
+              <Image source={{ uri: watch(name) }} style={styles.image} />
+            ) : (
+              <View style={styles.uploadButton}>
+                <Icon name="plus" size={24} color={'#43A041'} />
+              </View>
+            )}
+          </TouchableOpacity>
+        )}
+      />
+
+      {/* Custom Alert Modal */}
+      <Modal
+        transparent
+        visible={alertVisible}
+        animationType="fade"
+        onRequestClose={() => setAlertVisible(false)}
+      >
+        <View style={styles.overlay}>
+          <View style={styles.alertBox}>
+            <Text style={styles.title}>Upload Photo</Text>
+            <Text style={styles.message}>Choose an option</Text>
+
+            <TouchableOpacity style={styles.optionButton} onPress={openCamera}>
+              <Text style={styles.optionText}>📷 Open Front Camera</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.optionButton} onPress={openGallery}>
+              <Text style={styles.optionText}>🖼 Choose from Gallery</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.cancelButton} onPress={() => setAlertVisible(false)}>
+              <Text style={styles.cancelText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    </>
   );
 };
 
@@ -202,6 +108,50 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  alertBox: {
+    width: 300,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#333',
+  },
+  message: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#666',
+  },
+  optionButton: {
+    width: '100%',
+    padding: 12,
+    borderRadius: 5,
+    backgroundColor: '#3498db',
+    marginVertical: 5,
+    alignItems: 'center',
+  },
+  optionText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  cancelButton: {
+    marginTop: 10,
+  },
+  cancelText: {
+    color: '#e74c3c',
+    fontSize: 16,
   },
 });
 
