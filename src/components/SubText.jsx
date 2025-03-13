@@ -3,17 +3,27 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React, {useContext} from 'react';
 import {ThemeContext} from '../context/DarkThemeContext';
 const SubText = ({navigation}) => {
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
   return (
     <View style={styles.privacyContainer}>
-      <Text style={{fontFamily: 'Poppins-Regular'}}>
+      <Text
+        style={{
+          fontFamily: 'Poppins-Regular',
+          color: theme === 'dark' ? '#4b5563' : '#000000',
+        }}>
         By Continuing you agree to our
       </Text>
       <TouchableOpacity onPress={() => navigation.navigate('Terms')}>
         <Text style={styles.termsText}>Terms</Text>
       </TouchableOpacity>{' '}
-      <Text style={{fontFamily: 'Poppins-Regular'}}>and </Text>
+      <Text
+        style={{
+          fontFamily: 'Poppins-Regular',
+          color: theme === 'dark' ? '#4b5563' : '#000000',
+        }}>
+        and{' '}
+      </Text>
       <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy')}>
         <Text style={styles.termsText}>Privacy Policy</Text>
       </TouchableOpacity>{' '}
@@ -24,7 +34,6 @@ const SubText = ({navigation}) => {
 const getStyles = theme =>
   StyleSheet.create({
     privacyContainer: {
-      color: theme === 'dark' ? '#ffffff' : '#000000',
       textAlign: 'center',
       fontSize: 14,
       paddingVertical: 20,
@@ -38,7 +47,7 @@ const getStyles = theme =>
       fontFamily: 'Poppins-Regular',
     },
     termsText: {
-      color: '#379A35',
+      color: theme === 'dark' ? '#50C878' : '#379A35',
       fontFamily: 'Poppins-Regular',
     },
   });

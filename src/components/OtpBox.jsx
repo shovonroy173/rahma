@@ -5,8 +5,7 @@ import {Controller, useFormContext} from 'react-hook-form';
 import {validationRules} from '../utils/validation';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateFormData} from '../redux/slices/formSlice';
-import {AppStyles} from '../globalstyle/GlobalStyle';
-import { ThemeContext } from '../context/DarkThemeContext';
+import {ThemeContext} from '../context/DarkThemeContext';
 const OtpBox = (
   // {Controller, control, setValue, name}
   {name},
@@ -47,6 +46,7 @@ const OtpBox = (
             value={value}
             theme={{
               pinCodeContainerStyle: styles.container,
+              pinCodeTextStyle: styles.pinCodeText,
             }}
           />
         )}
@@ -67,14 +67,14 @@ const getStyles = theme =>
       borderRadius: 0,
       backgroundColor: theme === 'dark' ? '#121212' : '#FFFFFF',
     },
-    input: {
+    pinCodeText: {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
       gap: 15,
-      fontSize: 14,
-      fontFamily: AppStyles.styles.fontFamily,
-      color: theme === 'dark' ? '#FFFFFF' : '#000000',
+      fontSize: 25,
+      fontFamily: 'Poppins-Regular',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     errorText: {
       color: 'red',

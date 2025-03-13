@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {useContext, useEffect, useRef} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 import {useSelector} from 'react-redux';
@@ -16,7 +17,7 @@ const ProgressBar = () => {
       useNativeDriver: false,
     }).start();
   }, [progress, animatedWidth]);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   return (
@@ -43,13 +44,13 @@ const getStyles = theme =>
     progressBarContainer: {
       width: '80%',
       height: 4,
-      backgroundColor: theme === 'dark' ? '#fffffff' : '#A8C6A8',
+      backgroundColor: theme === 'dark' ? '#4b5563' : '#A8C6A8',
       borderRadius: 10,
       overflow: 'hidden',
     },
     progressBar: {
       height: '100%',
-      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
+      backgroundColor: theme === 'dark' ? '#166534' : '#379A35',
       borderRadius: 10,
     },
   });

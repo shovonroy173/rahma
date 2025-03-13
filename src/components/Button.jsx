@@ -112,7 +112,7 @@ const getStyles = theme =>
       backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
       padding: responsiveHeight(1),
       borderRadius: 100,
-      opacity: 0.7,
+      opacity: 0.6,
       cursor: 'auto',
     },
   });

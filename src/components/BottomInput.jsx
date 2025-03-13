@@ -26,7 +26,7 @@ const BottomInput = (
       console.log('no cache data');
     }
   }, [savedValue, setValue, name]);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
   return (
     <View>
@@ -44,7 +44,7 @@ const BottomInput = (
               }
             }
             value={value}
-            style={[theme === 'dark' ? styles.lightInputBox : styles.inputBox]}
+            style={styles.inputBox}
             placeholder={placeholder}
             placeholderTextColor={styles.placeholderColor}
           />
@@ -65,16 +65,7 @@ const getStyles = theme =>
       paddingHorizontal: 30,
       fontSize: 16,
       fontFamily: 'Poppins-Medium',
-      color: theme === 'dark' ? '#FFFFFF' : '#000000',
-    },
-    lightInputBox: {
-      borderBottomWidth: 0,
-      borderBottomColor: theme === 'dark' ? 'transparent' : '#A19B9B',
-      backgroundColor: 'transparent',
-      paddingHorizontal: 30,
-      fontSize: 16,
-      fontFamily: 'Poppins-Medium',
-      color: theme === 'dark' ? '#FFFFFF' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     errorText: {
       color: 'red',

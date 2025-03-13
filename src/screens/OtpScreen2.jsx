@@ -11,14 +11,14 @@ import SubTextOtp from '../components/SubTextOtp';
 import MainText from '../components/MainText';
 import {ScrollView} from 'react-native';
 import {responsiveHeight} from 'react-native-responsive-dimensions';
-import {useContext} from 'react';
-import {ThemeContext} from '../context/DarkThemeContext';
+import { ThemeContext } from '../context/DarkThemeContext';
+import { useContext } from 'react';
 
 const OtpScreen2 = ({navigation}) => {
+  // const [value, onChangeText] = useState('');
   const currentPage = useSelector(state => state.page.currentPage);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
-
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -28,7 +28,7 @@ const OtpScreen2 = ({navigation}) => {
             navigation={navigation}
           />
           <MainText
-            text1="Enter the Verification Code Here"
+            text1="he Verification Code Here"
             text2="A Verification Code Already Sent in your Phone."
           />
         </View>
@@ -36,7 +36,7 @@ const OtpScreen2 = ({navigation}) => {
           style={styles.scrollContainer}
           contentContainerStyle={{
             flexGrow: 1,
-            paddingBottom: 20,
+            // paddingBottom: 20,
             gap: 10,
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -52,7 +52,7 @@ const OtpScreen2 = ({navigation}) => {
             value={1}
             navigation={navigation}
             title="Verify Code"
-            path="Begin"
+            path="Phone"
             id="phoneOtp"
           />
         </View>
@@ -60,14 +60,13 @@ const OtpScreen2 = ({navigation}) => {
     </View>
   );
 };
-
 const getStyles = theme =>
   StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      backgroundColor: theme === 'dark' ? '#121212' : '#ffffff', // Dark mode background
       padding: responsiveHeight(4),
     },
     inputContainer: {
@@ -78,7 +77,9 @@ const getStyles = theme =>
     },
     buttonContainer: {
       paddingBottom: responsiveHeight(2),
-      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+    },
+    text: {
+      color: theme === 'dark' ? '#ffffff' : '#000000',
     },
   });
 

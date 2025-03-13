@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View} from 'react-native';
-import React, { useEffect} from 'react';
+import React, { useContext, useEffect} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
 import PhoneInput from 'react-native-phone-number-input';
 import {validationRules} from '../utils/validation';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateFormData} from '../redux/slices/formSlice';
+import { ThemeContext } from '../context/DarkThemeContext';
 const Phone = ({name, phoneInput}) => {
   const {
     control,
@@ -22,6 +23,8 @@ const Phone = ({name, phoneInput}) => {
       console.log('no cache data');
     }
   }, [savedValue, setValue, name]);
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
   return (
     <View>
       <Controller
@@ -32,6 +35,7 @@ const Phone = ({name, phoneInput}) => {
           <PhoneInput
             ref={phoneInput}
             defaultCode="US"
+            layout="first"
             onBlur={onBlur}
             onChangeText={text => {
               //   phoneInput.current?.isValidNumber(text) &&
@@ -46,6 +50,7 @@ const Phone = ({name, phoneInput}) => {
             textContainerStyle={styles.textContainer}
             codeTextStyle={styles.codeText}
             flagButtonStyle={styles.flagButton}
+            textInputStyle={styles.codeText}
             // renderDropdownImage={() => null}
             autoFocus
 
@@ -61,7 +66,7 @@ const Phone = ({name, phoneInput}) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (theme)=> StyleSheet.create({
   phoneContainer: {
     width: '100%',
     height: 50,
@@ -73,17 +78,17 @@ const styles = StyleSheet.create({
   textContainer: {
     paddingVertical: 0,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: theme === 'dark' ? '#d1d5db' : '#4b5563',
     borderRadius: 10,
     backgroundColor: 'transparent',
   },
   codeText: {
     fontSize: 16,
-    color: 'gray',
-    fontWeight: 'bold',
+    color: theme === 'dark' ? '#d1d5db' : '#4b5563',
+    fontFamily: 'Poppins-SemiBold',
   },
   flagContainer: {
-    backgroundColor: 'gray',
+    borderColor: theme === 'dark' ? '#d1d5db' : '#4b5563',
     borderRadius: 8,
     paddingHorizontal: 10,
     marginLeft: 5,

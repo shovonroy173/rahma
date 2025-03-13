@@ -100,7 +100,7 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(2),
       fontFamily: 'Poppins-Regular',
       paddingBottom: 5,
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
 
     buttonContainer: {

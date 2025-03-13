@@ -35,7 +35,7 @@ const StartScreen = ({navigation}) => {
         <View style={styles.loginContainer}>
           <View style={styles.languageContainer}>
             <View style={styles.languageItem}>
-              <Icon name="language" size={24} color="white" />
+              <Icon name="language" size={24} color={theme === 'dark' ? '#6b7280' : '#ffffff'} />
               <DropDownPicker
                 open={open}
                 value={selectedLanguage}
@@ -57,24 +57,24 @@ const StartScreen = ({navigation}) => {
                   <Ionicons
                     name="chevron-down"
                     size={20}
-                    color={theme === 'dark' ? '#000000' : '#ffffff'}
+                    color={theme === 'dark' ? '#374151' : '#ffffff'}
                   />
                 )}
                 ArrowUpIconComponent={() => (
                   <Ionicons
                     name="chevron-up"
                     size={20}
-                    color={theme === 'dark' ? '#000000' : '#ffffff'}
+                    color={theme === 'dark' ? '#6b7280' : '#ffffff'}
                   />
                 )}
                 textStyle={{
-                  color: 'white',
+                  color: theme === 'dark' ? '#374151' : '#ffffff',
                   fontSize: responsiveFontSize(1.8),
                   fontFamily: 'Poppins-Regular',
                 }}
               />
             </View>
-            <FAIcon name="question-circle-o" size={24} color="white" />
+            <FAIcon name="question-circle-o" size={24} color={theme === 'dark' ? '#6b7280' : '#ffffff'} />
           </View>
           <View style={styles.loginItems}>
             <Image source={require('../../assets/images/logo.webp')} />
@@ -203,11 +203,10 @@ const getStyles = theme =>
       borderRadius: 100,
     },
     googleLoginButtonText: {
-      color: theme === 'dark' ? '#FFFFFF' : '#000000',
+      color: theme === 'dark' ? '#374151' : '#000000',
       textAlign: 'center',
       fontSize: 18,
-      fontWeight: '600',
-      fontFamily: 'Poppins-Regular',
+      fontFamily: 'Poppins-SemiBold',
     },
     textContainer: {
       display: 'flex',
@@ -215,13 +214,12 @@ const getStyles = theme =>
       alignItems: 'center',
       justifyContent: 'center',
       gap: 10,
-      width: responsiveWidth(70),
+      width: responsiveWidth(80),
       flexWrap: 'wrap',
     },
     privacyContainer: {
-      color: theme === 'dark' ? '#B0B0B0' : '#000000',
+      color: theme === 'dark' ? '#374151' : '#000000',
       fontSize: 14,
-      fontWeight: '400',
       fontFamily: 'Poppins-Regular',
     },
     termsText: {

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {View, Text, StyleSheet} from 'react-native';
 import React, {useContext} from 'react';
 import {ThemeContext} from '../context/DarkThemeContext';
@@ -7,7 +8,8 @@ const SubTextOtp = () => {
   const styles = getStyles(theme);
   return (
     <View style={styles.privacyContainer}>
-      <Text style={{fontFamily: 'Poppins-Regular', fontSize: 12}}>
+      <Text style={{fontFamily: 'Poppins-Regular', fontSize: 12,   color: theme === 'dark' ? '#6b7280' : '#000000',
+        }}>
         Don’t Receive any Code?
       </Text>
 

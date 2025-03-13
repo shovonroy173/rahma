@@ -10,7 +10,7 @@ import {ThemeContext} from '../context/DarkThemeContext';
 const ProgressContainer = ({navigation, currentPage}) => {
   const dispatch = useDispatch();
   const totalPages = useSelector(state => state.page.totalPages);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
 
   return (
     <View style={styles.iconContainer}>
@@ -22,14 +22,14 @@ const ProgressContainer = ({navigation, currentPage}) => {
         <Icon
           name="left"
           size={24}
-          color={theme === 'dark' ? '#ffffff' : '#000000'}
+          color={theme === 'dark' ? '#4b5563' : '#000000'}
         />
       </TouchableOpacity>
       <ProgressBar progress={currentPage / totalPages} />
       <FAIcon
         name="question-circle-o"
         size={24}
-        color={theme === 'dark' ? '#ffffff' : '#000000'}
+        color={theme === 'dark' ? '#4b5563' : '#000000'}
       />
     </View>
   );
