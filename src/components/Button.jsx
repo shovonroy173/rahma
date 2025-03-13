@@ -74,10 +74,10 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
         if (isDisabled) {
           console.log('handle submit Error', errors[id]);
         } else {
-          // if (path === 'BottomNavigator') {
-          //   handleSubmit(onSubmit)();
-          // }
-          handleSubmit(onSubmit)();
+          if (path === 'BottomNavigator') {
+            handleSubmit(onSubmit)();
+          }
+          // handleSubmit(onSubmit)();
 
           dispatch(nextPage());
           navigation.navigate(path);
@@ -97,19 +97,19 @@ const getStyles = theme =>
   StyleSheet.create({
     loginButton: {
       width: responsiveWidth(84),
-      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35', // Darker green for dark mode
+      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
       padding: responsiveHeight(1),
       borderRadius: 100,
     },
     loginButtonText: {
-      color: theme === 'dark' ? '#E5E5E5' : '#FFFFFF', // Light text for dark mode
+      color: theme === 'dark' ? '#E5E5E5' : '#FFFFFF',
       textAlign: 'center',
       fontSize: responsiveFontSize(2.5),
       fontFamily: 'Poppins-SemiBold',
     },
     disabledButton: {
       width: responsiveWidth(84),
-      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35', // Adjust disabled color
+      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
       padding: responsiveHeight(1),
       borderRadius: 100,
       opacity: 0.7,

@@ -5,16 +5,24 @@ import {
   // Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import CommonWarning from '../components/CommonWarning';
 import Button from '../components/Button';
 import ErrorImage from '../components/ErrorImage';
-import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const ConfirmFrontPhotoScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
+
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
@@ -49,52 +57,54 @@ const ConfirmFrontPhotoScreen = ({navigation}) => {
   );
 };
 
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: responsiveHeight(4),
-
-  },
-  mainContainer: {
-    display: 'flex',
-    gap: responsiveHeight(2),
-    paddingHorizontal: responsiveHeight(1),
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: responsiveFontSize(3),
-    fontWeight: 600,
-    paddingHorizontal: responsiveWidth(2),
-  },
-  info: {
-    fontSize: responsiveFontSize(1.8),
-    textAlign: 'center',
-    fontWeight: 600,
-    color: '#7B7777',
-    paddingHorizontal: responsiveHeight(3),
-  },
-  btnContainer: {
-    display: 'flex',
-    gap: responsiveHeight(2),
-  },
-  loginButton: {
-    width: responsiveWidth(84),
-    padding: responsiveHeight(1),
-    borderRadius: 100,
-    borderWidth: 2,
-    borderColor: '#379A35',
-  },
-  loginButtonText: {
-    color: '#379A35',
-    textAlign: 'center',
-    fontSize: responsiveFontSize(2.5),
-    fontWeight: 600,
-    fontFamily: 'Poppins-SemiBold',
-  },
-});
+      padding: responsiveHeight(4),
+    },
+    mainContainer: {
+      display: 'flex',
+      gap: responsiveHeight(2),
+      paddingHorizontal: responsiveHeight(1),
+      alignItems: 'center',
+    },
+    title: {
+      fontSize: responsiveFontSize(3),
+      fontWeight: 600,
+      paddingHorizontal: responsiveWidth(2),
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    info: {
+      fontSize: responsiveFontSize(1.8),
+      textAlign: 'center',
+      fontWeight: 600,
+      color: theme === 'dark' ? '#B2AEAE' : '#7B7777',
+      paddingHorizontal: responsiveHeight(3),
+    },
+    btnContainer: {
+      display: 'flex',
+      gap: responsiveHeight(2),
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    loginButton: {
+      width: responsiveWidth(84),
+      padding: responsiveHeight(1),
+      borderRadius: 100,
+      borderWidth: 2,
+      borderColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
+    },
+    loginButtonText: {
+      color: theme === 'dark' ? '#1A3D1A' : '#379A35',
+      textAlign: 'center',
+      fontSize: responsiveFontSize(2.5),
+      fontWeight: 600,
+      fontFamily: 'Poppins-SemiBold',
+    },
+  });
 
 export default ConfirmFrontPhotoScreen;

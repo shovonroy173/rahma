@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-native/no-inline-styles */
 import {View, Image} from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -10,15 +10,18 @@ import ExploreScreen from './ExploreScreen';
 import MessagesScreen from './MessagesScreen';
 import ProfileScreen from './ProfileScreen';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
+import { ThemeContext } from '../context/DarkThemeContext';
 
-const BottomNavigatorScreen = () => {
+const  BottomNavigatorScreen = () => {
   const Tab = createBottomTabNavigator();
+  const {theme} = useContext(ThemeContext);
+
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#47A146',
+          backgroundColor: theme === 'dark' ? '#1A3D1A' : '#47A146',
           paddingTop: 15,
           paddingHorizontal: 20,
           height: responsiveHeight(10),
@@ -42,6 +45,8 @@ const BottomNavigatorScreen = () => {
                 <MaterialCommunityIcons
                 name="ring"
                 size={30}
+                color={theme === 'dark' ? '#ffffff' : '#00000'}
+
               />
               ) : (
                 <MaterialCommunityIcons
@@ -66,6 +71,7 @@ const BottomNavigatorScreen = () => {
                 <MaterialCommunityIcons
                   name="heart-multiple-outline"
                   size={30}
+                  color={theme === 'dark' ? '#ffffff' : '#00000'}
                 />
               ) : (
                 <MaterialCommunityIcons
@@ -98,7 +104,7 @@ const BottomNavigatorScreen = () => {
             </View>
           ),
         }}
-      />
+        />
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}

@@ -32,7 +32,7 @@ import {ThemeProvider} from './src/context/DarkThemeContext';
 
 function App() {
   const Stack = createNativeStackNavigator();
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [initialState, setInitialState] = useState(null);
 
   useEffect(() => {
@@ -45,8 +45,8 @@ function App() {
       } catch (error) {
         console.error('Failed to load navigation state:', error);
       } finally {
-        // setIsLoading(false);
-        console.log('out of loop');
+        setIsLoading(false);
+        // console.log('out of loop');
       }
     };
     loadNavigationState();
@@ -61,24 +61,21 @@ function App() {
   });
 
   // Wait for AsyncStorage to load before rendering navigation
-  // if (isLoading) {
-  //   return null; // or a loading spinner if needed
-  // }
+  if (isLoading) {
+    return null; // or a loading spinner if needed
+  }
 
   return (
     <FormProvider {...methods}>
-      <ThemeProvider>
-        <NavigationContainer
-          initialState={initialState}
-          onStateChange={async state => {
-            await AsyncStorage.setItem(
-              'navigationState',
-              JSON.stringify(state),
-            );
-          }}
-          style={styles.container}>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
+      <NavigationContainer
+        initialState={initialState}
+        onStateChange={async state => {
+          await AsyncStorage.setItem('navigationState', JSON.stringify(state));
+        }}
+        style={styles.container}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <ThemeProvider>
               <Stack.Navigator screenOptions={{headerShown: false}}>
                 {screens.map(item => (
                   <Stack.Screen
@@ -88,10 +85,10 @@ function App() {
                   />
                 ))}
               </Stack.Navigator>
-            </PersistGate>
-          </Provider>
-        </NavigationContainer>
-      </ThemeProvider>
+            </ThemeProvider>
+          </PersistGate>
+        </Provider>
+      </NavigationContainer>
     </FormProvider>
   );
 }

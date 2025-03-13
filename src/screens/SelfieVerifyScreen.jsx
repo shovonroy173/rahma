@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   // Dimensions,
 } from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -16,15 +16,19 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const SelfieVerifyScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
       <ProgressContainer currentPage={currentPage} navigation={navigation} />
       <Image
-        source={require('../../assets/images/user.png')}
+        source={require('../../assets/images/user.webp')}
         style={styles.image}
       />
       <View>
@@ -87,78 +91,83 @@ const SelfieVerifyScreen = ({navigation}) => {
 
 // const {width} = Dimensions.get('window');
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: 30,
-  },
-  image: {
-    width: responsiveWidth(30),
-    height: responsiveHeight(20),
-    borderRadius: 20,
-  },
-  titleText: {
-    fontSize: responsiveFontSize(3),
-     fontFamily: 'Poppins-SemiBold',
-  },
-  titleText2: {
-    fontSize: responsiveFontSize(1.8),
-     fontFamily: 'Poppins-SemiBold',
-    textAlign: 'center',
-  },
-  subText: {
-    fontSize: responsiveFontSize(1.4),
-     fontFamily: 'Poppins-Regular',
-    // textAlign: 'center',
-    color: '#313030',
-  },
-  rule: {
-    fontSize: responsiveFontSize(2),
-     fontFamily: 'Poppins-SemiBold',
-    // textAlign: 'center',
-    color: '#313030',
-  },
-  rule2: {
-    fontSize: responsiveFontSize(1.4),
-    fontFamily: 'Poppins-Regular',
-  },
-  ruleBox: {
-    display: 'flex',
-    gap: responsiveHeight(2),
-    paddingHorizontal: responsiveWidth(2),
-  },
-  ruleContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    // justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: responsiveWidth(10),
-    borderRadius: 20,
-    paddingVertical: responsiveWidth(2),
-    paddingHorizontal: responsiveWidth(5),
-    backgroundColor: '#F3F2F2',
-  },
-  loginButton: {
-    width: responsiveWidth(85),
-    padding: responsiveWidth(2),
-    borderRadius: 100,
-    borderWidth: 2,
-    borderColor: '#379A35',
-  },
-  loginButtonText: {
-    color: '#379A35',
-    textAlign: 'center',
-    fontSize: responsiveFontSize(2.4),
-     fontFamily: 'Poppins-SemiBold',
-    // fontFamily: 'Poppins-SemiBold',
-  },
-  subRule: {
-    fontSize: 10,
-    fontFamily: 'Poppins-Regular',
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      padding: 30,
+    },
+    image: {
+      width: responsiveWidth(30),
+      height: responsiveHeight(20),
+      borderRadius: 20,
+    },
+    titleText: {
+      fontSize: responsiveFontSize(3),
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    titleText2: {
+      fontSize: responsiveFontSize(1.8),
+      fontFamily: 'Poppins-SemiBold',
+      textAlign: 'center',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    subText: {
+      fontSize: responsiveFontSize(1.4),
+      fontFamily: 'Poppins-Regular',
+      // textAlign: 'center',
+      color: theme === 'dark' ? '#FFFFFF' : '#313030',
+    },
+    rule: {
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-SemiBold',
+      // textAlign: 'center',
+      color: theme === 'dark' ? '#FFFFFF' : '#313030',
+    },
+    rule2: {
+      fontSize: responsiveFontSize(1.4),
+      fontFamily: 'Poppins-Regular',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    ruleBox: {
+      display: 'flex',
+      gap: responsiveHeight(2),
+      paddingHorizontal: responsiveWidth(2),
+    },
+    ruleContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      // justifyContent: 'space-between',
+      alignItems: 'center',
+      gap: responsiveWidth(10),
+      borderRadius: 20,
+      paddingVertical: responsiveWidth(2),
+      paddingHorizontal: responsiveWidth(5),
+      backgroundColor: theme === 'dark' ? '#1C1C1C' : '#F3F2F2',
+    },
+    loginButton: {
+      width: responsiveWidth(85),
+      padding: responsiveWidth(2),
+      borderRadius: 100,
+      borderWidth: 2,
+      borderColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
+    },
+    loginButtonText: {
+      color: theme === 'dark' ? 'gray' : '#379A35',
+      textAlign: 'center',
+      fontSize: responsiveFontSize(2.4),
+      fontFamily: 'Poppins-SemiBold',
+      // fontFamily: 'Poppins-SemiBold',
+    },
+    subRule: {
+      fontSize: 10,
+      fontFamily: 'Poppins-Regular',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+  });
 
 export default SelfieVerifyScreen;

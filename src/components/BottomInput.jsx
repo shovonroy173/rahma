@@ -1,11 +1,12 @@
 import {StyleSheet, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {TextInput} from 'react-native';
 import {Text} from 'react-native';
 import {Controller, useFormContext} from 'react-hook-form';
 import {validationRules} from '../utils/validation';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateFormData} from '../redux/slices/formSlice';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const BottomInput = (
   // {Controller, control, errors, watch, name, setValue}
@@ -25,7 +26,8 @@ const BottomInput = (
       console.log('no cache data');
     }
   }, [savedValue, setValue, name]);
-
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
   return (
     <View>
       <Controller
@@ -40,13 +42,11 @@ const BottomInput = (
                 onChange(text);
                 dispatch(updateFormData({[name]: text}));
               }
-              // text => {
-              // setValue(name, text);
             }
-            // }
             value={value}
-            style={styles.inputBox}
+            style={[theme === 'dark' ? styles.lightInputBox : styles.inputBox]}
             placeholder={placeholder}
+            placeholderTextColor={styles.placeholderColor}
           />
         )}
       />
@@ -57,20 +57,32 @@ const BottomInput = (
   );
 };
 
-const styles = StyleSheet.create({
-  inputBox: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#A19B9B',
-    paddingHorizontal: 30,
-    fontSize: 16,
-    fontFamily: 'Poppins-Medium',
-  },
-  errorText: {
-    color: 'red',
-    fontSize: 12,
-    fontFamily: 'Poppins-Medium',
-    paddingVertical: 5,
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    inputBox: {
+      borderBottomWidth: 1,
+      borderBottomColor: '#A19B9B',
+      paddingHorizontal: 30,
+      fontSize: 16,
+      fontFamily: 'Poppins-Medium',
+      color: theme === 'dark' ? '#FFFFFF' : '#000000',
+    },
+    lightInputBox: {
+      borderBottomWidth: 0,
+      borderBottomColor: theme === 'dark' ? 'transparent' : '#A19B9B',
+      backgroundColor: 'transparent',
+      paddingHorizontal: 30,
+      fontSize: 16,
+      fontFamily: 'Poppins-Medium',
+      color: theme === 'dark' ? '#FFFFFF' : '#000000',
+    },
+    errorText: {
+      color: 'red',
+      fontSize: 12,
+      fontFamily: 'Poppins-Medium',
+      paddingVertical: 5,
+    },
+    placeholderColor: theme === 'dark' ? '#888' : '#555',
+  });
 
 export default BottomInput;

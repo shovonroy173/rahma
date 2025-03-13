@@ -7,7 +7,7 @@ const SentComplementsScreen = () => {
       title="Sent Compliment"
       subtitle="Compliments you’ve Sent to Other Members are Shown Here. Accepted Compliments will
 be Moved to your Matches."
-      img={require('../../assets/images/complements.png')}
+      img={require('../../assets/images/complements.webp')}
       single="single"
     />
   );

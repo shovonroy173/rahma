@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -16,7 +16,7 @@ import SubText from '../components/SubText';
 import MainText from '../components/MainText';
 import BottomInput from '../components/BottomInput';
 import {responsiveHeight} from 'react-native-responsive-dimensions';
-import { ThemeContext } from '../context/DarkThemeContext';
+import {ThemeContext} from '../context/DarkThemeContext';
 // import { useGetTodoQuery } from '../redux/endpoints/getTodos';
 
 const LoginScreen = ({navigation}) => {
@@ -78,7 +78,7 @@ const LoginScreen = ({navigation}) => {
 
 // const {width} = Dimensions.get('window');
 
-const getStyles = (theme) =>
+const getStyles = theme =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -97,7 +97,6 @@ const getStyles = (theme) =>
     },
     buttonContainer: {
       paddingBottom: responsiveHeight(2),
-      backgroundColor: theme === 'dark' ? '#222222' : 'white',
     },
     text: {
       color: theme === 'dark' ? '#ffffff' : '#000000',

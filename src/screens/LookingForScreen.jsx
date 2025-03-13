@@ -1,6 +1,6 @@
 /* eslint-disable dot-notation */
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import {lookingFor} from '../../assets/data/data';
@@ -9,6 +9,7 @@ import Button from '../components/Button';
 import Slider from '@react-native-community/slider';
 import {Controller, useFormContext} from 'react-hook-form';
 import {updateFormData} from '../redux/slices/formSlice';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const LookingForScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -23,6 +24,10 @@ const LookingForScreen = ({navigation}) => {
       console.log('no cache data');
     }
   }, [savedValue, setValue]);
+
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
+
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
@@ -76,35 +81,38 @@ const LookingForScreen = ({navigation}) => {
 
 const {width} = Dimensions.get('window');
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: 30,
-  },
-  topContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    // padding: 30,
-  },
-  slider: {
-    width: width - 60,
-    height: 30,
-  },
-  mainContainer: {
-    gap: 20,
-    // paddingHorizontal: 30,
-  },
-  title: {
-    fontSize: 30,
-    marginBottom: 10,
-    fontWeight: 600,
-    textAlign: 'center',
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#ffffff' : '#000000',
+
+      padding: 30,
+    },
+    topContainer: {
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      // padding: 30,
+    },
+    slider: {
+      width: width - 60,
+      height: 30,
+    },
+    mainContainer: {
+      gap: 20,
+      // paddingHorizontal: 30,
+    },
+    title: {
+      fontSize: 30,
+      marginBottom: 10,
+      fontWeight: 600,
+      textAlign: 'center',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+  });
 
 export default LookingForScreen;

@@ -1,8 +1,12 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
 import {useSelector} from 'react-redux';
-import {responsiveFontSize} from 'react-native-responsive-dimensions';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+} from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const Option2 = ({item, name}) => {
   const {control, watch, setValue} = useFormContext();
@@ -15,6 +19,9 @@ const Option2 = ({item, name}) => {
       console.log('no cache data');
     }
   }, [savedValue, setValue, name]);
+
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <Controller
@@ -45,36 +52,35 @@ const Option2 = ({item, name}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  optionContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#F3F2F2',
-    borderRadius: 10,
-    paddingHorizontal: 30,
-    paddingVertical: 10,
-    color: '#000000',
+const getStyles = theme =>
+  StyleSheet.create({
+    optionContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#1C1C1C' : '#F3F2F2',
+      borderRadius: 10,
+      paddingHorizontal: 30,
+      paddingVertical: 10,
+    },
+    selectedOption: {
+      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
+      padding: responsiveHeight(1),
+    },
+    optionText: {
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-Medium',
+      opacity: theme === 'dark' ? 0.5 : 0.6,
+      // color: '#000000',
+    },
+    optionTextSelected: {
+      fontSize: responsiveFontSize(2),
+      color: theme === 'dark' ? '#1C1C1C' : '#ffffff',
 
-  },
-  selectedOption: {
-    backgroundColor: '#379A35',
-
-  },
-  optionText: {
-    fontSize: responsiveFontSize(2),
-    fontFamily: 'Poppins-Medium',
-    opacity: 0.6,
-
-  },
-  optionTextSelected: {
-    fontSize: responsiveFontSize(2),
-    color: '#ffffff',
-    fontFamily: 'Poppins-SemiBold',
-    opacity: 1,
-
-  },
-});
+      fontFamily: 'Poppins-SemiBold',
+      opacity: 1,
+    },
+  });
 
 export default Option2;

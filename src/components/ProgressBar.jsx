@@ -1,23 +1,27 @@
-import {useEffect, useRef} from 'react';
+import {useContext, useEffect, useRef} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const ProgressBar = () => {
-  const currentPage = useSelector((state) => state.page.currentPage);
-  const totalPages = useSelector((state) => state.page.totalPages);
+  const currentPage = useSelector(state => state.page.currentPage);
+  const totalPages = useSelector(state => state.page.totalPages);
   const progress = (currentPage / totalPages) * 100;
   const animatedWidth = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.timing(animatedWidth, {
-      toValue: progress, // Dynamic progress
-      duration: 500, // Animation speed
-      useNativeDriver: false, // Must be false for width
+      toValue: progress,
+      duration: 500,
+      useNativeDriver: false,
     }).start();
-  }, [progress, animatedWidth]); // Re-run effect if progress changes
+  }, [progress, animatedWidth]);
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
+
   return (
     <View style={styles.progressBarContainer}>
-        <Animated.View
+      <Animated.View
         style={[
           styles.progressBar,
           {
@@ -34,17 +38,18 @@ const ProgressBar = () => {
 
 export default ProgressBar;
 
-const styles = StyleSheet.create({
-  progressBarContainer: {
-    width: '80%',
-    height: 4,
-    backgroundColor: '#A8C6A8',
-    borderRadius: 10,
-    overflow: 'hidden',
-  },
-  progressBar: {
-    height: '100%',
-    backgroundColor: '#47A146',
-    borderRadius: 10,
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    progressBarContainer: {
+      width: '80%',
+      height: 4,
+      backgroundColor: theme === 'dark' ? '#fffffff' : '#A8C6A8',
+      borderRadius: 10,
+      overflow: 'hidden',
+    },
+    progressBar: {
+      height: '100%',
+      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
+      borderRadius: 10,
+    },
+  });

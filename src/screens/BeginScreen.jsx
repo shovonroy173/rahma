@@ -38,7 +38,7 @@ const BeginScreen = ({navigation}) => {
   const renderItem = ({item}) => (
     <View style={styles.slide}>
       <ImageBackground
-        source={require('../../assets/images/begin.png')}
+        source={require('../../assets/images/begin.webp')}
         style={styles.backgroundImage}>
         <View style={styles.content}>
           <View style={styles.iconContainer}>
@@ -53,7 +53,7 @@ const BeginScreen = ({navigation}) => {
           </View>
           <View>
             <View style={styles.slideContent}>
-              <Image source={require('../../assets/images/bd.png')} />
+              <Image source={require('../../assets/images/bd.webp')} />
               <Text style={styles.slideText}>{item.text}</Text>
             </View>
             <View style={styles.dotsContainer}>

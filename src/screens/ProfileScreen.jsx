@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   View,
   Text,
@@ -18,34 +19,8 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import {features} from '../../assets/data/data';
 const {width} = Dimensions.get('window');
-const data = [
-  {
-    id: '1',
-    title: 'Welcome to Our App',
-    desc: 'Discover new features and enjoy a seamless experience.',
-  },
-  {
-    id: '2',
-    title: 'Stay Connected',
-    desc: 'Keep in touch with your friends and never miss an update.',
-  },
-  {
-    id: '3',
-    title: 'Smart Notifications',
-    desc: 'Receive important alerts and updates in real time.',
-  },
-  {
-    id: '4',
-    title: 'Explore the World',
-    desc: 'Find new places, events, and experiences around you.',
-  },
-  {
-    id: '5',
-    title: 'Get Started Now',
-    desc: 'Join millions of users and start your journey today!',
-  },
-];
 
 const ProfileScreen = ({navigation}) => {
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -57,7 +32,9 @@ const ProfileScreen = ({navigation}) => {
     intervalRef.current = setInterval(() => {
       if (flatListRef.current) {
         currentIndex.current =
-          currentIndex.current < data.length - 1 ? currentIndex.current + 1 : 0;
+          currentIndex.current < features.length - 1
+            ? currentIndex.current + 1
+            : 0;
         flatListRef.current.scrollToOffset({
           offset: currentIndex.current * width,
           animated: true,
@@ -72,7 +49,7 @@ const ProfileScreen = ({navigation}) => {
     <View style={styles.slide}>
       {/* Fixed Dots Container */}
       <View style={styles.fixedDotsContainer}>
-        {data.map((_, index) => {
+        {features.map((_, index) => {
           const inputRange = [
             (index - 1) * width,
             index * width,
@@ -87,7 +64,7 @@ const ProfileScreen = ({navigation}) => {
 
           const backgroundColor = scrollX.interpolate({
             inputRange,
-            outputRange: ['#CCCCCC', '#ECA76E', '#CCCCCC'],
+            outputRange: ['#CCCCCC', '#000000', '#CCCCCC'],
             extrapolate: 'clamp',
           });
 
@@ -111,7 +88,10 @@ const ProfileScreen = ({navigation}) => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.topContainer}>
-        <Image source={require('../../assets/images/filter.png')} />
+        <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
+          <Image source={require('../../assets/images/filter.png')} />
+        </TouchableOpacity>
+
         <View style={styles.notificationContainer}>
           <View style={styles.beseen}>
             <Ionicons name="rocket-sharp" size={24} color={'white'} />
@@ -124,7 +104,7 @@ const ProfileScreen = ({navigation}) => {
         <View style={styles.profileInfo}>
           <View style={styles.imgContainer}>
             <Image
-              source={require('../../assets/images/profile.png')}
+              source={require('../../assets/images/profile.webp')}
               style={styles.image}
             />
           </View>
@@ -200,11 +180,10 @@ const ProfileScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.carouselContainer}>
-
           <View style={styles.carouselContent}>
             <FlatList
               ref={flatListRef}
-              data={data}
+              data={features}
               renderItem={renderItem}
               keyExtractor={item => item.id}
               horizontal
@@ -223,10 +202,9 @@ const ProfileScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
 
-
           <View style={styles.imageContainer}>
             <Image
-              source={require('../../assets/images/profile2.png')}
+              source={require('../../assets/images/profile2.webp')}
               style={styles.profileImage}
             />
           </View>
@@ -436,13 +414,13 @@ const styles = StyleSheet.create({
   },
   dot: {
     height: 8,
-    width:20,
+    width: 20,
     borderRadius: 4,
   },
   slideContent: {
     width: '50%',
     marginTop: 20,
-gap:10
+    gap: 10,
   },
   title: {
     fontSize: 18,

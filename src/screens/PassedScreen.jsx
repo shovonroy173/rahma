@@ -6,7 +6,7 @@ const PassedScreen = () => {
     <ExploreComponent
       title="Favourited"
       subtitle="People Who you Passed will Appear Here."
-      img={require('../../assets/images/passed.png')}
+      img={require('../../assets/images/passed.webp')}
     />
   );
 };

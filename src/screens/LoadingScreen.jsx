@@ -1,11 +1,15 @@
 import {StyleSheet, View} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import {Skeleton} from '@rneui/themed';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
+import {ThemeContext} from '../context/DarkThemeContext';
 const LoadingScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
+
   return (
     <View style={styles.container}>
       {/* <Text>Loading Screen</Text> */}
@@ -32,18 +36,19 @@ const LoadingScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    // alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: 30,
-  },
-  mainContainer: {
-    display: 'flex',
-    gap: 20,
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      // alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      padding: 30,
+    },
+    mainContainer: {
+      display: 'flex',
+      gap: 20,
+    },
+  });
 
 export default LoadingScreen;

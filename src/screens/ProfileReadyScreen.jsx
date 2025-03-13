@@ -1,13 +1,19 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import {Image} from 'react-native';
 import Button from '../components/Button';
-import {responsiveFontSize, responsiveWidth} from 'react-native-responsive-dimensions';
+import {
+  responsiveFontSize,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const ProfileReadyScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
@@ -15,7 +21,7 @@ const ProfileReadyScreen = ({navigation}) => {
         <ProgressContainer navigation={navigation} currentPage={currentPage} />
         <View style={styles.mainContainer}>
           <Image
-            source={require('../../assets/images/congratulation.png')}
+            source={require('../../assets/images/congratulation.webp')}
             style={styles.image}
           />
           <View style={styles.textContainer}>
@@ -33,41 +39,43 @@ const ProfileReadyScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: 30,
-  },
-  mainContainer: {
-    display: 'flex',
-    gap: 20,
-    alignItems: 'center',
-  },
-  textContainer: {
-    display: 'flex',
-    gap: 20,
-  },
-  title1: {
-    fontSize: responsiveFontSize(3.5),
-    textAlign: 'center',
-    fontFamily: 'Poppins-SemiBold',
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
 
-  },
-  title2: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#313030',
-    fontFamily: 'Poppins-Medium',
-  },
-  image: {
-    width: responsiveWidth(55),
-    height: responsiveWidth(55),
-    objectFit: 'cover',
-    alignItems: 'center',
-  },
-});
+      padding: 30,
+    },
+    mainContainer: {
+      display: 'flex',
+      gap: 20,
+      alignItems: 'center',
+    },
+    textContainer: {
+      display: 'flex',
+      gap: 20,
+    },
+    title1: {
+      fontSize: responsiveFontSize(3.5),
+      textAlign: 'center',
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    title2: {
+      fontSize: 16,
+      textAlign: 'center',
+      color: theme === 'dark' ? '#FFFFFF' : '#313030',
+      fontFamily: 'Poppins-Medium',
+    },
+    image: {
+      width: responsiveWidth(55),
+      height: responsiveWidth(55),
+      objectFit: 'cover',
+      alignItems: 'center',
+    },
+  });
 
 export default ProfileReadyScreen;

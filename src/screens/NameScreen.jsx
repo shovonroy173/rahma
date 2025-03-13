@@ -42,7 +42,7 @@ const NameScreen = ({navigation}) => {
                 navigation={navigation}
               />
               <Image
-                source={require('../../assets/images/male.png')}
+                source={require('../../assets/images/male.webp')}
                 style={styles.image}
               />
               {/* <Text style={styles.titleText}>Sadit</Text> */}

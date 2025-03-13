@@ -301,7 +301,6 @@ const styles = StyleSheet.create({
     fontSize: responsiveFontSize(2),
     // fontWeight: 600,
     paddingHorizontal: responsiveWidth(2),
-
   },
   shareContainer: {
     flexDirection: 'row',

@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useContext, useRef} from 'react';
 import {
   View,
   Text,
@@ -10,21 +10,10 @@ import {
 import Drawer from 'react-native-drawer';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
-import Button from '../components/Button';
 import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
+import { ThemeContext } from '../context/DarkThemeContext';
+import DrawerContent from '../components/DrawerContent';
 
-const DrawerContent = ({closeDrawer, navigation}) => (
-  <View style={[styles.drawerContainer, styles.shadowProp]}>
-    <View style={styles.drawerTextContainer}>
-      <Text style={styles.drawerText1}>Sorry!</Text>
-      <Text style={styles.drawerText2}>
-        We are Unable to Continue your Private Information has been Deleted.
-      </Text>
-    </View>
-
-    <Button title="Got It" navigation={navigation} path="Warnings" />
-  </View>
-);
 
 const VerficationCancelScreen = ({navigation}) => {
   const drawerRef = useRef(null);
@@ -37,13 +26,15 @@ const VerficationCancelScreen = ({navigation}) => {
     drawerRef.current.close();
   };
   const currentPage = useSelector(state => state.page.currentPage);
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <Drawer
       ref={drawerRef}
       type="overlay"
       content={
-        <DrawerContent closeDrawer={closeDrawer} navigation={navigation} />
+        <DrawerContent closeDrawer={closeDrawer} navigation={navigation} styles={styles} />
       }
       tapToClose={true}
       openDrawerOffset={0.4}
@@ -59,7 +50,7 @@ const VerficationCancelScreen = ({navigation}) => {
             navigation={navigation}
           />
           <Image
-            source={require('../../assets/images/user.png')}
+            source={require('../../assets/images/user.webp')}
             style={styles.image}
           />
 

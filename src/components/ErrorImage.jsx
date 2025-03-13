@@ -5,7 +5,7 @@ import {responsiveWidth} from 'react-native-responsive-dimensions';
 const ErrorImage = () => {
   return (
     <View style={styles.imgContainer}>
-      <Image source={require('../../assets/images/readable.png')} />
+      <Image source={require('../../assets/images/readable.webp')} />
     </View>
   );
 };

@@ -6,7 +6,7 @@ const LikedScreen = () => {
     <ExploreComponent
       title="Liked"
       subtitle="People Who you Passed will Appear Here."
-      img={require('../../assets/images/liked.png')}
+      img={require('../../assets/images/liked.webp')}
     />
   );
 };

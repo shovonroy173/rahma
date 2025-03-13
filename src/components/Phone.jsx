@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
+import { StyleSheet, Text, View} from 'react-native';
+import React, { useEffect} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
 import PhoneInput from 'react-native-phone-number-input';
 import {validationRules} from '../utils/validation';
@@ -22,7 +22,6 @@ const Phone = ({name, phoneInput}) => {
       console.log('no cache data');
     }
   }, [savedValue, setValue, name]);
-
   return (
     <View>
       <Controller
@@ -49,6 +48,7 @@ const Phone = ({name, phoneInput}) => {
             flagButtonStyle={styles.flagButton}
             // renderDropdownImage={() => null}
             autoFocus
+
           />
         )}
       />

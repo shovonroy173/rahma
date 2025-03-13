@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import Selection from '../components/Selection';
 import Button from '../components/Button';
 import {knowStatus, marriedStatus} from '../../assets/data/data';
@@ -10,10 +10,12 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const MaritalIntensionScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
-
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -56,32 +58,36 @@ const MaritalIntensionScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  mainContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: responsiveWidth(2),
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: responsiveHeight(4),
-  },
-  contentContainer: {
-    gap: responsiveWidth(3),
-  },
-  title: {
-    fontSize: responsiveFontSize(3.5),
-    textAlign: 'center',
-    fontFamily: 'Poppins-SemiBold',
-  },
-  text: {
-    fontSize: responsiveFontSize(2),
-    fontFamily: 'Poppins-Bold',
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    mainContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: responsiveWidth(2),
+    },
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      padding: responsiveHeight(4),
+    },
+    contentContainer: {
+      gap: responsiveWidth(3),
+    },
+    title: {
+      fontSize: responsiveFontSize(3.5),
+      textAlign: 'center',
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#E5E5E5' : '#000000',
+    },
+    text: {
+      color: theme === 'dark' ? '#E5E5E5' : '#000000',
+
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-Bold',
+    },
+  });
 
 export default MaritalIntensionScreen;

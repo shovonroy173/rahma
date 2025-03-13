@@ -10,7 +10,7 @@ import {
   Platform,
   PermissionsAndroid,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Image} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -25,6 +25,7 @@ import About from '../components/About';
 import {users} from '../../assets/data/data';
 import Geolocation from 'react-native-geolocation-service';
 import GlossyButton from '../components/GlossyButton';
+import {ThemeContext} from '../context/DarkThemeContext';
 const HomeScreen = ({navigation}) => {
   // const {data, loading, error} = useGetUserQuery('email@valid.com');
   // console.log(data, loading, error);
@@ -91,6 +92,9 @@ const HomeScreen = ({navigation}) => {
     );
   };
 
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
+
   return (
     <View style={{flex: 1}}>
       {location ? (
@@ -136,14 +140,19 @@ const HomeScreen = ({navigation}) => {
                       <Ionicons
                         name="rocket-sharp"
                         size={24}
-                        color={'#379A35'}
+                        color={theme === 'dark' ? '#1A3D1A' : '#379A35'}
                       />
-                      <Text>Be Seen First</Text>
+                      <Text
+                        style={{
+                          color: theme === 'dark' ? '#7A7676' : '#ffffff',
+                        }}>
+                        Be Seen First
+                      </Text>
                     </View>
                     <Ionicons
                       name="notifications-outline"
                       size={24}
-                      color={'white'}
+                      color={theme === 'dark' ? '#7A7676' : '#ffffff'}
                     />
                   </View>
                 </View>
@@ -208,10 +217,12 @@ const HomeScreen = ({navigation}) => {
             alignItems: 'center',
             padding: responsiveHeight(4),
             gap: responsiveHeight(4),
+            backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
           }}>
-          <Image
-            source={require('../../assets/images/gps.png')}
-            style={{width: 200, height: 200, objectFit: 'cover'}}
+          <Entypo
+            name="location"
+            size={200}
+            color={theme === 'dark' ? '#7A7676' : 'black'}
           />
           <View
             style={{
@@ -222,6 +233,7 @@ const HomeScreen = ({navigation}) => {
                 fontSize: responsiveFontSize(4.5),
                 textAlign: 'center',
                 fontWeight: 600,
+                color: theme === 'dark' ? '#7A7676' : '#000000',
               }}>
               Ready to meet your future partner?
             </Text>
@@ -229,6 +241,7 @@ const HomeScreen = ({navigation}) => {
               style={{
                 fontSize: responsiveFontSize(2.5),
                 textAlign: 'center',
+                color: theme === 'dark' ? '#7A7676' : '#000000',
               }}>
               Enable GPS on your device to start seeing Muslims singles nearby.
             </Text>
@@ -249,181 +262,188 @@ const HomeScreen = ({navigation}) => {
 
 const {height} = Dimensions.get('window');
 
-const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    justifyContent: 'center',
-    width: '100%',
-    height: height * 0.9,
-    objectFit: 'cover',
-  },
-  loginButton: {
-    width: responsiveWidth(85),
-    backgroundColor: '#379A35',
-    padding: responsiveHeight(1.5),
-    borderRadius: 100,
-  },
-  loginButtonText: {
-    color: '#FFFFFF',
-    textAlign: 'center',
-    fontSize: responsiveFontSize(2),
-    fontWeight: 600,
-    fontFamily: 'Poppins-SemiBold',
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 30,
-    height: height * 0.9,
-  },
-  topContainer: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  mainIconContainer: {
-    position: 'absolute', // Keep it fixed
-    top: responsiveHeight(78), // Adjust as needed
-    left: 0,
-    right: 0,
-    zIndex: 10, // Ensure it stays above the ScrollView
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-  },
-  notificationContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: 10,
-  },
-  beseen: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 10,
-    gap: 10,
-  },
-  info: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    gap: 10,
-    borderRadius: 15,
-    backgroundColor: '#313030',
-  },
-  infotext: {
-    color: 'white',
-  },
-  nameContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 20,
-  },
-  bottomContainer: {
-    width: '100%',
-    display: 'flex',
-    gap: 10,
-    // flexDirection: 'row',
-    justifyContent: 'space-between',
-    // alignItems: 'center',
-    paddingBottom: 70,
-  },
-  name: {
-    color: '#ffffff',
-    fontSize: 30,
-    fontWeight: 600,
-  },
-  iconContainer: {
-    backgroundColor: '#ffffff',
-    borderRadius: 100,
-    padding: 2,
-  },
+const getStyles = theme =>
+  StyleSheet.create({
+    backgroundImage: {
+      flex: 1,
+      justifyContent: 'center',
+      width: '100%',
+      height: height * 0.9,
+      objectFit: 'cover',
+    },
+    loginButton: {
+      width: responsiveWidth(85),
+      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
+      padding: responsiveHeight(1.5),
+      borderRadius: 100,
+    },
+    loginButtonText: {
+      color: theme === 'dark' ? '#7A7676' : '#ffffff',
 
-  iconContainerBg: {
-    backgroundColor: '#1d1c1c',
-    borderRadius: 100,
-    padding: 10,
-  },
-  // iconContainerBgCheck: {
-  //   backgroundColor: '#e70a3d',
-  //   borderRadius: 100,
-  //   padding: 10,
-  // },
-  iconContainerBgCheck: {
-    backgroundColor: '#e70a3d', // Button color
-    borderRadius: 100,
-    padding: 10,
-    position: 'relative', // To allow overlay
-    overflow: 'hidden', // Ensures the overlay doesn't go beyond the border-radius
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5, // For Android shadow
-  },
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)', // Light gloss effect
-    borderRadius: 100, // Same as button to fit within the border
-    zIndex: -1, // Ensures the icon stays above the overlay
-  },
+      textAlign: 'center',
+      fontSize: responsiveFontSize(2),
+      fontWeight: 600,
+      fontFamily: 'Poppins-SemiBold',
+    },
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: 30,
+      height: height * 0.9,
+    },
+    topContainer: {
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    mainIconContainer: {
+      position: 'absolute',
+      top: responsiveHeight(78),
+      left: 0,
+      right: 0,
+      zIndex: 10,
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: 20,
+    },
+    notificationContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      gap: 10,
+    },
+    beseen: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      borderRadius: 20,
+      padding: 10,
+      gap: 10,
+    },
+    info: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: 8,
+      paddingHorizontal: 16,
+      gap: 10,
+      borderRadius: 15,
+      backgroundColor: theme === 'dark' ? '#FFFFFF' : '#313030',
+    },
+    infotext: {
+      color: theme === 'dark' ? '#7A7676' : '#ffffff',
+    },
+    nameContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 20,
+    },
+    bottomContainer: {
+      width: '100%',
+      display: 'flex',
+      gap: 10,
+      // flexDirection: 'row',
+      justifyContent: 'space-between',
+      // alignItems: 'center',
+      paddingBottom: 70,
+    },
+    name: {
+      color: theme === 'dark' ? '#7A7676' : '#ffffff',
 
-  iconContainerBgStar: {
-    backgroundColor: '#e800d5',
-    borderRadius: 100,
-    padding: 10,
-  },
-  iconContainer2: {
-    backgroundColor: '#ffffff',
-    borderRadius: 100,
-    padding: 6,
-    // borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  descContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    // justifyContent: 'space-between',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    gap: 10,
-  },
-  address: {
-    fontSize: 18,
-    color: '#ffffff',
-  },
-  aboutContainer: {flex: 1, padding: 20, backgroundColor: 'white'},
-  aboutHeader: {fontSize: 22, fontWeight: 'bold', marginBottom: 10},
-  aboutText: {fontSize: 16, lineHeight: 22, marginBottom: 10},
-  featureContainer: {
-    backgroundColor: '#f3eded',
-    paddingVertical: responsiveWidth(1),
-    paddingHorizontal: responsiveWidth(4),
-    borderRadius: 20,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 5,
-    width: responsiveWidth(30),
-  },
-});
+      fontSize: 30,
+      fontWeight: 600,
+    },
+    iconContainer: {
+      backgroundColor: theme === 'dark' ? '#7A7676' : '#ffffff',
+      borderRadius: 100,
+      padding: 2,
+    },
+
+    iconContainerBg: {
+      backgroundColor: '#1d1c1c',
+      borderRadius: 100,
+      padding: 10,
+    },
+    // iconContainerBgCheck: {
+    //   backgroundColor: '#e70a3d',
+    //   borderRadius: 100,
+    //   padding: 10,
+    // },
+    iconContainerBgCheck: {
+      backgroundColor: '#e70a3d', // Button color
+      borderRadius: 100,
+      padding: 10,
+      position: 'relative', // To allow overlay
+      overflow: 'hidden', // Ensures the overlay doesn't go beyond the border-radius
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 4},
+      shadowOpacity: 0.2,
+      shadowRadius: 4,
+      elevation: 5, // For Android shadow
+    },
+    overlay: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(255, 255, 255, 0.3)', // Light gloss effect
+      borderRadius: 100, // Same as button to fit within the border
+      zIndex: -1, // Ensures the icon stays above the overlay
+    },
+
+    iconContainerBgStar: {
+      backgroundColor: '#e800d5',
+      borderRadius: 100,
+      padding: 10,
+    },
+    iconContainer2: {
+      backgroundColor: '#ffffff',
+      borderRadius: 100,
+      padding: 6,
+      // borderWidth: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    descContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      // justifyContent: 'space-between',
+      alignItems: 'center',
+      flexWrap: 'wrap',
+      gap: 10,
+    },
+    address: {
+      fontSize: 18,
+      color: theme === 'dark' ? '#7A7676' : '#ffffff',
+    },
+    aboutContainer: {
+      flex: 1,
+      padding: 20,
+      backgroundColor: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    aboutHeader: {fontSize: 22, fontWeight: 'bold', marginBottom: 10},
+    aboutText: {fontSize: 16, lineHeight: 22, marginBottom: 10},
+    featureContainer: {
+      backgroundColor: theme === 'dark' ? '#333333' : '#f3eded',
+      paddingVertical: responsiveWidth(1),
+      paddingHorizontal: responsiveWidth(4),
+      borderRadius: 20,
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 5,
+      width: responsiveWidth(30),
+    },
+  });
 
 export default HomeScreen;

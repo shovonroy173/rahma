@@ -10,7 +10,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useContext, useEffect} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
@@ -22,6 +22,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const GrownUpScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -37,6 +38,8 @@ const GrownUpScreen = ({navigation}) => {
       console.log('no cache data');
     }
   }, [savedValue, setValue]);
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <KeyboardAvoidingView
@@ -90,42 +93,47 @@ const GrownUpScreen = ({navigation}) => {
 
 const {width} = Dimensions.get('window');
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: responsiveHeight(4),
-  },
-  mainContainer: {
-    display: 'flex',
-    gap: responsiveWidth(2),
-    alignItems: 'center',
-  },
-  contentContainer: {
-    display: 'flex',
-    gap: responsiveWidth(2),
-    alignItems: 'center',
-  },
-  countryContainer: {
-    width: width,
-    height: responsiveHeight(55),
-    paddingHorizontal: 20,
-  },
-  titleText: {
-    fontSize: responsiveFontSize(3.5),
-     fontFamily: 'Poppins-SemiBold',
-    textAlign: 'center',
-  },
-  date: {
-    fontSize: responsiveFontSize(2),
-     fontFamily: 'Poppins-SemiBold',
-    textAlign: 'center',
-    paddingVertical: responsiveHeight(1),
-  },
-  buttonContainer: {
-    paddingBottom: responsiveWidth(2),
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+
+      padding: responsiveHeight(4),
+    },
+    mainContainer: {
+      display: 'flex',
+      gap: responsiveWidth(2),
+      alignItems: 'center',
+    },
+    contentContainer: {
+      display: 'flex',
+      gap: responsiveWidth(2),
+      alignItems: 'center',
+    },
+    countryContainer: {
+      width: width,
+      height: responsiveHeight(55),
+      paddingHorizontal: 20,
+    },
+    titleText: {
+      fontSize: responsiveFontSize(3.5),
+      fontFamily: 'Poppins-SemiBold',
+      textAlign: 'center',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    date: {
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-SemiBold',
+      textAlign: 'center',
+      paddingVertical: responsiveHeight(1),
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+    },
+    buttonContainer: {
+      paddingBottom: responsiveWidth(2),
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+    },
+  });
 export default GrownUpScreen;

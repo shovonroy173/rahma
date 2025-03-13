@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import {Controller, useFormContext} from 'react-hook-form';
 import {
@@ -8,6 +8,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {useSelector} from 'react-redux';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const Option = ({item, index, id}) => {
   const {control, watch, setValue} = useFormContext();
@@ -20,6 +21,9 @@ const Option = ({item, index, id}) => {
       console.log('no cache data');
     }
   }, [savedValue, setValue, id]);
+
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <Controller
@@ -58,7 +62,7 @@ const Option = ({item, index, id}) => {
           <Feather
             name="chevron-right"
             size={24}
-            color={watch(id)?.id === item.id ? '#ffffff' : '#000000'}
+            color={(watch(id)?.id === item.id && theme === 'dark') ? '#ffffff' : '#000000'}
           />
         </TouchableOpacity>
       )}
@@ -66,39 +70,47 @@ const Option = ({item, index, id}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  optionContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#DCD8D8',
-    borderRadius: 20,
-    paddingHorizontal: responsiveWidth(5),
-    paddingVertical: responsiveHeight(1),
-    color: '#000000',
-    height: responsiveHeight(8),
-  },
-  selectedOption: {
-    backgroundColor: '#379A35',
-  },
-  optionText: {
-    fontSize: responsiveFontSize(1.8),
-    fontFamily: 'Poppins-Medium',
-  },
-  optionTextSelected: {
-    fontSize: responsiveFontSize(1.8),
-    color: '#ffffff',
-    fontFamily: 'Poppins-Medium',
-  },
-  optionText2: {
-    color: '#000000',
-    fontFamily: 'Poppins-Regular',
-  },
-  optionTextSelected2: {
-    color: '#ffffff',
-    fontFamily: 'Poppins-Regular',
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    optionContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#1C1C1C' : '#F3F2F2',
+      borderRadius: 20,
+      paddingHorizontal: responsiveWidth(5),
+      paddingVertical: responsiveHeight(1),
+      // color: theme === 'dark' ? '#CCCCCCC' : '#000000',
+      height: responsiveHeight(8),
+    },
+    selectedOption: {
+      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
+      padding: responsiveHeight(1),
+    },
+    optionText: {
+      fontSize: responsiveFontSize(1.8),
+      fontFamily: 'Poppins-Medium',
+      opacity: theme === 'dark' ? 0.5 : 0.6,
+
+    },
+    optionTextSelected: {
+      fontSize: responsiveFontSize(1.8),
+      fontFamily: 'Poppins-Medium',
+      color: theme === 'dark' ? '#f1ecec' : '#ffffff',
+      opacity: 1,
+
+    },
+    optionText2: {
+      opacity: theme === 'dark' ? 0.5 : 0.6,
+
+      fontFamily: 'Poppins-Regular',
+    },
+    optionTextSelected2: {
+      color: theme === 'dark' ? '#f1ecec' : '#ffffff',
+
+      fontFamily: 'Poppins-Regular',
+    },
+  });
 
 export default Option;

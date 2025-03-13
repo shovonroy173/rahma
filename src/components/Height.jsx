@@ -1,11 +1,12 @@
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
 import {useSelector} from 'react-redux';
 import {
   responsiveFontSize,
   responsiveHeight,
 } from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const Height = ({item, name}) => {
   const {control, watch, setValue} = useFormContext();
@@ -19,6 +20,8 @@ const Height = ({item, name}) => {
       console.log('no cache data');
     }
   }, [savedValue, setValue, name]);
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <Controller
@@ -49,24 +52,26 @@ const Height = ({item, name}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 40,
-  },
-  text: {
-    fontSize: responsiveFontSize(2),
-    fontFamily: 'Poppins-SemiBold',
-    padding: responsiveHeight(2),
-  },
-  selectedText: {
-    borderRadius: 10,
-    color: 'white',
-    backgroundColor: '#379A35',
-    padding: responsiveHeight(2),
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 40,
+    },
+    text: {
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-SemiBold',
+      padding: responsiveHeight(2),
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    selectedText: {
+      borderRadius: 10,
+      color: 'white',
+      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
+      padding: responsiveHeight(2),
+    },
+  });
 
 export default Height;

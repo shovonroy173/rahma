@@ -106,7 +106,7 @@ const getStyles = theme =>
     buttonContainer: {
       paddingBottom: responsiveHeight(2),
       width: '100%',
-      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      // backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
     },
   });
 

@@ -1,5 +1,5 @@
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
@@ -8,11 +8,15 @@ import {
   responsiveFontSize,
   responsiveHeight,
 } from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const FaceVerificationScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
   const {control, watch} = useFormContext();
   // console.log('face', watch('faceVerification'));
+
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
@@ -30,7 +34,7 @@ const FaceVerificationScreen = ({navigation}) => {
             }}
             style={styles.mainContainer}>
             <Image
-              source={require('../../assets/images/faceverification.png')}
+              source={require('../../assets/images/faceverification.webp')}
             />
             <Text style={styles.text}>Put your Face in this Circle</Text>
           </TouchableOpacity>
@@ -46,30 +50,33 @@ const FaceVerificationScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: responsiveHeight(4),
-  },
-  title: {
-    fontSize: responsiveFontSize(3.5),
-    fontFamily: 'Poppins-SemiBold',
-    textAlign: 'center',
-  },
-  mainContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 20,
-  },
-  text: {
-    fontSize: responsiveFontSize(2),
-    fontFamily: 'Poppins-Medium',
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      padding: responsiveHeight(4),
+    },
+    title: {
+      fontSize: responsiveFontSize(3.5),
+      fontFamily: 'Poppins-SemiBold',
+      textAlign: 'center',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    mainContainer: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 20,
+    },
+    text: {
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-Medium',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
 
-    textAlign: 'center',
-  },
-});
+      textAlign: 'center',
+    },
+  });
 
 export default FaceVerificationScreen;

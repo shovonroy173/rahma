@@ -6,7 +6,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 const PreviewScreen = () => {
   return (
     <ImageBackground
-      source={require('../../assets/images/preview.png')}
+      source={require('../../assets/images/preview.webp')}
       style={styles.backgroundImage}>
       <View style={styles.container}>
         <View style={styles.bottomContainer}>

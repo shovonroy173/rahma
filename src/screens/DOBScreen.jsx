@@ -53,7 +53,7 @@ const DOBScreen = ({navigation}) => {
                 }}
                 showsVerticalScrollIndicator={false}> */}
               <Image
-                source={require('../../assets/images/dob.png')}
+                source={require('../../assets/images/dob.webp')}
                 style={styles.image}
               />
               <Calender name="calender" />

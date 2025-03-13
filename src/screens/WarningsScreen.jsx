@@ -1,12 +1,15 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import MainText from '../components/MainText';
 import Button from '../components/Button';
+import { ThemeContext } from '../context/DarkThemeContext';
 
 const WarningsScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
@@ -37,12 +40,12 @@ const WarningsScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
     padding: 30,
   },
   mainContainer: {
@@ -60,8 +63,8 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   textNumber: {
-    color: '#ffffff',
-    backgroundColor: '#379A35',
+    color: theme === 'dark' ? '#000000' : '#ffffff',
+    backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
     borderRadius: 100,
     textAlign: 'center',
     width: 55,
@@ -72,7 +75,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     fontFamily: 'Poppins-SemiBold',
-    color: '#313030',
+    color: theme === 'dark' ? '#ffffff' : '#313030',
   },
 });
 

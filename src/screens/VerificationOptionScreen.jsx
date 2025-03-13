@@ -1,14 +1,17 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
 import {options} from '../../assets/data/data';
 import Option from '../components/Option';
 import { responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
+import { ThemeContext } from '../context/DarkThemeContext';
 
 const VerificationOptionScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
@@ -41,12 +44,12 @@ const VerificationOptionScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
     padding: responsiveHeight(4),
   },
   mainContainer: {
@@ -55,21 +58,25 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: 1,
-    backgroundColor: 'black',
+    backgroundColor: theme === 'dark' ? '#ffffff' : '#000000',
+
   },
   title: {
     fontSize: responsiveFontSize(3),
     fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
   },
   text: {
     fontSize: responsiveFontSize(1.8),
     fontFamily: 'Poppins-SemiBold',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
 
   },
   text2: {
     fontSize: responsiveFontSize(1.8),
     fontFamily: 'Poppins-Regular',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
 
   },
   textContainer: {
@@ -81,7 +88,7 @@ const styles = StyleSheet.create({
   footerText: {
     fontSize: responsiveFontSize(1.8),
     fontFamily: 'Poppins-SemiBold',
-    color: '#379A35',
+    color: theme === 'dark' ? '#1A3D1A' : '#379A35',
   },
 });
 

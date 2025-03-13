@@ -37,12 +37,12 @@ const Gender = ({item}) => {
           )}
           {item.id === 'male' ? (
             <Image
-              source={require('../../assets/images/male.png')}
+              source={require('../../assets/images/male.webp')}
               style={styles.image}
             />
           ) : (
             <Image
-              source={require('../../assets/images/female.png')}
+              source={require('../../assets/images/female.webp')}
               style={styles.image}
             />
           )}

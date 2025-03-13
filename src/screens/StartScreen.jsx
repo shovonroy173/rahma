@@ -30,7 +30,7 @@ const StartScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../../assets/images/login-bg.png')}
+        source={require('../../assets/images/login-bg.webp')}
         style={styles.backgroundImage}>
         <View style={styles.loginContainer}>
           <View style={styles.languageContainer}>
@@ -77,7 +77,7 @@ const StartScreen = ({navigation}) => {
             <FAIcon name="question-circle-o" size={24} color="white" />
           </View>
           <View style={styles.loginItems}>
-            <Image source={require('../../assets/images/logo.png')} />
+            <Image source={require('../../assets/images/logo.webp')} />
             <TouchableOpacity
               onPress={() => navigation.navigate('Login')}
               style={styles.loginButton}>
@@ -130,7 +130,7 @@ const getStyles = theme =>
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: theme === 'dark' ? '#121212' : '#FFFFFF',
+      // backgroundColor: theme === 'dark' ? '#121212' : '#FFFFFF',
     },
     dropdownContainer: {
       width: responsiveWidth(30),
@@ -171,12 +171,12 @@ const getStyles = theme =>
     },
     loginButton: {
       width: responsiveWidth(85),
-      backgroundColor: theme === 'dark' ? '#2E7D32' : '#379A35',
+      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
       padding: 10,
       borderRadius: 100,
     },
     loginButtonText: {
-      color: '#FFFFFF',
+      color: theme === 'dark' ? '#131313' : '#ffffff',
       textAlign: 'center',
       fontSize: responsiveFontSize(2.2),
       fontFamily: 'Poppins-SemiBold',
@@ -188,7 +188,7 @@ const getStyles = theme =>
       justifyContent: 'center',
       gap: 10,
       width: responsiveWidth(85),
-      backgroundColor: '#3682D4',
+      backgroundColor: theme === 'dark' ? '#1e3a8a' : '#3682D4',
       padding: 10,
       borderRadius: 100,
     },

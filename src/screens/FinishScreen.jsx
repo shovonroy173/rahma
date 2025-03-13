@@ -1,11 +1,15 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const FinishScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
@@ -32,34 +36,39 @@ const FinishScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: 30,
-  },
-  mainContainer: {
-    gap: 40,
-  },
-  text3: {
-    fontSize: 16,
-    fontWeight: 600,
-    paddingHorizontal: 20,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 30,
-    marginBottom: 10,
-    fontWeight: 600,
-    textAlign: 'center',
-  },
-  title2: {
-    fontSize: 16,
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#ffffff' : '#000000',
+
+      padding: 30,
+    },
+    mainContainer: {
+      gap: 40,
+    },
+    text3: {
+      fontSize: 16,
+      fontWeight: 600,
+      paddingHorizontal: 20,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    title: {
+      fontSize: 30,
+      marginBottom: 10,
+      fontWeight: 600,
+      textAlign: 'center',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    title2: {
+      fontSize: 16,
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+  });
 
 export default FinishScreen;

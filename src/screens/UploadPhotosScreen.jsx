@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useRef} from 'react';
+import React, {useContext, useRef} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import ImageUpload from '../components/ImageUpload';
 import {images} from '../../assets/data/data';
@@ -14,6 +14,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const UploadPhotosScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -26,6 +27,8 @@ const UploadPhotosScreen = ({navigation}) => {
   const closeDrawer = () => {
     drawerRef.current.close();
   };
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <Drawer
@@ -61,7 +64,7 @@ const UploadPhotosScreen = ({navigation}) => {
             <ImageUpload key={item.id} name={`images.${item.title}`} />
           ))}
           <TouchableOpacity onPress={openDrawer} style={styles.guidelineButton}>
-            <Icon name="plus" size={24} color={'#43A041'} />
+            <Icon name="plus" size={24} color={theme === 'dark' ? '#2C6A2F' : '#43A041'} />
 
             <Text style={styles.guidelineText}>Photo</Text>
             <Text style={styles.guidelineText}>Guidelines</Text>
@@ -72,62 +75,55 @@ const UploadPhotosScreen = ({navigation}) => {
           title="Continue"
           navigation={navigation}
           path="SelfieVerify"
-          id="images.img1"
+          // id="images.img1"
         />
       </View>
     </Drawer>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: responsiveHeight(4),
-    backgroundColor: '#ffffff',
-  },
-  title: {
-    fontSize: responsiveFontSize(3.5),
-    fontFamily: 'Poppins-SemiBold',
-    textAlign: 'center',
-  },
-  subTitle: {
-    fontSize: responsiveFontSize(1.5),
-    textAlign: 'center',
-    color: 'gray',
-    fontFamily: 'Poppins-Medium',
-  },
-  allImages: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-    gap: responsiveWidth(3),
-    alignItems: 'center',
-  },
-  button: {
-    padding: 15,
-    backgroundColor: '#007bff',
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-  },
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: responsiveHeight(4),
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+    },
+    title: {
+      fontSize: responsiveFontSize(3.5),
+      fontFamily: 'Poppins-SemiBold',
+      textAlign: 'center',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    subTitle: {
+      fontSize: responsiveFontSize(1.5),
+      textAlign: 'center',
+      color: theme === 'dark' ? '#444444' : '#CCCCCC',
 
-  guidelineButton: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 10,
-  },
-  guidelineText: {
-    color: '#43A041',
-    fontSize: responsiveFontSize(2.3),
-    fontFamily: 'Poppins-Medium',
-  },
-});
+      fontFamily: 'Poppins-Medium',
+    },
+    allImages: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      flexWrap: 'wrap',
+      gap: responsiveWidth(3),
+      alignItems: 'center',
+    },
+    guidelineButton: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 10,
+    },
+    guidelineText: {
+      color: theme === 'dark' ? '#2C6A2F' : '#43A041',
+      fontSize: responsiveFontSize(2.3),
+      fontFamily: 'Poppins-Medium',
+    },
+  });
 
 const drawerStyles = {
   drawer: {shadowColor: '#000', shadowOpacity: 0.5, shadowRadius: 3},

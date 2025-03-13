@@ -7,7 +7,7 @@ const VisitedYouScreen = () => {
       title="Visted you"
       subtitle="People Who have Liked you will Appear Here."
       name="likedyou"
-      img={require('../../assets/images/visitedyou.png')}
+      img={require('../../assets/images/visitedyou.webp')}
     />
   );
 };

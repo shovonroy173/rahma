@@ -10,7 +10,7 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useDispatch, useSelector} from 'react-redux';
 import Button from '../components/Button';
@@ -18,12 +18,20 @@ import {Controller, useFormContext} from 'react-hook-form';
 import {Keyboard} from 'react-native';
 import {validationRules} from '../utils/validation';
 import {updateFormData} from '../redux/slices/formSlice';
-import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const BioScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
   const {control} = useFormContext();
   const dispatch = useDispatch();
+
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <KeyboardAvoidingView
@@ -78,47 +86,50 @@ const BioScreen = ({navigation}) => {
   );
 };
 
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: responsiveHeight(4),
-  },
+      padding: responsiveHeight(4),
+    },
 
-  title: {
-    fontSize: responsiveFontSize(3.5),
-    marginBottom: 10,
-    fontFamily: 'Poppins-SemiBold',
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: responsiveFontSize(1.8),
-    fontFamily: 'Poppins-Regular',
-    marginBottom: 10,
-  },
-  input: {
-    width: responsiveWidth(85),
-    minHeight: 400,
-    borderWidth: 2,
-    borderStyle: 'dashed',
-    borderRadius: 10,
-    borderColor: '#78B377',
-    backgroundColor: '#F3F2F2',
-    textAlignVertical: 'top',
-    padding: 20,
-    fontFamily: 'Poppins-Regular',
-  },
-  inputScrollContainer: {
-    flexGrow: 1,
-    paddingBottom: 20,
-  },
-  buttonContainer: {
-    paddingVertical: 20,
-    width: '100%',
-  },
-});
+    title: {
+      fontSize: responsiveFontSize(3.5),
+      marginBottom: 10,
+      fontFamily: 'Poppins-SemiBold',
+      textAlign: 'center',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    subtitle: {
+      fontSize: responsiveFontSize(1.8),
+      fontFamily: 'Poppins-Regular',
+      marginBottom: 10,
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    input: {
+      width: responsiveWidth(84),
+      minHeight: 400,
+      borderWidth: 2,
+      borderStyle: 'dashed',
+      borderRadius: 10,
+      borderColor: theme === 'dark' ? '#A3D38B' : '#78B377',
+      backgroundColor: theme === 'dark' ? '#343333' : '#F3F2F2',
+      textAlignVertical: 'top',
+      padding: 20,
+      fontFamily: 'Poppins-Regular',
+    },
+    inputScrollContainer: {
+      flexGrow: 1,
+      paddingBottom: 20,
+    },
+    buttonContainer: {
+      paddingVertical: 20,
+      width: '100%',
+    },
+  });
 
 export default BioScreen;

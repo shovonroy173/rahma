@@ -1,5 +1,5 @@
 import {View, Text, Image, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
@@ -7,9 +7,13 @@ import {
   responsiveFontSize,
   responsiveHeight,
 } from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const VerficationCompleteScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
@@ -19,7 +23,7 @@ const VerficationCompleteScreen = ({navigation}) => {
       </View>
 
       <View style={styles.mainContainer}>
-        <Image source={require('../../assets/images/doneverification.png')} />
+        <Image source={require('../../assets/images/doneverification.webp')} />
         <Text style={styles.text}>Verifiaction Done</Text>
       </View>
 
@@ -34,28 +38,31 @@ const VerficationCompleteScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: responsiveHeight(4),
-  },
-  title: {
-    fontSize: responsiveFontSize(3.5),
-     fontFamily: 'Poppins-SemiBold',
-  },
-  mainContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 10,
-  },
-  text: {
-    fontSize: responsiveFontSize(2),
-    fontFamily: 'Poppins-Medium',
-    textAlign: 'center',
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      padding: responsiveHeight(4),
+    },
+    title: {
+      fontSize: responsiveFontSize(3.5),
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    mainContainer: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+    },
+    text: {
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-Medium',
+      textAlign: 'center',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+  });
 
 export default VerficationCompleteScreen;

@@ -27,7 +27,7 @@ const RulesScreen = ({navigation}) => {
     <View style={styles.container}>
       <ProgressContainer currentPage={currentPage} navigation={navigation} />
       <Image
-        source={require('../../assets/images/user.png')}
+        source={require('../../assets/images/user.webp')}
         style={styles.image}
       />
       <View>

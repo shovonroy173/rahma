@@ -77,7 +77,6 @@ const getStyles = theme =>
     },
     buttonContainer: {
       paddingBottom: responsiveHeight(2),
-      backgroundColor: theme === 'dark' ? '#1e1e1e' : 'white', // Dark mode button container
     },
     text: {
       color: theme === 'dark' ? '#ffffff' : '#000000',

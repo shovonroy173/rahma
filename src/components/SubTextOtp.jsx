@@ -1,14 +1,13 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React, { useContext } from 'react';
-import {AppStyles} from '../globalstyle/GlobalStyle';
-import { ThemeContext } from '../context/DarkThemeContext';
+import React, {useContext} from 'react';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const SubTextOtp = () => {
   const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
   return (
     <View style={styles.privacyContainer}>
-      <Text style={{fontFamily: AppStyles.styles.fontFamily}}>
+      <Text style={{fontFamily: 'Poppins-Regular', fontSize: 12}}>
         Don’t Receive any Code?
       </Text>
 
@@ -17,23 +16,19 @@ const SubTextOtp = () => {
   );
 };
 
-const getStyles = (theme) =>
+const getStyles = theme =>
   StyleSheet.create({
     privacyContainer: {
-      color: theme === 'dark' ? '#FFFFFF' : '#000000', // Dark mode: White, Light mode: Black
-      textAlign: 'center',
-      fontSize: 12,
-      fontFamily: 'Poppins-Regular',
-      fontWeight: '400', // Use a string for compatibility
       display: 'flex',
       flexDirection: 'row',
+      alignItems: 'center',
       justifyContent: 'center',
       gap: 15,
       paddingVertical: 20,
+      // flexWrap: 'wrap',
     },
     privacyText: {
-      color: theme === 'dark' ? '#50C878' : '#379A35', // Dark mode: Light green, Light mode: Dark green
-      fontSize: 16,
+      color: theme === 'dark' ? '#50C878' : '#379A35', fontSize: 14,
       fontFamily: 'Poppins-Regular',
     },
   });

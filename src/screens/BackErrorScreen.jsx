@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import ErrorImage from '../components/ErrorImage';
@@ -11,9 +11,12 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const BackErrorScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
@@ -68,70 +71,68 @@ const BackErrorScreen = ({navigation}) => {
 
 // const {width} = Dimensions.get('window');
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    padding: responsiveHeight(4),
-  },
-  title: {
-    fontSize: responsiveFontSize(2.5),
-    fontFamily: 'Poppins-SemiBold',
-
-    textAlign: 'center',
-  },
-  idType: {
-    fontSize: responsiveFontSize(1.8),
-    fontFamily: 'Poppins-SemiBold',
-
-    color: '#313030',
-  },
-  idType2: {
-    fontSize: responsiveFontSize(1.8),
-    fontFamily: 'Poppins-SemiBold',
-
-    color: '#379A35',
-  },
-  idType3: {
-    fontSize: responsiveFontSize(1.8),
-    fontFamily: 'Poppins-SemiBold',
-    color: '#313030',
-  },
-  nation: {
-    fontSize: responsiveFontSize(1.4),
-    color: '#575454',
-    textAlign: 'center',
-    fontFamily: 'Poppins-Regular',
-  },
-  screenNameContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: responsiveWidth(10),
-  },
-  rule: {
-    fontSize: responsiveFontSize(1.5),
-    fontFamily: 'Poppins-SemiBold',
-
-    color: '#313030',
-  },
-  ruleBox: {
-    display: 'flex',
-    gap: responsiveHeight(2),
-  },
-  ruleContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: responsiveWidth(2),
-    backgroundColor: '#E8E5E5',
-    borderRadius: 10,
-    // width: responsiveWidth(84),
-    padding: 10,
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      padding: responsiveHeight(4),
+    },
+    title: {
+      fontSize: responsiveFontSize(2.5),
+      fontFamily: 'Poppins-SemiBold',
+      textAlign: 'center',
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    idType: {
+      fontSize: responsiveFontSize(1.8),
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#FFFFFF' : '#313030',
+    },
+    idType2: {
+      fontSize: responsiveFontSize(1.8),
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#1A3D1A' : '#379A35',
+    },
+    idType3: {
+      fontSize: responsiveFontSize(1.8),
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#FFFFFF' : '#313030',
+    },
+    nation: {
+      fontSize: responsiveFontSize(1.4),
+      color: theme === 'dark' ? '#ffffff' : '#575454',
+      textAlign: 'center',
+      fontFamily: 'Poppins-Regular',
+    },
+    screenNameContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: responsiveWidth(10),
+    },
+    rule: {
+      fontSize: responsiveFontSize(1.5),
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#FFFFFF' : '#313030',
+    },
+    ruleBox: {
+      display: 'flex',
+      gap: responsiveHeight(2),
+    },
+    ruleContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: responsiveWidth(2),
+      backgroundColor: theme === 'dark' ? '#2B2B2B' : '#E8E5E5',
+      borderRadius: 10,
+      // width: responsiveWidth(84),
+      padding: 10,
+    },
+  });
 
 export default BackErrorScreen;

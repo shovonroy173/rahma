@@ -6,7 +6,7 @@ const BlockedScreen = () => {
     <ExploreComponent
       title="Blocked"
       subtitle="People Who you Passed will Appear Here."
-      img={require('../../assets/images/blocked.png')}
+      img={require('../../assets/images/blocked.webp')}
     />
   );
 };

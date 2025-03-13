@@ -1,12 +1,13 @@
 import {View, Text, StyleSheet, TextInput} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useContext, useEffect} from 'react';
 import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {Controller, useFormContext} from 'react-hook-form';
 import {validationRules} from '../utils/validation';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const SalaryInput = ({name, placeholder}) => {
   const {
@@ -24,6 +25,8 @@ const SalaryInput = ({name, placeholder}) => {
       console.log('no cache data');
     }
   }, [savedValue, setValue, name]);
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <View>
@@ -50,22 +53,24 @@ const SalaryInput = ({name, placeholder}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  input: {
-    width: responsiveWidth(35),
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: '#A19B9B',
-    paddingHorizontal: 15,
-    height: responsiveHeight(6),
-    fontFamily: 'Poppins-Regular',
-  },
-  errorText: {
-    color: 'red',
-    fontSize: 12,
-    fontFamily: 'Poppins-Medium',
-    paddingVertical: 5,
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    input: {
+      width: responsiveWidth(35),
+      borderWidth: 1,
+      borderRadius: 10,
+      borderColor: theme === 'dark' ? '#E0E0E0' : '#A19B9B',
+
+      paddingHorizontal: 15,
+      height: responsiveHeight(6),
+      fontFamily: 'Poppins-Regular',
+    },
+    errorText: {
+      color: 'red',
+      fontSize: 12,
+      fontFamily: 'Poppins-Medium',
+      paddingVertical: 5,
+    },
+  });
 
 export default SalaryInput;

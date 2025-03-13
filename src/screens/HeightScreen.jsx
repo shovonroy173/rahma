@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import {heights} from '../../assets/data/data';
@@ -10,9 +10,12 @@ import {
   responsiveFontSize,
   responsiveHeight,
 } from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const HeightScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
@@ -42,29 +45,32 @@ const HeightScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-    padding: responsiveHeight(4),
-  },
-  mainContainer: {
-    gap: responsiveHeight(2),
-  },
-  title: {
-    fontSize: responsiveFontSize(3.5),
-    fontFamily: 'Poppins-SemiBold',
-    textAlign: 'center',
-    marginBottom: responsiveHeight(2),
-  },
-  scrollContainer: {
-    flex: 1,
-    width: '100%',
-  },
-  buttonContainer: {
-    paddingVertical: responsiveHeight(2),
-    backgroundColor: 'white',
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+
+      padding: responsiveHeight(4),
+    },
+    mainContainer: {
+      gap: responsiveHeight(2),
+    },
+    title: {
+      fontSize: responsiveFontSize(3.5),
+      fontFamily: 'Poppins-SemiBold',
+      textAlign: 'center',
+      marginBottom: responsiveHeight(2),
+      color: theme === 'dark' ? '#ffffff' : '#000000',
+    },
+    scrollContainer: {
+      flex: 1,
+      width: '100%',
+    },
+    buttonContainer: {
+      paddingVertical: responsiveHeight(2),
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+    },
+  });
 
 export default HeightScreen;

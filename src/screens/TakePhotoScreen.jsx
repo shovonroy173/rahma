@@ -1,11 +1,12 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Warning from '../components/Warning';
 import {warnings} from '../../assets/data/data';
 import CommonWarning from '../components/CommonWarning';
 import Button from '../components/Button';
+import { ThemeContext } from '../context/DarkThemeContext';
 // import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera';
 
 const TakePhotoScreen = ({navigation}) => {
@@ -14,6 +15,9 @@ const TakePhotoScreen = ({navigation}) => {
   // if (!hasPermission) return console.log('not permited');
   // if (device == null) return console.log('no device');
   const currentPage = useSelector(state => state.page.currentPage);
+  const theme = useContext(ThemeContext);
+  const styles = getStyles(theme);
+
   return (
     <View style={styles.container}>
       <ProgressContainer currentPage={currentPage} navigation={navigation} />
@@ -39,18 +43,20 @@ Photo.
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (theme)=> StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: theme === 'dark' ? '#333333' : '#E8E5E5',
     padding: 30,
   },
   title: {
     fontSize: 30,
     fontWeight: 600,
     textAlign: 'center',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
+
   },
 });
 
