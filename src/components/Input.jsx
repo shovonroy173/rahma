@@ -63,7 +63,7 @@ export const getStyles = theme =>
       borderRadius: 10,
       borderColor: theme === 'dark' ? '#555' : '#A19B9B',
       backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
       paddingHorizontal: 15,
       height: responsiveHeight(6),
       fontFamily: 'Poppins-Regular',

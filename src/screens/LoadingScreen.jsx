@@ -22,9 +22,24 @@ const LoadingScreen = ({navigation}) => {
           height={40}
           skeletonStyle={styles.skeleton}
         />{' '}
-        <Skeleton animation="wave" width="100%" height={20} />
-        <Skeleton animation="wave" width="100%" height={60} />
-        <Skeleton animation="wave" width="100%" height={20} />
+        <Skeleton
+          animation="wave"
+          width="100%"
+          height={20}
+          skeletonStyle={styles.skeleton}
+        />
+        <Skeleton
+          animation="wave"
+          width="100%"
+          height={60}
+          skeletonStyle={styles.skeleton}
+        />
+        <Skeleton
+          animation="wave"
+          width="100%"
+          height={20}
+          skeletonStyle={styles.skeleton}
+        />
       </View>
       <Button
         title="Ok, Got It"
@@ -48,6 +63,9 @@ const getStyles = theme =>
     mainContainer: {
       display: 'flex',
       gap: 20,
+    },
+    skeleton: {
+      backgroundColor: theme === 'dark' ? '#111827' : '#9ca3af',
     },
   });
 

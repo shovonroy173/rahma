@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   // Dimensions,
 } from 'react-native';
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -16,11 +16,11 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { ThemeContext } from '../context/DarkThemeContext';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const RulesScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   return (
@@ -44,7 +44,8 @@ const RulesScreen = ({navigation}) => {
         <View style={styles.ruleContainer}>
           <Ionicons
             name="checkmark-circle-outline"
-            color={'#379A35'}
+            color={theme === 'dark' ? '#166534' : '#379A35'}
+
             size={24}
           />
           <Text style={styles.rule}>
@@ -54,7 +55,8 @@ const RulesScreen = ({navigation}) => {
         <View style={styles.ruleContainer}>
           <Ionicons
             name="checkmark-circle-outline"
-            color={'#379A35'}
+            color={theme === 'dark' ? '#166534' : '#379A35'}
+
             size={24}
           />
           <Text style={styles.rule}>
@@ -65,7 +67,7 @@ const RulesScreen = ({navigation}) => {
         <View style={styles.ruleContainer}>
           <Ionicons
             name="checkmark-circle-outline"
-            color={'#379A35'}
+            color={theme === 'dark' ? '#166534' : '#379A35'}
             size={24}
           />
           <Text style={styles.rule}>
@@ -89,78 +91,75 @@ const RulesScreen = ({navigation}) => {
   );
 };
 
-const getStyles = (theme)=> StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
 
-    padding: responsiveHeight(4),
-    gap: responsiveHeight(2),
-  },
-  image: {
-    width: responsiveWidth(35),
-    height: responsiveWidth(35),
-    borderRadius: 20,
-  },
-  titleText: {
-    fontSize: responsiveFontSize(3),
-    textAlign: 'center',
-    fontFamily: 'Poppins-SemiBold',
-    color: theme === 'dark' ? '#ffffff' : '#000000',
-
-  },
-  titleText2: {
-    fontSize: responsiveFontSize(2),
-    textAlign: 'center',
-    fontFamily: 'Poppins-SemiBold',
-    color: theme === 'dark' ? '#ffffff' : '#000000',
-
-  },
-  subText: {
-    fontSize: responsiveFontSize(1.4),
-    textAlign: 'center',
-    fontFamily: 'Poppins-Regular',
-    color: theme === 'dark' ? '#ffffff' : '#313030',
-
-  },
-  rule: {
-    fontSize: responsiveFontSize(1.6),
-    textAlign: 'left',
-    color: theme === 'dark' ? '#ffffff' : '#313030',
-    fontFamily: 'Poppins-SemiBold',
-
-  },
-  ruleBox: {
-    display: 'flex',
-    gap: responsiveHeight(1.5),
-    paddingHorizontal: responsiveWidth(2),
-  },
-  ruleContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: responsiveWidth(2),
-    gap: responsiveWidth(1.5),
-  },
-  loginButton: {
-    width: responsiveWidth(85),
-    padding: responsiveWidth(1.5),
-    borderRadius: 100,
-    borderWidth: 2,
-    borderColor: theme === 'dark' ? '#121212' : '#379A35',
-  },
-  loginButtonText: {
-    color: theme === 'dark' ? '#121212' : '#379A35',
-    textAlign: 'center',
-    fontSize: responsiveFontSize(2.5),
-    fontWeight: 600,
-    fontFamily: 'Poppins-SemiBold',
-  },
-  buttonContainer: {
-    gap: responsiveHeight(2),
-  },
-});
+      padding: responsiveHeight(4),
+      gap: responsiveHeight(2),
+    },
+    image: {
+      width: responsiveWidth(35),
+      height: responsiveWidth(35),
+      borderRadius: 20,
+    },
+    titleText: {
+      fontSize: responsiveFontSize(3),
+      textAlign: 'center',
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
+    },
+    titleText2: {
+      fontSize: responsiveFontSize(2),
+      textAlign: 'center',
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
+    },
+    subText: {
+      fontSize: responsiveFontSize(1.4),
+      textAlign: 'center',
+      fontFamily: 'Poppins-Regular',
+      color: theme === 'dark' ? '#9ca3af' : '#313030',
+    },
+    rule: {
+      fontSize: responsiveFontSize(1.6),
+      textAlign: 'left',
+      color: theme === 'dark' ? '#d1d5db' : '#313030',
+      fontFamily: 'Poppins-SemiBold',
+    },
+    ruleBox: {
+      display: 'flex',
+      gap: responsiveHeight(1.5),
+      paddingHorizontal: responsiveWidth(2),
+    },
+    ruleContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: responsiveWidth(2),
+      gap: responsiveWidth(1.5),
+    },
+    loginButton: {
+      width: responsiveWidth(85),
+      padding: responsiveWidth(1.5),
+      borderRadius: 100,
+      borderWidth: 2,
+      borderColor: theme === 'dark' ? '#14532d' : '#379A35',
+    },
+    loginButtonText: {
+      color: theme === 'dark' ? '#14532d' : '#379A35',
+      textAlign: 'center',
+      fontSize: responsiveFontSize(2.5),
+      fontWeight: 600,
+      fontFamily: 'Poppins-SemiBold',
+    },
+    buttonContainer: {
+      gap: responsiveHeight(2),
+    },
+  });
 
 export default RulesScreen;

@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
@@ -9,7 +9,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { ThemeContext } from '../context/DarkThemeContext';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const NotificationScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -59,7 +59,7 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(3.5),
       textAlign: 'center',
       fontFamily: 'Poppins-SemiBold',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     mainContainer: {
       gap: responsiveHeight(2),
@@ -85,19 +85,19 @@ const getStyles = theme =>
     },
     memberText: {
       fontSize: responsiveFontSize(2.4),
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#f3f4f6',
       opacity: 0.7,
       fontFamily: 'Poppins-SemiBold',
     },
     memberText2: {
       fontSize: responsiveFontSize(1.4),
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#6b7280' : '#e5e7eb',
       opacity: 0.7,
       fontFamily: 'Poppins-Regular',
     },
 
     learnMore: {
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#f3f4f6',
 
       backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
       padding: responsiveHeight(1),

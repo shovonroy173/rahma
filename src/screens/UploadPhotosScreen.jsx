@@ -1,6 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useContext, useRef} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  // ActivityIndicator,
+} from 'react-native';
 import ImageUpload from '../components/ImageUpload';
 import {images} from '../../assets/data/data';
 import Button from '../components/Button';
@@ -29,6 +35,7 @@ const UploadPhotosScreen = ({navigation}) => {
   };
   const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
+  // const ImageUpload = lazy(() => import('../components/ImageUpload'));
 
   return (
     <Drawer
@@ -53,6 +60,7 @@ const UploadPhotosScreen = ({navigation}) => {
                 color: '#379A35',
                 fontSize: responsiveFontSize(2),
                 fontFamily: 'Poppins-SemiBold',
+                paddingHorizontal: 5,
               }}>
               3 Photos
             </Text>
@@ -61,10 +69,17 @@ const UploadPhotosScreen = ({navigation}) => {
         </View>
         <View style={styles.allImages}>
           {images.map(item => (
+            // <Suspense
+            //   fallback={<ActivityIndicator size="large" color="#0000ff" />} >
             <ImageUpload key={item.id} name={`images.${item.title}`} />
+            // </Suspense>
           ))}
           <TouchableOpacity onPress={openDrawer} style={styles.guidelineButton}>
-            <Icon name="plus" size={24} color={theme === 'dark' ? '#2C6A2F' : '#43A041'} />
+            <Icon
+              name="plus"
+              size={24}
+              color={theme === 'dark' ? '#2C6A2F' : '#43A041'}
+            />
 
             <Text style={styles.guidelineText}>Photo</Text>
             <Text style={styles.guidelineText}>Guidelines</Text>
@@ -95,12 +110,12 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(3.5),
       fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5dbs' : '#000000',
     },
     subTitle: {
       fontSize: responsiveFontSize(1.5),
       textAlign: 'center',
-      color: theme === 'dark' ? '#444444' : '#CCCCCC',
+      color: theme === 'dark' ? '#e5e7eb' : '#CCCCCC',
 
       fontFamily: 'Poppins-Medium',
     },

@@ -45,7 +45,7 @@ const SelfieVerifyScreen = ({navigation}) => {
         <View style={styles.ruleContainer}>
           <MaterialCommunityIcons
             name="skull-scan-outline"
-            color={'#379A35'}
+            color={theme === 'dark' ? '#166534' : '#379A35'}
             size={24}
           />
           <View>
@@ -58,7 +58,7 @@ const SelfieVerifyScreen = ({navigation}) => {
         <View style={styles.ruleContainer}>
           <MaterialCommunityIcons
             name="skull-scan-outline"
-            color={'#379A35'}
+            color={theme === 'dark' ? '#166534' : '#379A35'}
             size={24}
           />
           <View>
@@ -108,13 +108,13 @@ const getStyles = theme =>
     titleText: {
       fontSize: responsiveFontSize(3),
       fontFamily: 'Poppins-SemiBold',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     titleText2: {
       fontSize: responsiveFontSize(1.8),
       fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     subText: {
       fontSize: responsiveFontSize(1.4),
@@ -126,12 +126,12 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(2),
       fontFamily: 'Poppins-SemiBold',
       // textAlign: 'center',
-      color: theme === 'dark' ? '#FFFFFF' : '#313030',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     rule2: {
       fontSize: responsiveFontSize(1.4),
       fontFamily: 'Poppins-Regular',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#9ca3af' : '#313030',
     },
     ruleBox: {
       display: 'flex',
@@ -154,10 +154,10 @@ const getStyles = theme =>
       padding: responsiveWidth(2),
       borderRadius: 100,
       borderWidth: 2,
-      borderColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
+      borderColor: theme === 'dark' ? '#14532d' : '#379A35',
     },
     loginButtonText: {
-      color: theme === 'dark' ? 'gray' : '#379A35',
+      color: theme === 'dark' ? '#14532d' : '#379A35',
       textAlign: 'center',
       fontSize: responsiveFontSize(2.4),
       fontFamily: 'Poppins-SemiBold',
@@ -166,7 +166,7 @@ const getStyles = theme =>
     subRule: {
       fontSize: 10,
       fontFamily: 'Poppins-Regular',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#9ca3af' : '#000000',
     },
   });
 

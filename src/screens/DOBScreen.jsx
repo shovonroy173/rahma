@@ -23,7 +23,7 @@ import { ThemeContext } from '../context/DarkThemeContext';
 
 const DOBScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   return (
@@ -100,8 +100,6 @@ const getStyles = (theme) => StyleSheet.create({
 
   buttonContainer: {
     paddingBottom: responsiveHeight(2),
-    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
-
   },
 });
 export default DOBScreen;

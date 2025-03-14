@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext} from 'react';
+import React, { useContext} from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -35,6 +35,8 @@ const SalaryScreen = ({navigation}) => {
   const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
+  // const SalaryInput = lazy(()=>import('../components/SalaryInput'));
+
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}
@@ -66,11 +68,14 @@ const SalaryScreen = ({navigation}) => {
                 {/* <BottomInput name="salary" placeholder="ex. 20000" /> */}
                 <View style={styles.salaryContainer}>
                   {salary.map(item => (
+                    // <Suspense fallback={<ActivityIndicator size="large" color="#0000ff" />}>
+
                     <SalaryInput
                       key={item.id}
                       placeholder={item.placeholder}
                       name={`salary.${item.name}`}
                     />
+                    // {/* </Suspense> */}
                   ))}
                 </View>
                 {/* <Input placeholder="Max"/> */}

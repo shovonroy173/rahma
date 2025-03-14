@@ -42,7 +42,7 @@ const FrontErrorScreen = ({navigation}) => {
         <View style={styles.ruleContainer}>
           <Ionicons
             name="checkmark-circle-outline"
-            color={'#379A35'}
+            color={theme === 'dark' ? '#166534' : '#379A35'}
             size={24}
           />
           <Text style={styles.rule}>
@@ -52,7 +52,7 @@ const FrontErrorScreen = ({navigation}) => {
         <View style={styles.ruleContainer}>
           <Ionicons
             name="checkmark-circle-outline"
-            color={'#379A35'}
+            color={theme === 'dark' ? '#166534' : '#379A35'}
             size={24}
           />
           <Text style={styles.rule}>
@@ -85,26 +85,26 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(2.5),
       fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     idType: {
       fontSize: responsiveFontSize(1.8),
       fontFamily: 'Poppins-SemiBold',
-      color: theme === 'dark' ? '#FFFFFF' : '#313030',
+      color: theme === 'dark' ? '#d1d5db' : '#313030',
     },
     idType2: {
       fontSize: responsiveFontSize(1.8),
       fontFamily: 'Poppins-SemiBold',
-      color: theme === 'dark' ? '#1A3D1A' : '#379A35',
+      color: theme === 'dark' ? '#14532d' : '#379A35',
     },
     idType3: {
       fontSize: responsiveFontSize(1.8),
       fontFamily: 'Poppins-SemiBold',
-      color: theme === 'dark' ? '#FFFFFF' : '#313030',
+      color: theme === 'dark' ? '#d1d5db' : '#313030',
     },
     nation: {
       fontSize: responsiveFontSize(1.4),
-      color: theme === 'dark' ? '#ffffff' : '#575454',
+      color: theme === 'dark' ? '#9ca3af' : '#575454',
       textAlign: 'center',
       fontFamily: 'Poppins-Regular',
     },
@@ -118,7 +118,7 @@ const getStyles = theme =>
     rule: {
       fontSize: responsiveFontSize(1.5),
       fontFamily: 'Poppins-SemiBold',
-      color: theme === 'dark' ? '#FFFFFF' : '#313030',
+      color: theme === 'dark' ? '#6b7280' : '#313030',
     },
     ruleBox: {
       display: 'flex',

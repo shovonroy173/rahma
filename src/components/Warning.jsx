@@ -3,7 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import React, {useContext} from 'react';
 import {ThemeContext} from '../context/DarkThemeContext';
 const Warning = ({title, icon}) => {
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
   return (
     <View style={styles.container}>

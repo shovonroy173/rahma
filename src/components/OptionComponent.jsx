@@ -74,7 +74,7 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(3.5),
       textAlign: 'center',
       fontFamily: 'Poppins-SemiBold',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     scrollWrapper: {
       flex: 1,
@@ -93,7 +93,6 @@ const getStyles = theme =>
     buttonContainer: {
       paddingVertical: responsiveHeight(2),
       width: '100%',
-      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
     },
   });
 

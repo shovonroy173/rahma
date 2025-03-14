@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React, {useContext, useEffect} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
@@ -38,7 +39,12 @@ const Height = ({item, name}) => {
               styles.text,
               watch(name)?.id === item?.id && styles.selectedText,
             ]}>{`${item?.cm} cm`}</Text>
-          <Text>-</Text>
+          <Text
+            style={{
+              color: theme === 'dark' ? '#d1d5db' : '#111827',
+            }}>
+            -
+          </Text>
           <Text
             style={[
               styles.text,
@@ -64,7 +70,7 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(2),
       fontFamily: 'Poppins-SemiBold',
       padding: responsiveHeight(2),
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
     },
     selectedText: {
       borderRadius: 10,

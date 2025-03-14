@@ -8,7 +8,7 @@ import { ThemeContext } from '../context/DarkThemeContext';
 
 const WarningsScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   return (
@@ -63,19 +63,19 @@ const getStyles = (theme) => StyleSheet.create({
     gap: 10,
   },
   textNumber: {
-    color: theme === 'dark' ? '#000000' : '#ffffff',
+    color: theme === 'dark' ? '#d1d5db' : '#ffffff',
     backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
     borderRadius: 100,
     textAlign: 'center',
-    width: 55,
-    padding:10,
+    width: 50,
+    padding:8,
     fontSize: 20,
     fontFamily: 'Poppins-SemiBold',
   },
   text: {
     fontSize: 18,
     fontFamily: 'Poppins-SemiBold',
-    color: theme === 'dark' ? '#ffffff' : '#313030',
+    color: theme === 'dark' ? '#d1d5db' : '#313030',
   },
 });
 

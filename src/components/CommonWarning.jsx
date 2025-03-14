@@ -2,7 +2,7 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import React, {useContext} from 'react';
 import {ThemeContext} from '../context/DarkThemeContext';
 const CommonWarning = ({title}) => {
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   return (

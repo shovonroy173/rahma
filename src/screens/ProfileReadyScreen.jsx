@@ -62,12 +62,12 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(3.5),
       textAlign: 'center',
       fontFamily: 'Poppins-SemiBold',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     title2: {
       fontSize: 16,
       textAlign: 'center',
-      color: theme === 'dark' ? '#FFFFFF' : '#313030',
+      color: theme === 'dark' ? '#d1d5db' : '#313030',
       fontFamily: 'Poppins-Medium',
     },
     image: {

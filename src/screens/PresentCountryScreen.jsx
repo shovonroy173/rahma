@@ -9,24 +9,26 @@ import {
   KeyboardAvoidingView,
   Platform,
   Keyboard,
+  // ActivityIndicator,
 } from 'react-native';
 import React, {useContext, useEffect} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
-import Country from '../components/Country';
+// import Country from '../components/Country';
 import {Controller, useFormContext} from 'react-hook-form';
-import {CountrySelection} from 'react-native-country-list';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {ThemeContext} from '../context/DarkThemeContext';
+import CountryPicker, {DARK_THEME} from 'react-native-country-picker-modal';
 
 const PresentCountryScreen = ({navigation}) => {
+  // const Country = lazy(() => import('../components/Country'));
   const currentPage = useSelector(state => state.page.currentPage);
-  const {control, getValues, setValue} = useFormContext();
+  const {getValues, setValue, control} = useFormContext();
   const savedValue = useSelector(
     state => state.form.formData['presentCountry'] || '',
   );
@@ -37,7 +39,7 @@ const PresentCountryScreen = ({navigation}) => {
       console.log('no cache data');
     }
   }, [savedValue, setValue]);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   return (
@@ -57,13 +59,18 @@ const PresentCountryScreen = ({navigation}) => {
                 <Text style={styles.titleText}>Do you Live?</Text>
               </View>
               <View style={styles.countryContainer}>
-                <Country name="presentCountry" />
-                {/* <CountrySelection action={item => onCountrySelection(item)} /> */}
                 <Controller
                   name="presentCountry"
                   control={control}
                   render={({field: {onChange, value}}) => (
-                    <CountrySelection action={item => onChange(item?.name)} />
+                    <CountryPicker
+                      withModal={false}
+                      withFilter
+                      withFlag
+                      withCallingCode
+                      theme={theme === 'dark' && DARK_THEME}
+                      onSelect={data => onChange(data?.name)}
+                    />
                   )}
                 />
                 {getValues('presentCountry') && (
@@ -116,7 +123,7 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(3),
       textAlign: 'center',
       fontFamily: 'Poppins-SemiBold',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     date: {
       fontSize: responsiveFontSize(2),
@@ -124,11 +131,10 @@ const getStyles = theme =>
       fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
       paddingVertical: responsiveHeight(1),
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
     },
     buttonContainer: {
       paddingBottom: responsiveWidth(2),
-      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
     },
   });
 export default PresentCountryScreen;

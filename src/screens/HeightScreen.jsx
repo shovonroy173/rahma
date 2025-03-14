@@ -61,7 +61,7 @@ const getStyles = theme =>
       fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
       marginBottom: responsiveHeight(2),
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
     },
     scrollContainer: {
       flex: 1,
@@ -69,7 +69,6 @@ const getStyles = theme =>
     },
     buttonContainer: {
       paddingVertical: responsiveHeight(2),
-      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
     },
   });
 

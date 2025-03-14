@@ -15,7 +15,7 @@ import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
 // import Country from '../components/Country';
-import {CountrySelection} from 'react-native-country-list';
+// import {CountrySelection} from 'react-native-country-list';
 import {Controller, useFormContext} from 'react-hook-form';
 import {
   responsiveFontSize,
@@ -23,6 +23,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {ThemeContext} from '../context/DarkThemeContext';
+import CountryPicker, {DARK_THEME} from 'react-native-country-picker-modal';
 
 const EthinicOriginScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -63,13 +64,28 @@ const EthinicOriginScreen = ({navigation}) => {
               <View style={styles.countryContainer}>
                 {/* <Country name="birthCountry" /> */}
                 {/* <CountrySelection action={item => onCountrySelection(item)} /> */}
-                <Controller
+                {/* <Controller
                   name="ethinicorigin"
                   control={control}
                   render={({field: {onChange, value}}) => (
                     <CountrySelection action={item => onChange(item?.name)} />
                   )}
+                /> */}
+                <Controller
+                  name="ethinicorigin"
+                  control={control}
+                  render={({field: {onChange, value}}) => (
+                    <CountryPicker
+                      withModal={false}
+                      withFilter
+                      withFlag
+                      withCallingCode
+                      theme={theme === 'dark' && DARK_THEME}
+                      onSelect={data => onChange(data?.name)}
+                    />
+                  )}
                 />
+
                 {getValues('ethinicorigin') && (
                   <Text style={styles.date}>
                     Ethinic Origin: {getValues('ethinicorigin')}
@@ -123,18 +139,17 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(3.5),
       fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     date: {
       fontSize: responsiveFontSize(2),
       fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
       paddingVertical: responsiveHeight(1),
-      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+     color: theme === 'dark' ? '#d1d5db' : '#111827',
     },
     buttonContainer: {
       paddingBottom: responsiveWidth(2),
-      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
     },
   });
 export default EthinicOriginScreen;

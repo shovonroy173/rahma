@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable dot-notation */
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import React, {useContext, useEffect} from 'react';
@@ -36,12 +37,20 @@ const LookingForScreen = ({navigation}) => {
         <View>
           <View style={styles.topContainer}>
             <Text style={styles.title}>Age</Text>
-            <Text>{`${
+            <Text
+              style={{
+                color: theme === 'dark' ? '#d1d5db' : '#111827',
+              }}>{`${
               getValues('lookingforage')
                 ? Math.floor(getValues('lookingforage'))
                 : 'Not Selected'
             }`}</Text>
-            <Text>18-51 Years</Text>
+            <Text
+              style={{
+                color: theme === 'dark' ? '#d1d5db' : '#111827',
+              }}>
+              18-51 Years
+            </Text>
           </View>
           <Controller
             name="lookingforage"
@@ -111,7 +120,7 @@ const getStyles = theme =>
       marginBottom: 10,
       fontWeight: 600,
       textAlign: 'center',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
     },
   });
 

@@ -20,7 +20,7 @@ import {ThemeContext} from '../context/DarkThemeContext';
 
 const ConfirmFrontPhotoScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   return (
@@ -77,7 +77,7 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(3),
       fontWeight: 600,
       paddingHorizontal: responsiveWidth(2),
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     info: {
       fontSize: responsiveFontSize(1.8),
@@ -89,20 +89,18 @@ const getStyles = theme =>
     btnContainer: {
       display: 'flex',
       gap: responsiveHeight(2),
-      color: theme === 'dark' ? '#ffffff' : '#000000',
     },
     loginButton: {
       width: responsiveWidth(84),
       padding: responsiveHeight(1),
       borderRadius: 100,
       borderWidth: 2,
-      borderColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
+      borderColor: theme === 'dark' ? '#14532d' : '#379A35',
     },
     loginButtonText: {
-      color: theme === 'dark' ? '#1A3D1A' : '#379A35',
+      color: theme === 'dark' ? '#14532d' : '#379A35',
       textAlign: 'center',
       fontSize: responsiveFontSize(2.5),
-      fontWeight: 600,
       fontFamily: 'Poppins-SemiBold',
     },
   });

@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -11,10 +11,12 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { ThemeContext } from '../context/DarkThemeContext';
 
 const About = ({about, location}) => {
   // console.log(about);
-
+const {theme} = useContext(ThemeContext);
+const styles = getStyles(theme);
   return (
     <View style={styles.container}>
       {/* About Mw */}
@@ -234,12 +236,12 @@ const About = ({about, location}) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles =(theme)=> StyleSheet.create({
   container: {
     flex: 1,
     padding: responsiveHeight(3),
     gap: responsiveHeight(5),
-    backgroundColor: 'white',
+    backgroundColor: theme === 'dark' ? '#000000' : 'white',
     // alignItems: 'center',
   },
   aboutContainer: {
@@ -251,13 +253,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: responsiveFontSize(2.4),
     fontWeight: 'bold',
+    color: theme === 'dark' ? '#d1d5db' : '#111827',
+
   },
   mainContainer: {
     flex: 1,
     gap: 10,
   },
   featureContainer: {
-    backgroundColor: '#f3eded',
+    backgroundColor: theme === 'dark' ? '#27272a'  : '#f3eded',
     paddingVertical: responsiveWidth(1),
     paddingHorizontal: responsiveWidth(4),
     borderRadius: 20,

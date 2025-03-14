@@ -14,7 +14,7 @@ import {ThemeContext} from '../context/DarkThemeContext';
 
 const MaritalIntensionScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
   return (
     <View style={styles.container}>
@@ -80,10 +80,10 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(3.5),
       textAlign: 'center',
       fontFamily: 'Poppins-SemiBold',
-      color: theme === 'dark' ? '#E5E5E5' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
     },
     text: {
-      color: theme === 'dark' ? '#E5E5E5' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
 
       fontSize: responsiveFontSize(2),
       fontFamily: 'Poppins-Bold',

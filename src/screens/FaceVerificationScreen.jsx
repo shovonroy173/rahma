@@ -63,7 +63,7 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(3.5),
       fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     mainContainer: {
       display: 'flex',
@@ -73,7 +73,7 @@ const getStyles = theme =>
     text: {
       fontSize: responsiveFontSize(2),
       fontFamily: 'Poppins-Medium',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
 
       textAlign: 'center',
     },

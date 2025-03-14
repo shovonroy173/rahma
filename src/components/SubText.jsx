@@ -10,7 +10,7 @@ const SubText = ({navigation}) => {
       <Text
         style={{
           fontFamily: 'Poppins-Regular',
-          color: theme === 'dark' ? '#4b5563' : '#000000',
+          color: theme === 'dark' ? '#4b5563' : '#111827',
         }}>
         By Continuing you agree to our
       </Text>
@@ -20,7 +20,7 @@ const SubText = ({navigation}) => {
       <Text
         style={{
           fontFamily: 'Poppins-Regular',
-          color: theme === 'dark' ? '#4b5563' : '#000000',
+          color: theme === 'dark' ? '#4b5563' : '#111827',
         }}>
         and{' '}
       </Text>

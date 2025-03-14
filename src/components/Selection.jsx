@@ -39,13 +39,13 @@ const Selection = ({name, item, type}) => {
             <FontAwesome6
               name="handcuffs"
               size={24}
-              color={selectedValue === item?.title ? '#012a10' : 'gray'}
+              color={selectedValue === item?.title ? '#14532d' : 'gray'}
             />
           ) : (
             <MaterialCommunityIcons
               name="message-text-outline"
               size={24}
-              color={selectedValue === item?.title ? '#012a10' : 'gray'}
+              color={selectedValue === item?.title ? '#14532d' : 'gray'}
             />
           )}
 
@@ -78,8 +78,8 @@ const getStyles = theme =>
       backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
     },
     selectedContainer: {
-      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#47A146',
-      borderColor: theme === 'dark' ? '#1A3D1A' : '#47A146',
+      backgroundColor: theme === 'dark' ? '#16a34a' : '#47A146',
+      borderColor: theme === 'dark' ? '#16a34a' : '#47A146',
     },
     title: {
       fontSize: 16,
@@ -88,7 +88,7 @@ const getStyles = theme =>
       color: theme === 'dark' ? '#1C1C1C' : '#47A146',
     },
     selectedText: {
-      color: theme === 'dark' ? '#000000' : '#ffffff',
+      color: theme === 'dark' ? '#111827' : '#ffffff',
       opacity:1,
     },
   });

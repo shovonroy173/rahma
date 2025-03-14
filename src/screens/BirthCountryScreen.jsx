@@ -10,27 +10,30 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import React, { useContext, useEffect } from 'react';
+import React, {useContext, useEffect} from 'react';
 import ProgressContainer from '../components/ProgressContainer';
 import {useSelector} from 'react-redux';
 import Button from '../components/Button';
-// import Country from '../components/Country';
-import {CountrySelection} from 'react-native-country-list';
 import {Controller, useFormContext} from 'react-hook-form';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { ThemeContext } from '../context/DarkThemeContext';
+import {ThemeContext} from '../context/DarkThemeContext';
+import CountryPicker, {DARK_THEME} from 'react-native-country-picker-modal';
 
 const BirthCountryScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
   // const onCountrySelection = data => {
   //   console.log(data);
   // };
+  // const Country = lazy(() => import('../components/Country'));
+
   const {control, getValues, setValue} = useFormContext();
-  const savedValue = useSelector(state => state.form.formData['birthCountry'] || '');
+  const savedValue = useSelector(
+    state => state.form.formData['birthCountry'] || '',
+  );
   useEffect(() => {
     if (savedValue) {
       setValue('birthCountry', savedValue);
@@ -38,7 +41,7 @@ const BirthCountryScreen = ({navigation}) => {
       console.log('no cache data');
     }
   }, [savedValue, setValue]);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   return (
@@ -59,13 +62,18 @@ const BirthCountryScreen = ({navigation}) => {
                 <Text style={styles.titleText}>Do you Born?</Text>
               </View>
               <View style={styles.countryContainer}>
-                {/* <Country name="birthCountry" /> */}
-                {/* <CountrySelection action={item => onCountrySelection(item)} /> */}
                 <Controller
                   name="birthCountry"
                   control={control}
                   render={({field: {onChange, value}}) => (
-                    <CountrySelection action={item => onChange(item?.name)} />
+                    <CountryPicker
+                      withModal={false}
+                      withFilter
+                      withFlag
+                      withCallingCode
+                      theme={theme === 'dark' && DARK_THEME}
+                      onSelect={data => onChange(data?.name)}
+                    />
                   )}
                 />
                 {getValues('birthCountry') && (
@@ -93,50 +101,47 @@ const BirthCountryScreen = ({navigation}) => {
 
 const {width} = Dimensions.get('window');
 
-const getStyles = (theme)=> StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
 
-    padding: responsiveHeight(4),
-  },
-  mainContainer: {
-    display: 'flex',
-    gap: responsiveWidth(2),
-    alignItems: 'center',
-  },
-  contentContainer: {
-    display: 'flex',
-    gap: responsiveWidth(2),
-    alignItems: 'center',
-  },
-  countryContainer: {
-    width: width,
-    height: responsiveHeight(55),
-    paddingHorizontal: 20,
-  },
-  titleText: {
-    fontSize: responsiveFontSize(3),
-    textAlign: 'center',
-    fontFamily: 'Poppins-SemiBold',
-    color: theme === 'dark' ? '#ffffff' : '#000000',
-
-  },
-  date: {
-    fontSize: responsiveFontSize(2),
-    fontWeight: 600,
-    fontFamily: 'Poppins-SemiBold',
-    textAlign: 'center',
-    paddingVertical: responsiveHeight(1),
-    color: theme === 'dark' ? '#ffffff' : '#000000',
-
-  },
-  buttonContainer: {
-    paddingBottom: responsiveWidth(2),
-    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
-
-  },
-});
+      padding: responsiveHeight(4),
+    },
+    mainContainer: {
+      display: 'flex',
+      gap: responsiveWidth(2),
+      alignItems: 'center',
+    },
+    contentContainer: {
+      display: 'flex',
+      gap: responsiveWidth(2),
+      alignItems: 'center',
+    },
+    countryContainer: {
+      width: width,
+      height: responsiveHeight(55),
+      paddingHorizontal: 20,
+    },
+    titleText: {
+      fontSize: responsiveFontSize(3),
+      textAlign: 'center',
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#d1d5dbs' : '#000000',
+    },
+    date: {
+      fontSize: responsiveFontSize(2),
+      fontWeight: 600,
+      fontFamily: 'Poppins-SemiBold',
+      textAlign: 'center',
+      paddingVertical: responsiveHeight(1),
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
+    },
+    buttonContainer: {
+      paddingBottom: responsiveWidth(2),
+    },
+  });
 export default BirthCountryScreen;

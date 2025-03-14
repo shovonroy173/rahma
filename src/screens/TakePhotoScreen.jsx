@@ -15,7 +15,7 @@ const TakePhotoScreen = ({navigation}) => {
   // if (!hasPermission) return console.log('not permited');
   // if (device == null) return console.log('no device');
   const currentPage = useSelector(state => state.page.currentPage);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   return (
@@ -48,14 +48,14 @@ const getStyles = (theme)=> StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: theme === 'dark' ? '#333333' : '#E8E5E5',
+    backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
     padding: 30,
   },
   title: {
     fontSize: 30,
     fontWeight: 600,
     textAlign: 'center',
-    color: theme === 'dark' ? '#ffffff' : '#000000',
+    color: theme === 'dark' ? '#d1d5db' : '#000000',
 
   },
 });

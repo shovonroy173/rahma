@@ -67,6 +67,8 @@ const BioScreen = ({navigation}) => {
                   value={value}
                   placeholder="Describe yourself.."
                   style={styles.input}
+            placeholderTextColor={styles.placeholderColor}
+
                 />
               )}
             />
@@ -102,13 +104,13 @@ const getStyles = theme =>
       marginBottom: 10,
       fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
     },
     subtitle: {
       fontSize: responsiveFontSize(1.8),
       fontFamily: 'Poppins-Regular',
       marginBottom: 10,
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
     },
     input: {
       width: responsiveWidth(84),
@@ -121,6 +123,8 @@ const getStyles = theme =>
       textAlignVertical: 'top',
       padding: 20,
       fontFamily: 'Poppins-Regular',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
+
     },
     inputScrollContainer: {
       flexGrow: 1,
@@ -130,6 +134,8 @@ const getStyles = theme =>
       paddingVertical: 20,
       width: '100%',
     },
+    placeholderColor: theme === 'dark' ? '#888' : '#555',
+
   });
 
 export default BioScreen;

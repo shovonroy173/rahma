@@ -55,7 +55,7 @@ const ProfessionScreen = ({navigation}) => {
           <TextInput
             style={styles.searchInput}
             placeholder="Search profession..."
-            placeholderTextColor="#68AE67"
+            placeholderTextColor={theme === 'dark' ? '#14532d' : '#68AE67'}
             value={query}
             onChangeText={setQuery}
           />
@@ -119,7 +119,7 @@ const getStyles = theme =>
       fontFamily: 'Poppins-SemiBold',
       paddingHorizontal: responsiveWidth(4),
       textAlign: 'center',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     searchContainer: {
       flexDirection: 'row',
@@ -147,7 +147,7 @@ const getStyles = theme =>
     listItemText: {
       fontSize: responsiveFontSize(1.8),
       fontFamily: 'Poppins-Medium',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
     selectedItem: {
       borderBottomWidth: 1,

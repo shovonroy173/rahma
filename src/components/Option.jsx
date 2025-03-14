@@ -61,8 +61,12 @@ const Option = ({item, index, id}) => {
           </View>
           <Feather
             name="chevron-right"
-            size={24}
-            color={(watch(id)?.id === item.id && theme === 'dark') ? '#ffffff' : '#000000'}
+            size={30}
+            style={[
+              watch(id)?.id === item.id
+                ? styles.optionTextSelected
+                : styles.optionText,
+            ]}
           />
         </TouchableOpacity>
       )}

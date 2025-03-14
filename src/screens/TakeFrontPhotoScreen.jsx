@@ -13,7 +13,7 @@ const TakeFrontPhotoScreen = ({navigation}) => {
   // if (!hasPermission) return console.log('not permited');
   // if (device == null) return console.log('no device');
   const currentPage = useSelector(state => state.page.currentPage);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   return (
@@ -55,7 +55,7 @@ const getStyles = theme =>
       fontSize: 30,
       fontWeight: 600,
       textAlign: 'center',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#000000',
     },
   });
 

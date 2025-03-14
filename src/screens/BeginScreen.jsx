@@ -35,6 +35,10 @@ const BeginScreen = ({navigation}) => {
   const flatListRef = useRef(null);
   const dispatch = useDispatch();
 
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
+
+
   const renderItem = ({item}) => (
     <View style={styles.slide}>
       <ImageBackground
@@ -47,9 +51,17 @@ const BeginScreen = ({navigation}) => {
                 dispatch(prevPage());
                 navigation.goBack();
               }}>
-              <Icon name="left" size={24} />
+              <Icon
+                name="left"
+                size={24}
+                color={theme === 'dark' ? '#9ca3af' : '#000000'}
+              />
             </TouchableOpacity>
-            <FAIcon name="question-circle-o" size={24} />
+            <FAIcon
+              name="question-circle-o"
+              size={24}
+              color={theme === 'dark' ? '#9ca3af' : '#000000'}
+            />
           </View>
           <View>
             <View style={styles.slideContent}>
@@ -89,9 +101,6 @@ const BeginScreen = ({navigation}) => {
       </ImageBackground>
     </View>
   );
-
-  const theme = useContext(ThemeContext);
-  const styles = getStyles(theme);
 
   return (
     <View style={styles.container}>
@@ -188,12 +197,12 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(3),
       // fontWeight: 600,
       fontFamily: 'Poppins-SemiBold',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#f3f4f6' : '#000000',
     },
     subText: {
       fontSize: responsiveFontSize(2),
       fontFamily: 'Poppins-Medium',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#9ca3af' : '#000000',
     },
     colorText: {
       color: theme === 'dark' ? '#A1FF99' : '#47A146',
@@ -205,11 +214,11 @@ const getStyles = theme =>
       gap: responsiveHeight(1),
       padding: responsiveHeight(1),
       borderRadius: 40,
-      backgroundColor: '#9CCC9C99',
+      backgroundColor: theme === 'dark' ? '#587C58' : '#9CCC9C99',
     },
     slideText: {
       fontSize: responsiveFontSize(1.5),
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#9ca3af' : '#000000',
       fontFamily: 'Poppins-Regular',
     },
     dotsContainer: {

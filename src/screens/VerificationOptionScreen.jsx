@@ -10,7 +10,7 @@ import { ThemeContext } from '../context/DarkThemeContext';
 
 const VerificationOptionScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   return (
@@ -58,25 +58,25 @@ const getStyles = (theme) => StyleSheet.create({
   },
   divider: {
     height: 1,
-    backgroundColor: theme === 'dark' ? '#ffffff' : '#000000',
+    backgroundColor: theme === 'dark' ? '#d1d5db' : '#000000',
 
   },
   title: {
     fontSize: responsiveFontSize(3),
     fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
-    color: theme === 'dark' ? '#ffffff' : '#000000',
+    color: theme === 'dark' ? '#d1d5db' : '#000000',
   },
   text: {
     fontSize: responsiveFontSize(1.8),
     fontFamily: 'Poppins-SemiBold',
-    color: theme === 'dark' ? '#ffffff' : '#000000',
+    color: theme === 'dark' ? '#d1d5db' : '#000000',
 
   },
   text2: {
     fontSize: responsiveFontSize(1.8),
     fontFamily: 'Poppins-Regular',
-    color: theme === 'dark' ? '#ffffff' : '#000000',
+    color: theme === 'dark' ? '#d1d5db' : '#000000',
 
   },
   textContainer: {
@@ -88,7 +88,7 @@ const getStyles = (theme) => StyleSheet.create({
   footerText: {
     fontSize: responsiveFontSize(1.8),
     fontFamily: 'Poppins-SemiBold',
-    color: theme === 'dark' ? '#1A3D1A' : '#379A35',
+    color: theme === 'dark' ? '#14532d' : '#379A35',
   },
 });
 

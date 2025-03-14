@@ -28,7 +28,7 @@ const OtpScreen2 = ({navigation}) => {
             navigation={navigation}
           />
           <MainText
-            text1="he Verification Code Here"
+            text1="Enter the Verification Code Here"
             text2="A Verification Code Already Sent in your Phone."
           />
         </View>
@@ -49,10 +49,9 @@ const OtpScreen2 = ({navigation}) => {
         </ScrollView>
         <View style={styles.buttonContainer}>
           <Button
-            value={1}
             navigation={navigation}
             title="Verify Code"
-            path="Phone"
+            path="Begin"
             id="phoneOtp"
           />
         </View>
@@ -77,9 +76,6 @@ const getStyles = theme =>
     },
     buttonContainer: {
       paddingBottom: responsiveHeight(2),
-    },
-    text: {
-      color: theme === 'dark' ? '#ffffff' : '#000000',
     },
   });
 

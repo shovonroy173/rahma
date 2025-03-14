@@ -60,6 +60,7 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
     !watch(id) ||
     phoneInput?.current?.isValidNumber(getValues('phone')) === false ||
     (id === 'user' && (!watch(id).firstName || !watch(id).lastName)) ||
+    (id === 'salary' && (!watch(id)?.min || !watch(id)?.max)) ||
     (id === 'selectedOptions' &&
       (Object.keys(watch(id)).length === 0 || totalInterests === 0)) ||
     (id === 'selectedPersonalies' &&

@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View} from 'react-native';
-import React, { useContext, useEffect} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import React, {useContext, useEffect} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
 import PhoneInput from 'react-native-phone-number-input';
 import {validationRules} from '../utils/validation';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateFormData} from '../redux/slices/formSlice';
-import { ThemeContext } from '../context/DarkThemeContext';
+import {ThemeContext} from '../context/DarkThemeContext';
 const Phone = ({name, phoneInput}) => {
   const {
     control,
@@ -51,9 +51,9 @@ const Phone = ({name, phoneInput}) => {
             codeTextStyle={styles.codeText}
             flagButtonStyle={styles.flagButton}
             textInputStyle={styles.codeText}
+            // countryPickerButtonStyle={styles.flagContainer}
             // renderDropdownImage={() => null}
             autoFocus
-
           />
         )}
       />
@@ -66,46 +66,43 @@ const Phone = ({name, phoneInput}) => {
   );
 };
 
-const getStyles = (theme)=> StyleSheet.create({
-  phoneContainer: {
-    width: '100%',
-    height: 50,
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    gap: 10,
-  },
-  textContainer: {
-    paddingVertical: 0,
-    borderWidth: 1,
-    borderColor: theme === 'dark' ? '#d1d5db' : '#4b5563',
-    borderRadius: 10,
-    backgroundColor: 'transparent',
-  },
-  codeText: {
-    fontSize: 16,
-    color: theme === 'dark' ? '#d1d5db' : '#4b5563',
-    fontFamily: 'Poppins-SemiBold',
-  },
-  flagContainer: {
-    borderColor: theme === 'dark' ? '#d1d5db' : '#4b5563',
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    marginLeft: 5,
-  },
-  flagButton: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 8,
-    padding: 5,
-  },
+const getStyles = theme =>
+  StyleSheet.create({
+    phoneContainer: {
+      width: '100%',
+      height: 50,
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'row',
+      gap: 10,
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+    },
+    textContainer: {
+      paddingVertical: 0,
+      borderWidth: 1,
+      borderColor: theme === 'dark' ? '#d1d5db' : '#4b5563',
+      borderRadius: 10,
+      backgroundColor: theme === 'dark' ? '#000000' : '#e5e7eb',
+    },
+    codeText: {
+      fontSize: 16,
+      color: theme === 'dark' ? '#d1d5db' : '#4b5563',
+      fontFamily: 'Poppins-SemiBold',
+    },
+    flagButton: {
+      borderWidth: 1,
+      borderColor: theme === 'dark' ? '#d1d5db' : '#4b5563',
+      borderRadius: 8,
+      padding: 5,
+      backgroundColor: theme === 'dark' ? '#000000' : '#e5e7eb',
+    },
 
-  errorText: {
-    color: 'red',
-    fontSize: 12,
-    fontFamily: 'Poppins-Medium',
-    paddingVertical: 5,
-  },
-});
+    errorText: {
+      color: 'red',
+      fontSize: 12,
+      fontFamily: 'Poppins-Medium',
+      paddingVertical: 5,
+    },
+  });
 
 export default Phone;

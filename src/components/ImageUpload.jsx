@@ -34,7 +34,7 @@ const ImageUpload = ({name}) => {
         console.log('ImagePicker Error: ', response.errorCode);
       } else {
         console.log(response.assets[0]?.uri);
-        setCurrentOnChange(response.assets[0]?.uri);
+        currentOnChange && currentOnChange(response.assets[0]?.uri);
       }
     });
     setAlertVisible(false);
@@ -54,7 +54,7 @@ const ImageUpload = ({name}) => {
         console.log('ImagePicker Error: ', response.errorCode);
       } else {
         console.log(response.assets[0]?.uri);
-        setCurrentOnChange(response.assets[0]?.uri);
+        currentOnChange && currentOnChange(response.assets[0]?.uri);
       }
     });
     setAlertVisible(false);
@@ -64,7 +64,7 @@ const ImageUpload = ({name}) => {
 
   return (
     <>
-      {/* <Controller
+      <Controller
         name={name}
         control={control}
         render={({field: {onChange}}) => (
@@ -83,8 +83,8 @@ const ImageUpload = ({name}) => {
             )}
           </TouchableOpacity>
         )}
-      /> */}
-      <TouchableOpacity
+      />
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => {
           // setCurrentOnChange(() => onChange);
@@ -97,7 +97,7 @@ const ImageUpload = ({name}) => {
             <Icon name="plus" size={24} color={'#43A041'} />
           </View>
         )}
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <Modal
         transparent
         visible={alertVisible}

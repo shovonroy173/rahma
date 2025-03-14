@@ -140,11 +140,11 @@ const HomeScreen = ({navigation}) => {
                       <Ionicons
                         name="rocket-sharp"
                         size={24}
-                        color={theme === 'dark' ? '#1A3D1A' : '#379A35'}
+                        color={theme === 'dark' ? '#14532d' : '#379A35'}
                       />
                       <Text
                         style={{
-                          color: theme === 'dark' ? '#7A7676' : '#ffffff',
+                          color: theme === 'dark' ? '#e5e7eb' : '#f3f4f6',
                         }}>
                         Be Seen First
                       </Text>

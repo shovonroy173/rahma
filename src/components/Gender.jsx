@@ -1,10 +1,11 @@
 /* eslint-disable dot-notation */
 import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Controller, useFormContext} from 'react-hook-form';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateFormData} from '../redux/slices/formSlice';
+import { ThemeContext } from '../context/DarkThemeContext';
 
 const Gender = ({item}) => {
   const {control, getValues, setValue} = useFormContext();
@@ -18,6 +19,8 @@ const Gender = ({item}) => {
     }
   }, [savedValue, setValue]);
   const dispatch = useDispatch();
+ const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
 
   return (
     <Controller
@@ -52,7 +55,7 @@ const Gender = ({item}) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (theme)=> StyleSheet.create({
   singleImageContainer: {
     position: 'relative', // Ensures overlay can be positioned inside this container
   },
@@ -65,7 +68,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: responsiveWidth(40),
     height: responsiveWidth(40),
-    backgroundColor: 'rgba(120,120,120, 0.7)',
+    backgroundColor:theme === 'dark' ? 'rgba(20,20,10, 0.7)' : 'rgba(110,120,120, 0.7)',
     borderRadius: 100,
     zIndex: 10,
   },

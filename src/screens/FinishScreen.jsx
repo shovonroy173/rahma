@@ -42,7 +42,7 @@ const getStyles = theme =>
       flex: 1,
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: theme === 'dark' ? '#ffffff' : '#000000',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
 
       padding: 30,
     },
@@ -56,18 +56,18 @@ const getStyles = theme =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
     },
     title: {
       fontSize: 30,
       marginBottom: 10,
       fontWeight: 600,
       textAlign: 'center',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
     },
     title2: {
       fontSize: 16,
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
     },
   });
 

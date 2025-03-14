@@ -59,7 +59,7 @@ const getStyles = theme =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: theme === 'dark' ? '#1C1C1C' : '#F3F2F2',
+      backgroundColor: theme === 'dark' ? '#1C1C1C' : '#e5e7eb',
       borderRadius: 10,
       paddingHorizontal: 30,
       paddingVertical: 10,
@@ -72,11 +72,12 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(2),
       fontFamily: 'Poppins-Medium',
       opacity: theme === 'dark' ? 0.5 : 0.6,
-      // color: '#000000',
+      color: theme === 'dark' ? '#1C1C1C' : '#111827',
+
     },
     optionTextSelected: {
       fontSize: responsiveFontSize(2),
-      color: theme === 'dark' ? '#1C1C1C' : '#ffffff',
+      color: theme === 'dark' ? '#d1d5db' : '#ffffff',
 
       fontFamily: 'Poppins-SemiBold',
       opacity: 1,

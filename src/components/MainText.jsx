@@ -27,7 +27,7 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(3.5),
       textAlign: 'center',
       fontFamily: 'Poppins-SemiBold',
-      color: theme === 'dark' ? '#f3f4f6' : '#000000',
+      color: theme === 'dark' ? '#f3f4f6' : '#111827',
     },
     subText: {
       fontSize: 16,

@@ -27,7 +27,7 @@ const Calender = ({name}) => {
       console.log('no cache data');
     }
   }, [savedValue, setValue, name]);
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
   return (
@@ -67,7 +67,7 @@ const getStyles = (theme)=> StyleSheet.create({
     fontSize: 20,
     fontWeight: 600,
     fontFamily: 'Poppins-SemiBold',
-    color: theme === 'dark' ? '#ffffff' : '#000000',
+    color: theme === 'dark' ? '#d1d5db' : '#000000',
 
   },
 });
