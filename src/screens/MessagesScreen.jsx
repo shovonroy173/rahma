@@ -1,14 +1,22 @@
 import {View, Text, StyleSheet, Image} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ExploreButton from '../components/ExploreButton';
+import {ThemeContext} from '../context/DarkThemeContext';
+import {responsiveFontSize, responsiveWidth} from 'react-native-responsive-dimensions';
 
 const MessagesScreen = () => {
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <Text style={styles.title}>Your Chat</Text>
-        <Ionicons name="heart-dislike-outline" size={24} color={'black'} />
+        <Ionicons
+          name="heart-dislike-outline"
+          size={24}
+          color={theme === 'dark' ? '#e5e7eb' : '#18181b'}
+        />
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.mainContainer}>
@@ -24,7 +32,7 @@ const MessagesScreen = () => {
           <Text style={styles.name2}>
             This is where you will Chat with your Future Partner
           </Text>
-          <Text>Match with Someone Special and Chat for Free.</Text>
+          <Text style={styles.name2}>Match with Someone Special and Chat for Free.</Text>
           <ExploreButton title="Find a Match" type="bg" />
         </View>
       </View>
@@ -32,56 +40,67 @@ const MessagesScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  title: {
-    fontSize: 24,
-    textAlign: 'center',
-    fontWeight: 600,
-  },
-  topContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    gap: 100,
-    paddingVertical: 20,
-    paddingHorizontal: 30,
-  },
-  mainContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 20,
-  },
-  contentContainer: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  subContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 20,
-    paddingBottom: 60,
-  },
-  textContainer: {
-    gap: 15,
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: 600,
-    // textAlign: 'center',
-  },
-  name2: {
-    fontSize: 18,
-    fontWeight: 600,
-    textAlign: 'center',
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme === 'dark' ? 'black' : 'white',
+    },
+    title: {
+      fontSize: responsiveFontSize(3),
+      textAlign: 'center',
+      fontFamily: 'Poppins-Regular',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+    },
+    topContainer: {
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      gap: 70,
+      paddingVertical: 20,
+      paddingHorizontal: 30,
+    },
+    mainContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: responsiveWidth(3),
+    },
+    contentContainer: {
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    subContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 20,
+      paddingBottom: 60,
+    },
+    textContainer: {
+      gap: responsiveWidth(1),
+    },
+    name: {
+      fontSize: responsiveFontSize(3),
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+
+      // textAlign: 'center',
+    },
+    subname:{
+      fontSize: responsiveFontSize(1.5),
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+    },
+    name2: {
+      fontSize: responsiveFontSize(1.6),
+      fontFamily: 'Poppins-SemiBold',
+      textAlign: 'center',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+
+    },
+  });
 
 export default MessagesScreen;

@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import ImageUpload from '../components/ImageUpload';
 import {images, info, lookingFor} from '../../assets/data/data';
 // import Drawer from 'react-native-drawer';
@@ -19,6 +19,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const EditScreen = () => {
   // const drawerRef = useRef(null);
@@ -30,6 +31,8 @@ const EditScreen = () => {
   // const closeDrawer = () => {
   //   drawerRef.current.close();
   // };
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
   return (
     // <Drawer
     //   ref={drawerRef}
@@ -96,96 +99,101 @@ const EditScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // justifyContent: 'space-between',
-    gap: 20,
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#ffffff',
-  },
-  allImages: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 20,
-    alignItems: 'center',
-  },
-  guidelineButton: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 10,
-  },
-  guidelineText: {
-    color: '#43A041',
-    fontSize: 20,
-  },
-  title: {
-    fontSize: 25,
-    fontWeight: 600,
-  },
-  subContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 40,
-  },
-  mainContainer: {
-    gap: 20,
-  },
-  scrollContainer: {
-    flex: 1,
-    width: '100%',
-    gap: 40,
-  },
-  number: {
-    fontSize: 25,
-    fontWeight: 600,
-    backgroundColor: '#47A146',
-    color: '#ffffff',
-    paddingVertical: 5,
-    paddingHorizontal: 25,
-    borderRadius: 20,
-  },
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      // justifyContent: 'space-between',
+      gap: 20,
+      alignItems: 'center',
+      padding: 20,
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+    },
+    allImages: {
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 20,
+      alignItems: 'center',
+    },
+    guidelineButton: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 10,
+    },
+    guidelineText: {
+      color: '#43A041',
+      fontSize: 20,
+    },
+    title: {
+      fontFamily: 'Poppins-SemiBold',
+      fontSize: responsiveFontSize(2.3),
+    },
+    subContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 40,
+    },
+    mainContainer: {
+      gap: 20,
+    },
+    scrollContainer: {
+      flex: 1,
+      width: '100%',
+      gap: 40,
+    },
+    number: {
+      fontSize: responsiveFontSize(2.5),
+      backgroundColor: theme === 'dark' ? '#14532d' : '#379A35',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+      fontFamily: 'Poppins-SemiBold',
+      paddingVertical: 5,
+      paddingHorizontal: 25,
+      borderRadius: 20,
+    },
 
-  memberContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: responsiveHeight(1.5),
-    paddingHorizontal: responsiveWidth(4),
-    backgroundColor: '#98C097',
-    // opacity: 0.7,
-    borderRadius: 10,
-  },
-  memberTextContainer: {
-    width: responsiveWidth(50),
-  },
-  memberText: {
-    fontSize: responsiveFontSize(2.4),
-    color: 'white',
-    opacity: 0.7,
-    fontWeight: 600,
-  },
-  memberText2: {
-    fontSize: responsiveFontSize(1.4),
-    color: 'white',
-    opacity: 0.7,
-  },
+    memberContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingVertical: responsiveHeight(1.5),
+      paddingHorizontal: responsiveWidth(4),
+      backgroundColor: theme === 'dark' ? '#5D6A4B' : '#98C097',
+      // opacity: 0.7,
+      borderRadius: 10,
+    },
+    memberTextContainer: {
+      width: responsiveWidth(50),
+    },
+    memberText: {
+      fontSize: responsiveFontSize(2.4),
+      color: theme === 'dark' ? '#d1d5db' : '#f3f4f6',
+      opacity: 0.7,
+      fontFamily: 'Poppins-SemiBold',
+    },
+    memberText2: {
+      fontSize: responsiveFontSize(1.4),
+      color: theme === 'dark' ? '#6b7280' : '#e5e7eb',
+      opacity: 0.7,
+      fontFamily: 'Poppins-Regular',
+    },
 
-  learnMore: {
-    color: 'white',
-    backgroundColor: '#379A35',
-    paddingVertical: responsiveHeight(1),
-    paddingHorizontal: responsiveWidth(3),
-    borderRadius: 20,
-    fontSize: responsiveFontSize(1.6),
-    fontWeight: 600,
-    opacity: 1,
-  },
-});
+    learnMore: {
+      color: theme === 'dark' ? '#d1d5db' : '#f3f4f6',
+
+      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
+      padding: responsiveHeight(1),
+
+      paddingVertical: responsiveHeight(1),
+      paddingHorizontal: responsiveWidth(3),
+      borderRadius: 20,
+      fontSize: responsiveFontSize(1.6),
+      fontFamily: 'Poppins-SemiBold',
+      opacity: 1,
+    },
+  });
 // const drawerStyles = {
 //   drawer: {shadowColor: '#000', shadowOpacity: 0.5, shadowRadius: 3},
 // };

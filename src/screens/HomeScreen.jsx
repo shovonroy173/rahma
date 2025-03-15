@@ -144,7 +144,8 @@ const HomeScreen = ({navigation}) => {
                       />
                       <Text
                         style={{
-                          color: theme === 'dark' ? '#e5e7eb' : '#f3f4f6',
+                          color: '#e5e7eb',
+                          fontFamily: 'Poppins-Regular',
                         }}>
                         Be Seen First
                       </Text>
@@ -152,7 +153,7 @@ const HomeScreen = ({navigation}) => {
                     <Ionicons
                       name="notifications-outline"
                       size={24}
-                      color={theme === 'dark' ? '#7A7676' : '#ffffff'}
+                      color={'#7A7676'}
                     />
                   </View>
                 </View>
@@ -322,9 +323,11 @@ const getStyles = theme =>
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      justifyContent: 'center',
+      backgroundColor: '#27272a',
       borderRadius: 20,
-      padding: 10,
+      paddingVertical: 10,
+      paddingHorizontal: 15,
       gap: 10,
     },
     info: {
@@ -335,15 +338,17 @@ const getStyles = theme =>
       paddingHorizontal: 16,
       gap: 10,
       borderRadius: 15,
-      backgroundColor: theme === 'dark' ? '#FFFFFF' : '#313030',
+      backgroundColor:theme === 'dark' ? '#18181b' : '#313030',
     },
     infotext: {
-      color: theme === 'dark' ? '#7A7676' : '#ffffff',
+      fontFamily: 'Poppins-Regular',
+      color: theme === 'dark' ? '#e5e7eb' : '#4b5563',
     },
     nameContainer: {
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
+      // justifyContent: 'center',
       gap: 20,
     },
     bottomContainer: {
@@ -356,15 +361,15 @@ const getStyles = theme =>
       paddingBottom: 70,
     },
     name: {
-      color: theme === 'dark' ? '#7A7676' : '#ffffff',
-
-      fontSize: 30,
-      fontWeight: 600,
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+      fontFamily: 'Poppins-SemiBold',
+      fontSize: responsiveFontSize(3.5),
     },
     iconContainer: {
-      backgroundColor: theme === 'dark' ? '#7A7676' : '#ffffff',
+      backgroundColor: '#ffffff',
       borderRadius: 100,
       padding: 2,
+      marginBottom: 30,
     },
 
     iconContainerBg: {
@@ -422,14 +427,15 @@ const getStyles = theme =>
       gap: 10,
     },
     address: {
-      fontSize: 18,
-      color: theme === 'dark' ? '#7A7676' : '#ffffff',
+      fontSize: responsiveFontSize(2.2),
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+      fontFamily: 'Poppins-Medium',
     },
-    aboutContainer: {
-      flex: 1,
-      padding: 20,
-      backgroundColor: theme === 'dark' ? '#ffffff' : '#000000',
-    },
+    // aboutContainer: {
+    //   flex: 1,
+    //   padding: 20,
+    //   backgroundColor: theme === 'dark' ? '#ffffff' : '#000000',
+    // },
     aboutHeader: {fontSize: 22, fontWeight: 'bold', marginBottom: 10},
     aboutText: {fontSize: 16, lineHeight: 22, marginBottom: 10},
     featureContainer: {

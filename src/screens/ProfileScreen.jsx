@@ -10,7 +10,7 @@ import {
   Animated,
   FlatList,
 } from 'react-native';
-import React, {useEffect, useRef} from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -20,6 +20,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {features} from '../../assets/data/data';
+import {ThemeContext} from '../context/DarkThemeContext';
 const {width} = Dimensions.get('window');
 
 const ProfileScreen = ({navigation}) => {
@@ -27,6 +28,10 @@ const ProfileScreen = ({navigation}) => {
   const flatListRef = useRef(null);
   const intervalRef = useRef(null);
   const currentIndex = useRef(0);
+
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
+  console.log(theme);
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
@@ -97,7 +102,7 @@ const ProfileScreen = ({navigation}) => {
             <Ionicons name="rocket-sharp" size={24} color={'white'} />
             <Text style={styles.text}>0</Text>
           </View>
-          <Ionicons name="notifications-outline" size={24} color={'black'} />
+          <Ionicons name="notifications-outline" size={24} color={'#7A7676'} />
         </View>
       </View>
       <View style={styles.profileContainer}>
@@ -110,7 +115,7 @@ const ProfileScreen = ({navigation}) => {
           </View>
           <Text style={styles.profileName}>Name</Text>
           <TouchableOpacity onPress={() => navigation.navigate('EditPreview')}>
-            <Text>View Profile</Text>
+            <Text style={styles.profileName}>View Profile</Text>
           </TouchableOpacity>
         </View>
 
@@ -148,19 +153,35 @@ const ProfileScreen = ({navigation}) => {
           style={styles.editProfile}
           onPress={() => navigation.navigate('EditPreview')}>
           <Text style={styles.editProfileText}>Edit Profile</Text>
-          <Feather name="edit" size={24} color={'black'} />
+          <Feather
+            name="edit"
+            size={24}
+            color={theme === 'dark' ? '#e5e7eb' : '#18181b'}
+          />
         </TouchableOpacity>
         <View style={styles.editProfile}>
           <Text style={styles.editProfileText}>Settings</Text>
-          <Ionicons name="settings-outline" size={24} color={'black'} />
+          <Ionicons
+            name="settings-outline"
+            size={24}
+            color={theme === 'dark' ? '#e5e7eb' : '#18181b'}
+          />
         </View>
         <View style={styles.editProfile}>
           <Text style={styles.editProfileText}>Help & Support Center</Text>
-          <Feather name="shield" size={24} color={'black'} />
+          <Feather
+            name="shield"
+            size={24}
+            color={theme === 'dark' ? '#e5e7eb' : '#18181b'}
+          />
         </View>
         <View style={styles.editProfile}>
           <Text style={styles.editProfileText}>Invite friends</Text>
-          <Feather name="share-2" size={24} color={'black'} />
+          <Feather
+            name="share-2"
+            size={24}
+            color={theme === 'dark' ? '#e5e7eb' : '#18181b'}
+          />
         </View>
         <View style={styles.verifyContainer}>
           <View style={{flexDirection: 'row', gap: 5, alignItems: 'center'}}>
@@ -168,11 +189,11 @@ const ProfileScreen = ({navigation}) => {
             <MaterialCommunityIcons
               name="check-decagram"
               size={18}
-              color={'blue'}
+              color={theme === 'dark' ? '#60a5fa' : 'blue'}
             />
           </View>
 
-          <Text>
+          <Text style={styles.editProfileText2}>
             Verify your age and identity to receive more likes and matches
           </Text>
           <TouchableOpacity>
@@ -214,224 +235,250 @@ const ProfileScreen = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    // padding: 20,
-    backgroundColor: 'white',
-  },
-  topContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    paddingVertical: 20,
-    paddingHorizontal: 30,
-  },
-  notificationContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: responsiveWidth(2),
-  },
-  beseen: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#379A35',
-    borderRadius: 20,
-    paddingVertical: responsiveWidth(2),
-    paddingHorizontal: responsiveWidth(6),
-    gap: 20,
-  },
-  text: {
-    color: 'white',
-  },
-  profileInfo: {
-    alignItems: 'center',
-  },
-  profileContainer: {
-    width: '100%',
-    flex: 1,
-    justifyContent: 'space-between',
-    backgroundColor: '#e8ffe8',
-    padding: responsiveHeight(3),
-    gap: responsiveHeight(2),
-  },
-  imgContainer: {
-    padding: 5,
-    borderRadius: 100,
-    borderWidth: 4,
-    borderColor: '#379A35',
-    backgroundColor: 'white',
-  },
-  image: {
-    width: responsiveWidth(25),
-    height: responsiveWidth(25),
-    borderRadius: 100,
-    objectFit: 'cover',
-    borderWidth: 2,
-    borderColor: '#379A35',
-  },
-  profileName: {
-    // fontSize: 18,
-    fontWeight: 'bold',
-  },
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flexGrow: 1,
+      // padding: 20,
+    },
+    topContainer: {
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      paddingVertical: 20,
+      paddingHorizontal: 30,
+    },
+    notificationContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: responsiveWidth(2),
+    },
+    beseen: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: '#379A35',
+      borderRadius: 20,
+      paddingVertical: responsiveWidth(2),
+      paddingHorizontal: responsiveWidth(6),
+      gap: 20,
+    },
+    text: {
+      color: 'white',
+    },
+    profileInfo: {
+      alignItems: 'center',
+    },
+    profileContainer: {
+      width: '100%',
+      flex: 1,
+      justifyContent: 'space-between',
+      backgroundColor: theme === 'dark' ? '#000000' : '#e8ffe8',
+      padding: responsiveHeight(3),
+      gap: responsiveHeight(2),
+    },
+    imgContainer: {
+      padding: 5,
+      borderRadius: 100,
+      borderWidth: 4,
+      borderColor: theme === 'dark' ? '#14532d' : '#379A35',
+      backgroundColor: theme === 'dark' ? '#000000' : 'white',
+    },
+    image: {
+      width: responsiveWidth(25),
+      height: responsiveWidth(25),
+      borderRadius: 100,
+      objectFit: 'cover',
+      borderWidth: 2,
+      borderColor: '#379A35',
+    },
+    profileName: {
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+    },
 
-  memberContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: responsiveHeight(1),
-    paddingHorizontal: responsiveWidth(4),
-    backgroundColor: '#98C097',
-    // opacity: 0.7,
-    borderRadius: 10,
-  },
-  memberText: {
-    fontSize: responsiveFontSize(2),
-    color: 'white',
-    opacity: 0.7,
-  },
-  memberText2: {
-    fontSize: responsiveFontSize(1.5),
-    color: 'white',
-    opacity: 0.7,
-  },
-  learnMore: {
-    color: 'white',
-    backgroundColor: '#379A35',
-    paddingVertical: responsiveHeight(1),
-    paddingHorizontal: responsiveWidth(4),
-    borderRadius: 20,
-    fontSize: 16,
-    fontWeight: 600,
-    opacity: 1,
-  },
-  likesContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  likesCard: {
-    width: '48%',
-    backgroundColor: '#DCD8D8',
-    padding: responsiveHeight(1.5),
-    borderRadius: 20,
-    alignItems: 'center',
-    gap: responsiveHeight(1.5),
-    // justifyContent: 'space-between',
-  },
-  likesNumber: {
-    fontSize: responsiveFontSize(2.5),
-    fontWeight: 600,
-    textAlign: 'center',
-  },
-  likesText: {
-    fontSize: responsiveFontSize(2),
-    fontWeight: 600,
-    textAlign: 'center',
-  },
-  goGoldText: {
-    fontSize: responsiveFontSize(1.4),
-    color: 'gray',
-  },
-  upgradeBtn: {
-    // marginTop: 10,
-    backgroundColor: '#379A35',
-    paddingVertical: 8,
-    paddingHorizontal: 24,
-    borderRadius: 20,
-  },
+    memberContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingVertical: responsiveHeight(1.5),
+      paddingHorizontal: responsiveWidth(4),
+      backgroundColor: theme === 'dark' ? '#5D6A4B' : '#98C097',
+      // opacity: 0.7,
+      borderRadius: 10,
+    },
+    memberTextContainer: {
+      width: responsiveWidth(50),
+    },
+    memberText: {
+      fontSize: responsiveFontSize(2),
+      color: theme === 'dark' ? '#d1d5db' : '#f3f4f6',
+      opacity: 0.7,
+      fontFamily: 'Poppins-SemiBold',
+    },
+    memberText2: {
+      fontSize: responsiveFontSize(1.4),
+      color: theme === 'dark' ? '#6b7280' : '#e5e7eb',
+      opacity: 0.7,
+      fontFamily: 'Poppins-Regular',
+    },
 
-  upgradeBtn2: {
-    // marginTop: 10,
-    backgroundColor: '#28AED8',
-    paddingVertical: 8,
-    paddingHorizontal: 24,
-    borderRadius: 20,
-  },
-  upgradeText: {
-    color: 'white',
-    fontSize: responsiveFontSize(2),
-    fontWeight: 'bold',
-  },
+    learnMore: {
+      color: theme === 'dark' ? '#d1d5db' : '#f3f4f6',
 
-  editProfile: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: responsiveHeight(2),
-    borderRadius: 10,
-    backgroundColor: '#DCD8D8',
-  },
-  editProfileText: {
-    fontSize: responsiveFontSize(2),
-    fontWeight: 500,
-  },
-  verifyContainer: {
-    // flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    gap: responsiveHeight(1),
-    padding: responsiveWidth(4),
-    backgroundColor: '#DCD8D8',
-    // opacity: 0.7,
-    borderRadius: 10,
-  },
-  carouselContainer: {
-    flexDirection: 'row',
-    backgroundColor: '#DCD8D8',
-    borderRadius: 10,
-    width: '100%',
-  },
-  carouselContent: {
-    flex: 1,
-    padding: responsiveWidth(4),
-  },
-  buttonContainer: {
-    marginTop: 10,
-    alignSelf: 'flex-start',
-  },
-  imageContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    // padding: 10,
-  },
-  profileImage: {
-    width: responsiveWidth(25),
-    height: responsiveWidth(25),
-    borderRadius: 40,
-    objectFit: 'cover',
-  },
-  slide: {
-    width: width,
-  },
-  fixedDotsContainer: {
-    position: 'absolute',
-    top: 5,
-    // alignSelf: 'center',
-    flexDirection: 'row',
-    gap: 5,
-  },
-  dot: {
-    height: 8,
-    width: 20,
-    borderRadius: 4,
-  },
-  slideContent: {
-    width: '50%',
-    marginTop: 20,
-    gap: 10,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  desc: {
-    fontSize: 16,
-    flexWrap: 'wrap',
-    flexShrink: 'shrink',
-    // backgroundColor: 'red'
-  },
-});
+      backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
+      padding: responsiveHeight(1),
+
+      paddingVertical: responsiveHeight(1),
+      paddingHorizontal: responsiveWidth(3),
+      borderRadius: 20,
+      fontSize: responsiveFontSize(1.6),
+      fontFamily: 'Poppins-SemiBold',
+      opacity: 1,
+    },
+    likesContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    likesCard: {
+      width: '48%',
+      backgroundColor: theme === 'dark' ? '#3f3f46' : '#DCD8D8',
+      padding: responsiveHeight(1.5),
+      borderRadius: 20,
+      alignItems: 'center',
+      gap: responsiveHeight(1.5),
+      justifyContent: 'space-between',
+    },
+    likesNumber: {
+      fontSize: responsiveFontSize(2.5),
+      fontFamily: 'Poppins-Medium',
+      textAlign: 'center',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+    },
+    likesText: {
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-Medium',
+      textAlign: 'center',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+    },
+    goGoldText: {
+      fontSize: responsiveFontSize(1.4),
+      fontFamily: 'Poppins-Regular',
+      textAlign: 'center',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+    },
+    upgradeBtn: {
+      // marginTop: 10,
+      backgroundColor: theme === 'dark' ? '#14532d' : '#379A35',
+      paddingVertical: 8,
+      paddingHorizontal: 24,
+      borderRadius: 20,
+    },
+
+    upgradeBtn2: {
+      // marginTop: 10,
+      backgroundColor: theme === 'dark' ? '#1e3a8a' : '#28AED8',
+      paddingVertical: 8,
+      paddingHorizontal: 24,
+      borderRadius: 20,
+    },
+    upgradeText: {
+      textAlign: 'center',
+      fontFamily: 'Poppins-Medium',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+      fontSize: responsiveFontSize(2),
+    },
+
+    editProfile: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: responsiveHeight(2),
+      borderRadius: 10,
+      backgroundColor: theme === 'dark' ? '#3f3f46' : '#DCD8D8',
+    },
+    editProfileText: {
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-Medium',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+    },
+    editProfileText2: {
+      fontSize: responsiveFontSize(1.8),
+      fontFamily: 'Poppins-Medium',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+    },
+    verifyContainer: {
+      // flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      gap: responsiveHeight(1),
+      padding: responsiveWidth(4),
+      backgroundColor: theme === 'dark' ? '#3f3f46' : '#DCD8D8',
+
+      // opacity: 0.7,
+      borderRadius: 10,
+    },
+    carouselContainer: {
+      flexDirection: 'row',
+      backgroundColor: theme === 'dark' ? '#3f3f46' : '#DCD8D8',
+
+      borderRadius: 10,
+      width: '100%',
+    },
+    carouselContent: {
+      flex: 1,
+      padding: responsiveWidth(4),
+    },
+    buttonContainer: {
+      marginTop: 10,
+      alignSelf: 'flex-start',
+    },
+    imageContainer: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      // padding: 10,
+    },
+    profileImage: {
+      width: responsiveWidth(25),
+      height: responsiveWidth(25),
+      borderRadius: 40,
+      objectFit: 'cover',
+    },
+    slide: {
+      width: width,
+    },
+    fixedDotsContainer: {
+      position: 'absolute',
+      top: 5,
+      // alignSelf: 'center',
+      flexDirection: 'row',
+      gap: 5,
+    },
+    dot: {
+      height: 8,
+      width: 20,
+      borderRadius: 4,
+    },
+    slideContent: {
+      width: '50%',
+      marginTop: 20,
+      gap: 10,
+    },
+    title: {
+      fontSize: responsiveFontSize(2.2),
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+    },
+    desc: {
+      flexWrap: 'wrap',
+      flexShrink: 'shrink',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+
+      fontSize: responsiveFontSize(1.8),
+      fontFamily: 'Poppins-Medium',
+    },
+  });
 
 export default ProfileScreen;

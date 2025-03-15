@@ -1,9 +1,13 @@
 import {View, Text, ImageBackground, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {ThemeContext} from '../context/DarkThemeContext';
+import {responsiveFontSize} from 'react-native-responsive-dimensions';
 
 const PreviewScreen = () => {
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
   return (
     <ImageBackground
       source={require('../../assets/images/preview.webp')}
@@ -27,7 +31,11 @@ const PreviewScreen = () => {
               <Text style={styles.infotext}>Active Today</Text>
             </View>
             <View style={styles.info}>
-              <Ionicons name="briefcase-outline" size={30} color={'white'} />
+              <Ionicons
+                name="briefcase-outline"
+                size={30}
+                color={theme === 'dark' ? '#e5e7eb' : '#4b5563'}
+              />
               <Text style={styles.infotext}>Human Resource Professional</Text>
             </View>
           </View>
@@ -37,64 +45,69 @@ const PreviewScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    justifyContent: 'center',
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  },
-  info: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    gap: 10,
-    borderRadius: 15,
-    backgroundColor: '#313030',
-  },
-  infotext: {
-    color: 'white',
-  },
-  nameContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 20,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    padding: 40,
-  },
-  bottomContainer: {
-    display: 'flex',
-    gap: 20,
-  },
-  name: {
-    color: '#ffffff',
-    fontSize: 30,
-    fontWeight: 600,
-  },
-  iconContainer: {
-    backgroundColor: '#ffffff',
-    borderRadius: 100,
-    padding: 2,
-  },
-  descContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    // justifyContent: 'space-between',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    gap: 10,
-  },
-  address: {
-    fontSize: 18,
-    color: '#ffffff',
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    backgroundImage: {
+      flex: 1,
+      justifyContent: 'center',
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+    },
+    info: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: 8,
+      paddingHorizontal: 16,
+      gap: 10,
+      borderRadius: 15,
+      backgroundColor: theme === 'dark' ? '#27272a' : '#e5e7eb',
+    },
+    infotext: {
+      fontFamily: 'Poppins-Regular',
+      color: theme === 'dark' ? '#e5e7eb' : '#4b5563',
+    },
+    nameContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 20,
+    },
+    container: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      padding: 40,
+    },
+    bottomContainer: {
+      display: 'flex',
+      gap: 20,
+    },
+    name: {
+      color: theme === 'dark' ? '#e5e7eb' : '#4b5563',
+
+      fontSize: responsiveFontSize(3.5),
+      fontFamily: 'Poppins-SemiBold',
+    },
+    iconContainer: {
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+      borderRadius: 100,
+      padding: 2,
+    },
+    descContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      // justifyContent: 'space-between',
+      alignItems: 'center',
+      flexWrap: 'wrap',
+      gap: 10,
+    },
+    address: {
+      color: theme === 'dark' ? '#e5e7eb' : '#4b5563',
+
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-SemiBold',
+    },
+  });
 
 export default PreviewScreen;

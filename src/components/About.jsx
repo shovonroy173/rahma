@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -11,12 +11,12 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { ThemeContext } from '../context/DarkThemeContext';
+import {ThemeContext} from '../context/DarkThemeContext';
 
 const About = ({about, location}) => {
   // console.log(about);
-const {theme} = useContext(ThemeContext);
-const styles = getStyles(theme);
+  const {theme} = useContext(ThemeContext);
+  const styles = getStyles(theme);
   return (
     <View style={styles.container}>
       {/* About Mw */}
@@ -24,16 +24,31 @@ const styles = getStyles(theme);
         <Text style={styles.title}>About me</Text>
         <View style={styles.aboutContainer}>
           <View style={styles.featureContainer}>
-            <MaterialIcons name="height" size={24} />
-            <Text>{`${about?.height?.cm}cm (${about?.height?.ft}ft)`}</Text>
+            <MaterialIcons
+              name="height"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
+            <Text
+              style={
+                styles.feature
+              }>{`${about?.height?.cm}cm (${about?.height?.ft}ft)`}</Text>
           </View>
           <View style={styles.featureContainer}>
-            <MaterialCommunityIcons name="ring" size={24} />
-            <Text>{about?.maritalStatus.title}</Text>
+            <MaterialCommunityIcons
+              name="ring"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
+            <Text style={styles.feature}>{about?.maritalStatus.title}</Text>
           </View>
           <View style={styles.featureContainer}>
-            <MaterialCommunityIcons name="baby-face-outline" size={24} />
-            <Text>{`${
+            <MaterialCommunityIcons
+              name="baby-face-outline"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
+            <Text style={styles.feature}>{`${
               about?.presentCildren?.title === 'Yes'
                 ? 'I have Children'
                 : about?.presentCildren?.title === 'No'
@@ -48,22 +63,38 @@ const styles = getStyles(theme);
         <Text style={styles.title}>Religiosity</Text>
         <View style={styles.aboutContainer}>
           <View style={styles.featureContainer}>
-            <Feather name="moon" size={24} />
-            <Text>{about?.sect?.title}</Text>
+            <Feather
+              name="moon"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
+            <Text style={styles.feature}>{about?.sect?.title}</Text>
           </View>
           <View style={styles.featureContainer}>
-            <Feather name="moon" size={24} />
+            <Feather
+              name="moon"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
 
-            <Text>{about?.religiousType?.title}</Text>
+            <Text style={styles.feature}>{about?.religiousType?.title}</Text>
           </View>
           <View style={styles.featureContainer}>
-            <FontAwesome6 name="person-praying" size={24} />
-            <Text>{about?.prayingHabit?.title}</Text>
+            <FontAwesome6
+              name="person-praying"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
+            <Text style={styles.feature}>{about?.prayingHabit?.title}</Text>
           </View>
           <View style={styles.featureContainer}>
-            <MaterialIcons name="silverware-fork-knife" size={24} />
+            <MaterialIcons
+              name="silverware-fork-knife"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
 
-            <Text>{`${
+            <Text style={styles.feature}>{`${
               about?.eatingHabit?.id === 1
                 ? 'Only eats halal'
                 : about?.eatingHabit?.id === 2
@@ -74,9 +105,13 @@ const styles = getStyles(theme);
             }`}</Text>
           </View>
           <View style={styles.featureContainer}>
-            <MaterialIcons name="smoking-rooms" size={24} />
+            <MaterialIcons
+              name="smoking-rooms"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
 
-            <Text>{`${
+            <Text style={styles.feature}>{`${
               about?.smokingHabit?.id === 1
                 ? 'Smoker'
                 : about?.smokingHabit?.id === 2
@@ -87,9 +122,13 @@ const styles = getStyles(theme);
             }`}</Text>
           </View>
           <View style={styles.featureContainer}>
-            <Entypo name="drink" size={24} />
+            <Entypo
+              name="drink"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
 
-            <Text>{`${
+            <Text style={styles.feature}>{`${
               about?.drinkingHabit?.id === 1 ? 'Does drink' : "Doesn't drink"
             }`}</Text>
           </View>
@@ -100,8 +139,12 @@ const styles = getStyles(theme);
         <Text style={styles.title}>Future Plans</Text>
         <View style={styles.aboutContainer}>
           <View style={styles.featureContainer}>
-            <MaterialCommunityIcons name="baby-face-outline" size={24} />
-            <Text>
+            <MaterialCommunityIcons
+              name="baby-face-outline"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
+            <Text style={styles.feature}>
               {`${
                 about?.futureChildren?.id === 1
                   ? 'Wants Children'
@@ -114,8 +157,12 @@ const styles = getStyles(theme);
             </Text>
           </View>
           <View style={styles.featureContainer}>
-            <MaterialCommunityIcons name="airplane" size={24} />
-            <Text>{`${
+            <MaterialCommunityIcons
+              name="airplane"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
+            <Text style={styles.feature}>{`${
               about?.moveAbroad.id === 1
                 ? 'Will move abroad'
                 : about?.moveAbroad.id === 2
@@ -135,7 +182,7 @@ const styles = getStyles(theme);
               .map(item => (
                 <View key={item?.id} style={styles.featureContainerNonBg}>
                   <Text>{item?.icon}</Text>
-                  <Text>{item?.title}</Text>
+                  <Text style={styles.feature}>{item?.title}</Text>
                 </View>
               ))}
         </View>
@@ -150,7 +197,7 @@ const styles = getStyles(theme);
               .map(item => (
                 <View key={item?.id} style={styles.featureContainerNonBg}>
                   <Text>{item?.icon}</Text>
-                  <Text>{item?.title}</Text>
+                  <Text style={styles.feature}>{item?.title}</Text>
                 </View>
               ))}
         </View>
@@ -160,12 +207,20 @@ const styles = getStyles(theme);
         <Text style={styles.title}>Education and career</Text>
         <View style={styles.aboutContainer}>
           <View style={styles.featureContainer}>
-            <MaterialCommunityIcons name="book-education" size={24} />
-            <Text>{about?.education?.title}</Text>
+            <MaterialCommunityIcons
+              name="book-education"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
+            <Text style={styles.feature}>{about?.education?.title}</Text>
           </View>
           <View style={styles.featureContainer}>
-            <MaterialCommunityIcons name="briefcase-variant" size={24} />
-            <Text>{about?.profession}</Text>
+            <MaterialCommunityIcons
+              name="briefcase-variant"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
+            <Text style={styles.feature}>{about?.profession}</Text>
           </View>
         </View>
       </View>
@@ -174,31 +229,43 @@ const styles = getStyles(theme);
         <Text style={styles.title}>Languages and ethinicity</Text>
         <View style={styles.aboutContainer}>
           <View style={styles.featureContainer}>
-            <MaterialCommunityIcons name="book-education" size={24} />
-            <Text>{about?.birthCountry}</Text>
+            <MaterialCommunityIcons
+              name="book-education"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
+            <Text style={styles.feature}>{about?.birthCountry}</Text>
           </View>
           <View style={styles.featureContainer}>
-            <MaterialCommunityIcons name="briefcase-variant" size={24} />
-            <Text>{`Grew up in ${about?.grownUp}`}</Text>
+            <MaterialCommunityIcons
+              name="briefcase-variant"
+              size={24}
+              color={theme === 'dark' ? '#d1d5db' : '#111827'}
+            />
+            <Text style={styles.feature}>{`Grew up in ${about?.grownUp}`}</Text>
           </View>
         </View>
       </View>
       {/* Bio */}
       <View style={styles.mainContainer}>
         <Text style={styles.title}>Bio</Text>
-        <Text>{about?.bio}</Text>
+        <Text style={styles.feature}>{about?.bio}</Text>
       </View>
       {/* Verified profile */}
       <View style={styles.verifiedContainer}>
         <View style={styles.verifiedContainerTop}>
           <Text style={styles.verifiedContainertitle}>Verified profile</Text>
-          <MaterialCommunityIcons name="alert-circle-outline" size={24} />
+          <MaterialCommunityIcons
+            name="alert-circle-outline"
+            size={24}
+            color={theme === 'dark' ? '#d1d5db' : '#111827'}
+          />
         </View>
         <View style={styles.verifiedContainerTop}>
           <MaterialCommunityIcons
             name="check-decagram"
             size={24}
-            color={'green'}
+            color={theme === 'dark' ? '#14532d' : '#379A35'}
           />
           <Text style={styles.verifiedContainertext}>
             {`${about?.user?.firstName} ${about?.user?.lastName}'s main photo has been verified.`}
@@ -207,7 +274,11 @@ const styles = getStyles(theme);
       </View>
       {/* Share profile */}
       <View style={styles.shareContainer}>
-        <MaterialCommunityIcons name="share-variant-outline" size={24} />
+        <MaterialCommunityIcons
+          name="share-variant-outline"
+          size={24}
+          color={theme === 'dark' ? '#d1d5db' : '#111827'}
+        />
         <Text style={styles.verifiedContainertext}>Share profile</Text>
       </View>
       {/* <hr /> */}
@@ -215,15 +286,27 @@ const styles = getStyles(theme);
       {/* icons */}
       <View style={styles.iconContentContainer}>
         <View style={styles.iconContainer}>
-          <MaterialCommunityIcons name="star-outline" size={40} />
+          <MaterialCommunityIcons
+            name="star-outline"
+            size={40}
+            color={theme === 'dark' ? '#d1d5db' : '#111827'}
+          />
           <Text style={styles.icontext}>Favourite</Text>
         </View>
         <View style={styles.iconContainer}>
-          <MaterialCommunityIcons name="block-helper" size={40} />
+          <MaterialCommunityIcons
+            name="block-helper"
+            size={40}
+            color={theme === 'dark' ? '#d1d5db' : '#111827'}
+          />
           <Text style={styles.icontext}>Block</Text>
         </View>
         <View style={styles.iconContainer}>
-          <MaterialCommunityIcons name="flag-variant-outline" size={40} />
+          <MaterialCommunityIcons
+            name="flag-variant-outline"
+            size={40}
+            color={theme === 'dark' ? '#d1d5db' : '#111827'}
+          />
           <Text style={styles.icontext}>Report</Text>
         </View>
       </View>
@@ -236,105 +319,113 @@ const styles = getStyles(theme);
   );
 };
 
-const getStyles =(theme)=> StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: responsiveHeight(3),
-    gap: responsiveHeight(5),
-    backgroundColor: theme === 'dark' ? '#000000' : 'white',
-    // alignItems: 'center',
-  },
-  aboutContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    gap: 20,
-    flexWrap: 'wrap',
-  },
-  title: {
-    fontSize: responsiveFontSize(2.4),
-    fontWeight: 'bold',
-    color: theme === 'dark' ? '#d1d5db' : '#111827',
-
-  },
-  mainContainer: {
-    flex: 1,
-    gap: 10,
-  },
-  featureContainer: {
-    backgroundColor: theme === 'dark' ? '#27272a'  : '#f3eded',
-    paddingVertical: responsiveWidth(1),
-    paddingHorizontal: responsiveWidth(4),
-    borderRadius: 20,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 5,
-    // width: responsiveWidth(30),
-  },
-  featureContainerNonBg: {
-    borderWidth: 2,
-    borderColor: '#f3eded',
-    paddingVertical: responsiveWidth(1),
-    paddingHorizontal: responsiveWidth(4),
-    borderRadius: 20,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 5,
-  },
-  verifiedContainer: {
-    backgroundColor: '#f3eded',
-    padding: responsiveWidth(4),
-    borderRadius: 15,
-    gap: responsiveHeight(2),
-  },
-  verifiedContainerTop: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: responsiveWidth(2),
-  },
-  verifiedContainertitle: {
-    fontSize: responsiveFontSize(2.4),
-    fontWeight: 600,
-  },
-  verifiedContainertext: {
-    fontSize: responsiveFontSize(2),
-    // fontWeight: 600,
-    paddingHorizontal: responsiveWidth(2),
-  },
-  shareContainer: {
-    flexDirection: 'row',
-    gap: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  hr: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#f3eded',
-    marginVertical: 10,
-  },
-  iconContentContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    // backgroundColor: 'red',
-    // width: responsiveWidth(80),
-    paddingHorizontal: responsiveWidth(4),
-  },
-  iconContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 2,
-  },
-  icontext: {
-    fontSize: responsiveFontSize(2),
-    fontWeight: 500,
-  },
-});
+const getStyles = theme =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: responsiveHeight(3),
+      gap: responsiveHeight(5),
+      backgroundColor: theme === 'dark' ? '#000000' : 'white',
+      // alignItems: 'center',
+    },
+    aboutContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      gap: 20,
+      flexWrap: 'wrap',
+    },
+    title: {
+      fontSize: responsiveFontSize(2.4),
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
+    },
+    mainContainer: {
+      flex: 1,
+      gap: 10,
+    },
+    feature: {
+      fontFamily: 'Poppins-Regular',
+      color: theme === 'dark' ? '#e5e7eb' : '#4b5563',
+    },
+    featureContainer: {
+      backgroundColor: theme === 'dark' ? '#27272a' : '#e5e7eb',
+      paddingVertical: responsiveWidth(1),
+      paddingHorizontal: responsiveWidth(4),
+      borderRadius: 20,
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 5,
+      // width: responsiveWidth(30),
+    },
+    featureContainerNonBg: {
+      borderWidth: 2,
+      borderColor: theme === 'dark' ? '#e5e7eb' : '#4b5563',
+      paddingVertical: responsiveWidth(1),
+      paddingHorizontal: responsiveWidth(4),
+      borderRadius: 20,
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 5,
+    },
+    verifiedContainer: {
+      backgroundColor: theme === 'dark' ? '#e5e7eb' : '#f3eded',
+      paddingVertical: responsiveWidth(4),
+      paddingHorizontal: responsiveHeight(2),
+      borderRadius: 15,
+      gap: responsiveHeight(2),
+    },
+    verifiedContainerTop: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: responsiveWidth(2),
+    },
+    verifiedContainertitle: {
+      fontSize: responsiveFontSize(2.4),
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
+    },
+    verifiedContainertext: {
+      fontSize: responsiveFontSize(1.8),
+      fontFamily: 'Poppins-Medium',
+      paddingHorizontal: responsiveWidth(2),
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
+    },
+    shareContainer: {
+      flexDirection: 'row',
+      gap: 20,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    hr: {
+      borderBottomWidth: 1,
+      borderBottomColor: theme === 'dark' ? '#d1d5db' : '#111827',
+      marginVertical: 10,
+    },
+    iconContentContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      // backgroundColor: 'red',
+      // width: responsiveWidth(80),
+      paddingHorizontal: responsiveWidth(4),
+    },
+    iconContainer: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 2,
+    },
+    icontext: {
+      fontSize: responsiveFontSize(2),
+      fontFamily: 'Poppins-Medium',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
+    },
+  });
 
 export default About;
