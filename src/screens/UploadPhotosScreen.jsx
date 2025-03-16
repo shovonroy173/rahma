@@ -69,10 +69,7 @@ const UploadPhotosScreen = ({navigation}) => {
         </View>
         <View style={styles.allImages}>
           {images.map(item => (
-            // <Suspense
-            //   fallback={<ActivityIndicator size="large" color="#0000ff" />} >
-            <ImageUpload key={item.id} name={`images.${item.title}`} />
-            // </Suspense>
+            <ImageUpload key={item.id} name={`images${item?.name}`} />
           ))}
           <TouchableOpacity onPress={openDrawer} style={styles.guidelineButton}>
             <Icon

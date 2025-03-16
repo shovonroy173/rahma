@@ -66,6 +66,7 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
     (id === 'selectedPersonalies' &&
       (Object.keys(watch(id)).length === 0 || totalInterests === 0));
 
+
   const {theme} = useContext(ThemeContext);
   const styles = getStyles(theme);
 
@@ -75,9 +76,9 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
         if (isDisabled) {
           console.log('handle submit Error', errors[id]);
         } else {
-          if (path === 'BottomNavigator') {
+          // if (path === 'BottomNavigator') {
             handleSubmit(onSubmit)();
-          }
+          // }
           // handleSubmit(onSubmit)();
 
           dispatch(nextPage());

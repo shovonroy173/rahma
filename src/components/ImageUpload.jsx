@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -6,8 +6,9 @@ import {
   StyleSheet,
   Modal,
   Text,
+  ActivityIndicator,
 } from 'react-native';
-import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 import {Controller, useFormContext} from 'react-hook-form';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {
@@ -15,29 +16,35 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {ThemeContext} from '../context/DarkThemeContext';
+import {Camera, useCameraDevice} from 'react-native-vision-camera';
 
 const ImageUpload = ({name}) => {
-  const {control, watch} = useFormContext();
+  const {control} = useFormContext();
   const [alertVisible, setAlertVisible] = useState(false);
+  const [isCameraActive, setIsCameraActive] = useState(false);
   const [currentOnChange, setCurrentOnChange] = useState(null);
-  const openCamera = () => {
-    const options = {
-      mediaType: 'photo',
-      maxWidth: 500,
-      maxHeight: 500,
-      quality: 0.3,
-    };
-    launchCamera(options, response => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.errorCode) {
-        console.log('ImagePicker Error: ', response.errorCode);
-      } else {
-        console.log(response.assets[0]?.uri);
-        currentOnChange && currentOnChange(response.assets[0]?.uri);
+  const cameraRef = useRef(null);
+  const [photoPath, setPhotoPath] = useState(null);
+  const {theme} = useContext(ThemeContext);
+
+  useEffect(() => {
+    (async () => {
+      const cameraPermissionStatus = await Camera.requestCameraPermission();
+      if (cameraPermissionStatus !== 'granted') {
+        console.log('Camera permission denied');
       }
-    });
+    })();
+  }, []);
+
+  const device = useCameraDevice('front');
+
+  const openCamera = () => {
+    setIsCameraActive(true);
     setAlertVisible(false);
+  };
+
+  const closeCamera = () => {
+    setIsCameraActive(false);
   };
 
   const openGallery = () => {
@@ -54,13 +61,28 @@ const ImageUpload = ({name}) => {
         console.log('ImagePicker Error: ', response.errorCode);
       } else {
         console.log(response.assets[0]?.uri);
+        setPhotoPath(response.assets[0]?.uri);
         currentOnChange && currentOnChange(response.assets[0]?.uri);
       }
     });
     setAlertVisible(false);
   };
-  const {theme} = useContext(ThemeContext);
+
+  const handleTakePhoto = async () => {
+    if (cameraRef.current) {
+      try {
+        const photo = await cameraRef.current.takePhoto();
+        setPhotoPath(`file://${photo.path}`);
+        currentOnChange && currentOnChange(`file://${photo.path}`);
+        setIsCameraActive(false);
+      } catch (error) {
+        console.log('Error taking photo:', error);
+      }
+    }
+  };
+
   const styles = getStyles(theme);
+  console.log(photoPath);
 
   return (
     <>
@@ -69,13 +91,12 @@ const ImageUpload = ({name}) => {
         control={control}
         render={({field: {onChange}}) => (
           <TouchableOpacity
-            style={styles.button}
             onPress={() => {
               setCurrentOnChange(() => onChange);
               setAlertVisible(true);
             }}>
-            {watch(name) ? (
-              <Image source={{uri: watch(name)}} style={styles.image} />
+            {photoPath ? (
+              <Image source={{uri: photoPath}} style={styles.image} />
             ) : (
               <View style={styles.uploadButton}>
                 <Icon name="plus" size={24} color={'#43A041'} />
@@ -84,20 +105,37 @@ const ImageUpload = ({name}) => {
           </TouchableOpacity>
         )}
       />
-      {/* <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          // setCurrentOnChange(() => onChange);
-          setAlertVisible(true);
-        }}>
-        {currentOnChange ? (
-          <Image source={{uri: currentOnChange}} style={styles.image} />
-        ) : (
-          <View style={styles.uploadButton}>
-            <Icon name="plus" size={24} color={'#43A041'} />
-          </View>
-        )}
-      </TouchableOpacity> */}
+
+      {/* Camera Full-Screen Modal */}
+      <Modal visible={isCameraActive} animationType="slide" transparent={false}>
+        <View style={styles.cameraContainer}>
+          {device ? (
+            <Camera
+              style={StyleSheet.absoluteFill}
+              ref={cameraRef}
+              device={device}
+              isActive={isCameraActive}
+              photo={true}
+            />
+          ) : (
+            <ActivityIndicator size="large" color="#1C6758" />
+          )}
+
+          {/* Capture Button */}
+          <TouchableOpacity
+            style={styles.captureButton}
+            onPress={handleTakePhoto}>
+            <Text style={styles.captureButtonText}>📸</Text>
+          </TouchableOpacity>
+
+          {/* Close Camera */}
+          <TouchableOpacity style={styles.closeButton} onPress={closeCamera}>
+            <Text style={styles.closeButtonText}>❌</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
+      {/* Gallery & Camera Selection Modal */}
       <Modal
         transparent
         visible={alertVisible}
@@ -130,11 +168,6 @@ const ImageUpload = ({name}) => {
 
 const getStyles = theme =>
   StyleSheet.create({
-    image: {
-      width: responsiveWidth(25),
-      height: responsiveHeight(18),
-      objectFit: 'cover',
-    },
     uploadButton: {
       width: responsiveWidth(25),
       height: responsiveHeight(18),
@@ -144,6 +177,38 @@ const getStyles = theme =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    cameraContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#000',
+    },
+    captureButton: {
+      position: 'absolute',
+      bottom: 50,
+      width: 100,
+      height: 100,
+      backgroundColor: '#43A041',
+      borderRadius: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    captureButtonText: {
+      color: '#fff',
+      fontSize: 25,
+    },
+    closeButton: {
+      position: 'absolute',
+      top: 50,
+      right: 20,
+      backgroundColor: '#e74c3c',
+      padding: 10,
+      borderRadius: 10,
+    },
+    closeButtonText: {
+      color: '#fff',
+      fontSize: 16,
     },
     overlay: {
       flex: 1,
@@ -179,8 +244,7 @@ const getStyles = theme =>
       alignItems: 'center',
     },
     optionText: {
-      color: theme === 'dark' ? '#27272a' : '#ffffff',
-
+      color: '#ffffff',
       fontSize: 16,
     },
     cancelButton: {
@@ -190,237 +254,11 @@ const getStyles = theme =>
       color: theme === 'dark' ? '#d45d5d' : '#e74c3c',
       fontSize: 16,
     },
+    image: {
+      width: responsiveWidth(25),
+      height: responsiveHeight(18),
+      objectFit: 'cover',
+    },
   });
 
 export default ImageUpload;
-
-// import {
-//   View,
-//   TouchableOpacity,
-//   Image,
-//   StyleSheet,
-//   Alert,
-//   // Platform,
-// } from 'react-native';
-// import React, {useState} from 'react';
-// import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
-// import {Controller, useFormContext} from 'react-hook-form';
-// import Icon from 'react-native-vector-icons/AntDesign';
-// // import {AppState} from 'react-native';
-// import {validationRules} from '../utils/validation';
-// import {
-//   responsiveHeight,
-//   responsiveWidth,
-// } from 'react-native-responsive-dimensions';
-// // import ImagePicker from 'react-native-image-crop-picker';
-// // import {
-// //   request,
-// //   check,
-// //   requestMultiple,
-// //   PERMISSIONS,
-// //   RESULTS,
-// // } from 'react-native-permissions';
-
-// const ImageUpload = ({name}) => {
-//   const {control, watch} = useFormContext();
-//   // const [formData, setFormData] = useState();
-
-//   // console.log(formData);
-
-//   // const requestCameraPermission = async () => {
-//   //   const cameraPermission =
-//   //     Platform.OS === 'android' ? PERMISSIONS.ANDROID.CAMERA : PERMISSIONS.IOS.CAMERA;
-//   //   const storagePermission = PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE;
-
-//   //   try {
-//   //     if (Platform.OS === 'android') {
-//   //       const statuses = await requestMultiple([cameraPermission, storagePermission]);
-//   //       if (statuses[cameraPermission] === RESULTS.GRANTED) {
-//   //         openCamera();
-//   //       } else {
-//   //         Alert.alert('Permission Denied', 'Camera access is required to take photos.');
-//   //       }
-//   //     } else {
-//   //       const status = await request(cameraPermission);
-//   //       if (status === RESULTS.GRANTED) {
-//   //         openCamera();
-//   //       } else {
-//   //         Alert.alert('Permission Denied', 'Camera access is required to take photos.');
-//   //       }
-//   //     }
-//   //   } catch (error) {
-//   //     console.log('Permission error:', error);
-//   //   }
-//   // };
-//   // const requestCameraPermission = async () => {
-//   //   if (Platform.OS === 'android') {
-//   //     const result = await request(PERMISSIONS.ANDROID.CAMERA);
-//   //     if (result === RESULTS.GRANTED) {
-//   //       openCamera();
-//   //     } else {
-//   //       Alert.alert('Permission Denied', 'Camera access is required.');
-//   //     }
-//   //   } else {
-//   //     openCamera(); // iOS handles permissions internally
-//   //   }
-//   // };
-//   const openCamera = async onChange => {
-//     console.log('camera');
-
-//     const options = {
-//       mediaType: 'photo',
-//       // includeBase64: false,
-//       // maxHeight: 2000,
-//       // maxWidth: 2000,
-//       // saveToPhotos: true,
-//     };
-
-//  await  launchCamera(options, response => {
-//       console.log(response);
-
-//       if (response.didCancel) {
-//         console.log('User cancelled camera', response);
-//       } else if (response.errorCode) {
-//         console.log('Camera Error:', response, response.errorMessage);
-//       } else {
-//         const selectedImage = response.assets[0]?.uri;
-//         // setFormData(prev => ({
-//         //   ...prev,
-//         //   image: selectedImage,
-//         // }));
-//         onChange(selectedImage);
-//       }
-//     });
-
-//     // try {
-//     //   await ImagePicker.openCamera({
-//     //     width: 300,
-//     //     height: 400,
-//     //     // cropping: true,
-//     //   }).then(image => {
-//     //     console.log(image);
-//     //     // const imgPath = image?.path;
-//     //     onChange(image);
-//     //     setFormData(image);
-//     //   });
-//     // } catch (error) {
-//     //   console.log(error);
-//     // }
-//   };
-//   // console.log('image path', formData);
-
-//   // const openCamera = onChange => {
-//   //   const options = {
-//   //     mediaType: 'photo',
-//   //     includeBase64: false,
-//   //     maxHeight: 2000,
-//   //     maxWidth: 2000,
-//   //     saveToPhotos: true,
-//   //   };
-
-//   //   const handleAppStateChange = nextAppState => {
-//   //     if (nextAppState === 'active') {
-//   //       launchCamera(options, response => {
-//   //         if (response.didCancel) {
-//   //           console.log('User cancelled camera');
-//   //         } else if (response.errorCode) {
-//   //           console.log('Camera Error:', response.errorMessage);
-//   //         } else {
-//   //           let imageUri = response.assets?.[0]?.uri;
-//   //           onChange(imageUri);
-//   //         }
-//   //       });
-//   //     }
-//   //   };
-
-//   //   AppState.addEventListener('change', handleAppStateChange);
-//   //   launchCamera(options);
-
-//   //   // Cleanup when camera is opened
-//   //   return () => {
-//   //     AppState.removeEventListener('change', handleAppStateChange);
-//   //   };
-//   // };
-
-//   const openGallery = onChange => {
-//     const options = {
-//     mediaType: 'photo',
-//       includeBase64: false,
-//       maxHeight: 2000,
-//       maxWidth: 2000,
-//     };
-
-//     launchImageLibrary(options, response => {
-//       if (response.didCancel) {
-//         console.log('User cancelled gallery');
-//       } else if (response.errorCode) {
-//         console.log('Gallery Error:', response.errorMessage);
-//       } else {
-//         const selectedImage = response.assets[0]?.uri;
-//         // setFormData(prev => ({
-//         //   ...prev,
-//         //   image: selectedImage,
-//         // }));
-//         console.log(selectedImage);
-//         onChange(selectedImage);
-//       }
-//     });
-//   };
-
-//   return (
-//     <Controller
-//       name={name}
-//       control={control}
-//       rules={validationRules[name]}
-//         render={({field: {onChange}}) => (
-//           // <View>
-//           <TouchableOpacity
-//             style={styles.button}
-//             onPress={() => {
-//               Alert.alert('Upload Photo', 'Choose an option', [
-//                 {text: 'Take Photo', onPress: () => openCamera(onChange)},
-//                 {
-//                   text: 'Choose from Gallery',
-//                   onPress: () => openGallery(onChange),
-//                 },
-//                 {text: 'Cancel', style: 'cancel'},
-//               ]);
-//             }}>
-//             {
-//             // watch(name) ?
-//             //  (
-//             //   <Image source={{uri: watch(name)?.path}} style={styles.image} />
-//             // )
-//             //  :
-//               (
-//               <View style={styles.uploadButton}>
-//                 <Icon name="plus" size={24} color={'#43A041'} />
-//               </View>
-//             )
-//             }
-//           </TouchableOpacity>
-//           // </View>
-//         )}
-//     />
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   image: {
-//     width: responsiveWidth(25),
-//     height: responsiveHeight(18),
-//     objectFit: 'cover',
-//   },
-//   uploadButton: {
-//     width: responsiveWidth(25),
-//     height: responsiveHeight(18),
-//     borderStyle: 'dashed',
-//     borderWidth: 2,
-//     borderColor: '#43A041',
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
-
-// export default ImageUpload;

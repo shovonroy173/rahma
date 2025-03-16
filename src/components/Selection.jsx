@@ -83,7 +83,7 @@ const getStyles = theme =>
     },
     title: {
       fontSize: 16,
-      fontWeight: 600,
+      fontFamily: 'Poppins-SemiBold',
       opacity: theme === 'dark' ? 0.8 : 0.5,
       color: theme === 'dark' ? '#1C1C1C' : '#47A146',
     },
