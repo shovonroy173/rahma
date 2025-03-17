@@ -107,12 +107,11 @@ const getStyles = theme =>
     },
     optionText2: {
       opacity: theme === 'dark' ? 0.7 : 0.6,
-
+      color: theme === 'dark' ? '#d1d5db' : '#27272a',
       fontFamily: 'Poppins-Regular',
     },
     optionTextSelected2: {
       color: theme === 'dark' ? '#f1ecec' : '#ffffff',
-
       fontFamily: 'Poppins-Regular',
     },
   });

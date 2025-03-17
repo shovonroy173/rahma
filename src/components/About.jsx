@@ -288,7 +288,7 @@ const About = ({about, location}) => {
         <View style={styles.iconContainer}>
           <MaterialCommunityIcons
             name="star-outline"
-            size={40}
+            size={30}
             color={theme === 'dark' ? '#d1d5db' : '#111827'}
           />
           <Text style={styles.icontext}>Favourite</Text>
@@ -296,7 +296,7 @@ const About = ({about, location}) => {
         <View style={styles.iconContainer}>
           <MaterialCommunityIcons
             name="block-helper"
-            size={40}
+            size={30}
             color={theme === 'dark' ? '#d1d5db' : '#111827'}
           />
           <Text style={styles.icontext}>Block</Text>
@@ -304,12 +304,13 @@ const About = ({about, location}) => {
         <View style={styles.iconContainer}>
           <MaterialCommunityIcons
             name="flag-variant-outline"
-            size={40}
+            size={30}
             color={theme === 'dark' ? '#d1d5db' : '#111827'}
           />
           <Text style={styles.icontext}>Report</Text>
         </View>
       </View>
+      {/* Location */}
       <View style={styles.shareContainer}>
         <Text style={styles.verifiedContainertext}>
           Latitude: {location.latitude}, Longitude: {location.longitude}
@@ -372,7 +373,7 @@ const getStyles = theme =>
       gap: 5,
     },
     verifiedContainer: {
-      backgroundColor: theme === 'dark' ? '#e5e7eb' : '#f3eded',
+      backgroundColor: theme === 'dark' ? '#27272a' : '#e5e7eb',
       paddingVertical: responsiveWidth(4),
       paddingHorizontal: responsiveHeight(2),
       borderRadius: 15,

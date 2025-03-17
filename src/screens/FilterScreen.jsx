@@ -24,10 +24,20 @@ const FilterScreen = ({navigation}) => {
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="close-circle-outline" size={30} color={'#379A35s'} />
+          <Ionicons
+            name="close-circle-outline"
+            size={30}
+            color={theme === 'dark' ? '#a1a1aa' : '#f3f4f6'}
+          />
         </TouchableOpacity>
         <Text style={styles.title}>Filters</Text>
-        <Text style={{fontFamily: 'Poppins-Regular'}}>Clear All</Text>
+        <Text
+          style={{
+            fontFamily: 'Poppins-Regular',
+            color: theme === 'dark' ? '#a1a1aa' : '#f3f4f6',
+          }}>
+          Clear All
+        </Text>
       </View>
       <ScrollView
         style={styles.scrollContainer}
