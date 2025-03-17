@@ -76,9 +76,9 @@ const Button = ({navigation, title, path, id, phoneInput}) => {
         if (isDisabled) {
           console.log('handle submit Error', errors[id]);
         } else {
-          // if (path === 'BottomNavigator') {
+          if (path === 'BottomNavigator') {
             handleSubmit(onSubmit)();
-          // }
+          }
           // handleSubmit(onSubmit)();
 
           dispatch(nextPage());
