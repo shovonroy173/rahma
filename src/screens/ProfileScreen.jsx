@@ -98,7 +98,7 @@ const ProfileScreen = ({navigation}) => {
           <Octicons
             name="multi-select"
             size={24}
-            color={theme === 'dark' ? '#e5e7eb' : '#7A7676'}
+            color={theme === 'dark' ? '#a1a1aa' : '#7A7676'}
           />
         </TouchableOpacity>
 
@@ -120,7 +120,7 @@ const ProfileScreen = ({navigation}) => {
           <Ionicons
             name="notifications-outline"
             size={24}
-            color={theme === 'dark' ? '#e5e7eb' : '#7A7676'}
+            color={theme === 'dark' ? '#a1a1aa' : '#7A7676'}
           />
         </View>
       </View>

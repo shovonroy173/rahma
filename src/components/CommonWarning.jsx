@@ -14,7 +14,14 @@ const CommonWarning = ({title}) => {
   return (
     <View style={styles.container}>
       <Image source={require('../../assets/images/warning.png')} />
-      <Text style={{fontFamily: 'Poppins-Regular', fontSize: responsiveFontSize(1.5)}}>{title}</Text>
+      <Text
+        style={{
+          fontFamily: 'Poppins-Regular',
+          fontSize: responsiveFontSize(1.5),
+          color: theme === 'dark' ? '#e5e7eb' : '#111111',
+        }}>
+        {title}
+      </Text>
     </View>
   );
 };

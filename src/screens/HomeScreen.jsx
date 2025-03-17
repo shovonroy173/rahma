@@ -136,7 +136,7 @@ const HomeScreen = ({navigation}) => {
                     <Octicons
                       name="multi-select"
                       size={24}
-                      color={theme === 'dark' ? '#e5e7eb' : '#f3f4f6'}
+                      color={theme === 'dark' ? '#a1a1aa' : '#f3f4f6'}
                     />
                   </TouchableOpacity>
                   <View style={styles.notificationContainer}>
@@ -157,7 +157,7 @@ const HomeScreen = ({navigation}) => {
                     <Ionicons
                       name="notifications-outline"
                       size={24}
-                      color={theme === 'dark' ? '#e5e7eb' : '#f3f4f6'}
+                      color={theme === 'dark' ? '#a1a1aa' : '#f3f4f6'}
                     />
                   </View>
                 </View>
@@ -285,7 +285,6 @@ const getStyles = theme =>
     },
     loginButtonText: {
       color: theme === 'dark' ? '#7A7676' : '#ffffff',
-
       textAlign: 'center',
       fontSize: responsiveFontSize(2),
       fontWeight: 600,

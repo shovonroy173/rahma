@@ -60,7 +60,7 @@ const getStyles = theme =>
       borderWidth: 1,
       borderRadius: 10,
       borderColor: theme === 'dark' ? '#E0E0E0' : '#A19B9B',
-
+      color: theme === 'dark' ? '#d1d5db' : '#18181b',
       paddingHorizontal: 15,
       height: responsiveHeight(6),
       fontFamily: 'Poppins-Regular',

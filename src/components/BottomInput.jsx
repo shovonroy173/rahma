@@ -37,12 +37,10 @@ const BottomInput = (
         render={({field: {onChange, onBlur, value}}) => (
           <TextInput
             onBlur={onBlur}
-            onChangeText={
-              text => {
-                onChange(text);
-                dispatch(updateFormData({[name]: text}));
-              }
-            }
+            onChangeText={text => {
+              onChange(text);
+              dispatch(updateFormData({[name]: text}));
+            }}
             value={value}
             style={styles.inputBox}
             placeholder={placeholder}
@@ -65,7 +63,7 @@ const getStyles = theme =>
       paddingHorizontal: 30,
       fontSize: 16,
       fontFamily: 'Poppins-Medium',
-      color: theme === 'dark' ? '#d1d5db' : '#000000',
+      color: theme === 'dark' ? '#d1d5db' : '#18181b',
     },
     errorText: {
       color: 'red',
