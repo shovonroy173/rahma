@@ -16,7 +16,11 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {ThemeContext} from '../context/DarkThemeContext';
-import {Camera, useCameraDevice} from 'react-native-vision-camera';
+import {
+  Camera,
+  useCameraDevice,
+  useCameraDevices,
+} from 'react-native-vision-camera';
 
 const ImageUpload = ({name}) => {
   const {control} = useFormContext();
@@ -25,6 +29,7 @@ const ImageUpload = ({name}) => {
   const [currentOnChange, setCurrentOnChange] = useState(null);
   const cameraRef = useRef(null);
   const [photoPath, setPhotoPath] = useState(null);
+  const [isFrontCamera, setIsFrontCamera] = useState(true);
   const {theme} = useContext(ThemeContext);
 
   useEffect(() => {
@@ -36,7 +41,7 @@ const ImageUpload = ({name}) => {
     })();
   }, []);
 
-  const device = useCameraDevice('front');
+  const device = useCameraDevice(isFrontCamera ? 'front' : 'back');
 
   const openCamera = () => {
     setIsCameraActive(true);
@@ -47,12 +52,16 @@ const ImageUpload = ({name}) => {
     setIsCameraActive(false);
   };
 
+  const toggleCamera = () => {
+    setIsFrontCamera(prev => !prev);
+  };
+
   const openGallery = () => {
     const options = {
       mediaType: 'photo',
       maxWidth: 500,
       maxHeight: 500,
-      quality: 0.3,
+      quality: 0.8,
     };
     launchImageLibrary(options, response => {
       if (response.didCancel) {
@@ -107,7 +116,7 @@ const ImageUpload = ({name}) => {
       />
 
       {/* Camera Full-Screen Modal */}
-      <Modal visible={isCameraActive} animationType="slide" transparent={false}>
+      <Modal visible={isCameraActive} animationType="fade" transparent={false}>
         <View style={styles.cameraContainer}>
           {device ? (
             <Camera
@@ -116,6 +125,7 @@ const ImageUpload = ({name}) => {
               device={device}
               isActive={isCameraActive}
               photo={true}
+              videoStabilizationMode="cinematic"
             />
           ) : (
             <ActivityIndicator size="large" color="#1C6758" />
@@ -125,9 +135,12 @@ const ImageUpload = ({name}) => {
           <TouchableOpacity
             style={styles.captureButton}
             onPress={handleTakePhoto}>
-            <Text style={styles.captureButtonText}>📸</Text>
+            <Text style={styles.captureButtonText}>📷</Text>
           </TouchableOpacity>
 
+          <TouchableOpacity style={styles.flipButton} onPress={toggleCamera}>
+            <Text style={styles.flipButtonText}>🔄</Text>
+          </TouchableOpacity>
           {/* Close Camera */}
           <TouchableOpacity style={styles.closeButton} onPress={closeCamera}>
             <Text style={styles.closeButtonText}>❌</Text>
@@ -187,8 +200,8 @@ const getStyles = theme =>
     captureButton: {
       position: 'absolute',
       bottom: 50,
-      width: 100,
-      height: 100,
+      width: 80,
+      height: 80,
       backgroundColor: '#43A041',
       borderRadius: 50,
       justifyContent: 'center',
@@ -197,6 +210,7 @@ const getStyles = theme =>
     captureButtonText: {
       color: '#fff',
       fontSize: 25,
+      textAlign: 'center',
     },
     closeButton: {
       position: 'absolute',
@@ -207,6 +221,18 @@ const getStyles = theme =>
       borderRadius: 10,
     },
     closeButtonText: {
+      color: '#fff',
+      fontSize: 16,
+    },
+    flipButton: {
+      position: 'absolute',
+      top: 50,
+      left: 20,
+      backgroundColor: '#3498db',
+      padding: 10,
+      borderRadius: 10,
+    },
+    flipButtonText: {
       color: '#fff',
       fontSize: 16,
     },

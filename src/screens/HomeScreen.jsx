@@ -11,10 +11,10 @@ import {
   PermissionsAndroid,
 } from 'react-native';
 import React, {useContext, useState} from 'react';
-import {Image} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Octicons from 'react-native-vector-icons/Octicons';
 // import {useGetUserQuery} from '../redux/slices/userSlice';
 import {
   responsiveFontSize,
@@ -79,7 +79,9 @@ const HomeScreen = ({navigation}) => {
 
   const getCurrentLocation = async () => {
     const hasPermission = await requestLocationPermission();
-    if (!hasPermission) return;
+    if (!hasPermission) {
+      return;
+    }
 
     Geolocation.getCurrentPosition(
       position => {
@@ -104,7 +106,7 @@ const HomeScreen = ({navigation}) => {
               onPress={() => setData(getRandomObject(users))}
               primaryColor="#000000"
               secondaryColor="#222222"
-              icon={<Ionicons name="close-outline" size={30} color={'red'} />}
+              icon={<Ionicons name="close-outline" size={30} color="red" />}
             />
 
             <View style={styles.nameContainer}>
@@ -112,7 +114,7 @@ const HomeScreen = ({navigation}) => {
                 onPress={() => setData(getRandomObject(users))}
                 primaryColor="#e800d5"
                 secondaryColor="#c700b0"
-                icon={<SimpleLineIcons name="star" size={30} color={'white'} />}
+                icon={<SimpleLineIcons name="star" size={30} color="white" />}
               />
               <GlossyButton
                 onPress={() => setData(getRandomObject(users))}
@@ -131,8 +133,10 @@ const HomeScreen = ({navigation}) => {
                 <View style={styles.topContainer}>
                   <TouchableOpacity
                     onPress={() => navigation.navigate('Filter')}>
-                    <Image
-                      source={require('../../assets/images/filter_white.png')}
+                    <Octicons
+                      name="multi-select"
+                      size={24}
+                      color={theme === 'dark' ? '#e5e7eb' : '#f3f4f6'}
                     />
                   </TouchableOpacity>
                   <View style={styles.notificationContainer}>
@@ -144,7 +148,7 @@ const HomeScreen = ({navigation}) => {
                       />
                       <Text
                         style={{
-                          color: '#e5e7eb',
+                          color: theme === 'dark' ? '#e5e7eb' : '#d1d5db',
                           fontFamily: 'Poppins-Regular',
                         }}>
                         Be Seen First
@@ -153,7 +157,7 @@ const HomeScreen = ({navigation}) => {
                     <Ionicons
                       name="notifications-outline"
                       size={24}
-                      color={'#7A7676'}
+                      color={theme === 'dark' ? '#e5e7eb' : '#f3f4f6'}
                     />
                   </View>
                 </View>
@@ -178,7 +182,7 @@ const HomeScreen = ({navigation}) => {
                   }`}</Text>
                   <View style={styles.descContainer}>
                     <View style={styles.info}>
-                      <Entypo name="dot-single" size={24} color={'#379A35'} />
+                      <Entypo name="dot-single" size={30} color={'#379A35'} />
                       <Text style={styles.infotext}>Active Today</Text>
                     </View>
                     <View style={styles.info}>
@@ -231,9 +235,9 @@ const HomeScreen = ({navigation}) => {
             }}>
             <Text
               style={{
-                fontSize: responsiveFontSize(4.5),
+                fontSize: responsiveFontSize(3.5),
                 textAlign: 'center',
-                fontWeight: 600,
+                fontFamily: 'Poppins-SemiBold',
                 color: theme === 'dark' ? '#7A7676' : '#000000',
               }}>
               Ready to meet your future partner?
@@ -242,6 +246,7 @@ const HomeScreen = ({navigation}) => {
               style={{
                 fontSize: responsiveFontSize(2.5),
                 textAlign: 'center',
+                fontFamily: 'Poppins-Medium',
                 color: theme === 'dark' ? '#7A7676' : '#000000',
               }}>
               Enable GPS on your device to start seeing Muslims singles nearby.
@@ -338,11 +343,11 @@ const getStyles = theme =>
       paddingHorizontal: 16,
       gap: 10,
       borderRadius: 15,
-      backgroundColor:theme === 'dark' ? '#18181b' : '#313030',
+      backgroundColor: theme === 'dark' ? '#18181b' : '#313030',
     },
     infotext: {
       fontFamily: 'Poppins-Regular',
-      color: theme === 'dark' ? '#e5e7eb' : '#4b5563',
+      color: theme === 'dark' ? '#e5e7eb' : '#d1d5db',
     },
     nameContainer: {
       display: 'flex',
@@ -361,7 +366,7 @@ const getStyles = theme =>
       paddingBottom: 70,
     },
     name: {
-      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+      color: theme === 'dark' ? '#a1a1aa' : '#9ca3af',
       fontFamily: 'Poppins-SemiBold',
       fontSize: responsiveFontSize(3.5),
     },
@@ -428,7 +433,7 @@ const getStyles = theme =>
     },
     address: {
       fontSize: responsiveFontSize(2.2),
-      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
+      color: theme === 'dark' ? '#a1a1aa' : '#9ca3af',
       fontFamily: 'Poppins-Medium',
     },
     // aboutContainer: {

@@ -22,6 +22,7 @@ import {
 import {features} from '../../assets/data/data';
 import {ThemeContext} from '../context/DarkThemeContext';
 const {width} = Dimensions.get('window');
+import Octicons from 'react-native-vector-icons/Octicons';
 
 const ProfileScreen = ({navigation}) => {
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -94,15 +95,33 @@ const ProfileScreen = ({navigation}) => {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.topContainer}>
         <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
-          <Image source={require('../../assets/images/filter.png')} />
+          <Octicons
+            name="multi-select"
+            size={24}
+            color={theme === 'dark' ? '#e5e7eb' : '#7A7676'}
+          />
         </TouchableOpacity>
 
         <View style={styles.notificationContainer}>
           <View style={styles.beseen}>
-            <Ionicons name="rocket-sharp" size={24} color={'white'} />
-            <Text style={styles.text}>0</Text>
+            <Ionicons
+              name="rocket-sharp"
+              size={24}
+              color={theme === 'dark' ? '#379A35' : '#14532d'}
+            />
+            <Text
+              style={{
+                color: theme === 'dark' ? '#e5e7eb' : '#d1d5db',
+                fontFamily: 'Poppins-Regular',
+              }}>
+              0
+            </Text>
           </View>
-          <Ionicons name="notifications-outline" size={24} color={'#7A7676'} />
+          <Ionicons
+            name="notifications-outline"
+            size={24}
+            color={theme === 'dark' ? '#e5e7eb' : '#7A7676'}
+          />
         </View>
       </View>
       <View style={styles.profileContainer}>
@@ -258,14 +277,14 @@ const getStyles = theme =>
     beseen: {
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: '#379A35',
+      backgroundColor: theme === 'dark' ? '#14532d' : '#379A35',
       borderRadius: 20,
       paddingVertical: responsiveWidth(2),
       paddingHorizontal: responsiveWidth(6),
       gap: 20,
     },
     text: {
-      color: 'white',
+      color: theme === 'dark' ? '#d1d5db' : '#111827',
     },
     profileInfo: {
       alignItems: 'center',

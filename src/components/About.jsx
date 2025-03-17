@@ -383,7 +383,7 @@ const getStyles = theme =>
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      gap: responsiveWidth(2),
+      // gap: responsiveWidth(2),
     },
     verifiedContainertitle: {
       fontSize: responsiveFontSize(2.4),

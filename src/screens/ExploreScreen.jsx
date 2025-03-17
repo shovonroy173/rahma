@@ -14,19 +14,29 @@ import {ThemeContext} from '../context/DarkThemeContext';
 const ExploreScreen = ({navigation}) => {
   const Tab = createMaterialTopTabNavigator();
 
-  const theme = useContext(ThemeContext);
-console.log(theme);
+  const {theme} = useContext(ThemeContext);
+  console.log(theme);
 
   return (
     <SafeAreaView style={styles.container}>
       <Filter navigation={navigation} />
       <Tab.Navigator
         screenOptions={{
-          tabBarLabelStyle: {fontSize: 16, fontWeight: 600, width: 230},
+          tabBarLabelStyle: {
+            fontSize: 16,
+            fontWeight: 600,
+            width: 230,
+            fontFamily: 'Poppins-SemiBold',
+          },
           tabBarScrollEnabled: true,
-          tabBarIndicatorStyle: {backgroundColor: theme.theme === 'dark' ? '#1A3D1A' : '#379A35'},
+          tabBarIndicatorStyle: {
+            backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
+          },
           tabBarActiveTintColor: '#379A35',
           tabBarInactiveTintColor: 'gray',
+          tabBarStyle: {
+            backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
+          },
         }}>
         <Tab.Screen name="Liked You" component={LikedYouScreen} />
         <Tab.Screen name="Visited You" component={VisitedYouScreen} />

@@ -1,9 +1,13 @@
 import {View, Text, StyleSheet, Image} from 'react-native';
 import React, {useContext} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import ExploreButton from '../components/ExploreButton';
 import {ThemeContext} from '../context/DarkThemeContext';
-import {responsiveFontSize, responsiveWidth} from 'react-native-responsive-dimensions';
+import {
+  responsiveFontSize,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const MessagesScreen = () => {
   const {theme} = useContext(ThemeContext);
@@ -22,7 +26,15 @@ const MessagesScreen = () => {
         <View style={styles.mainContainer}>
           <Image source={require('../../assets/images/messages_icon.png')} />
           <View style={styles.textContainer}>
-            <Text style={styles.name}>Rahma ✅</Text>
+            <View style={styles.nameContainer}>
+              <Text style={styles.name}>Rahma</Text>
+
+              <Feather
+                name="check-circle"
+                size={24}
+                color={theme === 'dark' ? '#e5e7eb' : '#18181b'}
+              />
+            </View>
             <Text style={styles.subname}>
               2 Photos have been Added by Verification
             </Text>
@@ -32,7 +44,9 @@ const MessagesScreen = () => {
           <Text style={styles.name2}>
             This is where you will Chat with your Future Partner
           </Text>
-          <Text style={styles.name2}>Match with Someone Special and Chat for Free.</Text>
+          <Text style={styles.name2}>
+            Match with Someone Special and Chat for Free.
+          </Text>
           <ExploreButton title="Find a Match" type="bg" />
         </View>
       </View>
@@ -82,6 +96,12 @@ const getStyles = theme =>
     textContainer: {
       gap: responsiveWidth(1),
     },
+    nameContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      gap: responsiveWidth(1),
+      alignItems: 'center',
+    },
     name: {
       fontSize: responsiveFontSize(3),
       fontFamily: 'Poppins-SemiBold',
@@ -89,7 +109,8 @@ const getStyles = theme =>
 
       // textAlign: 'center',
     },
-    subname:{
+
+    subname: {
       fontSize: responsiveFontSize(1.5),
       fontFamily: 'Poppins-SemiBold',
       color: theme === 'dark' ? '#e5e7eb' : '#18181b',
@@ -99,7 +120,6 @@ const getStyles = theme =>
       fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
       color: theme === 'dark' ? '#e5e7eb' : '#18181b',
-
     },
   });
 

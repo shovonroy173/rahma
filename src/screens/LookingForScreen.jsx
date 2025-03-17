@@ -11,6 +11,7 @@ import Slider from '@react-native-community/slider';
 import {Controller, useFormContext} from 'react-hook-form';
 import {updateFormData} from '../redux/slices/formSlice';
 import {ThemeContext} from '../context/DarkThemeContext';
+import {responsiveFontSize} from 'react-native-responsive-dimensions';
 
 const LookingForScreen = ({navigation}) => {
   const currentPage = useSelector(state => state.page.currentPage);
@@ -40,6 +41,7 @@ const LookingForScreen = ({navigation}) => {
             <Text
               style={{
                 color: theme === 'dark' ? '#d1d5db' : '#111827',
+                fontFamily: 'Poppins-Regular',
               }}>{`${
               getValues('lookingforage')
                 ? Math.floor(getValues('lookingforage'))
@@ -48,6 +50,7 @@ const LookingForScreen = ({navigation}) => {
             <Text
               style={{
                 color: theme === 'dark' ? '#d1d5db' : '#111827',
+                fontFamily: 'Poppins-Regular',
               }}>
               18-51 Years
             </Text>
@@ -96,7 +99,7 @@ const getStyles = theme =>
       flex: 1,
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: theme === 'dark' ? '#ffffff' : '#000000',
+      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
 
       padding: 30,
     },
@@ -116,9 +119,9 @@ const getStyles = theme =>
       // paddingHorizontal: 30,
     },
     title: {
-      fontSize: 30,
+      fontSize: responsiveFontSize(3.5),
       marginBottom: 10,
-      fontWeight: 600,
+      fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
       color: theme === 'dark' ? '#d1d5db' : '#111827',
     },

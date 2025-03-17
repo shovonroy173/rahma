@@ -51,8 +51,9 @@ const BottomNavigatorScreen = () => {
               ) : (
                 <MaterialCommunityIcons
                   name="ring"
-                  size={28}
-                  color={theme === 'dark' ? '#d1d5db' : '#111827'}
+                  size={25}
+                  style={{opacity:0.5}}
+                  color={theme === 'dark' ? '#4b5563' : '#E5E7EB'}
                 />
               )}
             </View>
@@ -75,7 +76,8 @@ const BottomNavigatorScreen = () => {
                 <MaterialCommunityIcons
                   name="heart-multiple-outline"
                   size={25}
-                  color={theme === 'dark' ? '#4b5563' : '#111827'}
+                  style={{opacity:0.5}}
+                  color={theme === 'dark' ? '#4b5563' : '#E5E7EB'}
                 />
               )}
             </View>
@@ -98,7 +100,8 @@ const BottomNavigatorScreen = () => {
                 <MaterialCommunityIcons
                   name="message-text-outline"
                   size={25}
-                  color={theme === 'dark' ? '#4b5563' : '#111827'}
+                  style={{opacity:0.5}}
+                  color={theme === 'dark' ? '#4b5563' : '#E5E7EB'}
                 />
               )}
             </View>
@@ -121,7 +124,8 @@ const BottomNavigatorScreen = () => {
                 <Ionicons
                   name="person-circle-outline"
                   size={25}
-                  color={theme === 'dark' ? '#4b5563' : '#111827'}
+                  style={{opacity:0.5}}
+                  color={theme === 'dark' ? '#4b5563' : '#E5E7EB'}
                 />
               )}
             </View>

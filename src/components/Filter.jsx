@@ -1,6 +1,7 @@
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React, {useContext} from 'react';
 import {ThemeContext} from '../context/DarkThemeContext';
+import Octicons from 'react-native-vector-icons/Octicons';
 
 const Filter = ({navigation}) => {
   const {theme} = useContext(ThemeContext);
@@ -8,7 +9,11 @@ const Filter = ({navigation}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
-        <Image source={require('../../assets/images/filter.png')} />
+        <Octicons
+          name="multi-select"
+          size={24}
+          color={theme === 'dark' ? '#e5e7eb' : '#f3f4f6'}
+        />
       </TouchableOpacity>
 
       <Text style={styles.title}>Explore</Text>
@@ -23,7 +28,7 @@ const getStyles = theme =>
       flexDirection: 'row',
       alignItems: 'center',
       // height: 60,
-      gap: 100,
+      gap: 80,
       paddingVertical: 20,
       paddingHorizontal: 40,
       backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',

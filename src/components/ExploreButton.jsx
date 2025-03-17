@@ -1,5 +1,5 @@
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -45,7 +45,7 @@ const getStyles = theme =>
     },
     loginButtonText: {
       // color: '#000000',
-      color: theme === 'dark' ? '#7A7676' : '#000000',
+      color: theme === 'dark' ? '#7A7676' : '#f3f4f6',
       textAlign: 'center',
       fontSize: responsiveFontSize(2),
       fontFamily: 'Poppins-SemiBold',

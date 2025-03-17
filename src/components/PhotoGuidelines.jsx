@@ -133,14 +133,15 @@ const getStyles = theme =>
     drawerText1: {
       fontSize: responsiveFontSize(2),
       color: theme === 'dark' ? '#d1d5db' : '#111111',
-      fontWeight: 600,
+      fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
     },
 
     drawerText2: {
       fontSize: responsiveFontSize(2),
       color: theme === 'dark' ? '#d1d5db' : '#111111',
-      fontWeight: 600,
+      fontFamily: 'Poppins-SemiBold',
+
     },
     rightContent: {
       display: 'flex',
