@@ -103,7 +103,7 @@ const getStyles = theme =>
     },
     nation: {
       fontSize: responsiveFontSize(1.4),
-      color: theme === 'dark' ? '#6b7280' : '#575454',
+      color: theme === 'dark' ? '#d1d5db' : '#575454',
       textAlign: 'center',
       fontFamily: 'Poppins-Regular',
     },

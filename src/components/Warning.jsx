@@ -9,7 +9,7 @@ const Warning = ({title, icon}) => {
   return (
     <View style={styles.container}>
       {icon}
-      <Text style={{color: theme === 'dark' ? '#E8E5E5' : '#111111', fontFamily: 'Poppins-Regular'}}>
+      <Text style={{color: theme === 'dark' ? '#e5e7eb' : '#111111', fontFamily: 'Poppins-Regular'}}>
         {title}
       </Text>
     </View>

@@ -39,7 +39,7 @@ const Calender = ({name}) => {
           <DatePicker
             date={value || maxDate}
             mode="date"
-            theme="auto"
+            theme={theme === 'dark' ? 'dark' : 'light'}
             minimumDate={minDate}
             maximumDate={maxDate}
             onDateChange={date => {

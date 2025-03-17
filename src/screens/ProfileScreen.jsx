@@ -339,8 +339,8 @@ const getStyles = theme =>
     },
     memberText2: {
       fontSize: responsiveFontSize(1.4),
-      color: theme === 'dark' ? '#6b7280' : '#e5e7eb',
-      opacity: 0.7,
+      color: theme === 'dark' ? '#71717a' : '#e5e7eb',
+      opacity: 0.8,
       fontFamily: 'Poppins-Regular',
     },
 

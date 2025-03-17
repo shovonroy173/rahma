@@ -5,6 +5,7 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {Controller, useFormContext} from 'react-hook-form';
 import {useSelector} from 'react-redux';
 import {ThemeContext} from '../context/DarkThemeContext';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 const Selection = ({name, item, type}) => {
   const {control, watch, setValue} = useFormContext();
@@ -82,10 +83,10 @@ const getStyles = theme =>
       borderColor: theme === 'dark' ? '#16a34a' : '#47A146',
     },
     title: {
-      fontSize: 16,
+      fontSize: responsiveFontSize(1.6),
       fontFamily: 'Poppins-SemiBold',
       opacity: theme === 'dark' ? 0.8 : 0.5,
-      color: theme === 'dark' ? '#1C1C1C' : '#47A146',
+      color: theme === 'dark' ? '#e4e4e7' : '#47A146',
     },
     selectedText: {
       color: theme === 'dark' ? '#111827' : '#ffffff',

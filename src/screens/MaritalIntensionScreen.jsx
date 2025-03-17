@@ -47,25 +47,20 @@ const MaritalIntensionScreen = ({navigation}) => {
           </View>
         </View>
       </View>
-
-      <Button
-        title="Continue"
-        navigation={navigation}
-        path="ReligiousType"
-        id="knowStatus"
-      />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Continue"
+          navigation={navigation}
+          path="ReligiousType"
+          id="knowStatus"
+        />
+      </View>
     </View>
   );
 };
 
 const getStyles = theme =>
   StyleSheet.create({
-    mainContainer: {
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      gap: responsiveWidth(2),
-    },
     container: {
       flex: 1,
       justifyContent: 'space-between',
@@ -73,6 +68,13 @@ const getStyles = theme =>
       backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
       padding: responsiveHeight(4),
     },
+    mainContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: responsiveWidth(2),
+    },
+
     contentContainer: {
       gap: responsiveWidth(3),
     },
@@ -87,6 +89,9 @@ const getStyles = theme =>
 
       fontSize: responsiveFontSize(2),
       fontFamily: 'Poppins-Bold',
+    },
+    buttonContainer: {
+      paddingBottom: responsiveWidth(2),
     },
   });
 

@@ -129,7 +129,6 @@ const getStyles = theme =>
       paddingHorizontal: 15,
       height: responsiveHeight(6),
     },
-
     textContainer: {
       gap: responsiveHeight(2),
       alignItems: 'center',
@@ -138,11 +137,10 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(3),
       fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
-      color: theme === 'dark' ? '#ffffff' : '#000000',
+      color: theme === 'dark' ? '#e5e7eb' : '#18181b',
     },
     buttonContainer: {
       paddingBottom: responsiveHeight(2),
-      backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
     },
     salaryContainer: {
       display: 'flex',

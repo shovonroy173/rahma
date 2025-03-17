@@ -118,7 +118,7 @@ const getStyles = theme =>
     rule: {
       fontSize: responsiveFontSize(1.5),
       fontFamily: 'Poppins-SemiBold',
-      color: theme === 'dark' ? '#6b7280' : '#313030',
+      color: theme === 'dark' ? '#d1d5db' : '#313030',
     },
     ruleBox: {
       display: 'flex',
