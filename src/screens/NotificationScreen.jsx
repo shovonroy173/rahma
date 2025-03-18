@@ -85,14 +85,13 @@ const getStyles = theme =>
     },
     memberText: {
       fontSize: responsiveFontSize(2.4),
-      color: theme === 'dark' ? '#d1d5db' : '#f3f4f6',
+      color: theme === 'dark' ? '#e5e7eb' : '#f3f4f6',
       opacity: 0.7,
       fontFamily: 'Poppins-SemiBold',
     },
     memberText2: {
       fontSize: responsiveFontSize(1.4),
-      color: theme === 'dark' ? '#71717a' : '#e5e7eb',
-      opacity: 0.8,
+      color: theme === 'dark' ? '#9ca3af' : '#e5e7eb',
       fontFamily: 'Poppins-Regular',
     },
 

@@ -128,7 +128,7 @@ const getStyles = theme => ({
     borderRadius: 100,
   },
   buttonContainer: {
-    paddingBottom: responsiveWidth(2),
+    paddingVertical: responsiveHeight(3),
   },
 });
 
