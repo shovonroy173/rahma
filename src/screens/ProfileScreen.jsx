@@ -53,7 +53,6 @@ const ProfileScreen = ({navigation}) => {
 
   const renderItem = ({item}) => (
     <View style={styles.slide}>
-      {/* Fixed Dots Container */}
       <View style={styles.fixedDotsContainer}>
         {features.map((_, index) => {
           const inputRange = [
@@ -293,7 +292,7 @@ const getStyles = theme =>
       width: '100%',
       flex: 1,
       justifyContent: 'space-between',
-      backgroundColor: theme === 'dark' ? '#000000' : '#e8ffe8',
+      backgroundColor: theme === 'dark' ? '#e9fee4' : '#e8ffe8',
       padding: responsiveHeight(3),
       gap: responsiveHeight(2),
     },
@@ -346,10 +345,8 @@ const getStyles = theme =>
 
     learnMore: {
       color: theme === 'dark' ? '#d1d5db' : '#f3f4f6',
-
       backgroundColor: theme === 'dark' ? '#1A3D1A' : '#379A35',
       padding: responsiveHeight(1),
-
       paddingVertical: responsiveHeight(1),
       paddingHorizontal: responsiveWidth(3),
       borderRadius: 20,
@@ -494,7 +491,6 @@ const getStyles = theme =>
       flexWrap: 'wrap',
       flexShrink: 'shrink',
       color: theme === 'dark' ? '#e5e7eb' : '#18181b',
-
       fontSize: responsiveFontSize(1.8),
       fontFamily: 'Poppins-Medium',
     },

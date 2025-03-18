@@ -12,7 +12,7 @@ const Filter = ({navigation}) => {
         <Octicons
           name="multi-select"
           size={24}
-          color={theme === 'dark' ? '#a1a1aa' : '#f3f4f6'}
+          color={theme === 'dark' ? '#a1a1aa' : '#27272a'}
         />
       </TouchableOpacity>
 

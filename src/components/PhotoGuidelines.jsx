@@ -84,8 +84,8 @@ const getStyles = theme =>
     drawerText: {
       textAlign: 'center',
       fontSize: responsiveFontSize(2),
-      fontWeight: 600,
-      marginBottom: 3,
+      fontFamily: 'Poppins-SemiBold',
+      color: theme === 'dark' ? '#d1d5db' : '#18181b',
     },
     loginButton: {
       width: responsiveWidth(80),
@@ -94,7 +94,7 @@ const getStyles = theme =>
       borderRadius: 100,
     },
     loginButtonText: {
-      color: theme === 'dark' ? '#d1d5db' : '#ffffff',
+      color: theme === 'dark' ? '#d1d5db' : '#18181b',
 
       textAlign: 'center',
       // fontSize: 20,
@@ -131,14 +131,14 @@ const getStyles = theme =>
     },
 
     drawerText1: {
-      fontSize: responsiveFontSize(2),
+      fontSize: responsiveFontSize(1),
       color: theme === 'dark' ? '#d1d5db' : '#111111',
       fontFamily: 'Poppins-SemiBold',
       textAlign: 'center',
     },
 
     drawerText2: {
-      fontSize: responsiveFontSize(2),
+      fontSize: responsiveFontSize(1.5),
       color: theme === 'dark' ? '#d1d5db' : '#111111',
       fontFamily: 'Poppins-SemiBold',
 

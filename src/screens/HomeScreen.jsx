@@ -365,12 +365,12 @@ const getStyles = theme =>
       paddingBottom: 70,
     },
     name: {
-      color: theme === 'dark' ? '#a1a1aa' : '#9ca3af',
+      color: theme === 'dark' ? '#e5e7eb' : '#d1d5db',
       fontFamily: 'Poppins-SemiBold',
       fontSize: responsiveFontSize(3.5),
     },
     iconContainer: {
-      backgroundColor: '#ffffff',
+      backgroundColor: theme === 'dark' ? '#18181b' : '#313030',
       borderRadius: 100,
       padding: 2,
       marginBottom: 30,
@@ -415,7 +415,7 @@ const getStyles = theme =>
       padding: 10,
     },
     iconContainer2: {
-      backgroundColor: '#ffffff',
+      // backgroundColor: '#ffffff',
       borderRadius: 100,
       padding: 6,
       // borderWidth: 1,
@@ -432,7 +432,7 @@ const getStyles = theme =>
     },
     address: {
       fontSize: responsiveFontSize(2.2),
-      color: theme === 'dark' ? '#a1a1aa' : '#9ca3af',
+      color: theme === 'dark' ? '#e5e7eb' : '#d1d5db',
       fontFamily: 'Poppins-Medium',
     },
     // aboutContainer: {

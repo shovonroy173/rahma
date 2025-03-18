@@ -11,6 +11,7 @@ import {
 import {launchImageLibrary} from 'react-native-image-picker';
 import {Controller, useFormContext} from 'react-hook-form';
 import Icon from 'react-native-vector-icons/AntDesign';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -135,15 +136,27 @@ const ImageUpload = ({name}) => {
           <TouchableOpacity
             style={styles.captureButton}
             onPress={handleTakePhoto}>
-            <Text style={styles.captureButtonText}>📷</Text>
+            <MaterialIcons
+              name="camera"
+              size={30}
+              color={theme === 'dark' ? '#e5e7eb' : '#18181b'}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.flipButton} onPress={toggleCamera}>
-            <Text style={styles.flipButtonText}>🔄</Text>
+            <MaterialIcons
+              name="cameraswitch"
+              size={24}
+              color={theme === 'dark' ? '#e5e7eb' : '#18181b'}
+            />
           </TouchableOpacity>
           {/* Close Camera */}
           <TouchableOpacity style={styles.closeButton} onPress={closeCamera}>
-            <Text style={styles.closeButtonText}>❌</Text>
+            <MaterialIcons
+              name="close"
+              size={24}
+              color={theme === 'dark' ? '#e5e7eb' : '#18181b'}
+            />
           </TouchableOpacity>
         </View>
       </Modal>
@@ -200,9 +213,9 @@ const getStyles = theme =>
     captureButton: {
       position: 'absolute',
       bottom: 50,
-      width: 80,
-      height: 80,
-      backgroundColor: '#43A041',
+      width: 70,
+      height: 70,
+      backgroundColor: theme === 'dark' ? '#18181b' : '#e5e7eb',
       borderRadius: 50,
       justifyContent: 'center',
       alignItems: 'center',
@@ -214,27 +227,21 @@ const getStyles = theme =>
     },
     closeButton: {
       position: 'absolute',
-      top: 50,
+      bottom: 60,
       right: 20,
-      backgroundColor: '#e74c3c',
+      backgroundColor: theme === 'dark' ? '#18181b' : '#e5e7eb',
+
       padding: 10,
-      borderRadius: 10,
-    },
-    closeButtonText: {
-      color: '#fff',
-      fontSize: 16,
+      borderRadius: 50,
     },
     flipButton: {
       position: 'absolute',
-      top: 50,
+      bottom: 60,
       left: 20,
-      backgroundColor: '#3498db',
+      backgroundColor: theme === 'dark' ? '#18181b' : '#e5e7eb',
+
       padding: 10,
-      borderRadius: 10,
-    },
-    flipButtonText: {
-      color: '#fff',
-      fontSize: 16,
+      borderRadius: 50,
     },
     overlay: {
       flex: 1,
@@ -256,7 +263,7 @@ const getStyles = theme =>
       color: theme === 'dark' ? '#ffffff' : '#333333',
     },
     message: {
-      fontSize: 16,
+      fontFamily: 'Poppins-Regular',
       textAlign: 'center',
       marginBottom: 20,
       color: theme === 'dark' ? ' #ccc' : '#666',
@@ -270,15 +277,15 @@ const getStyles = theme =>
       alignItems: 'center',
     },
     optionText: {
-      color: '#ffffff',
-      fontSize: 16,
+      color: theme === 'dark' ? '#d1d5db' : '#18181b',
+      fontFamily: 'Poppins-Medium',
     },
     cancelButton: {
       marginTop: 10,
     },
     cancelText: {
-      color: theme === 'dark' ? '#d45d5d' : '#e74c3c',
-      fontSize: 16,
+      color: theme === 'dark' ? '#d1d5db' : '#18181b',
+      fontFamily: 'Poppins-Medium',
     },
     image: {
       width: responsiveWidth(25),

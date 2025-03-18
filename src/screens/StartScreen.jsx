@@ -35,7 +35,7 @@ const StartScreen = ({navigation}) => {
         <View style={styles.loginContainer}>
           <View style={styles.languageContainer}>
             <View style={styles.languageItem}>
-              <Icon name="language" size={24} color={theme === 'dark' ? '#6b7280' : '#ffffff'} />
+              <Icon name="language" size={24} color={theme === 'dark' ? '#6b7280' : '#f3f4f6'} />
               <DropDownPicker
                 open={open}
                 value={selectedLanguage}
@@ -57,24 +57,24 @@ const StartScreen = ({navigation}) => {
                   <Ionicons
                     name="chevron-down"
                     size={20}
-                    color={theme === 'dark' ? '#374151' : '#ffffff'}
+                    color={theme === 'dark' ? '#27272a' : '#f3f4f6'}
                   />
                 )}
                 ArrowUpIconComponent={() => (
                   <Ionicons
                     name="chevron-up"
                     size={20}
-                    color={theme === 'dark' ? '#6b7280' : '#ffffff'}
+                    color={theme === 'dark' ? '#27272a' : '#f3f4f6'}
                   />
                 )}
                 textStyle={{
-                  color: theme === 'dark' ? '#374151' : '#ffffff',
+                  color: theme === 'dark' ? '#27272a' : '#f3f4f6',
                   fontSize: responsiveFontSize(1.8),
                   fontFamily: 'Poppins-Regular',
                 }}
               />
             </View>
-            <FAIcon name="question-circle-o" size={24} color={theme === 'dark' ? '#6b7280' : '#ffffff'} />
+            <FAIcon name="question-circle-o" size={24} color={theme === 'dark' ? '#6b7280' : '#f3f4f6'} />
           </View>
           <View style={styles.loginItems}>
             <Image source={require('../../assets/images/logo.webp')} />
@@ -176,7 +176,7 @@ const getStyles = theme =>
       borderRadius: 100,
     },
     loginButtonText: {
-      color: theme === 'dark' ? '#131313' : '#ffffff',
+      color: theme === 'dark' ? '#131313' : '#f3f4f6',
       textAlign: 'center',
       fontSize: responsiveFontSize(2.2),
       fontFamily: 'Poppins-SemiBold',
@@ -203,7 +203,7 @@ const getStyles = theme =>
       borderRadius: 100,
     },
     googleLoginButtonText: {
-      color: theme === 'dark' ? '#374151' : '#000000',
+      color: theme === 'dark' ? '#14532d' : '#374151',
       textAlign: 'center',
       fontSize: 18,
       fontFamily: 'Poppins-SemiBold',

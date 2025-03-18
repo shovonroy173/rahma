@@ -71,9 +71,8 @@ const getStyles = theme =>
     optionText: {
       fontSize: responsiveFontSize(2),
       fontFamily: 'Poppins-Medium',
-      opacity: theme === 'dark' ? 1 : 0.6,
-      color: theme === 'dark' ? '#a1a1aa' : '#111827',
-
+      opacity:  0.6,
+      color: theme === 'dark' ? '#e5e7eb' : '#27272a',
     },
     optionTextSelected: {
       fontSize: responsiveFontSize(2),

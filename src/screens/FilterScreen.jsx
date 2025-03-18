@@ -27,14 +27,14 @@ const FilterScreen = ({navigation}) => {
           <Ionicons
             name="close-circle-outline"
             size={30}
-            color={theme === 'dark' ? '#a1a1aa' : '#f3f4f6'}
+            color={theme === 'dark' ? '#a1a1aa' : '#18181b'}
           />
         </TouchableOpacity>
         <Text style={styles.title}>Filters</Text>
         <Text
           style={{
             fontFamily: 'Poppins-Regular',
-            color: theme === 'dark' ? '#a1a1aa' : '#f3f4f6',
+            color: theme === 'dark' ? '#a1a1aa' : '#18181b',
           }}>
           Clear All
         </Text>

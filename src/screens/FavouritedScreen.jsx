@@ -5,7 +5,7 @@ const FavouritedScreen = () => {
   return (
     <ExploreComponent
       title="Favourited"
-      subtitle="People you Favourited  will Appear Here.Don’t Worry they won’t Know your Favourited them."
+      subtitle="People you Favourited  will Appear Here. Don’t Worry they won’t Know your Favourited them."
       img={require('../../assets/images/favourited.webp')}
     />
   );

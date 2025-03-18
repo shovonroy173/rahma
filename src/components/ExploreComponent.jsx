@@ -4,6 +4,7 @@ import ExploreButton from './ExploreButton';
 import {
   responsiveFontSize,
   responsiveHeight,
+  responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {ThemeContext} from '../context/DarkThemeContext';
 // import {ThemeContext} from '../context/DarkThemeContext';
@@ -38,7 +39,7 @@ const getStyles = theme =>
       alignItems: 'center',
       backgroundColor: theme === 'dark' ? '#000000' : '#ffffff',
 
-      padding: responsiveHeight(3),
+      padding: responsiveWidth(3),
       gap: responsiveHeight(1),
     },
     nonButtonContainer: {
@@ -59,6 +60,7 @@ const getStyles = theme =>
       textAlign: 'center',
       color: theme === 'dark' ? '#e5e7eb' : '#18181b',
       fontFamily: 'Poppins-Medium',
+      paddingHorizontal: responsiveWidth(3),
     },
     image: {
       width: responsiveHeight(35),

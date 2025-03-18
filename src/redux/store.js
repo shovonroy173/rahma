@@ -21,7 +21,7 @@ import {setupListeners} from '@reduxjs/toolkit/query';
 
 // import {apiSlice} from './apiSlice';
 import {Alert} from 'react-native';
-import { userSlice } from './slices/userSlice';
+import {userSlice} from './slices/userSlice';
 
 const persistConfig = {
   key: 'root',
@@ -29,12 +29,13 @@ const persistConfig = {
   storage: AsyncStorage,
   whitelist: ['form'], //for persist
 };
+
+// rtk error
 export const rtkQueryErrorLogger = api => next => action => {
   if (isRejectedWithValue(action)) {
     console.log('rtkQuery error:', action.error, action.payload);
     Alert(JSON.stringify(action));
   }
-
   return next(action);
 };
 
@@ -43,7 +44,6 @@ const reducer = combineReducers({
   form: formReducer,
   // [apiSlice.reducerPath]: apiSlice.reducer,
   [userSlice.reducerPath]: userSlice.reducer,
-
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

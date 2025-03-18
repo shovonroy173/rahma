@@ -77,14 +77,17 @@ const getStyles = theme =>
       fontSize: responsiveFontSize(3),
       fontWeight: 600,
       paddingHorizontal: responsiveWidth(2),
-      color: theme === 'dark' ? '#d1d5db' : '#000000',
+      color: theme === 'dark' ? '#f3f4f6' : '#111827',
+      fontFamily: 'Poppins-SemiBold',
     },
     info: {
       fontSize: responsiveFontSize(1.8),
       textAlign: 'center',
       fontWeight: 600,
-      color: theme === 'dark' ? '#B2AEAE' : '#7B7777',
+      color: theme === 'dark' ? '#e5e7eb' : '#111111',
       paddingHorizontal: responsiveHeight(3),
+      fontFamily: 'Poppins-Regular',
+
     },
     btnContainer: {
       display: 'flex',
