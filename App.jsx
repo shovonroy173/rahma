@@ -1,3 +1,4 @@
+
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useEffect, useState} from 'react';
@@ -62,7 +63,7 @@ function App() {
     <FormProvider {...methods}>
       <NavigationContainer
         initialState={initialState}
-        onStateChange={async state => {
+        onStateChange={async (state) => {
           await AsyncStorage.setItem('navigationState', JSON.stringify(state));
         }}
         style={styles.container}>
